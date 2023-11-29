@@ -1,24 +1,35 @@
-Readme/Wiki requirements
+Readme requirements:
 
-Feature List
+# MathQuest
+    -App summary
 
-React Components list
-Database Schema
-frontend routes
-API routes
-Redux store tree
+# Live Link
+    -link to live site
 
-link to live site
+# Tech Stack
+    -list of tech/languages/pugins/third-party api's used (put at top of readme for increased visibility)
 
-App summary
+Frameworks and libraries:
+    'python, flask, javascrpt, react, redux, css3, html5'
 
-screenshots
+  database:
+    'postgres'
 
-install instructions(if needed)
+  hosted by:
+    'render'
 
-list of tech/languages/pugins/third-party api's used (put at top of readme for increased visibility)
+# Index
+(links to all wiki pages)
 
-future features
+#Screenshots
+    -screenshots
 
-technical issues/difficulties/challenges experienced during project
+#Endpoints
+    -frontend routes
+    -backend routes
 
+# Thoughts about the Process
+    -technical issues/difficulties/challenges experienced during project
+
+# Connect with the creator
+    -my social links
