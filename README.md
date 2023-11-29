@@ -19,7 +19,14 @@ Frameworks and libraries:
     'render'
 
 # Index
-(links to all wiki pages)
+
+[MathQuest Features List](https://github.com/CoryCampbell/Math-Quest/wiki/Feature-List)
+
+[MathQuest DB Diagram](https://github.com/CoryCampbell/Math-Quest/wiki/MathQuest-DB-Diagram)
+
+[MathQuest User Stories](https://github.com/CoryCampbell/Math-Quest/wiki/MathQuest-User-Stories)
+
+[MathQuest Wireframes](https://github.com/CoryCampbell/Math-Quest/wiki/MathQuest-Wireframes)
 
 #Screenshots
     -screenshots
