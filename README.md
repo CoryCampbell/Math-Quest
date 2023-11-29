@@ -28,11 +28,12 @@ Frameworks and libraries:
 
 [MathQuest Wireframes](https://github.com/CoryCampbell/Math-Quest/wiki/MathQuest-Wireframes)
 
-#Screenshots
+# Screenshots
     -screenshots
 
-#Endpoints
+# Endpoints
     -frontend routes
+
     -backend routes
 
 # Thoughts about the Process
