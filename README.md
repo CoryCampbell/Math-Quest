@@ -1,7 +1,5 @@
-Readme requirements:
-
 # MathQuest
-    -App summary
+    
 
 # Live Link
     -link to live site
