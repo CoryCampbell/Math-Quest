@@ -6,7 +6,7 @@ import "./SignupForm.css";
 
 function SignupFormModal() {
 	const dispatch = useDispatch();
-	const [email, setEmail] = useState("");
+	const [firstName, setFirstName] = useState("");
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
@@ -16,16 +16,14 @@ function SignupFormModal() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {
-			const data = await dispatch(signUp(username, email, password));
+			const data = await dispatch(signUp(username, firstName, password));
 			if (data) {
 				setErrors(data);
 			} else {
 				closeModal();
 			}
 		} else {
-			setErrors([
-				"Confirm Password field must be the same as the Password field",
-			]);
+			setErrors(["Confirm Password field must be the same as the Password field"]);
 		}
 	};
 
@@ -39,31 +37,16 @@ function SignupFormModal() {
 					))}
 				</ul>
 				<label>
-					Email
-					<input
-						type="text"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						required
-					/>
+					First Name
+					<input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
 				</label>
 				<label>
 					Username
-					<input
-						type="text"
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
-						required
-					/>
+					<input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
 				</label>
 				<label>
 					Password
-					<input
-						type="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						required
-					/>
+					<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 				</label>
 				<label>
 					Confirm Password
