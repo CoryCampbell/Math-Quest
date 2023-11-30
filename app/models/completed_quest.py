@@ -9,7 +9,7 @@ class CompletedQuest(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    character_id = db.Column(db.Integer, nullable=False)
+    character_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("characters.id")), nullable=False)
     quest_id = db.Column(db.Integer, nullable=False)
     quest_name = db.Column(db.String, nullable=False)
 
