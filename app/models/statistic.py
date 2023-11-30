@@ -9,7 +9,7 @@ class Statistic(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    character_id = db.Column(db.Integer, nullable=False)
+    character_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("characters.id")), nullable=False)
     highest_score = db.Column(db.Integer, nullable=False)
     total_enemies_defeated = db.Column(db.Integer, nullable=False)
     dungeon_levels_traveled = db.Column(db.Integer, nullable=False)

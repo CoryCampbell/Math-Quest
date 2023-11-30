@@ -9,7 +9,7 @@ class OwnedItem(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    character_id = db.Column(db.Integer, nullable=False)
+    character_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("characters.id")), nullable=False)
     item_id = db.Column(db.Integer, nullable=False)
     item_type = db.Column(db.String, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)

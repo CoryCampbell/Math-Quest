@@ -5,29 +5,40 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import LandingPage from "./components/LandingPage";
+import CreditsPage from "./components/CreditsPage";
 
 function App() {
-  const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
-  useEffect(() => {
-    dispatch(authenticate()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+	const dispatch = useDispatch();
+	const [isLoaded, setIsLoaded] = useState(false);
+	useEffect(() => {
+		dispatch(authenticate()).then(() => setIsLoaded(true));
+	}, [dispatch]);
 
-  return (
-    <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route path="/login" >
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-        </Switch>
-      )}
-    </>
-  );
+	return (
+		<>
+			<Navigation isLoaded={isLoaded} />
+			{isLoaded && (
+				<Switch>
+					<Route path="/login">
+						<LoginFormPage />
+					</Route>
+					<Route path="/signup">
+						<SignupFormPage />
+					</Route>
+					<Route path="/credits">
+						<CreditsPage />
+					</Route>
+					<Route exact path="/home">
+						<LandingPage />
+					</Route>
+					<Route exact path="/">
+						<LandingPage />
+					</Route>
+				</Switch>
+			)}
+		</>
+	);
 }
 
 export default App;

@@ -1,7 +1,21 @@
 .profile-dropdown {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   position: absolute;
+    list-style-type: none;
+    border: solid black 1px;
+    background-color: white;
+    padding: 0px;
 }
 
 .hidden {
   display: none;
+}
+
+.navigation-container {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(255, 160, 160);
 }
