@@ -38,4 +38,6 @@ backend routes
 technical issues/difficulties/challenges experienced during project
 
 # Connect with the creator
-my social links
+email: corycampbell20@yahoo.com
+github: @CoryCampbell
+discord: monkeydcory
