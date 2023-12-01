@@ -1,0 +1,12 @@
+.login-modal-container {
+  height: 100%;
+}
+
+.login-modal-container > h1 {
+  margin: 0px;
+}
+
+.login-form-modal {
+  height: 300px;
+  background-color: rgb(123, 123, 253);
+}
