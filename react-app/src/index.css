@@ -3,4 +3,16 @@
 body {
   margin: 0px;
   background-color: red;
+  height: 120vh;
+}
+
+/* Chrome/Safari/Opera */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+
+html {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;  /* Firefox */
 }

@@ -16,7 +16,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: fit-content;
+  height: fit-content + 100px;
   width: fit-content;
   background-color: rgb(123, 123, 253);
 }

@@ -5,17 +5,19 @@ import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
 
 function LoginFormModal() {
-  const dispatch = useDispatch();
-  const [username, setUsername] = useState("");
+	const dispatch = useDispatch();
+	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [errors, setErrors] = useState([]);
+
 	const { closeModal } = useModal();
-
-
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const data = await dispatch(login(username, password));
+
+		console.log("data", data);
+
 		if (data) {
 			console.log("data =============>", Object.keys(data));
 			setErrors(data);
@@ -23,12 +25,6 @@ function LoginFormModal() {
 		} else {
 			closeModal();
 		}
-	};
-
-	const demoUser = (e) => {
-		setUsername("Demo");
-		setPassword("password");
-		handleSubmit(e);
 	};
 
 	return (
@@ -56,9 +52,6 @@ function LoginFormModal() {
 					Log In
 				</button>
 			</form>
-			<button className="demo-user-button" onClick={demoUser}>
-				Demo User
-			</button>
 		</div>
 	);
 }

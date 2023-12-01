@@ -12,6 +12,7 @@ import AdventurePage from "./components/AdventurePage";
 import StatisticsPage from "./components/StatisticsPage";
 import QuestsPage from "./components/QuestsPage";
 import DungeonsPage from "./components/DungeonsPage";
+import Footer from "./components/Footer";
 
 function App() {
 	const dispatch = useDispatch();
@@ -54,6 +55,7 @@ function App() {
 					</Route>
 				</Switch>
 			)}
+			<Footer />
 		</>
 	);
 }
