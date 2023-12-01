@@ -11,11 +11,7 @@ function LoginFormModal() {
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
-	const demoUser = () => {
-		setUsername("Demo");
-		setPassword("password");
-		handleSubmit();
-	};
+
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -27,6 +23,12 @@ function LoginFormModal() {
 		} else {
 			closeModal();
 		}
+	};
+
+	const demoUser = (e) => {
+		setUsername("Demo");
+		setPassword("password");
+		handleSubmit(e);
 	};
 
 	return (
