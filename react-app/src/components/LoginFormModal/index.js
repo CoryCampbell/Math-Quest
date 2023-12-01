@@ -11,11 +11,19 @@ function LoginFormModal() {
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
+	const demoUser = () => {
+		setUsername("Demo");
+		setPassword("password");
+		handleSubmit();
+	};
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const data = await dispatch(login(username, password));
 		if (data) {
+			console.log("data =============>", Object.keys(data));
 			setErrors(data);
+			console.log("errors", errors);
 		} else {
 			closeModal();
 		}
@@ -24,22 +32,31 @@ function LoginFormModal() {
 	return (
 		<div className="login-modal-container">
 			<h1>Log In</h1>
-			<form onSubmit={handleSubmit}>
+			<form className="user-input-container" onSubmit={handleSubmit}>
 				<ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
 					))}
 				</ul>
-				<label>
-					Username
-					<input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
-				</label>
-				<label>
-					Password
-					<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-				</label>
-				<button type="submit">Log In</button>
+				<div className="username-input-row">
+					<label>
+						Username
+						<input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+					</label>
+				</div>
+				<div className="password-input-row">
+					<label>
+						Password
+						<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+					</label>
+				</div>
+				<button className="login-button" type="submit">
+					Log In
+				</button>
 			</form>
+			<button className="demo-user-button" onClick={demoUser}>
+				Demo User
+			</button>
 		</div>
 	);
 }

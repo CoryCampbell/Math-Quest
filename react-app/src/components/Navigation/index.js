@@ -5,6 +5,7 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import demoUser from "../LoginFormModal";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
@@ -69,7 +70,6 @@ function Navigation({ isLoaded }) {
 								onItemClick={closeMenu}
 								modalComponent={<LoginFormModal contentClassName="login-form-modal" />}
 							/>
-
 							<OpenModalButton buttonText="Sign Up" onItemClick={closeMenu} modalComponent={<SignupFormModal />} />
 						</div>
 						<div className="landing-links-container">
