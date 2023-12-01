@@ -1,19 +1,26 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../store/session";
+import { login, logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import demoUser from "../LoginFormModal";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
+	// const [username, setUsername] = useState("");
+	// const [password, setPassword] = useState("");
+	// const [errors, setErrors] = useState([]);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
 	const ulRef = useRef();
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		dispatch(login("Demo", "password"));
+	};
 
 	useEffect(() => {
 		if (!showMenu) return;
@@ -44,6 +51,9 @@ function Navigation({ isLoaded }) {
 				{isLoaded && sessionUser ? (
 					<div className="logged-in-nav-container">
 						<li>Greetings, {sessionUser.first_name}</li>
+						<li>
+							<button onClick={handleLogout}>Log Out</button>
+						</li>
 						<NavLink exact to="/village">
 							Village
 						</NavLink>
@@ -58,9 +68,6 @@ function Navigation({ isLoaded }) {
 						<NavLink to="/quests">Quests</NavLink>
 						<NavLink to="/statistics">Statistics</NavLink>
 						<NavLink to="/about">About</NavLink>
-						<li>
-							<button onClick={handleLogout}>Log Out</button>
-						</li>
 					</div>
 				) : (
 					<div className="landing-navlinks">
@@ -71,6 +78,9 @@ function Navigation({ isLoaded }) {
 								modalComponent={<LoginFormModal contentClassName="login-form-modal" />}
 							/>
 							<OpenModalButton buttonText="Sign Up" onItemClick={closeMenu} modalComponent={<SignupFormModal />} />
+							<button className="demo-user-button" type="submit" onClick={handleSubmit}>
+								Demo User
+							</button>
 						</div>
 						<div className="landing-links-container">
 							<NavLink exact to="/">
@@ -83,6 +93,6 @@ function Navigation({ isLoaded }) {
 			</ul>
 		</div>
 	);
-}
+};
 
 export default Navigation;
