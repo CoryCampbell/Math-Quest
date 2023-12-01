@@ -23,7 +23,6 @@
 }
 
 .logged-in-nav-container {
-  background-color: green;
   display: flex;
   flex-direction: row;
   width: 100%;
