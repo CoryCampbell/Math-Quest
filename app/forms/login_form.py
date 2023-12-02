@@ -15,7 +15,6 @@ def user_exists(form, field):
 def password_matches(form, field):
     # Checking if password matches
     password = field.data
-    print("=================> FIELD DATA: ", field.data)
     username = form.data['username']
     user = User.query.filter(User.username == username).first()
     if not user:

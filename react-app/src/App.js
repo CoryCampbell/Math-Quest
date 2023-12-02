@@ -29,10 +29,10 @@ function App() {
 					<Route path="/about">
 						<CreditsPage />
 					</Route>
-					<Route path="/adventure">
+					<Route path="/adventures">
 						<AdventurePage />
 					</Route>
-					<Route path="/character">
+					<Route path="/characters">
 						<CharacterPage />
 					</Route>
 					<Route path="/dungeons">

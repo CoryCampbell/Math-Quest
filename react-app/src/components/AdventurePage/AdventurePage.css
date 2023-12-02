@@ -1,0 +1,24 @@
+.adventure-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 35px;
+  height: 80vh;
+  margin: 0px;
+  border: solid black 1px;
+}
+
+.page-title {
+  font-weight: bolder;
+}
+
+.adventure-options-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.adventure-option {
+  width: 50%;
+}
