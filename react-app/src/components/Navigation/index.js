@@ -9,9 +9,6 @@ import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
-	// const [username, setUsername] = useState("");
-	// const [password, setPassword] = useState("");
-	// const [errors, setErrors] = useState([]);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
@@ -40,6 +37,7 @@ function Navigation({ isLoaded }) {
 
 	const handleLogout = (e) => {
 		e.preventDefault();
+		localStorage.clear();
 		closeMenu();
 		history.push("/");
 		dispatch(logout());

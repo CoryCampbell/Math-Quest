@@ -1,9 +1,17 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
+import { getUserCharactersThunk } from "../../store/characters";
 import "./VillagePage.css";
 
 function VillagePage() {
-	let sessionUser = useSelector((state) => state.session.user);
+	const dispatch = useDispatch();
+
+	const sessionUser = useSelector((state) => state.session.user);
+
+	useEffect(() => {
+		dispatch(getUserCharactersThunk());
+	}, [dispatch]);
 
 	if (!sessionUser) return <Redirect to="/" />;
 

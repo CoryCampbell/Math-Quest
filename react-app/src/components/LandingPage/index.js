@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import "./LandingPage.css";
 
 function LandingPage() {
-	let sessionUser = useSelector((state) => state.session.user);
+	const sessionUser = useSelector((state) => state.session.user);
 
 	if (sessionUser) return <Redirect to="/village" />;
 
