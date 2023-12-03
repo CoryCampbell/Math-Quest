@@ -1,0 +1,38 @@
+.character-page-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-char-page {
+  margin: 25px;
+  border: solid black 1px;
+  box-sizing: border-box;
+  width: 50%;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.right-char-page {
+  margin: 25px;
+  border: solid black 1px;
+  box-sizing: border-box;
+  width: 50%;
+  height: 75vh;
+}
+
+.character-select-option {
+  margin: 25px;
+  height: 100%;
+  border: solid black 1px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select-text {
+  display: flex;
+  justify-content: center;
+}
