@@ -30,7 +30,7 @@ export const getSelectedCharacterThunk = (character_name) => async (dispatch) =>
 	console.log("data", data);
 
 	//choose the character
-	const selectedCharacter = data.filter((character) => (character.character_name = character_name));
+	const selectedCharacter = data.filter((character) => (character.character_name = character_name))[0];
 
 	console.log("selectedCharacter", selectedCharacter);
 

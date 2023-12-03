@@ -37,6 +37,7 @@ function Navigation({ isLoaded }) {
 
 	const handleLogout = (e) => {
 		e.preventDefault();
+		localStorage.clear();
 		closeMenu();
 		history.push("/");
 		dispatch(logout());

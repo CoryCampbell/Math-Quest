@@ -4,21 +4,27 @@ import { Redirect } from "react-router-dom";
 import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
 
 import "./CharacterPage.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function CharacterPage() {
+	const history = useHistory();
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 	const userCharacters = useSelector((state) => state.characters.userCharacters);
+	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
+
+	let selectedCharacterName = localStorage.getItem("character_name");
+	console.log("selectedCharacterName: ", selectedCharacterName);
 
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
-	}, [dispatch]);
+		dispatch(getSelectedCharacterThunk(selectedCharacterName));
+	}, [dispatch, selectedCharacterName]);
 
 	function selectCharacter(e) {
-		console.log("test", e.target.innerHTML);
-		const character_name = e.target.innerHTML;
-		console.log("character_name", character_name);
-		dispatch(getSelectedCharacterThunk(character_name));
+		selectedCharacterName = e.target.innerHTML;
+		localStorage.setItem("character_name", selectedCharacterName);
+		dispatch(getSelectedCharacterThunk(selectedCharacterName));
 	}
 
 	if (!sessionUser) return <Redirect to="/" />;
@@ -27,15 +33,27 @@ function CharacterPage() {
 		<>
 			<div className="character-page-container">
 				<div className="left-char-page">
-					<p className="select-text">Select a Character</p>
-					{userCharacters &&
-						userCharacters.map((character) => (
-							<button key="character" className="character-select-option" onClick={selectCharacter}>
-								{character.character_name}
-							</button>
-						))}
+					<button className="character-select-create">Add New Character</button>
+					<div className="all-chars-container">
+						{userCharacters &&
+							userCharacters?.map((character) => (
+								<button key={character.id} className="character-select-option" onClick={selectCharacter}>
+									{character.character_name}
+								</button>
+							))}
+					</div>
 				</div>
-				<div className="right-char-page">Right</div>
+				<div className="right-char-page">
+					{selectedCharacter ? (
+						<>
+							<div>{selectedCharacterName}</div>
+						</>
+					) : (
+						<>
+							<div>unselected</div>
+						</>
+					)}
+				</div>
 			</div>
 		</>
 	);
@@ -44,5 +62,4 @@ function CharacterPage() {
 export default CharacterPage;
 
 /* <button className="character-select-option">Select A Character</button>
-					<button className="character-select-create">+ new character</button>
 					<button className="character-select-gear">Gear</button> */
