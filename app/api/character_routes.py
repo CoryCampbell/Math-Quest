@@ -11,7 +11,6 @@ def get_user_characters():
     """
     Query for all characters of a user
     """
-    print("============> TEST")
 
     allCharacters = Character.query.filter_by(user_id=current_user.id).all()
     print("============> all user characters", allCharacters)

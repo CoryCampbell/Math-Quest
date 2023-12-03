@@ -7,7 +7,7 @@ import { getUserCharactersThunk } from "../../store/characters";
 function VillagePage() {
 	const dispatch = useDispatch();
 
-	let sessionUser = useSelector((state) => state.session.user);
+	const sessionUser = useSelector((state) => state.session.user);
 
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());

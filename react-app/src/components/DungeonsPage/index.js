@@ -3,13 +3,13 @@ import { Redirect } from "react-router-dom";
 import "./DungeonsPage.css";
 
 function DungeonsPage() {
-	let sessionUser = useSelector((state) => state.session.user);
+	const sessionUser = useSelector((state) => state.session.user);
 
 	if (!sessionUser) return <Redirect to="/" />;
 
 	return (
 		<>
-			<div className="landing-page-container">Dungeons Coming Soon.</div>
+			<div className="dungeons-page-container">Dungeons Coming Soon.</div>
 		</>
 	);
 }

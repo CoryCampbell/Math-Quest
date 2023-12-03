@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import "./AdventurePage.css";
 
 function AdventurePage() {
-	let sessionUser = useSelector((state) => state.session.user);
+	const sessionUser = useSelector((state) => state.session.user);
 
 	if (!sessionUser) return <Redirect to="/" />;
 	return (
