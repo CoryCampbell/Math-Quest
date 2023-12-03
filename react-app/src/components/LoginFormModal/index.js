@@ -16,10 +16,7 @@ function LoginFormModal() {
 		e.preventDefault();
 		const data = await dispatch(login(username, password));
 
-		console.log("data", data);
-
 		if (data) {
-			console.log("data =============>", Object.keys(data));
 			setErrors(data);
 			console.log("errors", errors);
 		} else {

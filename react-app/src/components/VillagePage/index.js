@@ -11,15 +11,16 @@ function VillagePage() {
 		<>
 			<div className="village-page-container">
 				<h1>Village</h1>
+				<div className="subtitle-container">
+					<NavLink to="/characters">Characters</NavLink>
+					<NavLink to="/shop">Shop</NavLink>
+					<NavLink to="/adventures">Adventures</NavLink>
+				</div>
 				<div className="village-options-container">
+					<div className="village-option"></div>
+					<div className="village-option"></div>
 					<div className="village-option">
-						<NavLink to="/character">Character</NavLink>
-					</div>
-					<div className="village-option">
-						<NavLink to="/shop">Shop</NavLink>
-					</div>
-					<div className="village-option">
-						<NavLink to="/adventure">Adventure</NavLink>
+						<div className="adventure-options-container"></div>
 					</div>
 				</div>
 			</div>

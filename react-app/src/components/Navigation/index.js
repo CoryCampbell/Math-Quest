@@ -57,13 +57,13 @@ function Navigation({ isLoaded }) {
 						<NavLink exact to="/village">
 							Village
 						</NavLink>
-						<NavLink exact to="/character">
-							Character
+						<NavLink exact to="/characters">
+							Characters
 						</NavLink>
 						<NavLink exact to="/shop">
 							Shop
 						</NavLink>
-						<NavLink to="/adventure">Adventure</NavLink>
+						<NavLink to="/adventures">Adventures</NavLink>
 						<NavLink to="/dungeons">Dungeons</NavLink>
 						<NavLink to="/quests">Quests</NavLink>
 						<NavLink to="/statistics">Statistics</NavLink>
