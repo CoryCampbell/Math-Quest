@@ -19,3 +19,29 @@
   width: 30%;
   height: 100%;
 }
+
+.village-option > a {
+  position: relative;
+  top: -25px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.adventure-options-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.adventure-option {
+  border: solid black 1px;
+  box-sizing: border-box;
+  height: 25%;
+}
+
+.subtitle-container {
+  width: 75%;
+  display: flex;
+  justify-content: space-around;
+}
