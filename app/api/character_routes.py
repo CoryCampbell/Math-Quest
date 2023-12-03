@@ -5,7 +5,7 @@ from app.models import Character
 character_routes = Blueprint('characters', __name__)
 
 
-@character_routes.route('/characters')
+@character_routes.route('/')
 @login_required
 def get_user_characters():
     """
