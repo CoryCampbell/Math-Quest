@@ -8,15 +8,13 @@ const getUserCharacters = (payload) => ({
 	payload
 });
 
-const getSelectedCharacter = (payload) => ({
-	type: GET_SELECTED_CHARACTER,
-	payload
-});
-
 //Thunks
-export const getUserCharactersThunk = (user_id) => async (dispatch) => {
-	// const response = await fetch(`/`)
-	return "test";
+export const getUserCharactersThunk = () => async (dispatch) => {
+	const res = fetch("/api/characters/all");
+
+	const data = await res.json();
+	dispatch(getUserCharacters(data));
+	return data;
 };
 
 //Initial state
