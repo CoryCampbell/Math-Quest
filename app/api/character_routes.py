@@ -16,4 +16,4 @@ def get_user_characters():
     allCharacters = Character.query.filter_by(user_id=current_user.id).all()
     print("============> all user characters", allCharacters)
 
-    return {'userCharacters': [character.to_dict() for character in allCharacters]}
+    return [character.to_dict() for character in allCharacters]

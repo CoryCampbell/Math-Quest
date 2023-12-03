@@ -10,7 +10,7 @@ const getUserCharacters = (payload) => ({
 
 //Thunks
 export const getUserCharactersThunk = () => async (dispatch) => {
-	const res = fetch("/api/characters/all");
+	const res = await fetch("/api/characters/all");
 
 	const data = await res.json();
 	dispatch(getUserCharacters(data));
