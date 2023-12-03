@@ -17,7 +17,8 @@
 }
 
 .landing-navlinks {
-  width: 100%;
+  width: 90%;
+  margin: auto;
   display: flex;
   justify-content: space-between;
 }
@@ -25,8 +26,10 @@
 .logged-in-nav-container {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 90%;
+  margin: auto;
   justify-content: space-between;
+  align-items: center;
   list-style-type: none;
 }
 

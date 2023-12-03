@@ -14,9 +14,28 @@ const getSelectedCharacter = (payload) => ({
 });
 
 //Thunks
-export const getUserCharactersThunk = (user_id) => async (dispatch) => {
-	// const response = await fetch(`/`)
-	return "test";
+export const getUserCharactersThunk = () => async (dispatch) => {
+	const res = await fetch("/api/characters/all");
+
+	const data = await res.json();
+	console.log("daaata", data);
+	dispatch(getUserCharacters(data));
+	return data;
+};
+
+export const getSelectedCharacterThunk = (character_name) => async (dispatch) => {
+	const res = await fetch("/api/characters/all");
+
+	const data = await res.json();
+	console.log("data", data);
+
+	//choose the character
+	const selectedCharacter = data.filter((character) => (character.character_name = character_name))[0];
+
+	console.log("selectedCharacter", selectedCharacter);
+
+	dispatch(getSelectedCharacter(selectedCharacter));
+	return selectedCharacter;
 };
 
 //Initial state
