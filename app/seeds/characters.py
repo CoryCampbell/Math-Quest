@@ -4,9 +4,9 @@ from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want
 def seed_characters():
-    demoCharacter = Character(user_id=1, appearance=1, difficulty=1, character_name='Demo Character Boy', experience_points=100, coins=10)
-    thor = Character(user_id=2, appearance=1, difficulty=1, character_name='Thor', experience_points=1000, coins=1000)
-    her = Character(user_id=3, appearance=1, difficulty=1, character_name='Her', experience_points=10000, coins=10000)
+    demoCharacter = Character(user_id=1, level=1, appearance=1, difficulty=1, character_name='Demo Character Boy', max_health=100, current_health=100, experience_points=100, coins=10)
+    thor = Character(user_id=2, level=5, appearance=1, difficulty=1, character_name='Thor', max_health=500, current_health=500, experience_points=1000, coins=1000)
+    her = Character(user_id=3, level=25, appearance=1, difficulty=1, character_name='Her', max_health=1000, current_health=1000, experience_points=10000, coins=10000)
 
     db.session.add(demoCharacter)
     db.session.add(thor)

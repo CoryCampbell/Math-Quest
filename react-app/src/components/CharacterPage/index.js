@@ -47,6 +47,12 @@ function CharacterPage() {
 					{selectedCharacter ? (
 						<>
 							<div>{selectedCharacterName}</div>
+							<div> XP: {selectedCharacter.experience_points}</div>
+							<div>Coins: {selectedCharacter.coins}</div>
+							<div>
+								Health: {selectedCharacter.current_health} /{selectedCharacter.max_health}
+							</div>
+							<div>Level: {selectedCharacter.level}</div>
 						</>
 					) : (
 						<>
