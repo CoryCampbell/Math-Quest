@@ -46,7 +46,8 @@ def upgrade():
     sa.Column('current_health', sa.Integer(), nullable=False),
     sa.Column('experience_points', sa.Integer, nullable=False),
     sa.Column('coins', sa.Integer, nullable=False),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('character_name')
     )
     if environment == "production":
         op.execute(f"ALTER TABLE characters SET SCHEMA {SCHEMA};")

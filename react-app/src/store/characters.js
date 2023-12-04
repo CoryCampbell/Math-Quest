@@ -1,6 +1,7 @@
 // constants
-const GET_USER_CHARACTERS = "session/GET_USER_CHARACTERS";
-const GET_SELECTED_CHARACTER = "session/GET_SELECTED_CHARACTER";
+const GET_USER_CHARACTERS = "characters/getUserCharacters";
+const GET_SELECTED_CHARACTER = "characters/getSelectedCharacter";
+const ADD_NEW_CHARACTER = "characters/addNewCharacter";
 
 // Action Creators
 const getUserCharacters = (payload) => ({
@@ -13,7 +14,16 @@ const getSelectedCharacter = (payload) => ({
 	payload
 });
 
+const addNewCharacter = (payload) => ({
+	type: ADD_NEW_CHARACTER,
+	payload
+});
+
 //Thunks
+
+//
+//get user characters thunk
+//
 export const getUserCharactersThunk = () => async (dispatch) => {
 	const res = await fetch("/api/characters/all");
 
@@ -22,6 +32,9 @@ export const getUserCharactersThunk = () => async (dispatch) => {
 	return data;
 };
 
+//
+//get selected character thunk
+//
 export const getSelectedCharacterThunk = (character_name) => async (dispatch) => {
 	const res = await fetch("/api/characters/all");
 
@@ -37,16 +50,50 @@ export const getSelectedCharacterThunk = (character_name) => async (dispatch) =>
 	return selectedCharacter;
 };
 
+//
+//add new character thunk
+//
+export const addNewCharacterThunk = (character_name, appearance, user_id) => async (dispatch) => {
+	console.log("TEST ADD NEW CHARACTER THUNK");
+	console.log("character_name", character_name);
+	console.log("appearance", appearance);
+
+	const res = await fetch(`/api/characters/create`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({
+			character_name,
+			appearance,
+			user_id,
+			difficulty: 1,
+			level: 1,
+			max_health: 100,
+			current_health: 100,
+			experience_points: 0,
+			coins: 0
+		})
+	});
+
+	const data = await res.json();
+	dispatch(addNewCharacter(data));
+	return data;
+};
+
 //Initial state
 const initialState = { userCharacters: null, selectedCharacter: null };
 
 //Reducer
 export default function charactersReducer(state = initialState, action) {
+	const userCharactersAfterAddition = { ...state.userCharacters };
 	switch (action.type) {
 		case GET_USER_CHARACTERS:
 			return { ...state, userCharacters: action.payload };
 		case GET_SELECTED_CHARACTER:
 			return { ...state, selectedCharacter: action.payload };
+		case ADD_NEW_CHARACTER:
+			return { ...state, userCharacters: [userCharactersAfterAddition] };
 		default:
 			return state;
 	}

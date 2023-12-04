@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { login } from "../../store/session";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
-import "./LoginForm.css";
+import { addNewCharacterThunk } from "../../store/characters";
+// import "./LoginForm.css";
 
 function NewCharacterModal() {
+	const user_id = useSelector((state) => state.session.user.id);
+
 	const dispatch = useDispatch();
-	const [username, setUsername] = useState("");
-	const [password, setPassword] = useState("");
+	const [characterName, setCharacterName] = useState("");
+	const [appearance, setAppearance] = useState("");
 	const [errors, setErrors] = useState([]);
 
 	const { closeModal } = useModal();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const data = await dispatch(login(username, password));
+		const data = await dispatch(addNewCharacterThunk(characterName, appearance, user_id));
 
 		if (data) {
 			setErrors(data);
@@ -25,28 +28,74 @@ function NewCharacterModal() {
 	};
 
 	return (
-		<div className="login-modal-container">
-			<h1>Log In</h1>
+		<div className="create-character-container">
+			<h1>Create a New Character!</h1>
 			<form className="user-input-container" onSubmit={handleSubmit}>
 				<ul>
-					{errors.map((error, idx) => (
+					{/* {errors?.map((error, idx) => (
 						<li key={idx}>{error}</li>
-					))}
+					))} */}
 				</ul>
-				<div className="username-input-row">
+				<div className="name-input-row">
 					<label>
-						Username
-						<input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+						Name:
+						<input type="text" value={characterName} onChange={(e) => setCharacterName(e.target.value)} required />
 					</label>
 				</div>
-				<div className="password-input-row">
-					<label>
-						Password
-						<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-					</label>
-				</div>
+				<div className="appearance-input-row"></div>
+				<fieldset>
+					<legend>Select an appearance:</legend>
+
+					<div>
+						<input
+							type="radio"
+							id={1}
+							name="drone"
+							value={appearance}
+							onChange={(e) => setAppearance(e.target.id)}
+							required
+						/>
+						<label htmlFor="appearance-one">Appearance One</label>
+					</div>
+
+					<div>
+						<input
+							type="radio"
+							id={2}
+							name="drone"
+							value={appearance}
+							onChange={(e) => setAppearance(e.target.id)}
+							required
+						/>
+						<label htmlFor="appearance-two">Appearance Two</label>
+					</div>
+
+					<div>
+						<input
+							type="radio"
+							id={3}
+							name="drone"
+							value={appearance}
+							onChange={(e) => setAppearance(e.target.id)}
+							required
+						/>
+						<label htmlFor="appearance-three">Appearance Three</label>
+					</div>
+
+					<div>
+						<input
+							type="radio"
+							id={4}
+							name="drone"
+							value={appearance}
+							onChange={(e) => setAppearance(e.target.id)}
+							required
+						/>
+						<label htmlFor="appearance-four">Appearance Four</label>
+					</div>
+				</fieldset>
 				<button className="login-button" type="submit">
-					Log In
+					Create
 				</button>
 			</form>
 		</div>
