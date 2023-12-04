@@ -38,9 +38,12 @@ def upgrade():
     op.create_table('characters',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('appearance', sa.Integer(), nullable=False),
+    sa.Column('level', sa.Integer(), nullable=False),
     sa.Column('difficulty', sa.Integer(), nullable=False),
     sa.Column('character_name', sa.String(25), nullable=False),
+    sa.Column('appearance', sa.Integer(), nullable=False),
+    sa.Column('max_health', sa.Integer(), nullable=False),
+    sa.Column('current_health', sa.Integer(), nullable=False),
     sa.Column('experience_points', sa.Integer, nullable=False),
     sa.Column('coins', sa.Integer, nullable=False),
     sa.PrimaryKeyConstraint('id')

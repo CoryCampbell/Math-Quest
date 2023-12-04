@@ -10,9 +10,12 @@ class Character(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+    level = db.Column(db.Integer, nullable=False)
     appearance = db.Column(db.Integer, nullable=False)
     difficulty = db.Column(db.String, nullable=False)
     character_name = db.Column(db.String(25), nullable=False)
+    max_health = db.Column(db.Integer, nullable=False)
+    current_health = db.Column(db.Integer, nullable=False)
     experience_points = db.Column(db.Integer, nullable=False)
     coins = db.Column(db.Integer, nullable=False)
 
@@ -29,9 +32,12 @@ class Character(db.Model, UserMixin):
         return {
             'id': self.id,
             'user_id': self.user_id,
+            'level': self.level,
             'appearance': self.appearance,
             'difficulty': self.difficulty,
             'character_name': self.character_name,
+            'max_health': self.max_health,
+            'current_health': self.current_health,
             'experience_points': self.experience_points,
             'coins': self.coins
         }
