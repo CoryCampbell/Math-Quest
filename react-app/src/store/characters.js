@@ -18,7 +18,6 @@ export const getUserCharactersThunk = () => async (dispatch) => {
 	const res = await fetch("/api/characters/all");
 
 	const data = await res.json();
-	console.log("daaata", data);
 	dispatch(getUserCharacters(data));
 	return data;
 };

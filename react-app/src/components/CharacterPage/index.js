@@ -47,6 +47,11 @@ function CharacterPage() {
 					{selectedCharacter ? (
 						<>
 							<div>{selectedCharacterName}</div>
+							<div> XP: {selectedCharacter.experience_points}</div>
+							<div>Coins: {selectedCharacter.coins}</div>
+							<div></div>
+							<div></div>
+							<div></div>
 						</>
 					) : (
 						<>
