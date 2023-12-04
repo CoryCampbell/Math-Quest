@@ -54,10 +54,6 @@ export const getSelectedCharacterThunk = (character_name) => async (dispatch) =>
 //add new character thunk
 //
 export const addNewCharacterThunk = (character_name, appearance, user_id) => async (dispatch) => {
-	console.log("TEST ADD NEW CHARACTER THUNK");
-	console.log("character_name", character_name);
-	console.log("appearance", appearance);
-
 	const res = await fetch(`/api/characters/create`, {
 		method: "POST",
 		headers: {

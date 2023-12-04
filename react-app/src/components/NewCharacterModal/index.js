@@ -7,6 +7,7 @@ import { addNewCharacterThunk } from "../../store/characters";
 
 function NewCharacterModal() {
 	const user_id = useSelector((state) => state.session.user.id);
+	const userCharacters = useSelector((state) => state.characters.userCharacters);
 
 	const dispatch = useDispatch();
 	const [characterName, setCharacterName] = useState("");
@@ -17,7 +18,14 @@ function NewCharacterModal() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		userCharacters.forEach((character) => {
+			if (character.character_name === characterName) setErrors(["You already have a character with that name!"]);
+		});
+
 		const data = await dispatch(addNewCharacterThunk(characterName, appearance, user_id));
+
+		console.log("=================>data", data);
 
 		if (data) {
 			setErrors(data);
