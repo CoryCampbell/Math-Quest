@@ -20,6 +20,9 @@ function CharacterPage() {
 	const userCharacters = useSelector((state) => state.characters.userCharacters);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
 
+	const characterId = selectCharacter?.id;
+	console.log("character_id", characterId);
+
 	let selectedCharacterName = localStorage.getItem("character_name");
 
 	useEffect(() => {
@@ -74,7 +77,9 @@ function CharacterPage() {
 										<div className="delete-character-modal-container">
 											<OpenModalButton
 												buttonText="DELETE"
-												modalComponent={<DeleteCharacterModal className="delete-character-modal" />}
+												modalComponent={
+													<DeleteCharacterModal className="delete-character-modal" character_id={characterId} />
+												}
 											></OpenModalButton>
 										</div>
 									</div>

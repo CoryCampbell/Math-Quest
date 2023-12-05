@@ -63,14 +63,12 @@ def create_new_character():
     return new_character.to_dict()
 
 
-
-
-@character_routes.route('/delete', methods=["DELETE"])
+@character_routes.route('/<int:character_id>/delete', methods=["DELETE"])
 @login_required
 def delete_character(character_id):
-    print(character_id)
+
     character = Character.query.filter_by(id=character_id).first()
-    character_name = character["character_name"]
+    character_name = character.to_dict()["character_name"]
 
     if character:
         db.session.delete(character)

@@ -17,8 +17,9 @@ function UpdateCharacterModal() {
 		e.preventDefault();
 
 		if (!Object.values(errors).length) {
-			// const data = await dispatch(addNewCharacterThunk(characterName, appearance, user_id));
-			// console.log("data", data);
+			//if everything is good, update the characters name here:
+			//UPDATE NAME
+			//
 			closeModal();
 		} else return;
 	};

@@ -39,9 +39,9 @@ function NewCharacterModal() {
 		return;
 	}
 
-	useEffect(() => {
-		dispatch(getUserCharactersThunk());
-	}, [dispatch, userCharacters?.length]);
+	// useEffect(() => {
+	// 	// dispatch(getUserCharactersThunk());
+	// }, [dispatch, userCharacters?.length]);
 
 	return (
 		<div className="create-character-container">
