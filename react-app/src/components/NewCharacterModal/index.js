@@ -3,7 +3,7 @@ import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { addNewCharacterThunk, getUserCharactersThunk } from "../../store/characters";
-// import "./LoginForm.css";
+import "./NewCharacterModal.css";
 
 function NewCharacterModal() {
 	const user_id = useSelector((state) => state.session.user.id);
@@ -25,6 +25,7 @@ function NewCharacterModal() {
 			console.log("data", data);
 			closeModal();
 		}
+		// else return errors;
 	};
 
 	function validateInput() {
@@ -48,22 +49,18 @@ function NewCharacterModal() {
 
 	return (
 		<div className="create-character-container">
-			{errors.characterName && <p className="errors characterNameError">{errors.characterName}</p>}
 			<h1>Create a New Character!</h1>
 			<form className="user-input-container" onSubmit={handleSubmit}>
-				<ul>
-					{errors?.map((error, idx) => (
-						<li key={idx}>{error}</li>
-					))}
-				</ul>
+				<ul></ul>
 				<div className="name-input-row">
-					{errors.name && <p className="errors nameError">{errors.name}</p>}
+					{errors.characterName && <p className="errors characterNameError">{errors.characterName}</p>}
 					<label>
 						Name:
 						<input type="text" value={characterName} onChange={(e) => setCharacterName(e.target.value)} />
 					</label>
 				</div>
 				<div className="appearance-input-row"></div>
+				{errors.appearance && <p className="errors appearanceError">{errors.appearance}</p>}
 				<fieldset>
 					<legend>Select an appearance:</legend>
 
@@ -87,7 +84,7 @@ function NewCharacterModal() {
 						<label htmlFor="appearance-four">Appearance Four</label>
 					</div>
 				</fieldset>
-				<button className="login-button" type="submit" onSubmit={validateInput}>
+				<button className="login-button" type="submit" onClick={validateInput}>
 					Create
 				</button>
 			</form>
