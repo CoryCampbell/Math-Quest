@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteCharacterThunk, getUserCharactersThunk } from "../../store/characters";
+
 import "./DeleteCharacterModal.css";
 
 function DeleteCharacterModal() {

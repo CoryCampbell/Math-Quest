@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { getUserCharactersThunk, updateCharacterThunk } from "../../store/characters";
-import "./UpdateCharacterNameModal.css";
 import DeleteCharacterModal from "../DeleteCharacterModal";
 import OpenModalButton from "../OpenModalButton";
+
+import "./UpdateCharacterNameModal.css";
 
 function UpdateCharacterModal() {
 	// const user_id = useSelector((state) => state.session.user.id);
@@ -19,17 +20,24 @@ function UpdateCharacterModal() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log("===========> oldCharacterName, newCharacterName", oldCharacterName, newCharacterName);
-		const updatedCharacter = await dispatch(updateCharacterThunk(oldCharacterName, newCharacterName));
-		localStorage.setItem("character_name", newCharacterName);
-		closeModal();
-		return updatedCharacter;
+
+		if (!Object.values(errors).length) {
+			const updatedCharacter = await dispatch(updateCharacterThunk(oldCharacterName, newCharacterName));
+			localStorage.removeItem("character_name");
+			localStorage.setItem("character_name", newCharacterName);
+			dispatch(getUserCharactersThunk());
+			closeModal();
+			return updatedCharacter;
+		} else return;
 	};
 
 	function validateInput() {
 		const errorsObj = {};
-
+		const splCharsTestlist = /^[a-zA-Z- -0123456789-]*$/;
 		if (!newCharacterName || !newCharacterName.length) errorsObj.characterName = "Please give your character a Name!";
+
+		if (!splCharsTestlist.test(newCharacterName))
+			errorsObj.characterName = "Names are not allowed to include any Symbols or Special Characters!";
 
 		userCharacters.forEach((character) => {
 			if (character.character_name === newCharacterName)
