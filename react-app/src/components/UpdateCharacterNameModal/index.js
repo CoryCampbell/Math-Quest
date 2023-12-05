@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { getUserCharactersThunk } from "../../store/characters";
+import { getUserCharactersThunk, updateCharacterThunk } from "../../store/characters";
+import DeleteCharacterModal from "../DeleteCharacterModal";
+import OpenModalButton from "../OpenModalButton";
+
 import "./UpdateCharacterNameModal.css";
 
 function UpdateCharacterModal() {
 	// const user_id = useSelector((state) => state.session.user.id);
 	const userCharacters = useSelector((state) => state.characters.userCharacters);
+	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
+	const oldCharacterName = selectedCharacter.character_name;
 
 	const dispatch = useDispatch();
-	const [characterName, setCharacterName] = useState("");
+	const [newCharacterName, setNewCharacterName] = useState(oldCharacterName);
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
@@ -17,20 +22,25 @@ function UpdateCharacterModal() {
 		e.preventDefault();
 
 		if (!Object.values(errors).length) {
-			//if everything is good, update the characters name here:
-			//UPDATE NAME
-			//
+			const updatedCharacter = await dispatch(updateCharacterThunk(oldCharacterName, newCharacterName));
+			localStorage.removeItem("character_name");
+			localStorage.setItem("character_name", newCharacterName);
+			dispatch(getUserCharactersThunk());
 			closeModal();
+			return updatedCharacter;
 		} else return;
 	};
 
 	function validateInput() {
 		const errorsObj = {};
+		const splCharsTestlist = /^[a-zA-Z- -0123456789-]*$/;
+		if (!newCharacterName || !newCharacterName.length) errorsObj.characterName = "Please give your character a Name!";
 
-		if (!characterName || !characterName.length) errorsObj.characterName = "Please give your character a Name!";
+		if (!splCharsTestlist.test(newCharacterName))
+			errorsObj.characterName = "Names are not allowed to include any Symbols or Special Characters!";
 
 		userCharacters.forEach((character) => {
-			if (character.character_name === characterName)
+			if (character.character_name === newCharacterName)
 				errorsObj.characterName = "You already have a character with that name!";
 		});
 
@@ -51,12 +61,18 @@ function UpdateCharacterModal() {
 					{errors.characterName && <p className="errors characterNameError">{errors.characterName}</p>}
 					<label>
 						Name:
-						<input type="text" value={characterName} onChange={(e) => setCharacterName(e.target.value)} />
+						<input type="text" value={newCharacterName} onChange={(e) => setNewCharacterName(e.target.value)} />
 					</label>
 				</div>
 				<button className="update-button" type="submit" onClick={validateInput}>
 					Update
 				</button>
+				<OpenModalButton
+					buttonText="DELETE"
+					modalComponent={
+						<DeleteCharacterModal className="delete-character-modal" character_id={selectedCharacter.id} />
+					}
+				></OpenModalButton>
 			</form>
 		</div>
 	);

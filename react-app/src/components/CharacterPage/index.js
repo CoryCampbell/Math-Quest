@@ -20,10 +20,8 @@ function CharacterPage() {
 	const userCharacters = useSelector((state) => state.characters.userCharacters);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
 
-	const characterId = selectCharacter?.id;
-	console.log("character_id", characterId);
-
 	let selectedCharacterName = localStorage.getItem("character_name");
+	console.log("=====================> selectedCharacterName", selectedCharacterName);
 
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
@@ -70,18 +68,11 @@ function CharacterPage() {
 										<div className="info-character-title">{selectedCharacter.character_name}</div>
 										<div className="update-name-modal-container">
 											<OpenModalButton
-												buttonText="⚙"
+												buttonText="Edit/Delete"
 												modalComponent={<UpdateCharacterModal className="update-name-modal" />}
 											></OpenModalButton>
 										</div>
-										<div className="delete-character-modal-container">
-											<OpenModalButton
-												buttonText="DELETE"
-												modalComponent={
-													<DeleteCharacterModal className="delete-character-modal" character_id={characterId} />
-												}
-											></OpenModalButton>
-										</div>
+										<div className="delete-character-modal-container"></div>
 									</div>
 									<div>Coins: {selectedCharacter.coins}</div>
 								</div>
