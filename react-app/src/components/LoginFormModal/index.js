@@ -19,7 +19,6 @@ function LoginFormModal() {
 
 		if (data) {
 			setErrors(data);
-			console.log("errors", errors);
 		} else {
 			closeModal();
 		}

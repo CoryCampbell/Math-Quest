@@ -16,11 +16,12 @@ function DeleteCharacterModal() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const deletedCharacter = await dispatch(deleteCharacterThunk(selectedCharacter));
+		const deletedCharacter = await dispatch(deleteCharacterThunk(selectedCharacter.id));
+		console.log("deletedCharacter", deletedCharacter);
 		if (!Object.values(errors).length) {
-			// const data = await dispatch(addNewCharacterThunk(characterName, appearance, user_id));
-			// console.log("data", data);
-			console.log("test");
+			//IF EVERYTHING IS GOOD DELETE THE CHARACTER FROM DATABASE
+			//DELETE CHARACTER
+			//
 			closeModal();
 		} else return;
 	};
