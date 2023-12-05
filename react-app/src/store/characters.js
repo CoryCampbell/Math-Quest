@@ -34,7 +34,6 @@ export const getUserCharactersThunk = () => async (dispatch) => {
 	const res = await fetch("/api/characters/all");
 
 	const data = await res.json();
-	console.log("==============> !!!!! data", data);
 	dispatch(getUserCharacters(data));
 	return data;
 };
@@ -44,16 +43,11 @@ export const getUserCharactersThunk = () => async (dispatch) => {
 //
 export const getSelectedCharacterThunk = () => async (dispatch) => {
 	const res = await fetch("/api/characters/all");
-
 	const data = await res.json();
-	console.log("data ???", data);
-
 	const characterName = localStorage.getItem("character_name");
-	console.log("characterName", characterName);
+
 	//choose the character
 	const selectedCharacter = data.filter((character) => character.character_name === characterName)[0];
-
-	console.log("selectedCharacter", selectedCharacter);
 
 	dispatch(getSelectedCharacter(selectedCharacter));
 	return selectedCharacter;
@@ -90,13 +84,16 @@ export const addNewCharacterThunk = (character_name, appearance, user_id) => asy
 //DELETE A CHARACTER THUNK
 //
 export const deleteCharacterThunk = (character_id) => async (dispatch) => {
-	const res = await fetch(`/api/characters/delete`, {
+	const res = await fetch(`/api/characters/${character_id}/delete`, {
 		method: "DELETE"
 	});
 
 	if (res.ok) {
+		console.log("RES IS OKAY!!!!!!!!!!!");
 		const data = await res.json();
+		console.log("===========> character_id", character_id);
 		dispatch(deleteCharacter(character_id));
+		return data;
 	} else {
 		const errors = await res.json();
 		return errors;

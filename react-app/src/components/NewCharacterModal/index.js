@@ -19,7 +19,7 @@ function NewCharacterModal() {
 
 		if (!Object.values(errors).length) {
 			const data = await dispatch(addNewCharacterThunk(characterName, appearance, user_id));
-			console.log("data", data);
+			dispatch(getUserCharactersThunk());
 			closeModal();
 		} else return;
 	};
@@ -39,9 +39,9 @@ function NewCharacterModal() {
 		return;
 	}
 
-	useEffect(() => {
-		dispatch(getUserCharactersThunk());
-	}, [dispatch]);
+	// useEffect(() => {
+	// 	// dispatch(getUserCharactersThunk());
+	// }, [dispatch, userCharacters?.length]);
 
 	return (
 		<div className="create-character-container">
