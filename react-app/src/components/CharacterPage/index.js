@@ -19,10 +19,8 @@ function CharacterPage() {
 	const sessionUser = useSelector((state) => state.session.user);
 	const userCharacters = useSelector((state) => state.characters.userCharacters);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
-	console.log("==============> selectedCharacter", selectedCharacter);
 
 	let selectedCharacterName = localStorage.getItem("character_name");
-	console.log("selectedCharacterName: ", selectedCharacterName);
 
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
@@ -34,17 +32,6 @@ function CharacterPage() {
 		localStorage.setItem("character_name", selectedCharacterName);
 		dispatch(getSelectedCharacterThunk());
 	}
-
-	//Backup code to try and update selected character
-	// if (!selectedCharacter) {
-	// 	console.log("No Current Selected Character, trying to grab name from local storage");
-
-	// 	try {
-	// 		selectedCharacterName = localStorage.getItem("character_name");
-	// 	} catch {
-	// 		return;
-	// 	}
-	// }
 
 	if (!sessionUser) return <Redirect to="/" />;
 

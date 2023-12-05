@@ -20,7 +20,6 @@ function DeleteCharacterModal() {
 		if (!Object.values(errors).length) {
 			// const data = await dispatch(addNewCharacterThunk(characterName, appearance, user_id));
 			// console.log("data", data);
-			console.log("test");
 			closeModal();
 		} else return;
 	};
