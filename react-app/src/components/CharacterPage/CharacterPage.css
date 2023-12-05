@@ -1,33 +1,93 @@
+.all-chars-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.character-select-container > button {
+  border: none;
+    font-size: 15px;
+    height: 50px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.character-select-container > button:hover {
+    font-size: 15px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.character-select-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.character-select-container:hover {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.281);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.characters-title-container {
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  border-bottom: solid black 1px;
+}
+
+.characters-title-container > button {
+  background-color: blue;
+  border-radius: 15px;
+  height: 50px;
+  width: 150px;
+  color: white;
+  height: 40px;
+}
+
+b {
+  color: gold;
+}
+
+.character-name-options-container {
+  display: flex;
+  flex-direction: row;
+}
+
+form.submit-delete-character-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .character-page-container {
   display: flex;
   flex-direction: row;
 }
 
-.left-char-page {
-  margin: 25px;
-  border: solid black 1px;
-  box-sizing: border-box;
-  width: 50%;
-  height: 75vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-.right-char-page {
-  margin: 25px;
-  border: solid black 1px;
-  box-sizing: border-box;
-  width: 50%;
-  height: 75vh;
-}
-
 .character-select-option {
-  height: 200px;
-  width: 200px;
+  height: 20px;
+  width: 100%;
   border: solid black 1px;
   box-sizing: border-box;
   display: flex;
+
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
@@ -35,6 +95,75 @@
 .character-select-create {
   height: 10%;
   background-color: rgb(0, 247, 0);
+}
+
+.character-info-stats-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.char-level-div {
+  padding-right: 15px;
+}
+
+.info-stats-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.info-stats-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.inventory-container {
+  border: solid black 1px;
+  height: 50%;
+}
+
+.left-char-page {
+  margin: 25px;
+  border: solid black 1px;
+  box-sizing: border-box;
+  background-color: burlywood;
+  width: 50%;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.level-preview {
+  display: flex;
+  width: 100px;
+}
+
+.new-character-button {
+  height: 50px;
+  background-color: red;
+}
+
+.right-char-page {
+  border: solid black 1px;
+  box-sizing: border-box;
+  width: 50%;
+  height: 75vh;
+  margin: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: burlywood;
+}
+
+.right-char-page {
+
+}
+
+.selected {
+  box-shadow: 10px 10px 10px black;
 }
 
 .select-text {
@@ -46,19 +175,7 @@
   margin: 0px;
 }
 
-.all-chars-container {
-  border: solid black 1px;
-  box-sizing: border-box;
-  height: 100%;
+.xp-info {
   display: flex;
   flex-direction: row;
-}
-
-.all-chars-container > button {
-    font-size: 20px;
-    margin: 5px;
-}
-
-.selected {
-  box-shadow: 10px 10px 10px black;
 }
