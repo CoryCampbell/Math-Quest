@@ -39,10 +39,6 @@ def create_new_character():
     allCharacters = Character.query.filter_by(user_id=current_user.id).all()
     print("============> all user characters", allCharacters)
 
-    for character in allCharacters:
-        if character.character_name == character_name:
-            return {"error": "Character Name Already Used."}
-
     new_character = Character(
         character_name=character_name,
         appearance=appearance,

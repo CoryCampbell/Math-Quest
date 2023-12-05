@@ -21,7 +21,7 @@ function CharacterPage() {
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
 		dispatch(getSelectedCharacterThunk(selectedCharacterName));
-	}, [dispatch, selectedCharacterName]);
+	}, [dispatch, selectedCharacterName, userCharacters?.length]);
 
 	function selectCharacter(e) {
 		selectedCharacterName = e.target.innerHTML;

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { addNewCharacterThunk } from "../../store/characters";
+import { addNewCharacterThunk, getUserCharactersThunk } from "../../store/characters";
 // import "./LoginForm.css";
 
 function NewCharacterModal() {
@@ -19,35 +19,48 @@ function NewCharacterModal() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		userCharacters.forEach((character) => {
-			if (character.character_name === characterName) setErrors(["You already have a character with that name!"]);
-		});
+		if (!Object.values(errors).length) {
+			const data = await dispatch(addNewCharacterThunk(characterName, appearance, user_id));
 
-		const data = await dispatch(addNewCharacterThunk(characterName, appearance, user_id));
-
-		console.log("=================>data", data);
-
-		if (data) {
-			setErrors(data);
-			console.log("errors", errors);
-		} else {
+			console.log("data", data);
 			closeModal();
 		}
 	};
 
+	function validateInput() {
+		const errorsObj = {};
+
+		if (!characterName || !characterName.length) errorsObj.characterName = "Please give your character a Name!";
+		if (!appearance) errorsObj.appearance = "Please give your character an appearance!";
+
+		userCharacters.forEach((character) => {
+			if (character.character_name === characterName)
+				errorsObj.characterName = "You already have a character with that name!";
+		});
+
+		setErrors(errorsObj);
+		return;
+	}
+
+	useEffect(() => {
+		dispatch(getUserCharactersThunk());
+	}, [dispatch]);
+
 	return (
 		<div className="create-character-container">
+			{errors.characterName && <p className="errors characterNameError">{errors.characterName}</p>}
 			<h1>Create a New Character!</h1>
 			<form className="user-input-container" onSubmit={handleSubmit}>
 				<ul>
-					{/* {errors?.map((error, idx) => (
+					{errors?.map((error, idx) => (
 						<li key={idx}>{error}</li>
-					))} */}
+					))}
 				</ul>
 				<div className="name-input-row">
+					{errors.name && <p className="errors nameError">{errors.name}</p>}
 					<label>
 						Name:
-						<input type="text" value={characterName} onChange={(e) => setCharacterName(e.target.value)} required />
+						<input type="text" value={characterName} onChange={(e) => setCharacterName(e.target.value)} />
 					</label>
 				</div>
 				<div className="appearance-input-row"></div>
@@ -55,54 +68,26 @@ function NewCharacterModal() {
 					<legend>Select an appearance:</legend>
 
 					<div>
-						<input
-							type="radio"
-							id={1}
-							name="drone"
-							value={appearance}
-							onChange={(e) => setAppearance(e.target.id)}
-							required
-						/>
+						<input type="radio" id={1} name="drone" value={appearance} onChange={(e) => setAppearance(e.target.id)} />
 						<label htmlFor="appearance-one">Appearance One</label>
 					</div>
 
 					<div>
-						<input
-							type="radio"
-							id={2}
-							name="drone"
-							value={appearance}
-							onChange={(e) => setAppearance(e.target.id)}
-							required
-						/>
+						<input type="radio" id={2} name="drone" value={appearance} onChange={(e) => setAppearance(e.target.id)} />
 						<label htmlFor="appearance-two">Appearance Two</label>
 					</div>
 
 					<div>
-						<input
-							type="radio"
-							id={3}
-							name="drone"
-							value={appearance}
-							onChange={(e) => setAppearance(e.target.id)}
-							required
-						/>
+						<input type="radio" id={3} name="drone" value={appearance} onChange={(e) => setAppearance(e.target.id)} />
 						<label htmlFor="appearance-three">Appearance Three</label>
 					</div>
 
 					<div>
-						<input
-							type="radio"
-							id={4}
-							name="drone"
-							value={appearance}
-							onChange={(e) => setAppearance(e.target.id)}
-							required
-						/>
+						<input type="radio" id={4} name="drone" value={appearance} onChange={(e) => setAppearance(e.target.id)} />
 						<label htmlFor="appearance-four">Appearance Four</label>
 					</div>
 				</fieldset>
-				<button className="login-button" type="submit">
+				<button className="login-button" type="submit" onSubmit={validateInput}>
 					Create
 				</button>
 			</form>
