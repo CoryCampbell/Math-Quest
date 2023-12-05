@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteCharacterThunk, getUserCharactersThunk } from "../../store/characters";
+
 import "./DeleteCharacterModal.css";
 
 function DeleteCharacterModal() {
@@ -10,20 +11,14 @@ function DeleteCharacterModal() {
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
 	const characterName = localStorage.getItem("character_name");
 	const dispatch = useDispatch();
-	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		const deletedCharacter = await dispatch(deleteCharacterThunk(selectedCharacter.id));
-		console.log("deletedCharacter", deletedCharacter);
-		if (!Object.values(errors).length) {
-			//IF EVERYTHING IS GOOD DELETE THE CHARACTER FROM DATABASE
-			//DELETE CHARACTER
-			//
-			closeModal();
-		} else return;
+		closeModal();
+		return deletedCharacter;
 	};
 
 	useEffect(() => {

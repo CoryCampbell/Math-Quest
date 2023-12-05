@@ -20,7 +20,9 @@ function NewCharacterModal() {
 		if (!Object.values(errors).length) {
 			const data = await dispatch(addNewCharacterThunk(characterName, appearance, user_id));
 			dispatch(getUserCharactersThunk());
+			localStorage.setItem("character_name", characterName);
 			closeModal();
+			return data;
 		} else return;
 	};
 

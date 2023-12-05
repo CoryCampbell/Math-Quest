@@ -3,6 +3,7 @@ const GET_USER_CHARACTERS = "characters/getUserCharacters";
 const GET_SELECTED_CHARACTER = "characters/getSelectedCharacter";
 const ADD_NEW_CHARACTER = "characters/addNewCharacter";
 const DELETE_CHARACTER = "characters/deleteCharacter";
+const UPDATE_CHARACTER = "characters/updateCharacter";
 
 // Action Creators
 const getUserCharacters = (payload) => ({
@@ -23,6 +24,12 @@ const addNewCharacter = (payload) => ({
 const deleteCharacter = (character_id) => ({
 	type: DELETE_CHARACTER,
 	character_id
+});
+
+const updateCharacter = (oldCharacterName, newCharacterName) => ({
+	type: DELETE_CHARACTER,
+	oldCharacterName,
+	newCharacterName
 });
 
 //Thunks
@@ -89,10 +96,26 @@ export const deleteCharacterThunk = (character_id) => async (dispatch) => {
 	});
 
 	if (res.ok) {
-		console.log("RES IS OKAY!!!!!!!!!!!");
 		const data = await res.json();
-		console.log("===========> character_id", character_id);
 		dispatch(deleteCharacter(character_id));
+		return data;
+	} else {
+		const errors = await res.json();
+		return errors;
+	}
+};
+
+//
+//UPDATE A CHARACTER THUNK
+//
+export const updateCharacterThunk = (oldCharacterName, newCharacterName) => async (dispatch) => {
+	const res = await fetch(`/api/characters/${oldCharacterName}/${newCharacterName}`, {
+		method: "PATCH"
+	});
+
+	if (res.ok) {
+		const data = await res.json();
+		dispatch(updateCharacter(oldCharacterName, newCharacterName));
 		return data;
 	} else {
 		const errors = await res.json();
@@ -106,7 +129,7 @@ const initialState = { userCharacters: null, selectedCharacter: null };
 //Reducer
 export default function charactersReducer(state = initialState, action) {
 	const userCharactersAfterChange = { ...state.userCharacters };
-	// const userCharactersAfterDeletion = { ...state.userCharacters };
+
 	switch (action.type) {
 		case GET_USER_CHARACTERS:
 			return { ...state, userCharacters: action.payload };
@@ -115,6 +138,8 @@ export default function charactersReducer(state = initialState, action) {
 		case ADD_NEW_CHARACTER:
 			return { ...state, userCharacters: [userCharactersAfterChange] };
 		case DELETE_CHARACTER:
+			return { ...state, userCharacters: [userCharactersAfterChange] };
+		case UPDATE_CHARACTER:
 			return { ...state, userCharacters: [userCharactersAfterChange] };
 		default:
 			return state;
