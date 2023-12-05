@@ -13,7 +13,7 @@ class Character(db.Model, UserMixin):
     level = db.Column(db.Integer, nullable=False)
     appearance = db.Column(db.Integer, nullable=False)
     difficulty = db.Column(db.String, nullable=False)
-    character_name = db.Column(db.String(25), nullable=False)
+    character_name = db.Column(db.String(25), nullable=False, unique=True)
     max_health = db.Column(db.Integer, nullable=False)
     current_health = db.Column(db.Integer, nullable=False)
     experience_points = db.Column(db.Integer, nullable=False)
