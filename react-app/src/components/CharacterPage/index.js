@@ -4,12 +4,15 @@ import { Redirect } from "react-router-dom";
 import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
 import OpenModalButton from "../OpenModalButton";
 import NewCharacterModal from "../NewCharacterModal";
-
 import "./CharacterPage.css";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
+//
+
+//
+
+//
 
 function CharacterPage() {
-	const history = useHistory();
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 	const userCharacters = useSelector((state) => state.characters.userCharacters);
@@ -52,13 +55,21 @@ function CharacterPage() {
 				<div className="right-char-page">
 					{selectedCharacter ? (
 						<>
-							<div>{selectedCharacterName}</div>
-							<div>Level: {selectedCharacter.level}</div>
-							<div> XP: {selectedCharacter.experience_points}</div>
-							<div>Coins: {selectedCharacter.coins}</div>
-							<div>
-								Health: {selectedCharacter.current_health}/{selectedCharacter.max_health}
+							<div className="character-info-stats-container">
+								<div className="info-stats-top">
+									<div>{selectedCharacterName}</div>
+									<div>Coins: {selectedCharacter.coins}</div>
+								</div>
+								<div className="info-stats-bottom">
+									Health: {selectedCharacter.current_health}/{selectedCharacter.max_health}
+									<div className="xp-info">
+										<div>Level: {selectedCharacter.level}</div>
+										<div> XP: {selectedCharacter.experience_points}</div>
+									</div>
+								</div>
+								<div></div>
 							</div>
+							<div className="inventory-container">Inventory</div>
 						</>
 					) : (
 						<>

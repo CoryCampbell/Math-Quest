@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { addNewCharacterThunk, getUserCharactersThunk } from "../../store/characters";
@@ -13,7 +12,6 @@ function NewCharacterModal() {
 	const [characterName, setCharacterName] = useState("");
 	const [appearance, setAppearance] = useState("");
 	const [errors, setErrors] = useState([]);
-
 	const { closeModal } = useModal();
 
 	const handleSubmit = async (e) => {
@@ -21,11 +19,10 @@ function NewCharacterModal() {
 
 		if (!Object.values(errors).length) {
 			const data = await dispatch(addNewCharacterThunk(characterName, appearance, user_id));
-
 			console.log("data", data);
 			closeModal();
-		}
-		// else return errors;
+			alert("New Character Created!");
+		} else return;
 	};
 
 	function validateInput() {

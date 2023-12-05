@@ -28,6 +28,7 @@
   border: solid black 1px;
   box-sizing: border-box;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
@@ -61,4 +62,38 @@
 
 .selected {
   box-shadow: 10px 10px 10px black;
+}
+
+.character-info-stats-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info-stats-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.info-stats-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.xp-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.inventory-container {
+  border: solid black 1px;
+  height: 50%;
+}
+
+.right-char-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
