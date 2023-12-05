@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteCharacterThunk, getUserCharactersThunk } from "../../store/characters";
@@ -7,7 +7,6 @@ import "./DeleteCharacterModal.css";
 
 function DeleteCharacterModal() {
 	// const user_id = useSelector((state) => state.session.user.id);
-	const userCharacters = useSelector((state) => state.characters.userCharacters);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
 	const characterName = localStorage.getItem("character_name");
 	const dispatch = useDispatch();

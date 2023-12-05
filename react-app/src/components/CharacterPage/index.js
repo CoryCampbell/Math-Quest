@@ -6,7 +6,6 @@ import OpenModalButton from "../OpenModalButton";
 import NewCharacterModal from "../NewCharacterModal";
 import "./CharacterPage.css";
 import UpdateCharacterModal from "../UpdateCharacterNameModal";
-import DeleteCharacterModal from "../DeleteCharacterModal";
 
 //
 
@@ -50,8 +49,8 @@ function CharacterPage() {
 					<div className="all-chars-container">
 						{userCharacters &&
 							userCharacters?.map((character) => (
-								<div className="character-select-container">
-									<button key={character.id} className="character-select-option" onClick={selectCharacter}>
+								<div key={character.id} className="character-select-container">
+									<button className="character-select-option" onClick={selectCharacter}>
 										{character.character_name}
 									</button>
 									<div className="level-preview">Level {character.level}</div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { addNewCharacterThunk, getUserCharactersThunk } from "../../store/characters";
@@ -27,9 +27,24 @@ function NewCharacterModal() {
 
 	function validateInput() {
 		const errorsObj = {};
-		const splCharsTestlist = /^[a-zA-Z- -0123456789-]*$/;
+		const forbiddenSymbols = "/|-!?)(*&^%$#><:~`'@=+";
 
-		if (!characterName || !characterName.length) errorsObj.characterName = "Please give your character a Name!";
+		function forbiddenLoop(name) {
+			for (let i = 0; i < name.length; i++) {
+				const char = name[i];
+
+				if (forbiddenSymbols.includes(char)) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		if (!characterName || !characterName.trim().length) errorsObj.characterName = "Please give your character a Name!";
+
+		if (forbiddenLoop(characterName))
+			errorsObj.characterName = "Names are not allowed to include any Symbols or Special Characters!";
+
 		if (!appearance) errorsObj.appearance = "Please give your character an appearance!";
 
 		userCharacters.forEach((character) => {
@@ -37,16 +52,9 @@ function NewCharacterModal() {
 				errorsObj.characterName = "You already have a character with that name!";
 		});
 
-		if (!splCharsTestlist.test(characterName))
-			errorsObj.characterName = "Names are not allowed to include any Symbols or Special Characters!";
-
 		setErrors(errorsObj);
 		return;
 	}
-
-	// useEffect(() => {
-	// 	// dispatch(getUserCharactersThunk());
-	// }, [dispatch, userCharacters?.length]);
 
 	return (
 		<div className="create-character-container">
