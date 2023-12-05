@@ -7,7 +7,6 @@ import "./NewCharacterModal.css";
 function NewCharacterModal() {
 	const user_id = useSelector((state) => state.session.user.id);
 	const userCharacters = useSelector((state) => state.characters.userCharacters);
-
 	const dispatch = useDispatch();
 	const [characterName, setCharacterName] = useState("");
 	const [appearance, setAppearance] = useState("");
@@ -28,6 +27,7 @@ function NewCharacterModal() {
 
 	function validateInput() {
 		const errorsObj = {};
+		const splCharsTestlist = /^[a-zA-Z- -0123456789-]*$/;
 
 		if (!characterName || !characterName.length) errorsObj.characterName = "Please give your character a Name!";
 		if (!appearance) errorsObj.appearance = "Please give your character an appearance!";
@@ -36,6 +36,9 @@ function NewCharacterModal() {
 			if (character.character_name === characterName)
 				errorsObj.characterName = "You already have a character with that name!";
 		});
+
+		if (!splCharsTestlist.test(characterName))
+			errorsObj.characterName = "Names are not allowed to include any Symbols or Special Characters!";
 
 		setErrors(errorsObj);
 		return;
