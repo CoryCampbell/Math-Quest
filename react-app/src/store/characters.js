@@ -110,7 +110,6 @@ const initialState = { userCharacters: null, selectedCharacter: null };
 export default function charactersReducer(state = initialState, action) {
 	const userCharactersAfterChange = { ...state.userCharacters };
 	// const userCharactersAfterDeletion = { ...state.userCharacters };
-	console.log("action", action);
 	switch (action.type) {
 		case GET_USER_CHARACTERS:
 			return { ...state, userCharacters: action.payload };

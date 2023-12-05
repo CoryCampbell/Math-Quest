@@ -65,16 +65,16 @@ def create_new_character():
 
 
 
-@character_routes.route('/characters/delete', methods=["DELETE"])
+@character_routes.route('/delete', methods=["DELETE"])
 @login_required
 def delete_character(character_id):
-    user_id = current_user.id
+    print(character_id)
     character = Character.query.filter_by(id=character_id).first()
     character_name = character["character_name"]
 
     if character:
         db.session.delete(character)
         db.session.commit()
-        return {"message": repr("{character_name} has decided to part ways with you. They will not appear in your Character list anymore.")}
+        return {"message": repr("{character_name} has decided to part ways with you. They will not appear in your Characters list anymore.")}
     else:
         return {"error": repr("{character_name} could not be parted with.")}
