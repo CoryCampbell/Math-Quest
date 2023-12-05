@@ -19,7 +19,7 @@ function UpdateCharacterModal() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+		console.log("===========> oldCharacterName, newCharacterName", oldCharacterName, newCharacterName);
 		const updatedCharacter = await dispatch(updateCharacterThunk(oldCharacterName, newCharacterName));
 		localStorage.setItem("character_name", newCharacterName);
 		closeModal();

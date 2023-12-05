@@ -67,8 +67,7 @@ def create_new_character():
 @login_required
 def delete_character(character_id):
 
-    character = Character.query.filter_by(id=character_id).first()
-
+    character = Character.query.filter_by(id=character_id, user_id=current_user.id).first()
     if character:
         character_name = character.to_dict()["character_name"]
         db.session.delete(character)
@@ -82,12 +81,14 @@ def delete_character(character_id):
 @login_required
 def update_character(old_character_name, new_character_name):
     print("========= req data ======>", old_character_name, new_character_name)
-    character = Character.query.filter_by(character_name=old_character_name).first()
+    character = Character.query.filter_by(character_name=old_character_name, user_id=current_user.id).first()
     print("=======> before change: ", character.to_dict()["character_name"])
     if character:
         character.character_name = new_character_name
 
-    print("after change ============> ", character.to_dict()["character_name"])
-    db.session.commit()
+        print("after change ============> ", character.to_dict()["character_name"])
+        db.session.commit()
 
-    return {"message": repr("{old_character_name} will now be known as {new_character_name}!")}
+        return {"message": repr("{old_character_name} will now be known as {new_character_name}!")}
+    else:
+        return {"error": repr("{old_character_name}'s name could not be changed.")}

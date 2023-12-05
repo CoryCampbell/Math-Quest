@@ -21,6 +21,7 @@ function CharacterPage() {
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
 
 	let selectedCharacterName = localStorage.getItem("character_name");
+	console.log("=====================> selectedCharacterName", selectedCharacterName);
 
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
