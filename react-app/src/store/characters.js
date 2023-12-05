@@ -2,6 +2,7 @@
 const GET_USER_CHARACTERS = "characters/getUserCharacters";
 const GET_SELECTED_CHARACTER = "characters/getSelectedCharacter";
 const ADD_NEW_CHARACTER = "characters/addNewCharacter";
+const DELETE_CHARACTER = "characters/deleteCharacter";
 
 // Action Creators
 const getUserCharacters = (payload) => ({
@@ -19,6 +20,11 @@ const addNewCharacter = (payload) => ({
 	payload
 });
 
+const deleteCharacter = (character_id) => ({
+	type: DELETE_CHARACTER,
+	character_id
+});
+
 //Thunks
 
 //
@@ -28,6 +34,7 @@ export const getUserCharactersThunk = () => async (dispatch) => {
 	const res = await fetch("/api/characters/all");
 
 	const data = await res.json();
+	console.log("==============> !!!!! data", data);
 	dispatch(getUserCharacters(data));
 	return data;
 };
@@ -35,14 +42,16 @@ export const getUserCharactersThunk = () => async (dispatch) => {
 //
 //get selected character thunk
 //
-export const getSelectedCharacterThunk = (character_name) => async (dispatch) => {
+export const getSelectedCharacterThunk = () => async (dispatch) => {
 	const res = await fetch("/api/characters/all");
 
 	const data = await res.json();
-	console.log("data", data);
+	console.log("data ???", data);
 
+	const characterName = localStorage.getItem("character_name");
+	console.log("characterName", characterName);
 	//choose the character
-	const selectedCharacter = data.filter((character) => (character.character_name = character_name))[0];
+	const selectedCharacter = data.filter((character) => character.character_name === characterName)[0];
 
 	console.log("selectedCharacter", selectedCharacter);
 
@@ -77,19 +86,40 @@ export const addNewCharacterThunk = (character_name, appearance, user_id) => asy
 	return data;
 };
 
+//
+//DELETE A CHARACTER THUNK
+//
+export const deleteCharacterThunk = (character_id) => async (dispatch) => {
+	const res = await fetch(`/api/characters/delete`, {
+		method: "DELETE"
+	});
+
+	if (res.ok) {
+		const data = await res.json();
+		dispatch(deleteCharacter(character_id));
+	} else {
+		const errors = await res.json();
+		return errors;
+	}
+};
+
 //Initial state
 const initialState = { userCharacters: null, selectedCharacter: null };
 
 //Reducer
 export default function charactersReducer(state = initialState, action) {
-	const userCharactersAfterAddition = { ...state.userCharacters };
+	const userCharactersAfterChange = { ...state.userCharacters };
+	// const userCharactersAfterDeletion = { ...state.userCharacters };
+	console.log("action", action);
 	switch (action.type) {
 		case GET_USER_CHARACTERS:
 			return { ...state, userCharacters: action.payload };
 		case GET_SELECTED_CHARACTER:
 			return { ...state, selectedCharacter: action.payload };
 		case ADD_NEW_CHARACTER:
-			return { ...state, userCharacters: [userCharactersAfterAddition] };
+			return { ...state, userCharacters: [userCharactersAfterChange] };
+		case DELETE_CHARACTER:
+			return { ...state, userCharacters: [userCharactersAfterChange] };
 		default:
 			return state;
 	}

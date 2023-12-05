@@ -21,7 +21,6 @@ function NewCharacterModal() {
 			const data = await dispatch(addNewCharacterThunk(characterName, appearance, user_id));
 			console.log("data", data);
 			closeModal();
-			alert("New Character Created!");
 		} else return;
 	};
 
@@ -56,7 +55,6 @@ function NewCharacterModal() {
 						<input type="text" value={characterName} onChange={(e) => setCharacterName(e.target.value)} />
 					</label>
 				</div>
-				<div className="appearance-input-row"></div>
 				{errors.appearance && <p className="errors appearanceError">{errors.appearance}</p>}
 				<fieldset>
 					<legend>Select an appearance:</legend>
