@@ -1,16 +1,31 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import "./AdventurePage.css";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
+import { useEffect } from "react";
+import { addNewAdventureThunk } from "../../store/adventures";
 
 function AdventurePage() {
+	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
+	const currentAdventure = useSelector((state) => state.adventure);
+
+	useEffect(() => {
+		dispatch(getUserCharactersThunk());
+		dispatch(getSelectedCharacterThunk());
+	}, [dispatch]);
 
 	if (!sessionUser) return <Redirect to="/" />;
 
-	function startAdditionAdventure() {
-		console.log("addition adventure started!");
+	function startAdventure(e) {
+		console.log("Adventure started!");
+		console.log("e.value", e.target.value);
+		dispatch(addNewAdventureThunk(selectedCharacter.id, e.target.value));
+		//create new adventure
+
+		//re render page to show adventure status/progress/etc
 	}
 
 	return (
@@ -19,7 +34,7 @@ function AdventurePage() {
 				<div className="adventure-page-container">
 					<div className="page-title">Select Your Adventure!</div>
 					<div className="adventure-options-container">
-						<button className="adventure-option add" onClick={startAdditionAdventure}>
+						<button className="adventure-option add" value="addition" onClick={startAdventure}>
 							Addition Adventure
 						</button>
 						<button className="adventure-option sub" disabled>
@@ -39,6 +54,11 @@ function AdventurePage() {
 					<NavLink to="/characters">Characters</NavLink>
 				</div>
 			)}
+			{/* {selectedCharacter && currentAdventure && (
+				<div>
+					<div>adventure started</div>
+				</div>
+			)} */}
 		</>
 	);
 }
