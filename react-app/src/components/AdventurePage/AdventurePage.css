@@ -35,3 +35,11 @@
 .add:hover {
   background-color: white;
 }
+
+.no-character-adv-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
