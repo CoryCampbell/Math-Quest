@@ -1,10 +1,16 @@
 // constants
 const ADD_NEW_ADVENTURE = "adventures/addNewAdventure";
+const CLEAR_ADVENTURE = "adventures/clearAdventure";
 // const UPDATE_CHARACTER = "characters/updateCharacter";
 
 // Action Creators
 const addNewAdventure = (payload) => ({
 	type: ADD_NEW_ADVENTURE,
+	payload
+});
+
+const clearAdventure = (payload) => ({
+	type: CLEAR_ADVENTURE,
 	payload
 });
 
@@ -38,6 +44,11 @@ export const addNewAdventureThunk = (character_id, adventure_type) => async (dis
 	return data;
 };
 
+export const clearAdventureThunk = () => async (dispatch) => {
+	dispatch(clearAdventure());
+	return;
+};
+
 //
 //UPDATE AN ADVENTURE THUNK
 //
@@ -65,6 +76,8 @@ export default function charactersReducer(state = initialState, action) {
 	switch (action.type) {
 		case ADD_NEW_ADVENTURE:
 			return { ...userAdventureAfterChange };
+		case CLEAR_ADVENTURE:
+			return {};
 		// case UPDATE_ADVENTURE:
 		// 	return { ...state, userCharacters: [userCharactersAfterChange] };
 		default:
