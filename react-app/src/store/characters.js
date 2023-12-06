@@ -138,6 +138,7 @@ export default function charactersReducer(state = initialState, action) {
 		case ADD_NEW_CHARACTER:
 			return { ...state, userCharacters: [userCharactersAfterChange] };
 		case DELETE_CHARACTER:
+			console.log("============> ACTION: ", action);
 			return { ...state, userCharacters: [userCharactersAfterChange] };
 		case UPDATE_CHARACTER:
 			return { ...state, userCharacters: [userCharactersAfterChange] };
