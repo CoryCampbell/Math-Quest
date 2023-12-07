@@ -1,20 +1,24 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
 import { useEffect } from "react";
-import { addNewAdventureThunk } from "../../store/adventures";
-
+import { addNewAdventureThunk, clearAdventureThunk } from "../../store/adventures";
+import AdventureStartModal from "../AlertModals/AdventureStartModal";
+import OpenModalButton from "../OpenModalButton";
+import easyQuestions from "../../static/math-questions";
 import "./AdventurePage.css";
 
 function AdventurePage() {
+	const history = useHistory();
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
 	let currentAdventure = useSelector((state) => state.adventure);
-
 	let adventure = localStorage.getItem("adventure") || {};
-	console.log("adventure before parse: ", adventure);
+	let currentQuestion = localStorage.getItem("currentQuestion") || {};
+
+	if (Object.values(currentQuestion) !== 0) currentQuestion = loadQuestion();
 
 	if (Object.values(adventure) === 0) {
 		console.log("no adventure chosen");
@@ -28,8 +32,6 @@ function AdventurePage() {
 			currentAdventure = {};
 		}
 	}
-
-	console.log("adventure after grab from local storage start first load/re-render: ", currentAdventure);
 
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
@@ -45,21 +47,49 @@ function AdventurePage() {
 		adventureObject.progress = 0;
 		adventureObject.adventure_type = e.target.value;
 		adventureObject.completed = false;
-
 		localStorage.setItem("adventure", JSON.stringify(adventureObject));
 		adventure = JSON.parse(localStorage.getItem("adventure"));
 		currentAdventure = adventure;
 		console.log("adventure after grab from local storage start adventure click: ", currentAdventure);
 		dispatch(addNewAdventureThunk(selectedCharacter?.id, currentAdventure.adventure_type));
+
+		console.log("currentQuestion ===========>", currentQuestion);
 	}
 
-	console.log("adventure progress: ", currentAdventure);
+	function loadQuestion() {
+		//get random question from list
+		// Change this to a function that grabs a random question
+		let question = easyQuestions[0];
+		console.log("question", question);
+		localStorage.setItem("currentQuestion", question);
+		return question;
+	}
+
+	function usePotion() {
+		alert("Feature coming soon!");
+
+		//remove potion from inventory
+
+		//update user HP
+	}
+
+	function runAway() {
+		// alert("Feature coming soon!");
+
+		//remove adventure from local storage
+		localStorage.removeItem("adventure");
+
+		//remove adventure from state
+		dispatch(clearAdventureThunk());
+
+		//redirect to village page
+		history.push("/village");
+	}
 
 	// THREE STATES YOU CAN BE IN:
 	// 1: NO SELECTED CHARACTER
 	// 2: SELECTED CHARACTER BUT NO ADVENTURE STARTED
 	// 3: SELECTED CHARACTER ***AND*** ADVENTURE STARTED
-
 	return (
 		<>
 			{!selectedCharacter ? (
@@ -102,17 +132,36 @@ function AdventurePage() {
 									<div className="adv-top-right">
 										<div>Coins: {selectedCharacter.coins}</div>
 										<div>
-											level {selectedCharacter.level} - {selectedCharacter.experience_points}
+											level {selectedCharacter.level} XP: {selectedCharacter.experience_points}
 										</div>
 									</div>
 								</div>
 								<div className="full-game-container">
 									<div className="stage-time-container">
+										<button className="use-potion-button" onClick={usePotion}>
+											Use Potion
+										</button>
 										<div>Score: {currentAdventure["score"]}</div>
-										<div className="separator-div"></div>
-										<div>Stage: {currentAdventure["score"]} / 10</div>
+										<div>Stage: {currentAdventure["progress"] + 1} / 10</div>
+										<button className="run-away-button" onClick={runAway}>
+											Run Away!
+										</button>
 									</div>
-									<div className="bottom-game-container">Game CONTAINER</div>
+									<div className="bottom-game-container">
+										<div className="visual-game-container">
+											<div className="player-icon icon">player icon</div>
+											<div className="enemy-icon icon">enemy icon</div>
+										</div>
+										<div className="math-game-container">
+											<div className="question-container">{currentQuestion?.question}</div>
+											<div className="answers-container">
+												<button className="answer-one answer">{currentQuestion?.choices[0]}</button>
+												<button className="answer-two answer">2</button>
+												<button className="answer-three answer">3</button>
+												<button className="answer-four answer">4</button>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div className="spacer-div"></div>

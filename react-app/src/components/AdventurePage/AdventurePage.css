@@ -65,18 +65,20 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 50px;
-  border: solid black 1px;
+  height: 65px;
+  border: solid gray 5px;
+  box-sizing: border-box;
+  border-style: groove;
   box-sizing: border-box;
 }
 
 .bottom-game-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 80%;
+  height: 90%;
 }
 
 .adv-top-left {
@@ -99,16 +101,78 @@
 .stage-time-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 30px;
-}
-
-.separator-div {
-  width: 50px;
+  height: 10%;
 }
 
 .spacer-div {
   height: 10vh;
+}
+
+.visual-game-container {
+  border: solid red 1px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+}
+
+.math-game-container {
+  border: solid blue 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.icon {
+  border: solid black 1px;
+  box-sizing: border-box;
+  margin: 5px;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.question-container {
+  border: solid green 1px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.answers-container {
+  border: solid salmon 1px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.answer {
+  border: solid black 1px;
+  box-sizing: border-box;
+  width: 50%;
+  height: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
