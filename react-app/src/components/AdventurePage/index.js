@@ -77,7 +77,16 @@ function AdventurePage() {
 							</div>
 						</div>
 					) : (
-						<div>adventure started!</div>
+						<>
+							<div className="current-adventure-container">
+								<div className="adventure-info-container">
+									<div className="adv-top-left">left</div>
+									<div className="adv-top-mid">middle</div>
+									<div className="adv-top-right">right</div>
+								</div>
+								<div className="adventure-game-container">Game CONTAINER</div>
+							</div>
+						</>
 					)}
 				</>
 			)}

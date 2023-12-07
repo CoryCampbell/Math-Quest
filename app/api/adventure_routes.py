@@ -43,8 +43,11 @@ def create_new_adventure():
         completed=completed
     )
 
-    db.session.add(new_adventure)
-    db.session.commit()
+    # THIS SHOULD BE INSIDE UPDATE ADVENTURE?
+    # if new_adventure.completed === True:
+        # print("adventure completed!!!")
+    # db.session.add(new_adventure)
+    # db.session.commit()
 
     return new_adventure.to_dict()
 
