@@ -101,6 +101,7 @@ function AdventurePage() {
 									<div className="bottom-game-container">Game CONTAINER</div>
 								</div>
 							</div>
+							<div className="spacer-div"></div>
 						</>
 					)}
 				</>
