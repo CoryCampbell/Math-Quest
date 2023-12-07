@@ -1,9 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import "./AdventurePage.css";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
 import { useEffect } from "react";
+// import { addNewAdventureThunk } from "../../store/adventures";
+
+import "./AdventurePage.css";
 import { addNewAdventureThunk } from "../../store/adventures";
 
 function AdventurePage() {
@@ -11,6 +13,14 @@ function AdventurePage() {
 	const sessionUser = useSelector((state) => state.session.user);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
 	const currentAdventure = useSelector((state) => state.adventure);
+	console.log("cur adv: ", currentAdventure);
+
+	let adventure = localStorage.getItem("adventure");
+
+	if (!adventure) {
+		console.log("no adventure chosen");
+		adventure = {};
+	}
 
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
@@ -20,10 +30,16 @@ function AdventurePage() {
 	if (!sessionUser) return <Redirect to="/" />;
 
 	function startAdventure(e) {
-		console.log("Adventure started!");
-		console.log("e.value", e.target.value);
+		let adventureObject = {};
+		adventureObject.character_id = selectedCharacter.id;
+		adventureObject.score = 0;
+		adventureObject.progress = 0;
+		adventureObject.adventure_type = e.target.value;
+		adventureObject.completed = false;
+		console.log("adventureObject", adventureObject);
+
+		localStorage.setItem("adventure", adventureObject);
 		dispatch(addNewAdventureThunk(selectedCharacter.id, e.target.value));
-		//create new adventure
 
 		//re render page to show adventure status/progress/etc
 	}
@@ -42,7 +58,7 @@ function AdventurePage() {
 				</div>
 			) : (
 				<>
-					{selectedCharacter && Object.keys(currentAdventure).length === 0 ? (
+					{selectedCharacter && Object.keys(adventure).length === 0 ? (
 						<div className="adventure-page-container">
 							<div className="page-title">Select Your Adventure!</div>
 							<div className="adventure-options-container">
