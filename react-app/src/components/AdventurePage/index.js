@@ -1,13 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
 import { useEffect } from "react";
-import { addNewAdventureThunk } from "../../store/adventures";
+import { addNewAdventureThunk, clearAdventureThunk } from "../../store/adventures";
 
 import "./AdventurePage.css";
 
 function AdventurePage() {
+	const history = useHistory();
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
@@ -51,6 +52,27 @@ function AdventurePage() {
 		currentAdventure = adventure;
 		console.log("adventure after grab from local storage start adventure click: ", currentAdventure);
 		dispatch(addNewAdventureThunk(selectedCharacter?.id, currentAdventure.adventure_type));
+	}
+
+	function usePotion() {
+		alert("Feature coming soon!");
+
+		//remove potion from inventory
+
+		//update user HP
+	}
+
+	function runAway() {
+		// alert("Feature coming soon!");
+
+		//remove adventure from local storage
+		localStorage.removeItem("adventure");
+
+		//remove adventure from state
+		dispatch(clearAdventureThunk());
+
+		//redirect to village page
+		history.push("/village");
 	}
 
 	console.log("adventure progress: ", currentAdventure);
@@ -102,17 +124,36 @@ function AdventurePage() {
 									<div className="adv-top-right">
 										<div>Coins: {selectedCharacter.coins}</div>
 										<div>
-											level {selectedCharacter.level} - {selectedCharacter.experience_points}
+											level {selectedCharacter.level} XP: {selectedCharacter.experience_points}
 										</div>
 									</div>
 								</div>
 								<div className="full-game-container">
 									<div className="stage-time-container">
+										<button className="use-potion-button" onClick={usePotion}>
+											Use Potion
+										</button>
 										<div>Score: {currentAdventure["score"]}</div>
-										<div className="separator-div"></div>
-										<div>Stage: {currentAdventure["score"]} / 10</div>
+										<div>Stage: {currentAdventure["progress"] + 1} / 10</div>
+										<button className="run-away-button" onClick={runAway}>
+											Run Away!
+										</button>
 									</div>
-									<div className="bottom-game-container">Game CONTAINER</div>
+									<div className="bottom-game-container">
+										<div className="visual-game-container">
+											<div className="player-icon icon">player icon</div>
+											<div className="enemy-icon icon">enemy icon</div>
+										</div>
+										<div className="math-game-container">
+											<div className="question-container">question container</div>
+											<div className="answers-container">
+												<button className="answer-one answer">1</button>
+												<button className="answer-two answer">2</button>
+												<button className="answer-three answer">3</button>
+												<button className="answer-four answer">4</button>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div className="spacer-div"></div>
