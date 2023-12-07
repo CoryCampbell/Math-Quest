@@ -8,7 +8,7 @@
 .character-select-container > button {
   border: none;
     font-size: 15px;
-    height: 50px;
+    height: 40px;
     background-color: transparent;
     display: flex;
     flex-direction: row;
@@ -17,7 +17,7 @@
 
 .character-select-container > button:hover {
     font-size: 15px;
-    height: 50px;
+    height: 40px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -54,11 +54,10 @@
 
 .characters-title-container > button {
   background-color: blue;
-  border-radius: 15px;
-  height: 50px;
+  border-radius: 10px;
+  height: 30px;
   width: 150px;
   color: white;
-  height: 40px;
 }
 
 b {
@@ -78,6 +77,7 @@ form.submit-delete-character-container {
 .character-page-container {
   display: flex;
   flex-direction: row;
+  height: 95vh;
 }
 
 .character-select-option {
@@ -101,6 +101,7 @@ form.submit-delete-character-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 5px;
 }
 
 .char-level-div {
@@ -120,14 +121,20 @@ form.submit-delete-character-container {
 }
 
 .inventory-container {
-  border: solid black 1px;
+  border: solid gray 15px;
+  box-sizing: border-box;
+  border-style: groove;
+  border-radius: 5px;
   height: 50%;
+  margin: 5px;
+  background-color: rgb(201, 201, 201);
 }
 
 .left-char-page {
   margin: 25px;
-  border: solid black 1px;
+  border: solid gray 5px;
   box-sizing: border-box;
+  border-style: groove;
   background-color: burlywood;
   width: 50%;
   height: 75vh;
@@ -147,8 +154,9 @@ form.submit-delete-character-container {
 }
 
 .right-char-page {
-  border: solid black 1px;
+  border: solid gray 5px;
   box-sizing: border-box;
+  border-style: groove;
   width: 50%;
   height: 75vh;
   margin: 25px;
