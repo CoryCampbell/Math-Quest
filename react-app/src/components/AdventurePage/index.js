@@ -59,7 +59,9 @@ function AdventurePage() {
 	function loadQuestion() {
 		//get random question from list
 		// Change this to a function that grabs a random question
-		let question = easyQuestions[0];
+		const randomInt = Math.floor(Math.random() * 4);
+		console.log("randomInt ==========> !!!!!!!!!!", randomInt);
+		let question = easyQuestions[randomInt];
 		console.log("question", question);
 		localStorage.setItem("currentQuestion", question);
 		return question;
@@ -129,6 +131,10 @@ function AdventurePage() {
 											</div>
 										</div>
 									</div>
+									<OpenModalButton
+										buttonText="?"
+										modalComponent={<AdventureStartModal className="adventure-start-help-button" />}
+									></OpenModalButton>
 									<div className="adv-top-right">
 										<div>Coins: {selectedCharacter.coins}</div>
 										<div>
@@ -153,12 +159,12 @@ function AdventurePage() {
 											<div className="enemy-icon icon">enemy icon</div>
 										</div>
 										<div className="math-game-container">
-											<div className="question-container">{currentQuestion?.question}</div>
+											<div className="question-container">{currentQuestion?.question} = ?</div>
 											<div className="answers-container">
 												<button className="answer-one answer">{currentQuestion?.choices[0]}</button>
-												<button className="answer-two answer">2</button>
-												<button className="answer-three answer">3</button>
-												<button className="answer-four answer">4</button>
+												<button className="answer-two answer">{currentQuestion?.choices[1]}</button>
+												<button className="answer-three answer">{currentQuestion?.choices[2]}</button>
+												<button className="answer-four answer">{currentQuestion?.choices[3]}</button>
 											</div>
 										</div>
 									</div>
