@@ -18,6 +18,7 @@ function CharacterPage() {
 	const sessionUser = useSelector((state) => state.session.user);
 	const userCharacters = useSelector((state) => state.characters.userCharacters);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
+	const currentAdventure = useSelector((state) => state.adventure);
 
 	let selectedCharacterName = localStorage.getItem("character_name");
 	console.log("=====================> selectedCharacterName", selectedCharacterName);
@@ -28,6 +29,10 @@ function CharacterPage() {
 	}, [dispatch, selectedCharacterName, userCharacters?.length]);
 
 	function selectCharacter(e) {
+		if (Object.keys(currentAdventure).length !== 0) {
+			return alert("adveture started, please end your adventure before switching Characters!");
+		}
+
 		selectedCharacterName = e.target.innerHTML;
 		localStorage.setItem("character_name", selectedCharacterName);
 		dispatch(getSelectedCharacterThunk());
