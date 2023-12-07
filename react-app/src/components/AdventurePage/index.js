@@ -12,16 +12,15 @@ function AdventurePage() {
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
-	const currentAdventure = useSelector((state) => state.adventure);
-	console.log("cur adv: ", currentAdventure);
+	let currentAdventure = useSelector((state) => state.adventure);
 
 	let adventure = localStorage.getItem("adventure");
 
 	if (!adventure) {
 		console.log("no adventure chosen");
 		adventure = {};
-	}
-
+	} else currentAdventure = adventure;
+	console.log("cur adv state: ", currentAdventure);
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
 		dispatch(getSelectedCharacterThunk());
@@ -40,8 +39,6 @@ function AdventurePage() {
 
 		localStorage.setItem("adventure", adventureObject);
 		dispatch(addNewAdventureThunk(selectedCharacter.id, e.target.value));
-
-		//re render page to show adventure status/progress/etc
 	}
 
 	// THREE STATES YOU CAN BE IN:
@@ -80,11 +77,29 @@ function AdventurePage() {
 						<>
 							<div className="current-adventure-container">
 								<div className="adventure-info-container">
-									<div className="adv-top-left">left</div>
-									<div className="adv-top-mid">middle</div>
-									<div className="adv-top-right">right</div>
+									<div className="adv-top-left">
+										<div>{selectedCharacter.character_name}</div>
+										<div>
+											<div>
+												❤{selectedCharacter.current_health} / {selectedCharacter.max_health}
+											</div>
+										</div>
+									</div>
+									<div className="adv-top-right">
+										<div>Coins: {selectedCharacter.coins}</div>
+										<div>
+											level {selectedCharacter.level} - {selectedCharacter.experience_points}
+										</div>
+									</div>
 								</div>
-								<div className="adventure-game-container">Game CONTAINER</div>
+								<div className="full-game-container">
+									<div className="stage-time-container">
+										<div>Score: {adventure.score}?</div>
+										<div className="separator-div"></div>
+										<div>Stage: ?{adventure.progress} / 10</div>
+									</div>
+									<div className="bottom-game-container">Game CONTAINER</div>
+								</div>
 							</div>
 						</>
 					)}

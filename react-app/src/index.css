@@ -2,9 +2,10 @@
 
 body {
   margin: 0px;
-  background-color: green;
-  height: 120vh;
+  background-image: linear-gradient(rgb(243, 243, 243) 0%, skyblue 90%, green 10%);
+  height: 100vh;
   font-size: 20px;
+  font-family: sans-serif;
 }
 
 /* Chrome/Safari/Opera */

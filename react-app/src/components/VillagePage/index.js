@@ -22,35 +22,42 @@ function VillagePage() {
 			{selectedCharacter ? (
 				<div className="village-page-container">
 					<h1>Village</h1>
-					<div className="subtitle-container">
-						<NavLink to="/characters">Characters</NavLink>
-						<NavLink to="/shop">Shop</NavLink>
-						<NavLink to="/adventures">Adventures</NavLink>
-					</div>
 					<div className="village-options-container">
-						<div className="village-option"></div>
-						<div className="village-option"></div>
-						<div className="village-option">
-							<div className="adventure-options-container"></div>
-						</div>
+						<button className="village-option">
+							<p>Live!</p>
+							<NavLink to="/shop">Shop</NavLink>
+						</button>
+
+						<button className="village-character-option">
+							<p>Live!</p>
+							<p>*image will go here*</p>
+							<NavLink to="/characters">Characters</NavLink>
+						</button>
+						<button className="village-option">
+							<p>Live!</p>
+							<NavLink to="/adventures">Adventures</NavLink>
+						</button>
 					</div>
 				</div>
 			) : (
 				<>
 					<div className="village-page-container">
 						<h1>Village</h1>
-						<div className="subtitle-container">
-							<NavLink to="/characters">Characters</NavLink>
-							<NavLink to="/shop">Shop</NavLink>
-							<NavLink to="/adventures">Adventures</NavLink>
-						</div>
 						<div className="village-options-container">
-							<div className="village-option">Select Your Character!</div>
-							<div className="village-option">Shop Is Closed. Please Select A Character And Return Later!</div>
-							<div className="village-option">
-								Adventures need Heroes. Please Select A Character To Start An Adventure!
-								<div className="adventure-options-container"></div>
-							</div>
+							<button className="village-option-closed" disabled>
+								<p>Shop Is Closed. Please Select A Character And Return Later!</p>
+								<p className="x">X</p>
+							</button>
+
+							<button className="village-character-option">
+								<p>Choose A Character To Start Your Journey!</p>
+								<p>*image will go here*</p>
+								<NavLink to="/characters">Characters</NavLink>
+							</button>
+							<button className="village-option-closed" disabled>
+								<p>Adventures need Heroes. Please Select A Character To Start An Adventure!</p>
+								<p className="x">X</p>
+							</button>
 						</div>
 					</div>
 				</>

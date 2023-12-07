@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   font-size: 35px;
-  height: 80vh;
+  height: 100vh;
   width: 80%;
   margin: auto;
 }
@@ -50,7 +50,7 @@
   width: 80%;
   height: 80vh;
   margin: auto;
-    margin-top: 25px;
+  margin-top: 25px;
   border: solid black 1px;
   box-sizing: border-box;
 }
@@ -61,39 +61,46 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 100px;
+  height: 50px;
   border: solid black 1px;
   box-sizing: border-box;
 }
 
-.adventure-game-container {
+.bottom-game-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  border: solid black 1px;
-  box-sizing: border-box;
 }
 
 .adv-top-left {
-  border: solid black 1px;
-  box-sizing: border-box;
   width: 33%;
-  height: 100%;
-}
-
-.adv-top-mid {
-  border: solid black 1px;
-  box-sizing: border-box;
-  width: 34%;
   height: 100%;
 }
 
 .adv-top-right {
-  border: solid black 1px;
-  box-sizing: border-box;
   width: 33%;
   height: 100%;
+}
+
+.full-game-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.stage-time-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 30px;
+}
+
+.separator-div {
+  width: 50px;
 }
