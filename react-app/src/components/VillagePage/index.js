@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
