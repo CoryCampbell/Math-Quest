@@ -3,10 +3,9 @@ import { Redirect } from "react-router-dom";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
 import { useEffect } from "react";
-// import { addNewAdventureThunk } from "../../store/adventures";
+import { addNewAdventureThunk } from "../../store/adventures";
 
 import "./AdventurePage.css";
-import { addNewAdventureThunk } from "../../store/adventures";
 
 function AdventurePage() {
 	const dispatch = useDispatch();
@@ -14,13 +13,24 @@ function AdventurePage() {
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
 	let currentAdventure = useSelector((state) => state.adventure);
 
-	let adventure = localStorage.getItem("adventure");
+	let adventure = localStorage.getItem("adventure") || {};
+	console.log("adventure before parse: ", adventure);
 
-	if (!adventure) {
+	if (Object.values(adventure) === 0) {
 		console.log("no adventure chosen");
-		adventure = {};
-	} else currentAdventure = adventure;
-	console.log("cur adv state: ", currentAdventure);
+		currentAdventure = {};
+	} else {
+		try {
+			console.log("parsing!!!", adventure);
+			currentAdventure = JSON.parse(adventure);
+		} catch {
+			console.log("not able to parse!!!");
+			currentAdventure = {};
+		}
+	}
+
+	console.log("adventure after grab from local storage start first load/re-render: ", currentAdventure);
+
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
 		dispatch(getSelectedCharacterThunk());
@@ -35,11 +45,15 @@ function AdventurePage() {
 		adventureObject.progress = 0;
 		adventureObject.adventure_type = e.target.value;
 		adventureObject.completed = false;
-		console.log("adventureObject", adventureObject);
 
-		localStorage.setItem("adventure", adventureObject);
-		dispatch(addNewAdventureThunk(selectedCharacter.id, e.target.value));
+		localStorage.setItem("adventure", JSON.stringify(adventureObject));
+		adventure = JSON.parse(localStorage.getItem("adventure"));
+		currentAdventure = adventure;
+		console.log("adventure after grab from local storage start adventure click: ", currentAdventure);
+		dispatch(addNewAdventureThunk(selectedCharacter?.id, currentAdventure.adventure_type));
 	}
+
+	console.log("adventure progress: ", currentAdventure);
 
 	// THREE STATES YOU CAN BE IN:
 	// 1: NO SELECTED CHARACTER
@@ -94,13 +108,14 @@ function AdventurePage() {
 								</div>
 								<div className="full-game-container">
 									<div className="stage-time-container">
-										<div>Score: {adventure.score}?</div>
+										<div>Score: {currentAdventure["score"]}</div>
 										<div className="separator-div"></div>
-										<div>Stage: ?{adventure.progress} / 10</div>
+										<div>Stage: {currentAdventure["score"]} / 10</div>
 									</div>
 									<div className="bottom-game-container">Game CONTAINER</div>
 								</div>
 							</div>
+							<div className="spacer-div"></div>
 						</>
 					)}
 				</>
