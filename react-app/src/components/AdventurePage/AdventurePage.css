@@ -1,12 +1,12 @@
 .adventure-page-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   font-size: 35px;
   height: 80vh;
-  margin: 0px;
-  border: solid black 1px;
+  width: 80%;
+  margin: auto;
 }
 
 .page-title {
@@ -15,10 +15,85 @@
 
 .adventure-options-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 15px;
 }
 
 .adventure-option {
-  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(255, 255, 177);
+}
+
+.add:hover {
+  background-color: white;
+}
+
+.no-character-adv-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.current-adventure-container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 80vh;
+  margin: auto;
+    margin-top: 25px;
+  border: solid black 1px;
+  box-sizing: border-box;
+}
+
+.adventure-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  border: solid black 1px;
+  box-sizing: border-box;
+}
+
+.adventure-game-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border: solid black 1px;
+  box-sizing: border-box;
+}
+
+.adv-top-left {
+  border: solid black 1px;
+  box-sizing: border-box;
+  width: 33%;
+  height: 100%;
+}
+
+.adv-top-mid {
+  border: solid black 1px;
+  box-sizing: border-box;
+  width: 34%;
+  height: 100%;
+}
+
+.adv-top-right {
+  border: solid black 1px;
+  box-sizing: border-box;
+  width: 33%;
+  height: 100%;
 }

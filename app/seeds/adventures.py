@@ -4,9 +4,9 @@ from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want
 def seed_adventures():
-    demoAdventure1 = Adventure(character_id=1, score=100)
-    demoAdventure2 = Adventure(character_id=2, score=1000)
-    demoAdventure3 = Adventure(character_id=3, score=10000)
+    demoAdventure1 = Adventure(character_id=1, score=100, adventure_type="addition", completed=True)
+    demoAdventure2 = Adventure(character_id=2, score=1000, adventure_type="addition", completed=True)
+    demoAdventure3 = Adventure(character_id=3, score=10000, adventure_type="addition", completed=True)
 
     db.session.add(demoAdventure1)
     db.session.add(demoAdventure2)

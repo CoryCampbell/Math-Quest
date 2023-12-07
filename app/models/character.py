@@ -24,8 +24,8 @@ class Character(db.Model, UserMixin):
     adventures = db.relationship('Adventure', backref='character', cascade='all, delete')
     statistics = db.relationship('Statistic', backref='character', cascade='all, delete')
     leaderboard = db.relationship('LeaderboardItem', backref='character', cascade='all, delete')
-    completed_quests = db.relationship('CompletedQuest', backref='character', cascade='all, delete')
-    completed_dungeons = db.relationship('CompletedDungeon', backref='character', cascade='all, delete')
+    quests = db.relationship('Quest', backref='character', cascade='all, delete')
+    dungeons = db.relationship('Dungeon', backref='character', cascade='all, delete')
 
 
     def to_dict(self):

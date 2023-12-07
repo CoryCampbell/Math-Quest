@@ -33,10 +33,23 @@ function UpdateCharacterModal() {
 
 	function validateInput() {
 		const errorsObj = {};
-		const splCharsTestlist = /^[a-zA-Z- -0123456789-]*$/;
-		if (!newCharacterName || !newCharacterName.length) errorsObj.characterName = "Please give your character a Name!";
+		const forbiddenSymbols = "/|-!?)(*&^%$#><:~`'@=+";
 
-		if (!splCharsTestlist.test(newCharacterName))
+		function forbiddenLoop(name) {
+			for (let i = 0; i < name.length; i++) {
+				const char = name[i];
+
+				if (forbiddenSymbols.includes(char)) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		if (!newCharacterName || !newCharacterName.trim().length)
+			errorsObj.characterName = "Please give your character a Name!";
+
+		if (forbiddenLoop(newCharacterName))
 			errorsObj.characterName = "Names are not allowed to include any Symbols or Special Characters!";
 
 		userCharacters.forEach((character) => {

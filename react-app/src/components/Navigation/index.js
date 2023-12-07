@@ -6,6 +6,7 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
+import { clearAdventureThunk } from "../../store/adventures";
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
@@ -41,6 +42,7 @@ function Navigation({ isLoaded }) {
 		closeMenu();
 		history.push("/");
 		dispatch(logout());
+		dispatch(clearAdventureThunk());
 	};
 
 	return (

@@ -5,8 +5,8 @@ from .adventures import seed_adventures, undo_adventures
 from .owned_items import seed_owned_items, undo_owned_items
 from .leaderboard import seed_leaderboard, undo_leaderboard
 from .statistics import seed_statistics, undo_statistics
-from .completed_dungeons import seed_completed_dungeons, undo_completed_dungeons
-from .completed_quests import seed_completed_quests, undo_completed_quests
+from .dungeons import seed_dungeons, undo_dungeons
+from .quests import seed_quests, undo_quests
 
 from app.models.db import db, environment, SCHEMA
 
@@ -24,8 +24,8 @@ def seed():
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
         undo_leaderboard()
-        undo_completed_dungeons()
-        undo_completed_quests()
+        undo_dungeons()
+        undo_quests()
         undo_adventures()
         undo_statistics()
         undo_owned_items()
@@ -36,8 +36,8 @@ def seed():
     seed_owned_items()
     seed_statistics()
     seed_adventures()
-    seed_completed_quests()
-    seed_completed_dungeons()
+    seed_quests()
+    seed_dungeons()
     seed_leaderboard()
     # Add other seed functions here
 

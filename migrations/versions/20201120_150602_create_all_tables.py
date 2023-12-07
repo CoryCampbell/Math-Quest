@@ -57,6 +57,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('character_id', sa.Integer(), nullable=False),
     sa.Column('score', sa.Integer(), nullable=False),
+    sa.Column('adventure_type', sa.String(), nullable=False),
+    sa.Column('completed', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
@@ -77,7 +79,7 @@ def upgrade():
 
 
 
-    op.create_table('completed_quests',
+    op.create_table('quests',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('character_id', sa.Integer(), nullable=False),
     sa.Column('quest_id', sa.Integer(), nullable=False),
@@ -85,11 +87,11 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE completed_quests SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE quests SET SCHEMA {SCHEMA};")
 
 
 
-    op.create_table('completed_dungeons',
+    op.create_table('dungeons',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('character_id', sa.Integer(), nullable=False),
     sa.Column('dungeon_id', sa.Integer(), nullable=False),
@@ -98,7 +100,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE completed_dungeons SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE dungeons SET SCHEMA {SCHEMA};")
 
 
 
@@ -140,8 +142,8 @@ def downgrade():
     op.drop_table('characters')
     op.drop_table('adventures')
     op.drop_table('owned_items')
-    op.drop_table('completed_quests')
-    op.drop_table('completed_dungeons')
+    op.drop_table('quests')
+    op.drop_table('dungeons')
     op.drop_table('statistics')
     op.drop_table('leaderboard')
     # ### end Alembic commands ###
