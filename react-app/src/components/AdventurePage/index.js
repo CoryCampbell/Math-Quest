@@ -4,7 +4,9 @@ import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
 import { useEffect } from "react";
 import { addNewAdventureThunk, clearAdventureThunk } from "../../store/adventures";
-
+import AdventureStartModal from "../AlertModals/AdventureStartModal";
+import OpenModalButton from "../OpenModalButton";
+import easyQuestions from "../../static/math-questions";
 import "./AdventurePage.css";
 
 function AdventurePage() {
@@ -13,9 +15,10 @@ function AdventurePage() {
 	const sessionUser = useSelector((state) => state.session.user);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
 	let currentAdventure = useSelector((state) => state.adventure);
-
 	let adventure = localStorage.getItem("adventure") || {};
-	console.log("adventure before parse: ", adventure);
+	let currentQuestion = localStorage.getItem("currentQuestion") || {};
+
+	if (Object.values(currentQuestion) !== 0) currentQuestion = loadQuestion();
 
 	if (Object.values(adventure) === 0) {
 		console.log("no adventure chosen");
@@ -29,8 +32,6 @@ function AdventurePage() {
 			currentAdventure = {};
 		}
 	}
-
-	console.log("adventure after grab from local storage start first load/re-render: ", currentAdventure);
 
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
@@ -46,12 +47,22 @@ function AdventurePage() {
 		adventureObject.progress = 0;
 		adventureObject.adventure_type = e.target.value;
 		adventureObject.completed = false;
-
 		localStorage.setItem("adventure", JSON.stringify(adventureObject));
 		adventure = JSON.parse(localStorage.getItem("adventure"));
 		currentAdventure = adventure;
 		console.log("adventure after grab from local storage start adventure click: ", currentAdventure);
 		dispatch(addNewAdventureThunk(selectedCharacter?.id, currentAdventure.adventure_type));
+
+		console.log("currentQuestion ===========>", currentQuestion);
+	}
+
+	function loadQuestion() {
+		//get random question from list
+		// Change this to a function that grabs a random question
+		let question = easyQuestions[0];
+		console.log("question", question);
+		localStorage.setItem("currentQuestion", question);
+		return question;
 	}
 
 	function usePotion() {
@@ -75,13 +86,10 @@ function AdventurePage() {
 		history.push("/village");
 	}
 
-	console.log("adventure progress: ", currentAdventure);
-
 	// THREE STATES YOU CAN BE IN:
 	// 1: NO SELECTED CHARACTER
 	// 2: SELECTED CHARACTER BUT NO ADVENTURE STARTED
 	// 3: SELECTED CHARACTER ***AND*** ADVENTURE STARTED
-
 	return (
 		<>
 			{!selectedCharacter ? (
@@ -145,9 +153,9 @@ function AdventurePage() {
 											<div className="enemy-icon icon">enemy icon</div>
 										</div>
 										<div className="math-game-container">
-											<div className="question-container">question container</div>
+											<div className="question-container">{currentQuestion?.question}</div>
 											<div className="answers-container">
-												<button className="answer-one answer">1</button>
+												<button className="answer-one answer">{currentQuestion?.choices[0]}</button>
 												<button className="answer-two answer">2</button>
 												<button className="answer-three answer">3</button>
 												<button className="answer-four answer">4</button>
