@@ -17,8 +17,20 @@ function AdventurePage() {
 	let currentAdventure = useSelector((state) => state.adventure);
 	let adventure = localStorage.getItem("adventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
+	console.log("currentQuestion", currentQuestion);
 
-	if (Object.values(currentQuestion) !== 0) currentQuestion = loadQuestion();
+	if (Object.values(currentQuestion) === 0) {
+		console.log("X X X X X X ----> NO QUESTION FOUND");
+		currentQuestion = loadQuestion();
+	} else {
+		try {
+			console.log("parsing!!!", currentQuestion);
+			currentQuestion = JSON.parse(currentQuestion);
+		} catch {
+			console.log("not able to parse!!!");
+			currentQuestion = {};
+		}
+	}
 
 	if (Object.values(adventure) === 0) {
 		console.log("no adventure chosen");
@@ -41,6 +53,7 @@ function AdventurePage() {
 	if (!sessionUser) return <Redirect to="/" />;
 
 	function startAdventure(e) {
+		e.preventDefault();
 		let adventureObject = {};
 		adventureObject.character_id = selectedCharacter.id;
 		adventureObject.score = 0;
@@ -52,7 +65,7 @@ function AdventurePage() {
 		currentAdventure = adventure;
 		console.log("adventure after grab from local storage start adventure click: ", currentAdventure);
 		dispatch(addNewAdventureThunk(selectedCharacter?.id, currentAdventure.adventure_type));
-
+		currentQuestion = loadQuestion();
 		console.log("currentQuestion ===========>", currentQuestion);
 	}
 
@@ -63,7 +76,7 @@ function AdventurePage() {
 		console.log("randomInt ==========> !!!!!!!!!!", randomInt);
 		let question = easyQuestions[randomInt];
 		console.log("question", question);
-		localStorage.setItem("currentQuestion", question);
+		localStorage.setItem("currentQuestion", JSON.stringify(question));
 		return question;
 	}
 
@@ -88,6 +101,21 @@ function AdventurePage() {
 		history.push("/village");
 	}
 
+	function submitAnswer(e) {
+		console.log(e.target.value);
+
+		//check if submitted answer is correct
+
+		//handle correct answer updates
+
+		//handle incorrect answer updates
+
+		//update adventure progress
+
+		//reload another question
+	}
+
+	console.log("FINAL: currentQuestion: ", currentQuestion);
 	// THREE STATES YOU CAN BE IN:
 	// 1: NO SELECTED CHARACTER
 	// 2: SELECTED CHARACTER BUT NO ADVENTURE STARTED
@@ -161,10 +189,34 @@ function AdventurePage() {
 										<div className="math-game-container">
 											<div className="question-container">{currentQuestion?.question} = ?</div>
 											<div className="answers-container">
-												<button className="answer-one answer">{currentQuestion?.choices[0]}</button>
-												<button className="answer-two answer">{currentQuestion?.choices[1]}</button>
-												<button className="answer-three answer">{currentQuestion?.choices[2]}</button>
-												<button className="answer-four answer">{currentQuestion?.choices[3]}</button>
+												<button
+													className="answer-one answer"
+													value={currentQuestion?.choices[0]}
+													onClick={submitAnswer}
+												>
+													{currentQuestion?.choices[0]}
+												</button>
+												<button
+													className="answer-two answer"
+													value={currentQuestion?.choices[1]}
+													onClick={submitAnswer}
+												>
+													{currentQuestion?.choices[1]}
+												</button>
+												<button
+													className="answer-three answer"
+													value={currentQuestion?.choices[2]}
+													onClick={submitAnswer}
+												>
+													{currentQuestion?.choices[2]}
+												</button>
+												<button
+													className="answer-four answer"
+													value={currentQuestion?.choices[3]}
+													onClick={submitAnswer}
+												>
+													{currentQuestion?.choices[3]}
+												</button>
 											</div>
 										</div>
 									</div>
