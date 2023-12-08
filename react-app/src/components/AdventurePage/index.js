@@ -93,6 +93,7 @@ function AdventurePage() {
 
 		//remove adventure from local storage
 		localStorage.removeItem("adventure");
+		localStorage.removeItem("currentQuestion");
 
 		//remove adventure from state
 		dispatch(clearAdventureThunk());
