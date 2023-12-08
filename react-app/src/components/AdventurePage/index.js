@@ -27,7 +27,8 @@ function AdventurePage() {
 	let currentAdventure = useSelector((state) => state.adventure);
 	let adventure = localStorage.getItem("adventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
-	console.log("currentQuestion", currentQuestion);
+	let currentProgress = localStorage.getItem("currentProgress") || {};
+	console.log("FIRST RENDER: adventure, question, progress: ", adventure, currentQuestion, currentProgress);
 
 	//Protects page rendering from missing question
 	if (Object.values(currentQuestion) === 0) {
@@ -35,10 +36,10 @@ function AdventurePage() {
 		currentQuestion = loadQuestion();
 	} else {
 		try {
-			console.log("parsing!!!", currentQuestion);
+			console.log("parsing current question: ", currentQuestion);
 			currentQuestion = JSON.parse(currentQuestion);
 		} catch {
-			console.log("not able to parse!!!");
+			console.log("not able to parse question");
 			currentQuestion = {};
 		}
 	}
@@ -49,11 +50,25 @@ function AdventurePage() {
 		currentAdventure = {};
 	} else {
 		try {
-			console.log("parsing!!!", adventure);
+			console.log("parsing adventure: ", adventure);
 			currentAdventure = JSON.parse(adventure);
 		} catch {
-			console.log("not able to parse!!!");
+			console.log("not able to parse adventure");
 			currentAdventure = {};
+		}
+	}
+
+	//Protects page rendering from missing currentProgress
+	if (Object.values(currentProgress) === 0) {
+		console.log("no progress to show");
+		currentProgress = {};
+	} else {
+		try {
+			console.log("parsing progress: ", currentProgress);
+			currentProgress = JSON.parse(currentProgress);
+		} catch {
+			console.log("not able to parse progress", currentProgress);
+			currentProgress = {};
 		}
 	}
 
@@ -65,16 +80,27 @@ function AdventurePage() {
 	if (!sessionUser) return <Redirect to="/" />;
 
 	function startAdventure(e) {
+		console.log("--------------STARTING ADVENTURE--------------");
+		console.log("--------------STARTING ADVENTURE--------------");
+		console.log("--------------STARTING ADVENTURE--------------");
+		//clear any residual data from previous adventures
 		e.preventDefault();
+		console.log("currentStage should be 1", currentStage);
 
+		//create progress tracker for local storage
+		localStorage.removeItem("currentProgress");
+		localStorage.setItem("currentProgress", 1);
+
+		//create adventure object shell that will eventually be added to db
 		let adventureObject = {};
 
 		adventureObject.character_id = selectedCharacter.id;
 		adventureObject.score = 0;
-		adventureObject.progress = 0;
+		adventureObject.progress = 1;
 		adventureObject.adventure_type = e.target.value;
 		adventureObject.completed = false;
 
+		console.log("storing start of adventure in local storage", adventureObject);
 		localStorage.setItem("adventure", JSON.stringify(adventureObject));
 
 		adventure = JSON.parse(localStorage.getItem("adventure"));
@@ -83,11 +109,11 @@ function AdventurePage() {
 
 		dispatch(addNewAdventureThunk(selectedCharacter?.id, currentAdventure.adventure_type));
 
-		currentQuestion = loadQuestion();
-		console.log("currentQuestion ===========>", currentQuestion);
+		currentQuestion = loadQuestion(currentStage - 1);
+		console.log("currentQuestion ===========> should be first question", currentQuestion);
 	}
 
-	function loadQuestion() {
+	function loadQuestion(nextStage) {
 		//get random question from list ---OLD VERSION
 		// Change this to a function that grabs a random question
 		// const randomInt = Math.floor(Math.random() * 4);
@@ -97,7 +123,8 @@ function AdventurePage() {
 		// localStorage.setItem("currentQuestion", JSON.stringify(question));
 		// return question;
 
-		let question = easyQuestions.easySet1[currentStage - 1];
+		console.log("loading question #", nextStage);
+		let question = easyQuestions.easySet1[nextStage];
 		localStorage.setItem("currentQuestion", JSON.stringify(question));
 		return question;
 	}
@@ -157,14 +184,19 @@ function AdventurePage() {
 			//end the adventure and update page
 			console.log("adventure is over!");
 			setCompleted(true);
+			setRewardsClaimed(false);
 
 			return;
 		} else {
 			//advance to next stage
-			console.log("Advancing to the next stage: ", currentStage + 1);
-			setCurrentStage(currentStage + 1);
-			question = loadQuestion();
+			localStorage.removeItem("currentQuestion");
+			localStorage.removeItem("currentProgress");
+			const nextStage = currentStage + 1;
+			console.log("Advancing to the next stage: ", nextStage);
+			setCurrentStage(nextStage);
+			question = loadQuestion(nextStage - 1);
 			localStorage.setItem("currentQuestion", JSON.stringify(question));
+			localStorage.setItem("currentProgress", JSON.stringify(nextStage));
 		}
 
 		// otherwise end adventure and update the adventure database as well as update coins/xp
@@ -176,9 +208,13 @@ function AdventurePage() {
 		//add that adventure object to the database
 
 		//update setStates to render the home adventure page again
+		setCompleted(false);
 		setRewardsClaimed(true);
+		setCurrentStage(1);
+
 		localStorage.removeItem("adventure");
 		localStorage.removeItem("currentQuestion");
+		localStorage.removeItem("currentProgress");
 	}
 
 	// THREE STATES YOU CAN BE IN:
@@ -187,7 +223,7 @@ function AdventurePage() {
 	// 3: SELECTED CHARACTER ***AND*** ADVENTURE STARTED
 	return (
 		<>
-			{!selectedCharacter ? (
+			{!selectedCharacter && rewardsClaimed ? (
 				<div className="no-character-adv-page">
 					<div>Please Select A Character To Start A New Adventure!</div>
 					<NavLink to="/characters">Characters</NavLink>
@@ -214,7 +250,7 @@ function AdventurePage() {
 						</div>
 					) : (
 						<>
-							{completed === false ? (
+							{completed === false && rewardsClaimed ? (
 								<div className="current-adventure-container">
 									<div className="adventure-info-container">
 										<div className="adv-top-left">
