@@ -16,7 +16,6 @@ import "./AdventurePage.css";
 //
 
 function AdventurePage() {
-	const [currentStage, setCurrentStage] = useState(1);
 	const [passed, setPassed] = useState(false);
 	const [completed, setCompleted] = useState(false);
 	const [rewardsClaimed, setRewardsClaimed] = useState(true);
@@ -30,10 +29,26 @@ function AdventurePage() {
 	let currentProgress = localStorage.getItem("currentProgress") || {};
 	console.log("FIRST RENDER: adventure, question, progress: ", adventure, currentQuestion, currentProgress);
 
+	//Protects page rendering from missing currentProgress
+	if (Object.values(currentProgress) === 0) {
+		console.log("no progress to show");
+		currentProgress = {};
+	} else {
+		try {
+			console.log("parsing progress: ", currentProgress);
+			currentProgress = JSON.parse(currentProgress);
+		} catch {
+			console.log("not able to parse progress", currentProgress);
+			currentProgress = 1;
+		}
+	}
+
+	const [currentStage, setCurrentStage] = useState(currentProgress);
+
 	//Protects page rendering from missing question
 	if (Object.values(currentQuestion) === 0) {
 		console.log("X X X X X X ----> NO QUESTION FOUND");
-		currentQuestion = loadQuestion();
+		currentQuestion = loadQuestion(currentStage);
 	} else {
 		try {
 			console.log("parsing current question: ", currentQuestion);
@@ -55,20 +70,6 @@ function AdventurePage() {
 		} catch {
 			console.log("not able to parse adventure");
 			currentAdventure = {};
-		}
-	}
-
-	//Protects page rendering from missing currentProgress
-	if (Object.values(currentProgress) === 0) {
-		console.log("no progress to show");
-		currentProgress = {};
-	} else {
-		try {
-			console.log("parsing progress: ", currentProgress);
-			currentProgress = JSON.parse(currentProgress);
-		} catch {
-			console.log("not able to parse progress", currentProgress);
-			currentProgress = {};
 		}
 	}
 
