@@ -8,7 +8,9 @@ function QuestsPage() {
 	if (!sessionUser) return <Redirect to="/" />;
 	return (
 		<>
-			<div className="quests-page-container">Quests Page</div>
+			<div className="quests-page-container">
+				<h1>Quests Coming Soon!</h1>
+			</div>
 		</>
 	);
 }

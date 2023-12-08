@@ -9,6 +9,12 @@ import OpenModalButton from "../OpenModalButton";
 import easyQuestions from "../../static/math-questions";
 import "./AdventurePage.css";
 
+	//
+
+	//
+
+	//
+
 function AdventurePage() {
 	const history = useHistory();
 	const dispatch = useDispatch();
@@ -103,20 +109,27 @@ function AdventurePage() {
 	}
 
 	function submitAnswer(e) {
-		console.log(e.target.value);
-
-		//check if submitted answer is correct
+		const question = JSON.parse(localStorage.getItem("currentQuestion"));
+		console.log(" current question: ", question);
+		console.log("submitted answer: ", e.target.value);
+		console.log("correct answer: ", question.answer);
 
 		//handle correct answer updates
+		if (parseInt(e.target.value) === question.answer) {
+			console.log("CORRECT ANSWER!");
+			//update adventure progress
+		}
 
 		//handle incorrect answer updates
+		if (parseInt(e.target.value) !== question.answer) {
+			console.log("INCORRECT ANSWER!");
+			//update adventure progress
+		}
 
-		//update adventure progress
-
-		//reload another question
+		//reload another question and update the local storage value
+		//check to make sure stage can be advanced first otherwise end adventure and update the adventure database as well as update coins/xp
 	}
 
-	console.log("FINAL: currentQuestion: ", currentQuestion);
 	// THREE STATES YOU CAN BE IN:
 	// 1: NO SELECTED CHARACTER
 	// 2: SELECTED CHARACTER BUT NO ADVENTURE STARTED

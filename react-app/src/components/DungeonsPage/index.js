@@ -9,7 +9,9 @@ function DungeonsPage() {
 
 	return (
 		<>
-			<div className="dungeons-page-container">Dungeons Coming Soon.</div>
+			<div className="dungeons-page-container">
+				<h1>Dungeons Coming Soon!</h1>
+			</div>
 		</>
 	);
 }
