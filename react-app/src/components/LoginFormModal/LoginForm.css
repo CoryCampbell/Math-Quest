@@ -16,8 +16,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: fit-content + 100px;
-  width: fit-content;
+  height: 50vh;
   background-color: rgb(123, 123, 253);
 }
 
@@ -28,6 +27,21 @@
 
 .login-button {
   background-color: green;
+  margin-top: 50px;
   width: 50%;
   align-self: center;
+}
+
+.username-input-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.password-input-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.errors {
+  color: rgb(255, 144, 144);
 }
