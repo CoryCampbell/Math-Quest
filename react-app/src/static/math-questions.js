@@ -13,9 +13,9 @@ const easyQuestions = {
 			question_value: 5
 		},
 		{
-			question: "1+3",
-			answer: 4,
-			choices: [4, 0, 3, 1],
+			question: "1+6",
+			answer: 7,
+			choices: [4, 7, 3, 8],
 			question_value: 5
 		},
 		{

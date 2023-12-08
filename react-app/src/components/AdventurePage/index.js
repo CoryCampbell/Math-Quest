@@ -18,6 +18,7 @@ import "./AdventurePage.css";
 function AdventurePage() {
 	const [currentStage, setCurrentStage] = useState(1);
 	const [passed, setPassed] = useState(false);
+	const [completed, setCompleted] = useState(false);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
@@ -143,6 +144,7 @@ function AdventurePage() {
 		//deal damage or take damage based off of passed value
 		if (passed) {
 			//deal damage
+			//give score points
 		} else {
 			//take damage
 		}
@@ -151,8 +153,12 @@ function AdventurePage() {
 		//check to make sure stage can be advanced first
 		//reload another question and update the local storage value
 		if (currentStage + 1 > 10) {
-			//end the adventure and recieve rewards/experience points
+			//end the adventure and update page
 			console.log("adventure is over!");
+			setCompleted(true);
+
+			// recieve rewards/experience points
+
 			return;
 		} else {
 			//advance to next stage
@@ -198,79 +204,87 @@ function AdventurePage() {
 						</div>
 					) : (
 						<>
-							<div className="current-adventure-container">
-								<div className="adventure-info-container">
-									<div className="adv-top-left">
-										<div>{selectedCharacter.character_name}</div>
-										<div>
+							{completed === false ? (
+								<div className="current-adventure-container">
+									<div className="adventure-info-container">
+										<div className="adv-top-left">
+											<div>{selectedCharacter.character_name}</div>
 											<div>
-												❤{selectedCharacter.current_health} / {selectedCharacter.max_health}
+												<div>
+													❤{selectedCharacter.current_health} / {selectedCharacter.max_health}
+												</div>
+											</div>
+										</div>
+										<OpenModalButton
+											buttonText="?"
+											modalComponent={<AdventureStartModal className="adventure-start-help-button" />}
+										></OpenModalButton>
+										<div className="adv-top-right">
+											<div>Coins: {selectedCharacter.coins}</div>
+											<div>
+												level {selectedCharacter.level} XP: {selectedCharacter.experience_points}
 											</div>
 										</div>
 									</div>
-									<OpenModalButton
-										buttonText="?"
-										modalComponent={<AdventureStartModal className="adventure-start-help-button" />}
-									></OpenModalButton>
-									<div className="adv-top-right">
-										<div>Coins: {selectedCharacter.coins}</div>
-										<div>
-											level {selectedCharacter.level} XP: {selectedCharacter.experience_points}
+									<div className="full-game-container">
+										<div className="stage-time-container">
+											<button className="use-potion-button" onClick={usePotion}>
+												Use Potion
+											</button>
+											<div>Score: {currentAdventure["score"]}</div>
+											<div>Stage: {currentStage} / 10</div>
+											<button className="run-away-button" onClick={runAway}>
+												Run Away!
+											</button>
 										</div>
-									</div>
-								</div>
-								<div className="full-game-container">
-									<div className="stage-time-container">
-										<button className="use-potion-button" onClick={usePotion}>
-											Use Potion
-										</button>
-										<div>Score: {currentAdventure["score"]}</div>
-										<div>Stage: {currentStage} / 10</div>
-										<button className="run-away-button" onClick={runAway}>
-											Run Away!
-										</button>
-									</div>
-									<div className="bottom-game-container">
-										<div className="visual-game-container">
-											<div className="player-icon icon">player icon</div>
-											<div className="enemy-icon icon">enemy icon</div>
-										</div>
-										<div className="math-game-container">
-											<div className="question-container">{currentQuestion?.question} = ?</div>
-											<div className="answers-container">
-												<button
-													className="answer-one answer"
-													value={currentQuestion?.choices[0]}
-													onClick={submitAnswer}
-												>
-													{currentQuestion?.choices[0]}
-												</button>
-												<button
-													className="answer-two answer"
-													value={currentQuestion?.choices[1]}
-													onClick={submitAnswer}
-												>
-													{currentQuestion?.choices[1]}
-												</button>
-												<button
-													className="answer-three answer"
-													value={currentQuestion?.choices[2]}
-													onClick={submitAnswer}
-												>
-													{currentQuestion?.choices[2]}
-												</button>
-												<button
-													className="answer-four answer"
-													value={currentQuestion?.choices[3]}
-													onClick={submitAnswer}
-												>
-													{currentQuestion?.choices[3]}
-												</button>
+										<div className="bottom-game-container">
+											<div className="visual-game-container">
+												<div className="player-icon icon">player icon</div>
+												<div className="enemy-icon icon">enemy icon</div>
+											</div>
+											<div className="math-game-container">
+												<div className="question-container">{currentQuestion?.question} = ?</div>
+												<div className="answers-container">
+													<button
+														className="answer-one answer"
+														value={currentQuestion?.choices[0]}
+														onClick={submitAnswer}
+													>
+														{currentQuestion?.choices[0]}
+													</button>
+													<button
+														className="answer-two answer"
+														value={currentQuestion?.choices[1]}
+														onClick={submitAnswer}
+													>
+														{currentQuestion?.choices[1]}
+													</button>
+													<button
+														className="answer-three answer"
+														value={currentQuestion?.choices[2]}
+														onClick={submitAnswer}
+													>
+														{currentQuestion?.choices[2]}
+													</button>
+													<button
+														className="answer-four answer"
+														value={currentQuestion?.choices[3]}
+														onClick={submitAnswer}
+													>
+														{currentQuestion?.choices[3]}
+													</button>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
+							) : (
+								<div className="end-of-adventure-container">
+									<p>adventure ended</p>
+									<p>score</p>
+									<p>experience gained</p>
+								</div>
+							)}
 							<div className="spacer-div"></div>
 						</>
 					)}
