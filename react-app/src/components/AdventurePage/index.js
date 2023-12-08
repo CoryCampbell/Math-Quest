@@ -19,6 +19,7 @@ function AdventurePage() {
 	const [currentStage, setCurrentStage] = useState(1);
 	const [passed, setPassed] = useState(false);
 	const [completed, setCompleted] = useState(false);
+	const [rewardsClaimed, setRewardsClaimed] = useState(false);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
@@ -157,8 +158,6 @@ function AdventurePage() {
 			console.log("adventure is over!");
 			setCompleted(true);
 
-			// recieve rewards/experience points
-
 			return;
 		} else {
 			//advance to next stage
@@ -169,6 +168,17 @@ function AdventurePage() {
 		}
 
 		// otherwise end adventure and update the adventure database as well as update coins/xp
+	}
+
+	function claimRewards(e) {
+		// recieve rewards/experience points
+		//update the adveture object to represent total score/coins/experience points
+		//add that adventure object to the database
+
+		//update setStates to render the home adventure page again
+		setRewardsClaimed(true);
+		localStorage.removeItem("adventure");
+		localStorage.removeItem("currentQuestion");
 	}
 
 	// THREE STATES YOU CAN BE IN:
@@ -283,6 +293,9 @@ function AdventurePage() {
 									<p>adventure ended</p>
 									<p>score</p>
 									<p>experience gained</p>
+									<button className="rewards-button" onClick={claimRewards}>
+										Claim Rewards!
+									</button>
 								</div>
 							)}
 							<div className="spacer-div"></div>
