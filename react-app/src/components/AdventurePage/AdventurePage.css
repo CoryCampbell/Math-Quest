@@ -151,6 +151,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 45px;
 }
 
 .answers-container {
@@ -166,15 +167,23 @@
 }
 
 .answer {
+  font-size: 45px;
   border: solid black 1px;
   box-sizing: border-box;
-  width: 50%;
-  height: 50%;
+  width: 45%;
+  height: 25%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  background-color: gray;
+  border-radius: 25px;
+  margin: 1%;
+}
+
+.answer:hover {
+  background-color: rgb(62, 101, 66);
 }
 
 .end-of-adventure-container {

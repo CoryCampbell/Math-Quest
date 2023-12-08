@@ -69,7 +69,6 @@ function UpdateCharacterModal() {
 		<div className="update-character-container">
 			<h1>Update Your Character's Name!</h1>
 			<form className="user-input-container" onSubmit={handleSubmit}>
-				<ul></ul>
 				<div className="name-input-row">
 					{errors.characterName && <p className="errors characterNameError">{errors.characterName}</p>}
 					<label>
