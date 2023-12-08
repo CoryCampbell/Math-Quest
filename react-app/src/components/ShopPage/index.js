@@ -8,7 +8,9 @@ function ShopPage() {
 	if (!sessionUser) return <Redirect to="/" />;
 	return (
 		<>
-			<div className="shop-page-container">Shop Page</div>
+			<div className="shop-page-container">
+				<h1>Shop Coming Soon!</h1>
+			</div>
 		</>
 	);
 }

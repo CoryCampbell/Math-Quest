@@ -8,7 +8,9 @@ function StatisticsPage() {
 	if (!sessionUser) return <Redirect to="/" />;
 	return (
 		<>
-			<div className="stats-page-container">Statistics Page</div>
+			<div className="stats-page-container">
+				<h1>Statistics Coming Soon!</h1>
+			</div>
 		</>
 	);
 }

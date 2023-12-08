@@ -45,6 +45,9 @@ function NewCharacterModal() {
 		if (forbiddenLoop(characterName))
 			errorsObj.characterName = "Names are not allowed to include any Symbols or Special Characters!";
 
+		if (localStorage.getItem("adventure"))
+			errorsObj.adventure = "Please end your current adventure before creating a new Character!";
+
 		if (!appearance) errorsObj.appearance = "Please give your character an appearance!";
 
 		userCharacters.forEach((character) => {
@@ -63,6 +66,7 @@ function NewCharacterModal() {
 				<ul></ul>
 				<div className="name-input-row">
 					{errors.characterName && <p className="errors characterNameError">{errors.characterName}</p>}
+					{errors.adventure && <p className="errors adventureError">{errors.adventure}</p>}
 					<label>
 						Name:
 						<input type="text" value={characterName} onChange={(e) => setCharacterName(e.target.value)} />
