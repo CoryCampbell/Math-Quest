@@ -17,7 +17,14 @@ const easyQuestions = [
 		difficulty: 1,
 		question: "1+3",
 		answer: 4,
-		choices: [3, 1, 4, 0],
+		choices: [4, 0, 3, 1],
+		question_value: 5
+	},
+	{
+		difficulty: 1,
+		question: "4+3",
+		answer: 7,
+		choices: [7, 5, 3, 6],
 		question_value: 5
 	}
 ];

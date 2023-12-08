@@ -13,10 +13,13 @@ function AdventureStartModal() {
 
 	return (
 		<div className="adventure-start-container">
-			<p>You leave the Village in search of fame and fortune. Who knows what mysteries you will stumble across.</p>
+			<p>
+				*You leave the Village in search of fame and fortune. Who knows what mysteries you will stumble across along
+				your way!*
+			</p>
 			<div className="tips-container">
-				You can run away from a fight if you find yourself low on health. After 10 stages, you will return to your
-				Village and be rewarded for your progress!
+				<p>You can run away from a fight if you find yourself low on health.</p>
+				<p>After 10 stages, you will return to your Village and be rewarded for your progress!</p>
 			</div>
 			<button type="button" onClick={handleSubmit}>
 				Okay!
