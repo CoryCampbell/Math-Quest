@@ -18,7 +18,7 @@ function CharacterPage() {
 	const sessionUser = useSelector((state) => state.session.user);
 	const userCharacters = useSelector((state) => state.characters.userCharacters);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
-	const currentAdventure = useSelector((state) => state.adventure);
+	const currentAdventure = localStorage.getItem("adventure") || {};
 	console.log("currentAdventure", currentAdventure);
 
 	let selectedCharacterName = localStorage.getItem("character_name");
