@@ -2,14 +2,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { addNewAdventureThunk, clearAdventureThunk } from "../../store/adventures";
 import AdventureStartModal from "../AlertModals/AdventureStartModal";
 import OpenModalButton from "../OpenModalButton";
 import easyQuestions from "../../static/math-questions";
 import "./AdventurePage.css";
 
+//
+
+//
+
+//
+
 function AdventurePage() {
+	const [currentStage, setCurrentStage] = useState(1);
+	const [passed, setPassed] = useState(false);
+	const [completed, setCompleted] = useState(false);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
@@ -19,6 +28,7 @@ function AdventurePage() {
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	console.log("currentQuestion", currentQuestion);
 
+	//Protects page rendering from missing question
 	if (Object.values(currentQuestion) === 0) {
 		console.log("X X X X X X ----> NO QUESTION FOUND");
 		currentQuestion = loadQuestion();
@@ -32,6 +42,7 @@ function AdventurePage() {
 		}
 	}
 
+	//Protects page rendering from missing adventure
 	if (Object.values(adventure) === 0) {
 		console.log("no adventure chosen");
 		currentAdventure = {};
@@ -54,28 +65,38 @@ function AdventurePage() {
 
 	function startAdventure(e) {
 		e.preventDefault();
+
 		let adventureObject = {};
+
 		adventureObject.character_id = selectedCharacter.id;
 		adventureObject.score = 0;
 		adventureObject.progress = 0;
 		adventureObject.adventure_type = e.target.value;
 		adventureObject.completed = false;
+
 		localStorage.setItem("adventure", JSON.stringify(adventureObject));
+
 		adventure = JSON.parse(localStorage.getItem("adventure"));
 		currentAdventure = adventure;
 		console.log("adventure after grab from local storage start adventure click: ", currentAdventure);
+
 		dispatch(addNewAdventureThunk(selectedCharacter?.id, currentAdventure.adventure_type));
+
 		currentQuestion = loadQuestion();
 		console.log("currentQuestion ===========>", currentQuestion);
 	}
 
 	function loadQuestion() {
-		//get random question from list
+		//get random question from list ---OLD VERSION
 		// Change this to a function that grabs a random question
-		const randomInt = Math.floor(Math.random() * 4);
-		console.log("randomInt ==========> !!!!!!!!!!", randomInt);
-		let question = easyQuestions[randomInt];
-		console.log("question", question);
+		// const randomInt = Math.floor(Math.random() * 4);
+		// console.log("randomInt ==========> !!!!!!!!!!", randomInt);
+		// let question = easyQuestions[randomInt];
+		// console.log("question", question);
+		// localStorage.setItem("currentQuestion", JSON.stringify(question));
+		// return question;
+
+		let question = easyQuestions.easySet1[currentStage - 1];
 		localStorage.setItem("currentQuestion", JSON.stringify(question));
 		return question;
 	}
@@ -103,20 +124,53 @@ function AdventurePage() {
 	}
 
 	function submitAnswer(e) {
-		console.log(e.target.value);
-
-		//check if submitted answer is correct
+		let question = JSON.parse(localStorage.getItem("currentQuestion"));
+		console.log(" current question: ", question);
+		console.log("submitted answer: ", e.target.value);
+		console.log("correct answer: ", question.answer);
 
 		//handle correct answer updates
+		if (parseInt(e.target.value) === question.answer) {
+			console.log("CORRECT ANSWER!");
+			setPassed(true);
+		}
 
 		//handle incorrect answer updates
+		if (parseInt(e.target.value) !== question.answer) {
+			console.log("INCORRECT ANSWER!");
+			setPassed(false);
+		}
+
+		//deal damage or take damage based off of passed value
+		if (passed) {
+			//deal damage
+			//give score points
+		} else {
+			//take damage
+		}
 
 		//update adventure progress
+		//check to make sure stage can be advanced first
+		//reload another question and update the local storage value
+		if (currentStage + 1 > 10) {
+			//end the adventure and update page
+			console.log("adventure is over!");
+			setCompleted(true);
 
-		//reload another question
+			// recieve rewards/experience points
+
+			return;
+		} else {
+			//advance to next stage
+			console.log("Advancing to the next stage: ", currentStage + 1);
+			setCurrentStage(currentStage + 1);
+			question = loadQuestion();
+			localStorage.setItem("currentQuestion", JSON.stringify(question));
+		}
+
+		// otherwise end adventure and update the adventure database as well as update coins/xp
 	}
 
-	console.log("FINAL: currentQuestion: ", currentQuestion);
 	// THREE STATES YOU CAN BE IN:
 	// 1: NO SELECTED CHARACTER
 	// 2: SELECTED CHARACTER BUT NO ADVENTURE STARTED
@@ -150,79 +204,87 @@ function AdventurePage() {
 						</div>
 					) : (
 						<>
-							<div className="current-adventure-container">
-								<div className="adventure-info-container">
-									<div className="adv-top-left">
-										<div>{selectedCharacter.character_name}</div>
-										<div>
+							{completed === false ? (
+								<div className="current-adventure-container">
+									<div className="adventure-info-container">
+										<div className="adv-top-left">
+											<div>{selectedCharacter.character_name}</div>
 											<div>
-												❤{selectedCharacter.current_health} / {selectedCharacter.max_health}
+												<div>
+													❤{selectedCharacter.current_health} / {selectedCharacter.max_health}
+												</div>
+											</div>
+										</div>
+										<OpenModalButton
+											buttonText="?"
+											modalComponent={<AdventureStartModal className="adventure-start-help-button" />}
+										></OpenModalButton>
+										<div className="adv-top-right">
+											<div>Coins: {selectedCharacter.coins}</div>
+											<div>
+												level {selectedCharacter.level} XP: {selectedCharacter.experience_points}
 											</div>
 										</div>
 									</div>
-									<OpenModalButton
-										buttonText="?"
-										modalComponent={<AdventureStartModal className="adventure-start-help-button" />}
-									></OpenModalButton>
-									<div className="adv-top-right">
-										<div>Coins: {selectedCharacter.coins}</div>
-										<div>
-											level {selectedCharacter.level} XP: {selectedCharacter.experience_points}
+									<div className="full-game-container">
+										<div className="stage-time-container">
+											<button className="use-potion-button" onClick={usePotion}>
+												Use Potion
+											</button>
+											<div>Score: {currentAdventure["score"]}</div>
+											<div>Stage: {currentStage} / 10</div>
+											<button className="run-away-button" onClick={runAway}>
+												Run Away!
+											</button>
 										</div>
-									</div>
-								</div>
-								<div className="full-game-container">
-									<div className="stage-time-container">
-										<button className="use-potion-button" onClick={usePotion}>
-											Use Potion
-										</button>
-										<div>Score: {currentAdventure["score"]}</div>
-										<div>Stage: {currentAdventure["progress"] + 1} / 10</div>
-										<button className="run-away-button" onClick={runAway}>
-											Run Away!
-										</button>
-									</div>
-									<div className="bottom-game-container">
-										<div className="visual-game-container">
-											<div className="player-icon icon">player icon</div>
-											<div className="enemy-icon icon">enemy icon</div>
-										</div>
-										<div className="math-game-container">
-											<div className="question-container">{currentQuestion?.question} = ?</div>
-											<div className="answers-container">
-												<button
-													className="answer-one answer"
-													value={currentQuestion?.choices[0]}
-													onClick={submitAnswer}
-												>
-													{currentQuestion?.choices[0]}
-												</button>
-												<button
-													className="answer-two answer"
-													value={currentQuestion?.choices[1]}
-													onClick={submitAnswer}
-												>
-													{currentQuestion?.choices[1]}
-												</button>
-												<button
-													className="answer-three answer"
-													value={currentQuestion?.choices[2]}
-													onClick={submitAnswer}
-												>
-													{currentQuestion?.choices[2]}
-												</button>
-												<button
-													className="answer-four answer"
-													value={currentQuestion?.choices[3]}
-													onClick={submitAnswer}
-												>
-													{currentQuestion?.choices[3]}
-												</button>
+										<div className="bottom-game-container">
+											<div className="visual-game-container">
+												<div className="player-icon icon">player icon</div>
+												<div className="enemy-icon icon">enemy icon</div>
+											</div>
+											<div className="math-game-container">
+												<div className="question-container">{currentQuestion?.question} = ?</div>
+												<div className="answers-container">
+													<button
+														className="answer-one answer"
+														value={currentQuestion?.choices[0]}
+														onClick={submitAnswer}
+													>
+														{currentQuestion?.choices[0]}
+													</button>
+													<button
+														className="answer-two answer"
+														value={currentQuestion?.choices[1]}
+														onClick={submitAnswer}
+													>
+														{currentQuestion?.choices[1]}
+													</button>
+													<button
+														className="answer-three answer"
+														value={currentQuestion?.choices[2]}
+														onClick={submitAnswer}
+													>
+														{currentQuestion?.choices[2]}
+													</button>
+													<button
+														className="answer-four answer"
+														value={currentQuestion?.choices[3]}
+														onClick={submitAnswer}
+													>
+														{currentQuestion?.choices[3]}
+													</button>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
+							) : (
+								<div className="end-of-adventure-container">
+									<p>adventure ended</p>
+									<p>score</p>
+									<p>experience gained</p>
+								</div>
+							)}
 							<div className="spacer-div"></div>
 						</>
 					)}
