@@ -19,7 +19,7 @@ function AdventurePage() {
 	const [currentStage, setCurrentStage] = useState(1);
 	const [passed, setPassed] = useState(false);
 	const [completed, setCompleted] = useState(false);
-	const [rewardsClaimed, setRewardsClaimed] = useState(false);
+	const [rewardsClaimed, setRewardsClaimed] = useState(true);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
@@ -88,7 +88,6 @@ function AdventurePage() {
 		console.log("currentStage should be 1", currentStage);
 
 		//create progress tracker for local storage
-		localStorage.removeItem("currentProgress");
 		localStorage.setItem("currentProgress", 1);
 
 		//create adventure object shell that will eventually be added to db
@@ -223,7 +222,7 @@ function AdventurePage() {
 	// 3: SELECTED CHARACTER ***AND*** ADVENTURE STARTED
 	return (
 		<>
-			{!selectedCharacter && rewardsClaimed ? (
+			{!selectedCharacter && rewardsClaimed && parseInt(currentProgress) === 10 ? (
 				<div className="no-character-adv-page">
 					<div>Please Select A Character To Start A New Adventure!</div>
 					<NavLink to="/characters">Characters</NavLink>
