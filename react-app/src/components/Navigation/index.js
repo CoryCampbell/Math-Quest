@@ -57,7 +57,9 @@ function Navigation({ isLoaded }) {
 					<div className="logged-in-nav-container">
 						<li>Greetings, {sessionUser.first_name}</li>
 						<li>
-							<button onClick={handleLogout}>Log Out</button>
+							<button className="log-out-button" onClick={handleLogout}>
+								Log Out
+							</button>
 						</li>
 						<NavLink exact to="/village">
 							Village
@@ -77,12 +79,14 @@ function Navigation({ isLoaded }) {
 				) : (
 					<div className="landing-navlinks">
 						<div className="user-log-commands-container">
-							<OpenModalButton
-								buttonText="Log In"
-								onItemClick={closeMenu}
-								modalComponent={<LoginFormModal contentClassName="login-form-modal" />}
-							/>
-							<OpenModalButton buttonText="Sign Up" onItemClick={closeMenu} modalComponent={<SignupFormModal />} />
+							<div className="modal-buttons-container">
+								<OpenModalButton
+									buttonText="Log In"
+									onItemClick={closeMenu}
+									modalComponent={<LoginFormModal contentClassName="login-form-modal" />}
+								/>
+								<OpenModalButton buttonText="Sign Up" onItemClick={closeMenu} modalComponent={<SignupFormModal />} />
+							</div>
 							<button className="demo-user-button" type="submit" onClick={handleSubmit}>
 								Demo User
 							</button>

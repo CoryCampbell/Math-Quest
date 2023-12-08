@@ -222,7 +222,7 @@ function AdventurePage() {
 	// 3: SELECTED CHARACTER ***AND*** ADVENTURE STARTED
 	return (
 		<>
-			{!selectedCharacter && rewardsClaimed && parseInt(currentProgress) === 10 ? (
+			{!selectedCharacter && rewardsClaimed && parseInt(currentProgress) !== 10 ? (
 				<div className="no-character-adv-page">
 					<div>Please Select A Character To Start A New Adventure!</div>
 					<NavLink to="/characters">Characters</NavLink>
@@ -253,10 +253,10 @@ function AdventurePage() {
 								<div className="current-adventure-container">
 									<div className="adventure-info-container">
 										<div className="adv-top-left">
-											<div>{selectedCharacter.character_name}</div>
+											<div>{selectedCharacter?.character_name}</div>
 											<div>
 												<div>
-													❤{selectedCharacter.current_health} / {selectedCharacter.max_health}
+													❤{selectedCharacter?.current_health} / {selectedCharacter?.max_health}
 												</div>
 											</div>
 										</div>
@@ -265,9 +265,9 @@ function AdventurePage() {
 											modalComponent={<AdventureStartModal className="adventure-start-help-button" />}
 										></OpenModalButton>
 										<div className="adv-top-right">
-											<div>Coins: {selectedCharacter.coins}</div>
+											<div>Coins: {selectedCharacter?.coins}</div>
 											<div>
-												level {selectedCharacter.level} XP: {selectedCharacter.experience_points}
+												level {selectedCharacter?.level} XP: {selectedCharacter?.experience_points}
 											</div>
 										</div>
 									</div>
