@@ -15,49 +15,64 @@ function SignupFormModal() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (password === confirmPassword) {
-			const data = await dispatch(signUp(username, firstName, password));
-			if (data) {
-				setErrors(data);
-			} else {
-				closeModal();
-			}
+		let errorsObj = {};
+
+		const data = await dispatch(signUp(username, firstName, password));
+
+		if (Object.values(errors).length) {
+			console.log("errors", errors);
+			return;
+		} else if (data) {
+			errorsObj.firstName = data[0];
+			errorsObj.username = data[1];
+			errorsObj.password = errors.password;
+			setErrors(errorsObj);
 		} else {
-			setErrors(["Confirm Password field must be the same as the Password field"]);
+			closeModal();
 		}
 	};
+
+	function validateInfo() {
+		const errorsObj = {};
+
+		if (!password.length || !password.trim().length) errorsObj.password = "Please Create A Password!";
+
+		if (password !== confirmPassword) errorsObj.password = "Please Enter Matching Passwords!";
+
+		if (!firstName || !firstName.trim().length) errorsObj.firstName = "Please Enter Your First Name!";
+
+		if (!username || !username.trim().length) errorsObj.username = "Please Enter A Username!";
+
+		setErrors(errorsObj);
+		return;
+	}
 
 	return (
 		<>
 			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit}>
-				<ul>
-					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
-					))}
-				</ul>
+			<form className="sign-up-form-container" onSubmit={handleSubmit}>
+				{errors.firstName && <p className="errors firstNameError">{errors.firstName}</p>}
 				<label>
 					First Name
-					<input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+					<input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
 				</label>
+				{errors.username && <p className="errors usernameError">{errors.username}</p>}
 				<label>
 					Username
-					<input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+					<input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
 				</label>
+				{errors.password && <p className="errors passwordError">{errors.password}</p>}
 				<label>
 					Password
-					<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+					<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 				</label>
 				<label>
 					Confirm Password
-					<input
-						type="password"
-						value={confirmPassword}
-						onChange={(e) => setConfirmPassword(e.target.value)}
-						required
-					/>
+					<input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
 				</label>
-				<button type="submit">Sign Up</button>
+				<button className="sign-up-button" type="submit" onClick={validateInfo}>
+					Sign Up
+				</button>
 			</form>
 		</>
 	);

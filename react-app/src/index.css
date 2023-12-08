@@ -25,3 +25,7 @@ html {
 button {
   cursor: pointer;
 }
+
+a {
+  color: goldenrod;
+}

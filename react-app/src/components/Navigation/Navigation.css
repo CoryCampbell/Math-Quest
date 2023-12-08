@@ -44,6 +44,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
   width: 15%;
 }
 
@@ -52,6 +53,27 @@
   flex-direction: column;
 }
 
+.modal-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 200px;
+}
+
+.modal-buttons-container > button {
+  background-color: gray;
+  border-radius: 5px;
+  color: gold;
+}
+
 .demo-user-button {
-  background-color: red;
+  background-color: rgb(133, 0, 0);
+  border-radius: 5px;
+  color: gold;
+}
+
+.log-out-button {
+  background-color: rgb(133, 0, 0);
+  border-radius: 5px;
+  color: gold;
 }
