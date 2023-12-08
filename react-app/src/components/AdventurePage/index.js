@@ -85,9 +85,7 @@ function AdventurePage() {
 		console.log("--------------STARTING ADVENTURE--------------");
 		//clear any residual data from previous adventures
 		e.preventDefault();
-		setCompleted(false);
-		setRewardsClaimed(true);
-		setCurrentStage(1);
+		console.log("currentStage should be 1", currentStage);
 
 		//create progress tracker for local storage
 		localStorage.removeItem("currentProgress");
@@ -210,7 +208,10 @@ function AdventurePage() {
 		//add that adventure object to the database
 
 		//update setStates to render the home adventure page again
+		setCompleted(false);
 		setRewardsClaimed(true);
+		setCurrentStage(1);
+
 		localStorage.removeItem("adventure");
 		localStorage.removeItem("currentQuestion");
 		localStorage.removeItem("currentProgress");
