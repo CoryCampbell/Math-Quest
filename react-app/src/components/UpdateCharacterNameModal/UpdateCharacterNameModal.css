@@ -1,0 +1,29 @@
+#modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(123, 123, 253);
+  border-radius: 25px;
+  height: 400px;
+  width: 400px;
+  font-size: 15px;
+  border: solid gold 10px;
+  border-style: groove;
+}
+
+.update-character-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+}
+
+.user-input-container {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}

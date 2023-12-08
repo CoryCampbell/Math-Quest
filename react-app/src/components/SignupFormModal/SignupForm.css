@@ -6,6 +6,8 @@
   background-color: rgb(123, 123, 253);
   border-radius: 25px;
   height: 600px;
+  border: solid gold 10px;
+  border-style: groove;
 }
 
 .sign-up-form-container {

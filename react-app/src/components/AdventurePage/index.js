@@ -260,10 +260,12 @@ function AdventurePage() {
 												</div>
 											</div>
 										</div>
-										<OpenModalButton
-											buttonText="?"
-											modalComponent={<AdventureStartModal className="adventure-start-help-button" />}
-										></OpenModalButton>
+										<div className="help-button-container">
+											<OpenModalButton
+												buttonText="?"
+												modalComponent={<AdventureStartModal className="adventure-start-help-button" />}
+											></OpenModalButton>
+										</div>
 										<div className="adv-top-right">
 											<div>Coins: {selectedCharacter?.coins}</div>
 											<div>
