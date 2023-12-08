@@ -38,7 +38,9 @@ function Navigation({ isLoaded }) {
 
 	const handleLogout = (e) => {
 		e.preventDefault();
-		localStorage.clear();
+		localStorage.removeItem("character_name");
+		localStorage.removeItem("currentQuestion");
+		localStorage.removeItem("adventure");
 		closeMenu();
 		history.push("/");
 		dispatch(logout());
