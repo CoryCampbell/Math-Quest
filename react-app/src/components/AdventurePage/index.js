@@ -2,20 +2,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { addNewAdventureThunk, clearAdventureThunk } from "../../store/adventures";
 import AdventureStartModal from "../AlertModals/AdventureStartModal";
 import OpenModalButton from "../OpenModalButton";
 import easyQuestions from "../../static/math-questions";
 import "./AdventurePage.css";
 
-	//
+//
 
-	//
+//
 
-	//
+//
 
 function AdventurePage() {
+	const [currentStage, setCurrentStage] = useState(1);
+	const [passed, setPassed] = useState(false);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
@@ -25,6 +27,7 @@ function AdventurePage() {
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	console.log("currentQuestion", currentQuestion);
 
+	//Protects page rendering from missing question
 	if (Object.values(currentQuestion) === 0) {
 		console.log("X X X X X X ----> NO QUESTION FOUND");
 		currentQuestion = loadQuestion();
@@ -38,6 +41,7 @@ function AdventurePage() {
 		}
 	}
 
+	//Protects page rendering from missing adventure
 	if (Object.values(adventure) === 0) {
 		console.log("no adventure chosen");
 		currentAdventure = {};
@@ -60,28 +64,38 @@ function AdventurePage() {
 
 	function startAdventure(e) {
 		e.preventDefault();
+
 		let adventureObject = {};
+
 		adventureObject.character_id = selectedCharacter.id;
 		adventureObject.score = 0;
 		adventureObject.progress = 0;
 		adventureObject.adventure_type = e.target.value;
 		adventureObject.completed = false;
+
 		localStorage.setItem("adventure", JSON.stringify(adventureObject));
+
 		adventure = JSON.parse(localStorage.getItem("adventure"));
 		currentAdventure = adventure;
 		console.log("adventure after grab from local storage start adventure click: ", currentAdventure);
+
 		dispatch(addNewAdventureThunk(selectedCharacter?.id, currentAdventure.adventure_type));
+
 		currentQuestion = loadQuestion();
 		console.log("currentQuestion ===========>", currentQuestion);
 	}
 
 	function loadQuestion() {
-		//get random question from list
+		//get random question from list ---OLD VERSION
 		// Change this to a function that grabs a random question
-		const randomInt = Math.floor(Math.random() * 4);
-		console.log("randomInt ==========> !!!!!!!!!!", randomInt);
-		let question = easyQuestions[randomInt];
-		console.log("question", question);
+		// const randomInt = Math.floor(Math.random() * 4);
+		// console.log("randomInt ==========> !!!!!!!!!!", randomInt);
+		// let question = easyQuestions[randomInt];
+		// console.log("question", question);
+		// localStorage.setItem("currentQuestion", JSON.stringify(question));
+		// return question;
+
+		let question = easyQuestions.easySet1[currentStage - 1];
 		localStorage.setItem("currentQuestion", JSON.stringify(question));
 		return question;
 	}
@@ -109,7 +123,7 @@ function AdventurePage() {
 	}
 
 	function submitAnswer(e) {
-		const question = JSON.parse(localStorage.getItem("currentQuestion"));
+		let question = JSON.parse(localStorage.getItem("currentQuestion"));
 		console.log(" current question: ", question);
 		console.log("submitted answer: ", e.target.value);
 		console.log("correct answer: ", question.answer);
@@ -117,17 +131,38 @@ function AdventurePage() {
 		//handle correct answer updates
 		if (parseInt(e.target.value) === question.answer) {
 			console.log("CORRECT ANSWER!");
-			//update adventure progress
+			setPassed(true);
 		}
 
 		//handle incorrect answer updates
 		if (parseInt(e.target.value) !== question.answer) {
 			console.log("INCORRECT ANSWER!");
-			//update adventure progress
+			setPassed(false);
 		}
 
+		//deal damage or take damage based off of passed value
+		if (passed) {
+			//deal damage
+		} else {
+			//take damage
+		}
+
+		//update adventure progress
+		//check to make sure stage can be advanced first
 		//reload another question and update the local storage value
-		//check to make sure stage can be advanced first otherwise end adventure and update the adventure database as well as update coins/xp
+		if (currentStage + 1 > 10) {
+			//end the adventure and recieve rewards/experience points
+			console.log("adventure is over!");
+			return;
+		} else {
+			//advance to next stage
+			console.log("Advancing to the next stage: ", currentStage + 1);
+			setCurrentStage(currentStage + 1);
+			question = loadQuestion();
+			localStorage.setItem("currentQuestion", JSON.stringify(question));
+		}
+
+		// otherwise end adventure and update the adventure database as well as update coins/xp
 	}
 
 	// THREE STATES YOU CAN BE IN:
@@ -190,7 +225,7 @@ function AdventurePage() {
 											Use Potion
 										</button>
 										<div>Score: {currentAdventure["score"]}</div>
-										<div>Stage: {currentAdventure["progress"] + 1} / 10</div>
+										<div>Stage: {currentStage} / 10</div>
 										<button className="run-away-button" onClick={runAway}>
 											Run Away!
 										</button>
