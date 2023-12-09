@@ -1,7 +1,8 @@
 // constants
+const GET_CURRENT_ADVENTURE = "adventures/getCurrentAdventure";
 const ADD_NEW_ADVENTURE = "adventures/addNewAdventure";
 const CLEAR_ADVENTURE = "adventures/clearAdventure";
-// const UPDATE_CHARACTER = "characters/updateCharacter";
+const UPDATE_ADVENTURE = "adventures/updateAdventure";
 
 // Action Creators
 const addNewAdventure = (payload) => ({
@@ -14,11 +15,16 @@ const clearAdventure = (payload) => ({
 	payload
 });
 
-// const updateCharacter = (oldCharacterName, newCharacterName) => ({
-// 	type: DELETE_CHARACTER,
-// 	oldCharacterName,
-// 	newCharacterName
-// });
+const updateAdventure = (adventure_id, new_score) => ({
+	type: UPDATE_ADVENTURE,
+	adventure_id,
+	new_score
+});
+
+const getCurrentAdventure = (payload) => ({
+	type: GET_CURRENT_ADVENTURE,
+	payload
+});
 
 //Thunks
 
@@ -44,28 +50,60 @@ export const addNewAdventureThunk = (character_id, adventure_type) => async (dis
 	return data;
 };
 
-export const clearAdventureThunk = () => async (dispatch) => {
-	dispatch(clearAdventure());
-	return;
-};
-
 //
 //UPDATE AN ADVENTURE THUNK
 //
-// export const updateAdventureThunk = (oldCharacterName, newCharacterName) => async (dispatch) => {
-// 	const res = await fetch(`/api/characters/${oldCharacterName}/${newCharacterName}`, {
-// 		method: "PATCH"
-// 	});
+export const updateAdventureThunk = (adventure_id, new_score) => async (dispatch) => {
+	const res = await fetch(`/api/adventures/${adventure_id}/${new_score}`, {
+		method: "PATCH"
+	});
 
-// 	if (res.ok) {
-// 		const data = await res.json();
-// 		dispatch(updateCharacter(oldCharacterName, newCharacterName));
-// 		return data;
-// 	} else {
-// 		const errors = await res.json();
-// 		return errors;
-// 	}
-// };
+	if (res.ok) {
+		const data = await res.json();
+		dispatch(updateAdventure(adventure_id, new_score));
+		return data;
+	} else {
+		const errors = await res.json();
+		return errors;
+	}
+};
+
+//
+// GET CURRENT ADVENTURE THUNK
+//
+export const getCurrentAdventureThunk = (character_id) => async (dispatch) => {
+	const res = await fetch(`/api/adventures/${character_id}`, {
+		method: "GET"
+	});
+
+	if (res.ok) {
+		const data = await res.json();
+		dispatch(getCurrentAdventure());
+		return data;
+	} else {
+		const errors = await res.json();
+		return errors;
+	}
+};
+
+//
+// DELETE AN ADVENTURE THUNK
+//
+export const clearAdventureThunk = (adventure_id) => async (dispatch) => {
+	const res = await fetch(`/api/adventures/${adventure_id}`, {
+		method: "DELETE"
+	});
+
+	if (res.ok) {
+		const data = await res.json();
+		dispatch(clearAdventure());
+		return data;
+	} else {
+		const errors = await res.json();
+		return errors;
+	}
+};
+
 
 //Initial state
 const initialState = {};
@@ -78,8 +116,10 @@ export default function charactersReducer(state = initialState, action) {
 			return { ...userAdventureAfterChange };
 		case CLEAR_ADVENTURE:
 			return {};
-		// case UPDATE_ADVENTURE:
-		// 	return { ...state, userCharacters: [userCharactersAfterChange] };
+		case UPDATE_ADVENTURE:
+			return { ...userAdventureAfterChange };
+		case GET_CURRENT_ADVENTURE:
+			return { ...userAdventureAfterChange };
 		default:
 			return state;
 	}
