@@ -74,7 +74,6 @@ function AdventurePage() {
 		try {
 			console.log("parsing currentAdventure: ", currentAdventure);
 			currentAdventure = JSON.parse(currentAdventure);
-			dispatch(getCurrentAdventureThunk(currentAdventure.character_id));
 		} catch {
 			console.log("not able to parse currentAdventure");
 			currentAdventure = {};
@@ -84,7 +83,8 @@ function AdventurePage() {
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
 		dispatch(getSelectedCharacterThunk());
-	}, [dispatch]);
+		dispatch(getCurrentAdventureThunk(selectedCharacter?.id));
+	}, [dispatch, selectedCharacter?.id]);
 
 	if (!sessionUser) return <Redirect to="/" />;
 
