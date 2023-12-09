@@ -83,8 +83,7 @@ function AdventurePage() {
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
 		dispatch(getSelectedCharacterThunk());
-		dispatch(getCurrentAdventureThunk(selectedCharacter?.id));
-	}, [dispatch, selectedCharacter?.id]);
+	}, [dispatch]);
 
 	if (!sessionUser) return <Redirect to="/" />;
 
