@@ -3,7 +3,13 @@ import { Redirect } from "react-router-dom";
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
 import { useEffect, useState } from "react";
-import { addNewAdventureThunk, clearAdventureThunk } from "../../store/adventures";
+import {
+	addNewAdventureThunk,
+	clearAdventureThunk,
+	getCurrentAdventureThunk,
+	updateAdventureThunk
+} from "../../store/adventures";
+
 import AdventureStartModal from "../AlertModals/AdventureStartModal";
 import OpenModalButton from "../OpenModalButton";
 import easyQuestions from "../../static/math-questions";
@@ -23,22 +29,23 @@ function AdventurePage() {
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
-	let currentAdventure = useSelector((state) => state.adventure);
-	let adventure = localStorage.getItem("adventure") || {};
+	const adventure = useSelector((state) => state.adventure);
+
+	let currentAdventure = localStorage.getItem("adventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	let currentProgress = localStorage.getItem("currentProgress") || {};
-	console.log("FIRST RENDER: adventure, question, progress: ", adventure, currentQuestion, currentProgress);
+	console.log("FIRST RENDER: adventure, question, progress: ", currentAdventure, currentQuestion, currentProgress);
 
 	//Protects page rendering from missing currentProgress
 	if (Object.values(currentProgress) === 0) {
-		console.log("no progress to show");
+		console.log("no current progress to show");
 		currentProgress = {};
 	} else {
 		try {
-			console.log("parsing progress: ", currentProgress);
+			console.log("parsing current progress: ", currentProgress);
 			currentProgress = JSON.parse(currentProgress);
 		} catch {
-			console.log("not able to parse progress", currentProgress);
+			console.log("not able to parse current progress", currentProgress);
 			currentProgress = 1;
 		}
 	}
@@ -51,24 +58,24 @@ function AdventurePage() {
 		currentQuestion = loadQuestion(currentStage);
 	} else {
 		try {
-			console.log("parsing current question: ", currentQuestion);
+			console.log("parsing currentQuestion: ", currentQuestion);
 			currentQuestion = JSON.parse(currentQuestion);
 		} catch {
-			console.log("not able to parse question");
+			console.log("not able to parse currentQuestion");
 			currentQuestion = {};
 		}
 	}
 
-	//Protects page rendering from missing adventure
-	if (Object.values(adventure) === 0) {
-		console.log("no adventure chosen");
+	//Protects page rendering from missing currentAdventure
+	if (Object.values(currentAdventure) === 0) {
+		console.log("no currnetAdventure chosen");
 		currentAdventure = {};
 	} else {
 		try {
-			console.log("parsing adventure: ", adventure);
-			currentAdventure = JSON.parse(adventure);
+			console.log("parsing currentAdventure: ", currentAdventure);
+			currentAdventure = JSON.parse(currentAdventure);
 		} catch {
-			console.log("not able to parse adventure");
+			console.log("not able to parse currentAdventure");
 			currentAdventure = {};
 		}
 	}
@@ -81,6 +88,8 @@ function AdventurePage() {
 	if (!sessionUser) return <Redirect to="/" />;
 
 	function startAdventure(e) {
+		const adventure_type = e.target.value;
+		dispatch(addNewAdventureThunk(selectedCharacter?.id, adventure_type));
 		console.log("--------------STARTING ADVENTURE--------------");
 		console.log("--------------STARTING ADVENTURE--------------");
 		console.log("--------------STARTING ADVENTURE--------------");
@@ -91,23 +100,20 @@ function AdventurePage() {
 		//create progress tracker for local storage
 		localStorage.setItem("currentProgress", 1);
 
+		console.log("--------------adventure.id----->", adventure.id);
 		//create adventure object shell that will eventually be added to db
 		let adventureObject = {};
-
+		adventureObject.adventure_type = adventure_type;
 		adventureObject.character_id = selectedCharacter.id;
 		adventureObject.score = 0;
-		adventureObject.progress = 1;
-		adventureObject.adventure_type = e.target.value;
+		adventureObject.id = adventure.id;
 		adventureObject.completed = false;
 
 		console.log("storing start of adventure in local storage", adventureObject);
 		localStorage.setItem("adventure", JSON.stringify(adventureObject));
 
-		adventure = JSON.parse(localStorage.getItem("adventure"));
-		currentAdventure = adventure;
+		currentAdventure = JSON.parse(localStorage.getItem("adventure"));
 		console.log("adventure after grab from local storage start adventure click: ", currentAdventure);
-
-		dispatch(addNewAdventureThunk(selectedCharacter?.id, currentAdventure.adventure_type));
 
 		currentQuestion = loadQuestion(currentStage - 1);
 		console.log("currentQuestion ===========> should be first question", currentQuestion);
@@ -129,7 +135,8 @@ function AdventurePage() {
 		return question;
 	}
 
-	function usePotion() {
+	function usePotion(e) {
+		e.preventDefault();
 		alert("Feature coming soon!");
 
 		//remove potion from inventory
@@ -137,22 +144,26 @@ function AdventurePage() {
 		//update user HP
 	}
 
-	function runAway() {
+	function runAway(e) {
+		e.preventDefault();
 		// alert("Feature coming soon!");
+
+		//remove adventure from database
+		dispatch(clearAdventureThunk(adventure.id));
 
 		//remove adventure from local storage
 		localStorage.removeItem("adventure");
 		localStorage.removeItem("currentQuestion");
-
-		//remove adventure from state
-		dispatch(clearAdventureThunk());
+		localStorage.removeItem("currentProgress");
 
 		//redirect to village page
 		history.push("/village");
 	}
 
 	function submitAnswer(e) {
+		e.preventDefault();
 		let question = JSON.parse(localStorage.getItem("currentQuestion"));
+		let adventure = JSON.parse(localStorage.getItem("adventure"));
 		console.log(" current question: ", question);
 		console.log("submitted answer: ", e.target.value);
 		console.log("correct answer: ", question.answer);
@@ -161,6 +172,11 @@ function AdventurePage() {
 		if (parseInt(e.target.value) === question.answer) {
 			console.log("CORRECT ANSWER!");
 			setPassed(true);
+
+			//update score value
+			adventure.score = adventure.score + question.question_value;
+			console.log("new score value: ", adventure);
+			localStorage.setItem("adventure", JSON.stringify(adventure));
 		}
 
 		//handle incorrect answer updates
@@ -182,7 +198,13 @@ function AdventurePage() {
 		//reload another question and update the local storage value
 		if (currentStage + 1 > 10) {
 			//end the adventure and update page
-			console.log("adventure is over!");
+			console.log("adventure is over!", currentAdventure);
+
+			//update adventure info in database
+			console.log(adventure.id, adventure.score);
+			dispatch(updateAdventureThunk(adventure.id, adventure.score));
+			dispatch(getCurrentAdventureThunk(selectedCharacter.id));
+
 			setCompleted(true);
 			setRewardsClaimed(false);
 
@@ -230,7 +252,7 @@ function AdventurePage() {
 				</div>
 			) : (
 				<>
-					{selectedCharacter && Object.keys(adventure).length === 0 ? (
+					{selectedCharacter && Object.keys(currentAdventure).length === 0 ? (
 						<div className="adventure-page-container">
 							<div className="page-title">Select Your Adventure!</div>
 							<div className="adventure-options-container">
@@ -281,7 +303,7 @@ function AdventurePage() {
 											</button>
 											<div>Score: {currentAdventure["score"]}</div>
 											<div>Stage: {currentStage} / 10</div>
-											<button className="run-away-button" onClick={runAway}>
+											<button className="run-away-button" value={adventure?.id} onClick={runAway}>
 												Run Away!
 											</button>
 										</div>

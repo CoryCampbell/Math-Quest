@@ -6,17 +6,17 @@ from app import db
 adventure_routes = Blueprint('adventures', __name__)
 
 
-# @character_routes.route('/all')
-# @login_required
-# def get_user_characters():
-#     """
-#     Query for all characters of a user
-#     """
+@adventure_routes.route('/<adventure_id>')
+@login_required
+def get_current_adventure(adventure_id):
+    """
+    Query for current unfinished adventure of a user
+    """
 
-#     allCharacters = Character.query.filter_by(user_id=current_user.id).all()
-#     print("============> all user characters", allCharacters)
+    current_adventure = Adventure.query.filter_by(id=adventure_id).first()
+    print("============> current Adventure: ", current_adventure)
 
-#     return [character.to_dict() for character in allCharacters]
+    return [character.to_dict() for character in current_adventure]
 
 
 
@@ -43,41 +43,39 @@ def create_new_adventure():
         completed=completed
     )
 
-    # THIS SHOULD BE INSIDE UPDATE ADVENTURE?
-    # if new_adventure.completed === True:
-        # print("adventure completed!!!")
-    # db.session.add(new_adventure)
-    # db.session.commit()
+    db.session.add(new_adventure)
+    db.session.commit()
 
     return new_adventure.to_dict()
 
 
-# @character_routes.route('/<int:character_id>/delete', methods=["DELETE"])
-# @login_required
-# def delete_character(character_id):
+@adventure_routes.route('/<adventure_id>/<new_score>', methods=['PATCH'])
+@login_required
+def update_adventure(adventure_id, new_score):
+    """
+    Route for updating the current adventure once it is completed
+    """
+    adventure = Adventure.query.filter_by(adventure_id=adventure_id).first()
+    if adventure:
+        adventure.score = new_score
+        adventure.completed = True
 
-#     character = Character.query.filter_by(id=character_id, user_id=current_user.id).first()
-#     if character:
-#         character_name = character.to_dict()["character_name"]
-#         db.session.delete(character)
-#         db.session.commit()
-#         return {"message": repr("{character_name} has decided to part ways with you. They will not appear in your Characters list anymore.")}
-#     else:
-#         return {"error": repr("{character_name} could not be parted with.")}
+        db.session.commit()
+
+        return {"message": repr("{adventure_id} score will now {new_score}!")}
+    else:
+        return {"error": repr("score value for adventure number #{adventure_id} could not be updated.")}
 
 
-# @character_routes.route('/<old_character_name>/<new_character_name>', methods=['PATCH'])
-# @login_required
-# def update_character(old_character_name, new_character_name):
-#     print("========= req data ======>", old_character_name, new_character_name)
-#     character = Character.query.filter_by(character_name=old_character_name, user_id=current_user.id).first()
-#     print("=======> before change: ", character.to_dict()["character_name"])
-#     if character:
-#         character.character_name = new_character_name
+@adventure_routes.route('/<adventure_id>', methods=['DELETE'])
+@login_required
+def delete_current_adventure(adventure_id):
+    """Route for deleting the current adventure, happens when you run away or pass out"""
 
-#         print("after change ============> ", character.to_dict()["character_name"])
-#         db.session.commit()
-
-#         return {"message": repr("{old_character_name} will now be known as {new_character_name}!")}
-#     else:
-#         return {"error": repr("{old_character_name}'s name could not be changed.")}
+    adventure = Adventure.query.filter_by(id=adventure_id).first()
+    if adventure:
+        db.session.delete(adventure)
+        db.session.commit()
+        return {"message": "Adventure succesfully deleted"}
+    else:
+        return {"error": "Adventure not found"}, 404
