@@ -8,14 +8,14 @@ adventure_routes = Blueprint('adventures', __name__)
 
 @adventure_routes.route('/<character_id>')
 @login_required
-def get_current_adventure():
+def get_current_adventure(character_id):
     """
     Query for current unfinished adventure of a user
     """
     character_id = request.json.get("character_id")
 
     current_adventure = Adventure.query.filter_by(character_id=character_id, completed=False).first()
-    print("============> all user characters", current_adventure)
+    print("============> current Adventure: ", current_adventure)
 
     return [character.to_dict() for character in current_adventure]
 
@@ -53,6 +53,9 @@ def create_new_adventure():
 @adventure_routes.route('/<adventure_id>/<new_score>', methods=['PATCH'])
 @login_required
 def update_adventure(adventure_id, new_score):
+    """
+    Route for updating the current adventure once it is completed
+    """
     adventure = Adventure.query.filter_by(adventure_id=adventure_id).first()
     if adventure:
         adventure.score = new_score
@@ -63,3 +66,17 @@ def update_adventure(adventure_id, new_score):
         return {"message": repr("{adventure_id} score will now {new_score}!")}
     else:
         return {"error": repr("score value for adventure number #{adventure_id} could not be updated.")}
+
+
+@adventure_routes.route('/<adventure_id>', methods=['DELETE'])
+@login_required
+def delete_current_adventure(adventure_id):
+    """Route for deleting the current adventure, happens when you run away or pass out"""
+
+    adventure = Adventure.query.filter_by(id=adventure_id).first()
+    if adventure:
+        db.session.delete(adventure)
+        db.session.commit()
+        return {"message": "Adventure succesfully deleted"}
+    else:
+        return {"error": "Adventure not found"}, 404

@@ -10,6 +10,7 @@ import { clearAdventureThunk } from "../../store/adventures";
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
+	const adventure = useSelector((state) => state.adventure);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
@@ -39,6 +40,9 @@ function Navigation({ isLoaded }) {
 	const handleLogout = (e) => {
 		e.preventDefault();
 
+		dispatch(clearAdventureThunk(adventure?.id));
+		dispatch(logout());
+
 		localStorage.removeItem("character_name");
 		localStorage.removeItem("currentQuestion");
 		localStorage.removeItem("adventure");
@@ -46,8 +50,6 @@ function Navigation({ isLoaded }) {
 
 		closeMenu();
 		history.push("/");
-		dispatch(logout());
-		dispatch(clearAdventureThunk());
 	};
 
 	return (

@@ -21,9 +21,9 @@ const updateAdventure = (adventure_id, new_score) => ({
 	new_score
 });
 
-const getCurrentAdventure = (character_id) => ({
+const getCurrentAdventure = (payload) => ({
 	type: GET_CURRENT_ADVENTURE,
-	character_id
+	payload
 });
 
 //Thunks
@@ -50,19 +50,6 @@ export const addNewAdventureThunk = (character_id, adventure_type) => async (dis
 	return data;
 };
 
-export const clearAdventureThunk = (adventure_id) => async (dispatch) => {
-	const res = await fetch(`/api/adventures/${adventure_id}`);
-
-	if (res.ok) {
-		const data = await res.json();
-		dispatch(clearAdventure());
-		return data;
-	} else {
-		const errors = await res.json();
-		return errors;
-	}
-};
-
 //
 //UPDATE AN ADVENTURE THUNK
 //
@@ -81,6 +68,9 @@ export const updateAdventureThunk = (adventure_id, new_score) => async (dispatch
 	}
 };
 
+//
+// GET CURRENT ADVENTURE THUNK
+//
 export const getCurrentAdventureThunk = (character_id) => async (dispatch) => {
 	const res = await fetch(`/api/adventures/${character_id}`, {
 		method: "GET"
@@ -88,13 +78,32 @@ export const getCurrentAdventureThunk = (character_id) => async (dispatch) => {
 
 	if (res.ok) {
 		const data = await res.json();
-		dispatch(getCurrentAdventure(character_id));
+		dispatch(getCurrentAdventure());
 		return data;
 	} else {
 		const errors = await res.json();
 		return errors;
 	}
 };
+
+//
+// DELETE AN ADVENTURE THUNK
+//
+export const clearAdventureThunk = (adventure_id) => async (dispatch) => {
+	const res = await fetch(`/api/adventures/${adventure_id}`, {
+		method: "DELETE"
+	});
+
+	if (res.ok) {
+		const data = await res.json();
+		dispatch(clearAdventure());
+		return data;
+	} else {
+		const errors = await res.json();
+		return errors;
+	}
+};
+
 
 //Initial state
 const initialState = {};

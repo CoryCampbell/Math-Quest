@@ -74,6 +74,7 @@ function AdventurePage() {
 		try {
 			console.log("parsing currentAdventure: ", currentAdventure);
 			currentAdventure = JSON.parse(currentAdventure);
+			dispatch(getCurrentAdventureThunk(currentAdventure.character_id));
 		} catch {
 			console.log("not able to parse currentAdventure");
 			currentAdventure = {};
@@ -83,7 +84,6 @@ function AdventurePage() {
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
 		dispatch(getSelectedCharacterThunk());
-		dispatch(getCurrentAdventureThunk());
 	}, [dispatch]);
 
 	if (!sessionUser) return <Redirect to="/" />;
@@ -108,7 +108,6 @@ function AdventurePage() {
 		adventureObject.character_id = selectedCharacter.id;
 		adventureObject.score = 0;
 		adventureObject.id = adventure.id;
-		adventureObject.progress = 1;
 		adventureObject.completed = false;
 
 		console.log("storing start of adventure in local storage", adventureObject);
@@ -137,7 +136,8 @@ function AdventurePage() {
 		return question;
 	}
 
-	function usePotion() {
+	function usePotion(e) {
+		e.preventDefault();
 		alert("Feature coming soon!");
 
 		//remove potion from inventory
@@ -145,22 +145,24 @@ function AdventurePage() {
 		//update user HP
 	}
 
-	function runAway() {
+	function runAway(e) {
+		e.preventDefault();
 		// alert("Feature coming soon!");
+
+		//remove adventure from database
+		dispatch(clearAdventureThunk(adventure.id));
 
 		//remove adventure from local storage
 		localStorage.removeItem("adventure");
 		localStorage.removeItem("currentQuestion");
 		localStorage.removeItem("currentProgress");
 
-		//remove adventure from state
-		dispatch(clearAdventureThunk());
-
 		//redirect to village page
 		history.push("/village");
 	}
 
 	function submitAnswer(e) {
+		e.preventDefault();
 		let question = JSON.parse(localStorage.getItem("currentQuestion"));
 		let adventure = JSON.parse(localStorage.getItem("adventure"));
 		console.log(" current question: ", question);
@@ -302,7 +304,7 @@ function AdventurePage() {
 											</button>
 											<div>Score: {currentAdventure["score"]}</div>
 											<div>Stage: {currentStage} / 10</div>
-											<button className="run-away-button" onClick={runAway}>
+											<button className="run-away-button" value={adventure?.id} onClick={runAway}>
 												Run Away!
 											</button>
 										</div>
