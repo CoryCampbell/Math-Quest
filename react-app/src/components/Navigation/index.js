@@ -6,11 +6,11 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
+import { clearCharactersThunk } from "../../store/characters";
 import { clearAdventureThunk } from "../../store/adventures";
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
-	const adventure = useSelector((state) => state.adventure);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
@@ -37,10 +37,13 @@ function Navigation({ isLoaded }) {
 
 	const closeMenu = () => setShowMenu(false);
 
-	const handleLogout = (e) => {
+	const handleLogout = async (e) => {
 		e.preventDefault();
 
-		dispatch(clearAdventureThunk(adventure?.id));
+		// dispatch(removeAdventureThunk());
+		dispatch(clearCharactersThunk());
+		dispatch(clearAdventureThunk());
+
 		dispatch(logout());
 
 		localStorage.removeItem("character_name");

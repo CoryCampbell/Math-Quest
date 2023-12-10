@@ -5,7 +5,7 @@ import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/c
 import { useEffect, useState } from "react";
 import {
 	addNewAdventureThunk,
-	clearAdventureThunk,
+	deleteAdventureThunk,
 	getCurrentAdventureThunk,
 	updateAdventureThunk
 } from "../../store/adventures";
@@ -34,7 +34,15 @@ function AdventurePage() {
 	let currentAdventure = localStorage.getItem("adventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	let currentProgress = localStorage.getItem("currentProgress") || {};
-	console.log("FIRST RENDER: adventure, question, progress: ", currentAdventure, currentQuestion, currentProgress);
+	console.log(
+		"FIRST RENDER=======> ",
+		"currentAdventure: ",
+		currentAdventure,
+		"currentQuestion: ",
+		currentQuestion,
+		"currentProgress: ",
+		currentProgress
+	);
 
 	//Protects page rendering from missing currentProgress
 	if (Object.values(currentProgress) === 0) {
@@ -83,11 +91,13 @@ function AdventurePage() {
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
 		dispatch(getSelectedCharacterThunk());
+		// dispatch(getCurrentAdventureThunk(selectedCharacter?.id));
 	}, [dispatch]);
 
 	if (!sessionUser) return <Redirect to="/" />;
 
 	function startAdventure(e) {
+		e.preventDefault();
 		const adventure_type = e.target.value;
 		dispatch(addNewAdventureThunk(selectedCharacter?.id, adventure_type));
 		console.log("--------------STARTING ADVENTURE--------------");
@@ -149,7 +159,7 @@ function AdventurePage() {
 		// alert("Feature coming soon!");
 
 		//remove adventure from database
-		dispatch(clearAdventureThunk(adventure.id));
+		dispatch(deleteAdventureThunk(adventure.id));
 
 		//remove adventure from local storage
 		localStorage.removeItem("adventure");
@@ -225,6 +235,7 @@ function AdventurePage() {
 	}
 
 	function claimRewards(e) {
+		e.preventDefault();
 		// recieve rewards/experience points
 		//update the adveture object to represent total score/coins/experience points
 		//add that adventure object to the database

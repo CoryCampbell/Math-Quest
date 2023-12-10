@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { getUserCharactersThunk, updateCharacterThunk } from "../../store/characters";
@@ -60,10 +60,6 @@ function UpdateCharacterModal() {
 		setErrors(errorsObj);
 		return;
 	}
-
-	useEffect(() => {
-		dispatch(getUserCharactersThunk());
-	}, [dispatch]);
 
 	return (
 		<div className="update-character-container">

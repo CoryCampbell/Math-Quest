@@ -16,7 +16,7 @@ def get_current_adventure(adventure_id):
     current_adventure = Adventure.query.filter_by(id=adventure_id).first()
     print("============> current Adventure: ", current_adventure)
 
-    return [character.to_dict() for character in current_adventure]
+    return current_adventure.to_dict()
 
 
 
@@ -55,7 +55,7 @@ def update_adventure(adventure_id, new_score):
     """
     Route for updating the current adventure once it is completed
     """
-    adventure = Adventure.query.filter_by(adventure_id=adventure_id).first()
+    adventure = Adventure.query.filter_by(id=adventure_id).first()
     if adventure:
         adventure.score = new_score
         adventure.completed = True
