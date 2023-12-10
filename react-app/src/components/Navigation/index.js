@@ -7,10 +7,11 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
 import { clearCharactersThunk } from "../../store/characters";
-import { clearAdventureThunk } from "../../store/adventures";
+import { clearAdventureThunk, deleteAdventureThunk } from "../../store/adventures";
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
+	const adventure = useSelector((state) => state.adventure);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
@@ -40,10 +41,13 @@ function Navigation({ isLoaded }) {
 	const handleLogout = async (e) => {
 		e.preventDefault();
 
-		// dispatch(removeAdventureThunk());
 		dispatch(clearCharactersThunk());
 		dispatch(clearAdventureThunk());
 
+		console.log("adventure state on logout: ", adventure);
+		if (Object.keys(adventure).length) {
+			dispatch(deleteAdventureThunk(adventure.id));
+		}
 		dispatch(logout());
 
 		localStorage.removeItem("character_name");

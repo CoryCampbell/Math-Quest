@@ -6,18 +6,22 @@ from app import db
 adventure_routes = Blueprint('adventures', __name__)
 
 
-@adventure_routes.route('/<adventure_id>')
+@adventure_routes.route('/<character_id>')
 @login_required
-def get_current_adventure(adventure_id):
+def get_current_adventure(character_id):
     """
     Query for current unfinished adventure of a user
     """
+    character_id = request.json.get("character_id")
+    print("++++++++!+!+!+!+! character id : ", character_id)
 
-    current_adventure = Adventure.query.filter_by(id=adventure_id).first()
+    current_adventure = Adventure.query.filter_by(character_id=character_id, completed=False).first()
     print("============> current Adventure: ", current_adventure)
 
-    return current_adventure.to_dict()
-
+    if current_adventure:
+        return current_adventure.to_dict()
+    else:
+        return {"No current adventure"}
 
 
 

@@ -34,26 +34,14 @@ function AdventurePage() {
 	let currentAdventure = localStorage.getItem("adventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	let currentProgress = localStorage.getItem("currentProgress") || {};
-	console.log(
-		"FIRST RENDER=======> ",
-		"currentAdventure: ",
-		currentAdventure,
-		"currentQuestion: ",
-		currentQuestion,
-		"currentProgress: ",
-		currentProgress
-	);
 
 	//Protects page rendering from missing currentProgress
 	if (Object.values(currentProgress) === 0) {
-		console.log("no current progress to show");
 		currentProgress = {};
 	} else {
 		try {
-			console.log("parsing current progress: ", currentProgress);
 			currentProgress = JSON.parse(currentProgress);
 		} catch {
-			console.log("not able to parse current progress", currentProgress);
 			currentProgress = 1;
 		}
 	}
@@ -62,28 +50,22 @@ function AdventurePage() {
 
 	//Protects page rendering from missing question
 	if (Object.values(currentQuestion) === 0) {
-		console.log("X X X X X X ----> NO QUESTION FOUND");
 		currentQuestion = loadQuestion(currentStage);
 	} else {
 		try {
-			console.log("parsing currentQuestion: ", currentQuestion);
 			currentQuestion = JSON.parse(currentQuestion);
 		} catch {
-			console.log("not able to parse currentQuestion");
 			currentQuestion = {};
 		}
 	}
 
 	//Protects page rendering from missing currentAdventure
 	if (Object.values(currentAdventure) === 0) {
-		console.log("no currnetAdventure chosen");
 		currentAdventure = {};
 	} else {
 		try {
-			console.log("parsing currentAdventure: ", currentAdventure);
 			currentAdventure = JSON.parse(currentAdventure);
 		} catch {
-			console.log("not able to parse currentAdventure");
 			currentAdventure = {};
 		}
 	}
@@ -91,7 +73,6 @@ function AdventurePage() {
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
 		dispatch(getSelectedCharacterThunk());
-		// dispatch(getCurrentAdventureThunk(selectedCharacter?.id));
 	}, [dispatch]);
 
 	if (!sessionUser) return <Redirect to="/" />;
@@ -212,8 +193,8 @@ function AdventurePage() {
 
 			//update adventure info in database
 			console.log(adventure.id, adventure.score);
+			dispatch(getCurrentAdventureThunk());
 			dispatch(updateAdventureThunk(adventure.id, adventure.score));
-			dispatch(getCurrentAdventureThunk(selectedCharacter.id));
 
 			setCompleted(true);
 			setRewardsClaimed(false);
@@ -236,8 +217,8 @@ function AdventurePage() {
 
 	function claimRewards(e) {
 		e.preventDefault();
-		// recieve rewards/experience points
-		//update the adveture object to represent total score/coins/experience points
+		// receive rewards/experience points
+		//update the adventure object to represent total score/coins/experience points
 		//add that adventure object to the database
 
 		//update setStates to render the home adventure page again
