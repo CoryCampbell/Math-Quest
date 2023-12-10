@@ -31,7 +31,7 @@ function AdventurePage() {
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
 	const adventure = useSelector((state) => state.adventure);
 
-	let currentAdventure = localStorage.getItem("adventure") || {};
+	let currentAdventure = localStorage.getItem("currentAdventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	let currentProgress = localStorage.getItem("currentProgress") || {};
 
@@ -91,7 +91,6 @@ function AdventurePage() {
 		//create progress tracker for local storage
 		localStorage.setItem("currentProgress", 1);
 
-		console.log("--------------adventure.id----->", adventure.id);
 		//create adventure object shell that will eventually be added to db
 		let adventureObject = {};
 		adventureObject.adventure_type = adventure_type;
@@ -101,9 +100,9 @@ function AdventurePage() {
 		adventureObject.completed = false;
 
 		console.log("storing start of adventure in local storage", adventureObject);
-		localStorage.setItem("adventure", JSON.stringify(adventureObject));
+		localStorage.setItem("currentAdventure", JSON.stringify(adventureObject));
 
-		currentAdventure = JSON.parse(localStorage.getItem("adventure"));
+		currentAdventure = JSON.parse(localStorage.getItem("currentAdventure"));
 		console.log("adventure after grab from local storage start adventure click: ", currentAdventure);
 
 		currentQuestion = loadQuestion(currentStage - 1);
@@ -143,7 +142,7 @@ function AdventurePage() {
 		dispatch(deleteAdventureThunk(adventure.id));
 
 		//remove adventure from local storage
-		localStorage.removeItem("adventure");
+		localStorage.removeItem("currentAdventure");
 		localStorage.removeItem("currentQuestion");
 		localStorage.removeItem("currentProgress");
 
@@ -154,7 +153,7 @@ function AdventurePage() {
 	function submitAnswer(e) {
 		e.preventDefault();
 		let question = JSON.parse(localStorage.getItem("currentQuestion"));
-		let adventure = JSON.parse(localStorage.getItem("adventure"));
+		let adventure = JSON.parse(localStorage.getItem("currentAdventure"));
 		console.log(" current question: ", question);
 		console.log("submitted answer: ", e.target.value);
 		console.log("correct answer: ", question.answer);
@@ -167,7 +166,7 @@ function AdventurePage() {
 			//update score value
 			adventure.score = adventure.score + question.question_value;
 			console.log("new score value: ", adventure);
-			localStorage.setItem("adventure", JSON.stringify(adventure));
+			localStorage.setItem("currentAdventure", JSON.stringify(adventure));
 		}
 
 		//handle incorrect answer updates

@@ -52,7 +52,7 @@ function Navigation({ isLoaded }) {
 
 		localStorage.removeItem("character_name");
 		localStorage.removeItem("currentQuestion");
-		localStorage.removeItem("adventure");
+		localStorage.removeItem("currentAdventure");
 		localStorage.removeItem("currentProgress");
 
 		closeMenu();
