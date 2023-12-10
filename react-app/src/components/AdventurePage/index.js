@@ -23,6 +23,7 @@ import "./AdventurePage.css";
 
 function AdventurePage() {
 	const [passed, setPassed] = useState(false);
+	const [started, setStarted] = useState(false);
 	const [completed, setCompleted] = useState(false);
 	const [rewardsClaimed, setRewardsClaimed] = useState(true);
 	const history = useHistory();
@@ -79,6 +80,7 @@ function AdventurePage() {
 
 	function startAdventure(e) {
 		e.preventDefault();
+		setStarted(true);
 		const adventure_type = e.target.value;
 		console.log("--------------STARTING ADVENTURE--------------");
 		console.log("--------------STARTING ADVENTURE--------------");
@@ -227,8 +229,9 @@ function AdventurePage() {
 		setCompleted(false);
 		setRewardsClaimed(true);
 		setCurrentStage(1);
+		setStarted(false);
 
-		localStorage.removeItem("adventure");
+		localStorage.removeItem("currentAdventure");
 		localStorage.removeItem("currentQuestion");
 		localStorage.removeItem("currentProgress");
 
