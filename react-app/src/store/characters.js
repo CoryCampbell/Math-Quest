@@ -4,6 +4,7 @@ const GET_SELECTED_CHARACTER = "characters/getSelectedCharacter";
 const ADD_NEW_CHARACTER = "characters/addNewCharacter";
 const DELETE_CHARACTER = "characters/deleteCharacter";
 const UPDATE_CHARACTER = "characters/updateCharacter";
+const CLEAR_CHARACTERS = "characters/clearCharacters";
 
 // Action Creators
 const getUserCharacters = (payload) => ({
@@ -14,6 +15,10 @@ const getUserCharacters = (payload) => ({
 const getSelectedCharacter = (payload) => ({
 	type: GET_SELECTED_CHARACTER,
 	payload
+});
+
+const clearCharacters = () => ({
+	type: CLEAR_CHARACTERS
 });
 
 const addNewCharacter = (payload) => ({
@@ -58,6 +63,14 @@ export const getSelectedCharacterThunk = () => async (dispatch) => {
 
 	dispatch(getSelectedCharacter(selectedCharacter));
 	return selectedCharacter;
+};
+
+//
+// clear characters state
+//
+export const clearCharactersThunk = () => async (dispatch) => {
+	dispatch(clearCharacters());
+	return;
 };
 
 //
@@ -135,6 +148,8 @@ export default function charactersReducer(state = initialState, action) {
 			return { ...state, userCharacters: action.payload };
 		case GET_SELECTED_CHARACTER:
 			return { ...state, selectedCharacter: action.payload };
+		case CLEAR_CHARACTERS:
+			return initialState;
 		case ADD_NEW_CHARACTER:
 			return { ...state, userCharacters: [userCharactersAfterChange] };
 		case DELETE_CHARACTER:

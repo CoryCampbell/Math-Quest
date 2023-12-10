@@ -45,7 +45,7 @@ function NewCharacterModal() {
 		if (forbiddenLoop(characterName))
 			errorsObj.characterName = "Names are not allowed to include any Symbols or Special Characters!";
 
-		if (localStorage.getItem("adventure"))
+		if (localStorage.getItem("currentAdventure"))
 			errorsObj.adventure = "Please end your current adventure before creating a new Character!";
 
 		if (!appearance) errorsObj.appearance = "Please give your character an appearance!";
