@@ -18,18 +18,17 @@ function CharacterPage() {
 	const sessionUser = useSelector((state) => state.session.user);
 	const userCharacters = useSelector((state) => state.characters.userCharacters);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
-	const currentAdventure = localStorage.getItem("adventure") || {};
-	console.log("currentAdventure", currentAdventure);
+	const currentAdventure = localStorage.getItem("currentAdventure") || {};
 
 	let selectedCharacterName = localStorage.getItem("character_name");
-	console.log("=====================> selectedCharacterName", selectedCharacterName);
 
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
 		dispatch(getSelectedCharacterThunk());
-	}, [dispatch, selectedCharacterName, userCharacters?.length]);
+	}, [dispatch]);
 
 	function selectCharacter(e) {
+		e.preventDefault();
 		if (Object.keys(currentAdventure).length !== 0) {
 			return alert("Adventure started, please end your adventure before switching Characters!");
 		}
