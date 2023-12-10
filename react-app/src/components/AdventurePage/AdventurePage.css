@@ -98,6 +98,27 @@
   height: 100%;
 }
 
+.help-button-container > button {
+  background-color: rgb(0, 162, 255);
+  width: 25px;
+  height: 25px;
+  color: white;
+  border-radius: 4px;
+  border: solid white 2px;
+  box-shadow: 0px 0px 5px black;
+}
+
+.help-button-container > button:hover {
+  background-color: rgb(0, 162, 255);
+  width: 25px;
+  height: 25px;
+  color: white;
+  border-radius: 4px;
+  border: solid white 2px;
+  box-shadow: 0px 0px 5px black, 0px 0px 25px white;
+}
+
+
 .stage-time-container {
   display: flex;
   flex-direction: row;
@@ -192,4 +213,20 @@
   justify-content: center;
   align-items: center;
   height: 85vh;
+}
+
+.run-away-button {
+  background-color: rgb(0, 92, 15);
+  width: 100px;
+  height: 50px;
+  border-radius: 50px;
+  color: gold;
+}
+
+.use-potion-button {
+  background-color: red;
+  width: 100px;
+  height: 50px;
+  border-radius: 50px;
+  color: white;
 }

@@ -15,9 +15,10 @@ function DeleteCharacterModal() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const deletedCharacter = await dispatch(deleteCharacterThunk(selectedCharacter.id));
+		dispatch(deleteCharacterThunk(selectedCharacter.id));
+		localStorage.removeItem("character_name");
 		closeModal();
-		return deletedCharacter;
+		return;
 	};
 
 	useEffect(() => {

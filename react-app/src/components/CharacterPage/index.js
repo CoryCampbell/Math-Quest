@@ -69,7 +69,7 @@ function CharacterPage() {
 							<div className="character-info-stats-container">
 								<div className="info-stats-top">
 									<div className="character-name-options-container">
-										<div className="info-character-title">{selectedCharacter.character_name}</div>
+										<div className="info-character-title">{selectedCharacterName}</div>
 										<div className="update-name-modal-container">
 											<OpenModalButton
 												buttonText="Edit"

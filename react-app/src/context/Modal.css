@@ -20,5 +20,16 @@
 
 #modal-content {
   position: absolute;
-  background-color:white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  width: 600px;
+    font-family: fantasy;
+  font-size: 15px;
+  border: solid goldenrod 10px;
+  border-style: groove;
+  border-radius: 15px;
+  background-color: rgb(99, 99, 100);
 }

@@ -3,12 +3,7 @@ import { Redirect } from "react-router-dom";
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
 import { useEffect, useState } from "react";
-import {
-	addNewAdventureThunk,
-	deleteAdventureThunk,
-	getCurrentAdventureThunk,
-	updateAdventureThunk
-} from "../../store/adventures";
+import { addNewAdventureThunk, deleteAdventureThunk } from "../../store/adventures";
 
 import AdventureStartModal from "../AlertModals/AdventureStartModal";
 import OpenModalButton from "../OpenModalButton";
@@ -147,7 +142,7 @@ function AdventurePage() {
 		localStorage.removeItem("currentProgress");
 
 		//redirect to village page
-		history.push("/village");
+		history.push("/characters");
 	}
 
 	function submitAnswer(e) {

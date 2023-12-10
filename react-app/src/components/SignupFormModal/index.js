@@ -66,14 +66,14 @@ function SignupFormModal() {
 					Password
 					<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 				</label>
-				<label>
+				<label className="confirm-password-label">
 					Confirm Password
 					<input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
 				</label>
-				<button className="sign-up-button" type="submit" onClick={validateInfo}>
-					Sign Up
-				</button>
 			</form>
+			<button className="sign-up-button" type="submit" onClick={validateInfo}>
+				Sign Up
+			</button>
 		</>
 	);
 }

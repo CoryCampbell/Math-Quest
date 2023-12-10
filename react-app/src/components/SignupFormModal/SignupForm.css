@@ -1,25 +1,54 @@
-#modal-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(123, 123, 253);
-  border-radius: 25px;
-  height: 600px;
-  border: solid gold 10px;
-  border-style: groove;
-}
-
-.sign-up-form-container {
+form.sign-up-form-container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: center;
-  width: 600px;
-  height: 600px;
+  align-items: flex-end;
+  width: 90%;
+  height: 100%;
 }
 
 .sign-up-button {
   background-color: green;
   width: 50%;
+  border-radius: 20px;
+  height: 50px;
+}
+
+form {
+  font-size: 30px;
+}
+
+input {
+  height: 100%;
+  font-size: 25px;
+}
+
+.sign-up-form-container > .errors {
+  font-size: 25px;
+}
+
+.sign-up-form-container > .firstNameError {
+  position: absolute;
+  top: 85px;
+  right: 30px;
+}
+
+.sign-up-form-container > .usernameError {
+  position: fixed;
+  top: 320px;
+  right: 78px;
+}
+
+.sign-up-form-container > .passwordError {
+  position: fixed;
+  top: 425px;
+  right: 78px;
+}
+
+.confirm-password-label {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
 }
