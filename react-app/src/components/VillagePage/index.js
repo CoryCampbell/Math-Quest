@@ -4,13 +4,14 @@ import "./VillagePage.css";
 
 function VillagePage() {
 	const sessionUser = useSelector((state) => state.session.user);
-	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
 
 	if (!sessionUser) return <Redirect to="/" />;
 
+	const currerntCharacter = localStorage.getItem("character_name") || {};
+
 	return (
 		<>
-			{selectedCharacter ? (
+			{Object.keys(currerntCharacter).length ? (
 				<div className="village-page-container">
 					<h1>Village</h1>
 					<div className="village-options-container">
