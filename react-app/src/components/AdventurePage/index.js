@@ -80,7 +80,6 @@ function AdventurePage() {
 	function startAdventure(e) {
 		e.preventDefault();
 		const adventure_type = e.target.value;
-		dispatch(addNewAdventureThunk(selectedCharacter?.id, adventure_type));
 		console.log("--------------STARTING ADVENTURE--------------");
 		console.log("--------------STARTING ADVENTURE--------------");
 		console.log("--------------STARTING ADVENTURE--------------");
@@ -96,7 +95,6 @@ function AdventurePage() {
 		adventureObject.adventure_type = adventure_type;
 		adventureObject.character_id = selectedCharacter.id;
 		adventureObject.score = 0;
-		adventureObject.id = adventure.id;
 		adventureObject.completed = false;
 
 		console.log("storing start of adventure in local storage", adventureObject);
@@ -158,31 +156,32 @@ function AdventurePage() {
 		console.log("submitted answer: ", e.target.value);
 		console.log("correct answer: ", question.answer);
 
-		//handle correct answer updates
-		if (parseInt(e.target.value) === question.answer) {
-			console.log("CORRECT ANSWER!");
-			setPassed(true);
+		if (!adventure.completed) {
+			//handle correct answer updates
+			if (parseInt(e.target.value) === question.answer) {
+				console.log("CORRECT ANSWER!");
+				setPassed(true);
 
-			//update score value
-			adventure.score = adventure.score + question.question_value;
-			console.log("new score value: ", adventure);
-			localStorage.setItem("currentAdventure", JSON.stringify(adventure));
+				//update score value
+				adventure.score = adventure.score + question.question_value;
+				console.log("new score value: ", adventure);
+				localStorage.setItem("currentAdventure", JSON.stringify(adventure));
+			}
+
+			//handle incorrect answer updates
+			if (parseInt(e.target.value) !== question.answer) {
+				console.log("INCORRECT ANSWER!");
+				setPassed(false);
+			}
+
+			//deal damage or take damage based off of passed value
+			if (passed) {
+				//deal damage
+				//give score points
+			} else {
+				//take damage
+			}
 		}
-
-		//handle incorrect answer updates
-		if (parseInt(e.target.value) !== question.answer) {
-			console.log("INCORRECT ANSWER!");
-			setPassed(false);
-		}
-
-		//deal damage or take damage based off of passed value
-		if (passed) {
-			//deal damage
-			//give score points
-		} else {
-			//take damage
-		}
-
 		//update adventure progress
 		//check to make sure stage can be advanced first
 		//reload another question and update the local storage value
@@ -191,13 +190,12 @@ function AdventurePage() {
 			console.log("adventure is over!", currentAdventure);
 
 			//update adventure info in database
-			console.log(adventure.id, adventure.score);
-			dispatch(getCurrentAdventureThunk());
-			dispatch(updateAdventureThunk(adventure.id, adventure.score));
+			// console.log(adventure.id, adventure.score);
+			// dispatch(getCurrentAdventureThunk());
+			// dispatch(updateAdventureThunk(adventure.id, adventure.score));
 
 			setCompleted(true);
 			setRewardsClaimed(false);
-
 			return;
 		} else {
 			//advance to next stage
@@ -210,15 +208,20 @@ function AdventurePage() {
 			localStorage.setItem("currentQuestion", JSON.stringify(question));
 			localStorage.setItem("currentProgress", JSON.stringify(nextStage));
 		}
-
-		// otherwise end adventure and update the adventure database as well as update coins/xp
 	}
 
 	function claimRewards(e) {
 		e.preventDefault();
+
+		let adventure = JSON.parse(localStorage.getItem("currentAdventure"));
+		adventure.completed = true;
 		// receive rewards/experience points
 		//update the adventure object to represent total score/coins/experience points
 		//add that adventure object to the database
+
+		dispatch(
+			addNewAdventureThunk(selectedCharacter?.id, adventure.adventure_type, adventure.score, adventure.completed)
+		);
 
 		//update setStates to render the home adventure page again
 		setCompleted(false);
@@ -228,6 +231,8 @@ function AdventurePage() {
 		localStorage.removeItem("adventure");
 		localStorage.removeItem("currentQuestion");
 		localStorage.removeItem("currentProgress");
+
+		history.push("/village");
 	}
 
 	// THREE STATES YOU CAN BE IN:

@@ -36,7 +36,7 @@ const getCurrentAdventure = (payload) => ({
 //
 //add new adventure thunk
 //
-export const addNewAdventureThunk = (character_id, adventure_type) => async (dispatch) => {
+export const addNewAdventureThunk = (character_id, adventure_type, score, completed) => async (dispatch) => {
 	const res = await fetch(`/api/adventures/create`, {
 		method: "POST",
 		headers: {
@@ -44,9 +44,9 @@ export const addNewAdventureThunk = (character_id, adventure_type) => async (dis
 		},
 		body: JSON.stringify({
 			character_id,
-			score: 0,
+			score,
 			adventure_type,
-			completed: false
+			completed
 		})
 	});
 
