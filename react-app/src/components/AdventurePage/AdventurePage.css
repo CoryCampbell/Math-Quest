@@ -98,6 +98,27 @@
   height: 100%;
 }
 
+.help-button-container > button {
+  background-color: rgb(0, 162, 255);
+  width: 25px;
+  height: 25px;
+  color: white;
+  border-radius: 4px;
+  border: solid white 2px;
+  box-shadow: 0px 0px 5px black;
+}
+
+.help-button-container > button:hover {
+  background-color: rgb(0, 162, 255);
+  width: 25px;
+  height: 25px;
+  color: white;
+  border-radius: 4px;
+  border: solid white 2px;
+  box-shadow: 0px 0px 5px black, 0px 0px 25px white;
+}
+
+
 .stage-time-container {
   display: flex;
   flex-direction: row;
@@ -192,4 +213,75 @@
   justify-content: center;
   align-items: center;
   height: 85vh;
+}
+
+.run-away-button {
+  background-color: rgb(0, 92, 15);
+  width: 100px;
+  height: 50px;
+  border-radius: 50px;
+  color: gold;
+}
+
+.use-potion-button {
+  background-color: red;
+  width: 100px;
+  height: 50px;
+  border-radius: 50px;
+  color: white;
+}
+
+.rewards-button {
+  background-color: green;
+  width: 300px;
+  height: 50px;
+  border-radius: 20px;
+  font-family: fantasy;
+  font-size: 25px;
+}
+
+.rewards-button:hover {
+  background-color: rgb(0, 184, 0);
+  box-shadow: 0px 0px 15px white;
+}
+
+.reward-stats-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 50px;
+  width: 100%;
+}
+
+.adv-ended {
+  font-size: 50px;
+  color: green;
+  padding: 0px;
+  margin: 0px;
+}
+
+.return-title {
+  color: white;
+  margin: 0px;
+}
+
+.adv-ended-title-container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.stone-background {
+  background-color: gray;
+  width: 600px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: solid goldenrod 15px;
+  border-style: groove;
 }

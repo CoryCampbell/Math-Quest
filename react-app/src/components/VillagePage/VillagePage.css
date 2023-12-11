@@ -7,6 +7,14 @@
   align-items: center;
 }
 
+.village-page-container > h1 {
+  padding-top: 250px;
+}
+
+/* .village-options-closed > p {
+
+} */
+
 .village-options-container {
   display: flex;
   flex-direction: row;
@@ -20,11 +28,12 @@
   box-sizing: border-box;
   border-style: groove;
   width: 30%;
-  height: 100%;
+  height: 50%;
   background-color: rgba(255, 255, 255, 0.52);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .village-option-closed {
@@ -32,11 +41,12 @@
   box-sizing: border-box;
   border-style: groove;
   width: 30%;
-  height: 100%;
+  height: 50%;
   background-color: rgba(128, 128, 128, 0.52);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .village-option {
@@ -44,11 +54,12 @@
   box-sizing: border-box;
   border-style: groove;
   width: 30%;
-  height: 100%;
+  height: 50%;
   background-color: rgba(255, 255, 255, 0.52);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .x {
@@ -58,6 +69,7 @@
   align-items: center;
   font-size: 150px;
   color: rgb(113, 0, 0);
+  margin: 0px;
 }
 
 .village-options-container > p {

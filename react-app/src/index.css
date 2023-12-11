@@ -5,8 +5,8 @@ body {
   background-image: linear-gradient(rgb(255, 255, 255) 0%, skyblue 90%, green 10%);
   height: 100vh;
   font-size: 20px;
-  font-family: sans-serif;
-    border: solid goldenrod 15px;
+  font-family: fantasy;
+  border: solid goldenrod 15px;
   box-sizing: border-box;
   border-style: groove;
 }

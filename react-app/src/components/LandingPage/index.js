@@ -12,7 +12,7 @@ function LandingPage() {
 		<>
 			<div className="landing-page-container">
 				<h1>Welcome to MathQuest</h1>
-				<p>Adventure Lies Ahead!</p>
+				<h4>"Mathematics is not a language. It's an adventure." - Paul Lockhart</h4>
 				<div className="landing-page-details">
 					<div className="landing-detail-one-container">
 						<div className="detail-one-text">Solve Math Problems To Complete Adventures!</div>
