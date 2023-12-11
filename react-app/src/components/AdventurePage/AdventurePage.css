@@ -133,7 +133,6 @@
 }
 
 .visual-game-container {
-  border: solid red 1px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -143,7 +142,6 @@
 }
 
 .math-game-container {
-  border: solid blue 1px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -164,7 +162,6 @@
 }
 
 .question-container {
-  border: solid green 1px;
   box-sizing: border-box;
   width: 100%;
   height: 30%;
@@ -176,7 +173,6 @@
 }
 
 .answers-container {
-  border: solid salmon 1px;
   box-sizing: border-box;
   width: 100%;
   height: 70%;
