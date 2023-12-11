@@ -95,14 +95,14 @@ function NewCharacterModal() {
 						<div>
 							<input type="radio" id={3} name="drone" value={appearance} onChange={(e) => setAppearance(e.target.id)} />
 							<label htmlFor="appearance-three">
-								<img src={require("../../static/appearances/FEMALE3.PNG").default} alt="Female1"></img>
+								<img src={require("../../static/appearances/FEMALE3.PNG").default} alt="Female3"></img>
 							</label>
 						</div>
 
 						<div>
 							<input type="radio" id={4} name="drone" value={appearance} onChange={(e) => setAppearance(e.target.id)} />
 							<label htmlFor="appearance-four">
-								<img src={require("../../static/appearances/FEMALE4.PNG").default} alt="Female1"></img>
+								<img src={require("../../static/appearances/FEMALE4.PNG").default} alt="Female4"></img>
 							</label>
 						</div>
 					</fieldset>
