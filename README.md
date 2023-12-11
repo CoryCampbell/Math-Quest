@@ -28,7 +28,7 @@ Hosted by:
 
 # Screenshots
 
-Customizable c=Character Appearances:
+Customizable Character Appearances:
 
 ![image](https://github.com/CoryCampbell/Math-Quest/assets/110738538/5788f8c3-4747-49c5-aa85-a4892ea27135)
 
