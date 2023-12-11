@@ -2,10 +2,9 @@
 App Summary
 
 # Live Link
-[MathQuest Site](https://mathquest.onrender.com)
+[MathQuest](https://mathquest.onrender.com)
 
 # Tech Stack
-list of tech/languages/pugins/third-party api's used (put at top of readme for increased visibility)
 
 Frameworks and libraries:
     'python, flask, javascrpt, react, redux, css3, html5'
