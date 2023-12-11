@@ -10,7 +10,6 @@ function AboutPage() {
 				<h1>About</h1>
 				<div className="links-container">
 					<div className="links-left">
-						<h2>"Mathematics is not a language. It's an adventure." - Paul Lockhart</h2>
 						<h3>This Site was created by Cory Campbell</h3>
 						<h3>Artwork done by Katelyn Owens</h3>
 					</div>
