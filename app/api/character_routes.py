@@ -98,6 +98,7 @@ def update_experience(character_id, experience_points_gained):
     print("=======> before change: ", character.to_dict()["character_name"])
     if character:
         character.experience_points += int(experience_points_gained)
+        character.coins += 10
 
         print("after change ============> ", character.to_dict()["character_name"])
         db.session.commit()
