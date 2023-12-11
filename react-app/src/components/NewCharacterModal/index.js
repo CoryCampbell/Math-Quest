@@ -40,20 +40,22 @@ function NewCharacterModal() {
 			return false;
 		}
 
-		if (!characterName || !characterName.trim().length) errorsObj.characterName = "Please give your character a Name!";
+		if (localStorage.getItem("currentAdventure")) {
+			errorsObj.adventure = "Finish your adventure before creating a Character!";
+		} else {
+			if (!characterName || !characterName.trim().length)
+				errorsObj.characterName = "Please give your character a Name!";
 
-		if (forbiddenLoop(characterName))
-			errorsObj.characterName = "Names are not allowed to include any Symbols or Special Characters!";
+			if (forbiddenLoop(characterName))
+				errorsObj.characterName = "Names are not allowed to include any Symbols or Special Characters!";
 
-		if (localStorage.getItem("currentAdventure"))
-			errorsObj.adventure = "Please end your current adventure before creating a new Character!";
+			if (!appearance) errorsObj.appearance = "Please give your character an appearance!";
 
-		if (!appearance) errorsObj.appearance = "Please give your character an appearance!";
-
-		userCharacters.forEach((character) => {
-			if (character.character_name === characterName)
-				errorsObj.characterName = "You already have a character with that name!";
-		});
+			userCharacters.forEach((character) => {
+				if (character.character_name === characterName)
+					errorsObj.characterName = "You already have a character with that name!";
+			});
+		}
 
 		setErrors(errorsObj);
 		return;

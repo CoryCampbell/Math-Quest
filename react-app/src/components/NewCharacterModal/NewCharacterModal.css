@@ -63,3 +63,11 @@
 [type=readio]::after {
   background-color: gold;
 }
+
+.adventureError {
+  position: absolute;
+  width: 100%;
+  top: 75px;
+  left: 50px;
+  font-size: 25px;
+}

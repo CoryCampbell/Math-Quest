@@ -72,7 +72,7 @@ function CharacterPage() {
 						<div className="char-title">CHARACTERS</div>
 						<OpenModalButton
 							buttonText="Create New Character"
-							modalComponent={<NewCharacterModal className="new-character-button" />}
+							modalComponent={<NewCharacterModal className="new-character-button" disabled />}
 						></OpenModalButton>
 					</div>
 					<div className="all-chars-container">
