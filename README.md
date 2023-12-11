@@ -38,9 +38,15 @@ Solve Match Problems to Gain Experience:
 
 
 # Endpoints
-frontend routes
+Frontend Routes:
 
-backend routes
+![image](https://github.com/CoryCampbell/Math-Quest/assets/110738538/2180017c-97ae-42d3-b40d-b0b74f6a8c39)
+
+
+Backend Routes: 
+
+![image](https://github.com/CoryCampbell/Math-Quest/assets/110738538/fc893d27-4664-4979-92ae-b599a10a5963)
+
 
 # Thoughts about the Process
 technical issues/difficulties/challenges experienced during project
