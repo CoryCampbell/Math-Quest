@@ -179,23 +179,14 @@ function AdventurePage() {
 				//take damage
 			}
 		}
-		//update adventure progress
-		//check to make sure stage can be advanced first
-		//reload another question and update the local storage value
-		if (currentStage + 1 > 10) {
-			//end the adventure and update page
-			console.log("adventure is over!", currentAdventure);
 
-			//update adventure info in database
-			// console.log(adventure.id, adventure.score);
-			// dispatch(getCurrentAdventureThunk());
-			// dispatch(updateAdventureThunk(adventure.id, adventure.score));
+		if (currentStage + 1 > 10) {
+			console.log("adventure is over!", currentAdventure);
 
 			setCompleted(true);
 			setRewardsClaimed(false);
 			return;
 		} else {
-			//advance to next stage
 			localStorage.removeItem("currentQuestion");
 			localStorage.removeItem("currentProgress");
 			const nextStage = currentStage + 1;
@@ -351,9 +342,9 @@ function AdventurePage() {
 											<p className="return-title">Returning To The Village</p>
 										</div>
 										<div className="reward-stats-container">
-											<p>SCORE: {adventure.score}</p>
+											<p>SCORE: {currentAdventure.score}</p>
 											<p>+10 Coins!</p>
-											<p>{adventure.score} Experience Gained</p>
+											<p>{currentAdventure.score} Experience Gained</p>
 										</div>
 										<button className="rewards-button" onClick={claimRewards}>
 											Claim Rewards!
