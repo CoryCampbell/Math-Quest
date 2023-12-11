@@ -38,7 +38,14 @@ form.user-input-container {
   height: 50px;
   align-self: center;
   border-radius: 15px;
+  font-family: fantasy;
+  font-size: 25px;
 }
+
+.login-button:hover {
+    background-color: rgb(0, 185, 0);
+    box-shadow: 0px 0px 15px white;
+  }
 
 .username-input-row {
   display: flex;

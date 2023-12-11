@@ -48,6 +48,8 @@
   width: 15%;
 }
 
+
+
 .user-input-container {
   display: flex;
   flex-direction: column;
@@ -66,14 +68,36 @@
   color: gold;
 }
 
+.modal-buttons-container > button:hover {
+    background-color: rgb(171, 171, 171);
+  border-radius: 5px;
+  color: rgb(255, 226, 62);
+}
+
 .demo-user-button {
   background-color: rgb(133, 0, 0);
   border-radius: 5px;
   color: gold;
 }
 
+.demo-user-button:hover {
+    background-color: rgb(191, 2, 2);
+  border-radius: 5px;
+  color: rgb(251, 221, 52);
+}
+
 .log-out-button {
   background-color: rgb(133, 0, 0);
   border-radius: 5px;
   color: gold;
+}
+
+.log-out-button:hover {
+      background-color: rgb(191, 2, 2);
+  border-radius: 5px;
+  color: rgb(251, 221, 52);
+}
+
+a:hover {
+    color: rgb(218, 196, 75);
 }

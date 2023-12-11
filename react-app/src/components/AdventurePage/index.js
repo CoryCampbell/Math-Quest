@@ -345,12 +345,20 @@ function AdventurePage() {
 								</div>
 							) : (
 								<div className="end-of-adventure-container">
-									<p>adventure ended</p>
-									<p>score</p>
-									<p>experience gained</p>
-									<button className="rewards-button" onClick={claimRewards}>
-										Claim Rewards!
-									</button>
+									<div className="stone-background">
+										<div className="adv-ended-title-container">
+											<p className="adv-ended">Adventure Ended!</p>
+											<p className="return-title">Returning To The Village</p>
+										</div>
+										<div className="reward-stats-container">
+											<p>SCORE: {adventure.score}</p>
+											<p>+10 Coins!</p>
+											<p>{adventure.score} Experience Gained</p>
+										</div>
+										<button className="rewards-button" onClick={claimRewards}>
+											Claim Rewards!
+										</button>
+									</div>
 								</div>
 							)}
 							<div className="spacer-div"></div>
