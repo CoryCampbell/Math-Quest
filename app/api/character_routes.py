@@ -5,7 +5,6 @@ from app import db
 
 character_routes = Blueprint('characters', __name__)
 
-
 @character_routes.route('/all')
 @login_required
 def get_user_characters():
@@ -17,6 +16,8 @@ def get_user_characters():
     print("============> all user characters", allCharacters)
 
     return [character.to_dict() for character in allCharacters]
+
+
 
 
 
@@ -41,10 +42,6 @@ def create_new_character():
     experience_points = request.json.get("experience_points")
     coins = request.json.get("coins")
 
-
-    allCharacters = Character.query.filter_by(user_id=current_user.id).all()
-    print("============> all user characters", allCharacters)
-
     new_character = Character(
         character_name=character_name,
         appearance=appearance,
@@ -63,6 +60,15 @@ def create_new_character():
     return new_character.to_dict()
 
 
+
+
+
+
+
+
+
+
+
 @character_routes.route('/<int:character_id>/delete', methods=["DELETE"])
 @login_required
 def delete_character(character_id):
@@ -77,12 +83,41 @@ def delete_character(character_id):
         return {"error": repr("{character_name} could not be parted with.")}
 
 
+
+
+
+
+
+
+
+@character_routes.route('/experience/<character_id>/<experience_points_gained>', methods=['PATCH'])
+@login_required
+def update_experience(character_id, experience_points_gained):
+
+    character = Character.query.filter_by(id=character_id).first()
+    print("=======> before change: ", character.to_dict()["character_name"])
+    if character:
+        character.experience_points += int(experience_points_gained)
+
+        print("after change ============> ", character.to_dict()["character_name"])
+        db.session.commit()
+
+        return {"message": repr("{old_character_name} will now be known as {new_character_name}!")}
+    else:
+        return {"error": repr("{old_character_name}'s name could not be changed.")}
+
+
+
+
+
+
+
+
+
 @character_routes.route('/<old_character_name>/<new_character_name>', methods=['PATCH'])
 @login_required
 def update_character(old_character_name, new_character_name):
-    print("========= req data ======>", old_character_name, new_character_name)
     character = Character.query.filter_by(character_name=old_character_name, user_id=current_user.id).first()
-    print("=======> before change: ", character.to_dict()["character_name"])
     if character:
         character.character_name = new_character_name
 

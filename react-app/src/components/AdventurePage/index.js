@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
+import { getSelectedCharacterThunk, getUserCharactersThunk, updateExperienceThunk } from "../../store/characters";
 import { useEffect, useState } from "react";
 import { addNewAdventureThunk, deleteAdventureThunk } from "../../store/adventures";
 
@@ -219,6 +219,7 @@ function AdventurePage() {
 		dispatch(
 			addNewAdventureThunk(selectedCharacter?.id, adventure.adventure_type, adventure.score, adventure.completed)
 		);
+		dispatch(updateExperienceThunk(selectedCharacter?.id, adventure.score));
 
 		//update setStates to render the home adventure page again
 		setCompleted(false);

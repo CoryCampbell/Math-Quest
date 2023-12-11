@@ -4,6 +4,7 @@ const GET_SELECTED_CHARACTER = "characters/getSelectedCharacter";
 const ADD_NEW_CHARACTER = "characters/addNewCharacter";
 const DELETE_CHARACTER = "characters/deleteCharacter";
 const UPDATE_CHARACTER = "characters/updateCharacter";
+const UPDATE_EXPERIENCE = "characters/updateExperience";
 const CLEAR_CHARACTERS = "characters/clearCharacters";
 
 // Action Creators
@@ -32,9 +33,15 @@ const deleteCharacter = (character_id) => ({
 });
 
 const updateCharacter = (oldCharacterName, newCharacterName) => ({
-	type: DELETE_CHARACTER,
+	type: UPDATE_CHARACTER,
 	oldCharacterName,
 	newCharacterName
+});
+
+const updateExperience = (character_id, experience_points_gained) => ({
+	type: UPDATE_EXPERIENCE,
+	character_id,
+	experience_points_gained
 });
 
 //Thunks
@@ -129,6 +136,23 @@ export const updateCharacterThunk = (oldCharacterName, newCharacterName) => asyn
 	if (res.ok) {
 		const data = await res.json();
 		dispatch(updateCharacter(oldCharacterName, newCharacterName));
+		return data;
+	} else {
+		const errors = await res.json();
+		return errors;
+	}
+};
+//
+//UPDATE EXPERIENCE POINTS
+//
+export const updateExperienceThunk = (character_id, experience_points_gained) => async (dispatch) => {
+	const res = await fetch(`/api/characters/experience/${character_id}/${experience_points_gained}`, {
+		method: "PATCH"
+	});
+
+	if (res.ok) {
+		const data = await res.json();
+		dispatch(updateExperience(character_id, experience_points_gained));
 		return data;
 	} else {
 		const errors = await res.json();
