@@ -44,7 +44,7 @@ function LoginFormModal() {
 
 	return (
 		<div className="login-modal-container">
-			<h1>Log In</h1>
+			<h1 className="login-title">Log In</h1>
 			<form className="user-input-container" onSubmit={handleSubmit}>
 				<div className="username-input-row">
 					{errors.username && <p className="errors usernameError">{errors.username}</p>}
