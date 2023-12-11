@@ -48,7 +48,8 @@ Backend Routes:
 
 
 # Thoughts about the Process
-technical issues/difficulties/challenges experienced during project
+
+Getting the Character's information to render correctly was my biggest setback for this project, it definitely helped me get better with using React Hooks.
 
 # Connect with the creator
 email: corycampbell20@yahoo.com
