@@ -7,13 +7,13 @@ App Summary
 # Tech Stack
 
 Frameworks and libraries:
-    'python, flask, javascrpt, react, redux, css3, html5'
+    'Python, Flask, Javascript, React, Redux, CSS3, HTML5'
 
 Database:
-    'postgres'
+    'Postgres'
 
 Hosted by:
-    'render'
+    'Render'
 
 # Index
 
