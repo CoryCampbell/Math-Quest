@@ -4,13 +4,14 @@ import "./VillagePage.css";
 
 function VillagePage() {
 	const sessionUser = useSelector((state) => state.session.user);
-	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
 
 	if (!sessionUser) return <Redirect to="/" />;
 
+	const currerntCharacter = localStorage.getItem("character_name") || {};
+
 	return (
 		<>
-			{selectedCharacter ? (
+			{Object.keys(currerntCharacter).length ? (
 				<div className="village-page-container">
 					<h1>Village</h1>
 					<div className="village-options-container">
@@ -21,7 +22,6 @@ function VillagePage() {
 
 						<button className="village-character-option">
 							<p>Live!</p>
-							<p>*image will go here*</p>
 							<NavLink to="/characters">Characters</NavLink>
 						</button>
 						<button className="village-option">
@@ -41,8 +41,8 @@ function VillagePage() {
 							</button>
 
 							<button className="village-character-option">
+								<img src={require("../../static/appearances/unselected.PNG").default} alt="Female1"></img>
 								<p>Choose A Character To Start Your Journey!</p>
-								<p>*image will go here*</p>
 								<NavLink to="/characters">Characters</NavLink>
 							</button>
 							<button className="village-option-closed" disabled>

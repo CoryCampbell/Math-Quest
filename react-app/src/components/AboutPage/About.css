@@ -1,3 +1,43 @@
 .about-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   height: 95vh;
+}
+
+.about-page-container > h1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.links-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 70%;
+}
+
+.links-left {
+  width: 100%;
+  height: 45%;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.links-right {
+  width: 100%;
+  height: 45%;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.links-right > a {
+  color: black;
 }

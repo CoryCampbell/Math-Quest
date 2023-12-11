@@ -1,14 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
+import { getSelectedCharacterThunk, getUserCharactersThunk, updateExperienceThunk } from "../../store/characters";
 import { useEffect, useState } from "react";
-import {
-	addNewAdventureThunk,
-	deleteAdventureThunk,
-	getCurrentAdventureThunk,
-	updateAdventureThunk
-} from "../../store/adventures";
+import { addNewAdventureThunk, deleteAdventureThunk } from "../../store/adventures";
 
 import AdventureStartModal from "../AlertModals/AdventureStartModal";
 import OpenModalButton from "../OpenModalButton";
@@ -23,6 +18,7 @@ import "./AdventurePage.css";
 
 function AdventurePage() {
 	const [passed, setPassed] = useState(false);
+	const [started, setStarted] = useState(false);
 	const [completed, setCompleted] = useState(false);
 	const [rewardsClaimed, setRewardsClaimed] = useState(true);
 	const history = useHistory();
@@ -79,6 +75,7 @@ function AdventurePage() {
 
 	function startAdventure(e) {
 		e.preventDefault();
+		setStarted(true);
 		const adventure_type = e.target.value;
 		console.log("--------------STARTING ADVENTURE--------------");
 		console.log("--------------STARTING ADVENTURE--------------");
@@ -145,7 +142,7 @@ function AdventurePage() {
 		localStorage.removeItem("currentProgress");
 
 		//redirect to village page
-		history.push("/village");
+		history.push("/characters");
 	}
 
 	function submitAnswer(e) {
@@ -182,23 +179,14 @@ function AdventurePage() {
 				//take damage
 			}
 		}
-		//update adventure progress
-		//check to make sure stage can be advanced first
-		//reload another question and update the local storage value
-		if (currentStage + 1 > 10) {
-			//end the adventure and update page
-			console.log("adventure is over!", currentAdventure);
 
-			//update adventure info in database
-			// console.log(adventure.id, adventure.score);
-			// dispatch(getCurrentAdventureThunk());
-			// dispatch(updateAdventureThunk(adventure.id, adventure.score));
+		if (currentStage + 1 > 10) {
+			console.log("adventure is over!", currentAdventure);
 
 			setCompleted(true);
 			setRewardsClaimed(false);
 			return;
 		} else {
-			//advance to next stage
 			localStorage.removeItem("currentQuestion");
 			localStorage.removeItem("currentProgress");
 			const nextStage = currentStage + 1;
@@ -222,13 +210,15 @@ function AdventurePage() {
 		dispatch(
 			addNewAdventureThunk(selectedCharacter?.id, adventure.adventure_type, adventure.score, adventure.completed)
 		);
+		dispatch(updateExperienceThunk(selectedCharacter?.id, adventure.score));
 
 		//update setStates to render the home adventure page again
 		setCompleted(false);
 		setRewardsClaimed(true);
 		setCurrentStage(1);
+		setStarted(false);
 
-		localStorage.removeItem("adventure");
+		localStorage.removeItem("currentAdventure");
 		localStorage.removeItem("currentQuestion");
 		localStorage.removeItem("currentProgress");
 
@@ -346,12 +336,20 @@ function AdventurePage() {
 								</div>
 							) : (
 								<div className="end-of-adventure-container">
-									<p>adventure ended</p>
-									<p>score</p>
-									<p>experience gained</p>
-									<button className="rewards-button" onClick={claimRewards}>
-										Claim Rewards!
-									</button>
+									<div className="stone-background">
+										<div className="adv-ended-title-container">
+											<p className="adv-ended">Adventure Ended!</p>
+											<p className="return-title">Returning To The Village</p>
+										</div>
+										<div className="reward-stats-container">
+											<p>SCORE: {currentAdventure.score}</p>
+											<p>+10 Coins!</p>
+											<p>{currentAdventure.score} Experience Gained</p>
+										</div>
+										<button className="rewards-button" onClick={claimRewards}>
+											Claim Rewards!
+										</button>
+									</div>
 								</div>
 							)}
 							<div className="spacer-div"></div>

@@ -15,11 +15,12 @@ function SignupFormModal() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
 		let errorsObj = {};
 
 		const data = await dispatch(signUp(username, firstName, password));
 
-		if (Object.values(errors).length) {
+		if (Object.values(errors).length !== 0) {
 			console.log("errors", errors);
 			return;
 		} else if (data) {
@@ -33,7 +34,7 @@ function SignupFormModal() {
 	};
 
 	function validateInfo() {
-		const errorsObj = {};
+		let errorsObj = {};
 
 		if (!password.length || !password.trim().length) errorsObj.password = "Please Create A Password!";
 
@@ -66,7 +67,7 @@ function SignupFormModal() {
 					Password
 					<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 				</label>
-				<label>
+				<label className="confirm-password-label">
 					Confirm Password
 					<input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
 				</label>

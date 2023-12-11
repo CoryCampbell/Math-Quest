@@ -64,23 +64,27 @@ function UpdateCharacterModal() {
 	return (
 		<div className="update-character-container">
 			<h1>Update Your Character's Name!</h1>
-			<form className="user-input-container" onSubmit={handleSubmit}>
-				<div className="name-input-row">
+			<form className="update-char-container" onSubmit={handleSubmit}>
+				<div className="update-char-form">
 					{errors.characterName && <p className="errors characterNameError">{errors.characterName}</p>}
 					<label>
-						Name:
+						New Name
 						<input type="text" value={newCharacterName} onChange={(e) => setNewCharacterName(e.target.value)} />
 					</label>
+					<button className="update-button" type="submit" onClick={validateInput}>
+						Update
+					</button>
+					<button className="cancel-update-button">Cancel</button>
 				</div>
-				<button className="update-button" type="submit" onClick={validateInput}>
-					Update
-				</button>
-				<OpenModalButton
-					buttonText="DELETE"
-					modalComponent={
-						<DeleteCharacterModal className="delete-character-modal" character_id={selectedCharacter.id} />
-					}
-				></OpenModalButton>
+				<div className="delete-button-container">
+					<OpenModalButton
+						className="delete-button"
+						buttonText="Delete Character"
+						modalComponent={
+							<DeleteCharacterModal className="delete-character-modal" character_id={selectedCharacter.id} />
+						}
+					></OpenModalButton>
+				</div>
 			</form>
 		</div>
 	);
