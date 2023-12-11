@@ -27,7 +27,15 @@ Hosted by:
 [MathQuest Wireframes](https://github.com/CoryCampbell/Math-Quest/wiki/MathQuest-Wireframes)
 
 # Screenshots
-screenshots
+
+Customizable c=Character Appearances:
+
+![image](https://github.com/CoryCampbell/Math-Quest/assets/110738538/5788f8c3-4747-49c5-aa85-a4892ea27135)
+
+Solve Match Problems to Gain Experience: 
+![image](https://github.com/CoryCampbell/Math-Quest/assets/110738538/990e9e02-6779-4ed1-b597-601369b3b6ce)
+
+
 
 # Endpoints
 frontend routes
