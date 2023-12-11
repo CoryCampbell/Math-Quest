@@ -12,6 +12,7 @@ form.sign-up-form-container {
   width: 50%;
   border-radius: 20px;
   height: 50px;
+  align-self: center;
 }
 
 form {
@@ -29,20 +30,20 @@ input {
 
 .sign-up-form-container > .firstNameError {
   position: absolute;
-  top: 85px;
+  top: 75px;
   right: 30px;
 }
 
 .sign-up-form-container > .usernameError {
-  position: fixed;
-  top: 320px;
-  right: 78px;
+  position: absolute;
+  top: 167px;
+  right: 30px;
 }
 
 .sign-up-form-container > .passwordError {
-  position: fixed;
-  top: 425px;
-  right: 78px;
+  position: absolute;
+  top: 260px;
+  right: 30px;
 }
 
 .confirm-password-label {
