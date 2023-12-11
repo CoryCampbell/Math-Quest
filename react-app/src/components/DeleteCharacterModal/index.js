@@ -7,7 +7,7 @@ import "./DeleteCharacterModal.css";
 
 function DeleteCharacterModal() {
 	// const user_id = useSelector((state) => state.session.user.id);
-	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
+	let selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
 	const characterName = localStorage.getItem("character_name");
 	const dispatch = useDispatch();
 	const { closeModal } = useModal();
@@ -16,14 +16,11 @@ function DeleteCharacterModal() {
 		e.preventDefault();
 
 		dispatch(deleteCharacterThunk(selectedCharacter.id));
+		dispatch(getUserCharactersThunk());
 		localStorage.removeItem("character_name");
 		closeModal();
 		return;
 	};
-
-	useEffect(() => {
-		dispatch(getUserCharactersThunk());
-	}, [dispatch]);
 
 	return (
 		<div className="delete-character-container">

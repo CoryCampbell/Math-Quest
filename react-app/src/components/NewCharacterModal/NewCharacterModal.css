@@ -13,7 +13,7 @@
 
 .characterNameError {
   position: absolute;
-  top: 75px;
+  top: 50px;
 }
 
 .create-char-button {
@@ -25,7 +25,8 @@
 }
 
 .name-input-row {
-  margin: 50px;
+  margin: 55px;
+  padding-top: 25px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -41,7 +42,7 @@
 
 .appearanceError {
   position: absolute;
-  top: 165px;
+  top: 175px;
 }
 
 .appearance-options-view {

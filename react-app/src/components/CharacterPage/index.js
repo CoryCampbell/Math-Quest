@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
@@ -27,8 +27,9 @@ function CharacterPage() {
 
 	let selectedCharacterName = localStorage.getItem("character_name");
 
-	const appearance = selectedCharacter.appearance;
+	const appearance = selectedCharacter?.appearance;
 	console.log("appearance--------> ", appearance);
+
 	let imagePreview;
 
 	if (appearance === 1) {
@@ -48,7 +49,7 @@ function CharacterPage() {
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
 		dispatch(getSelectedCharacterThunk());
-	}, [dispatch]);
+	}, [dispatch, selectedCharacterName]);
 
 	function selectCharacter(e) {
 		e.preventDefault();
