@@ -2,7 +2,7 @@
 App Summary
 
 # Live Link
-[link to live site](https://mathquest.onrender.com)
+[MathQuest Site](https://mathquest.onrender.com)
 
 # Tech Stack
 list of tech/languages/pugins/third-party api's used (put at top of readme for increased visibility)
