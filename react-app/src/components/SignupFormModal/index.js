@@ -50,7 +50,7 @@ function SignupFormModal() {
 
 	return (
 		<>
-			<h1>Sign Up</h1>
+			<h1 className="signup-title">Sign Up</h1>
 			<form className="sign-up-form-container" onSubmit={handleSubmit}>
 				{errors.firstName && <p className="errors firstNameError">{errors.firstName}</p>}
 				<label>

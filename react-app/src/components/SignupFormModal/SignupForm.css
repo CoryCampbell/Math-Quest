@@ -37,19 +37,19 @@ input {
 
 .sign-up-form-container > .firstNameError {
   position: absolute;
-  top: 75px;
+  top: 100px;
   right: 30px;
 }
 
 .sign-up-form-container > .usernameError {
   position: absolute;
-  top: 167px;
+  top: 190px;
   right: 30px;
 }
 
 .sign-up-form-container > .passwordError {
   position: absolute;
-  top: 260px;
+  top: 275px;
   right: 30px;
 }
 
@@ -59,4 +59,9 @@ input {
   justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
+  font-size: 25px;
+}
+
+.signup-title {
+margin-bottom: 55px;
 }
