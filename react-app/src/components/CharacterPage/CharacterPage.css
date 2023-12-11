@@ -188,10 +188,6 @@ form.submit-delete-character-container {
   background-color: burlywood;
 }
 
-.right-char-page {
-
-}
-
 .selected {
   box-shadow: 10px 10px 10px black;
 }
@@ -208,4 +204,26 @@ form.submit-delete-character-container {
 .xp-info {
   display: flex;
   flex-direction: row;
+}
+
+.selected-character-gear {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+}
+
+.image-preview {
+  margin: 5px;
+  border: solid gray 5px;
+  box-sizing: border-box;
+  border-style: groove;
+}
+
+.gear-preview {
+  margin: 5px;
+  width: 70%;
+  border: solid gray 5px;
+  box-sizing: border-box;
+  border-style: groove;
 }

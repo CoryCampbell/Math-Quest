@@ -6,7 +6,6 @@ import OpenModalButton from "../OpenModalButton";
 import NewCharacterModal from "../NewCharacterModal";
 import "./CharacterPage.css";
 import UpdateCharacterModal from "../UpdateCharacterNameModal";
-
 //
 
 //
@@ -14,6 +13,12 @@ import UpdateCharacterModal from "../UpdateCharacterNameModal";
 //
 
 function CharacterPage() {
+	const appearanceOne = require("../../static/appearances/female-one.png");
+	const appearanceTwo = require("../../static/appearances/FEMALE2.PNG");
+	const appearanceThree = require("../../static/appearances/FEMALE3.PNG");
+	const appearanceFour = require("../../static/appearances/FEMALE4.PNG");
+	const appearanceUnselected = require("../../static/appearances/unselected.PNG");
+
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 	const userCharacters = useSelector((state) => state.characters.userCharacters);
@@ -21,6 +26,24 @@ function CharacterPage() {
 	const currentAdventure = localStorage.getItem("currentAdventure") || {};
 
 	let selectedCharacterName = localStorage.getItem("character_name");
+
+	const appearance = selectedCharacter.appearance;
+	console.log("appearance--------> ", appearance);
+	let imagePreview;
+
+	if (appearance === 1) {
+		imagePreview = appearanceOne;
+	} else if (appearance === 2) {
+		imagePreview = appearanceTwo;
+	} else if (appearance === 3) {
+		imagePreview = appearanceThree;
+	} else if (appearance === 4) {
+		imagePreview = appearanceFour;
+	} else {
+		imagePreview = appearanceUnselected;
+	}
+
+	console.log("imagePreview", imagePreview);
 
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
@@ -76,7 +99,6 @@ function CharacterPage() {
 												modalComponent={<UpdateCharacterModal className="update-name-modal" />}
 											></OpenModalButton>
 										</div>
-										<div className="delete-character-modal-container"></div>
 									</div>
 									<div>Coins: {selectedCharacter.coins}</div>
 								</div>
@@ -87,7 +109,10 @@ function CharacterPage() {
 										<div className="char-xp-div"> XP: {selectedCharacter.experience_points}</div>
 									</div>
 								</div>
-								<div></div>
+								<div className="selected-character-gear">
+									<img src={imagePreview.default} alt="appearance-preview"></img>
+									<div className="gear-preview">gear</div>
+								</div>
 							</div>
 							<div className="inventory-container">Inventory</div>
 						</>
