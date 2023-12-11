@@ -73,27 +73,35 @@ function NewCharacterModal() {
 				</div>
 				<div className="appearance-select-container">
 					{errors.appearance && <p className="errors appearanceError">{errors.appearance}</p>}
-					<fieldset>
+					<fieldset className="appearance-options-view">
 						<legend>Select an appearance:</legend>
 
 						<div>
 							<input type="radio" id={1} name="drone" value={appearance} onChange={(e) => setAppearance(e.target.id)} />
-							<label htmlFor="appearance-one">Appearance One</label>
+							<label htmlFor="appearance-one">
+								<img src={require("../../static/appearances/female-one.png").default} alt="Female1"></img>
+							</label>
 						</div>
 
 						<div>
 							<input type="radio" id={2} name="drone" value={appearance} onChange={(e) => setAppearance(e.target.id)} />
-							<label htmlFor="appearance-two">Appearance Two</label>
+							<label htmlFor="appearance-two">
+								<img src={require("../../static/appearances/FEMALE2.PNG").default} alt="Female2"></img>
+							</label>
 						</div>
 
 						<div>
 							<input type="radio" id={3} name="drone" value={appearance} onChange={(e) => setAppearance(e.target.id)} />
-							<label htmlFor="appearance-three">Appearance Three</label>
+							<label htmlFor="appearance-three">
+								<img src={require("../../static/appearances/FEMALE3.PNG").default} alt="Female1"></img>
+							</label>
 						</div>
 
 						<div>
 							<input type="radio" id={4} name="drone" value={appearance} onChange={(e) => setAppearance(e.target.id)} />
-							<label htmlFor="appearance-four">Appearance Four</label>
+							<label htmlFor="appearance-four">
+								<img src={require("../../static/appearances/FEMALE4.PNG").default} alt="Female1"></img>
+							</label>
 						</div>
 					</fieldset>
 					<button className="create-char-button" type="submit" onClick={validateInput}>

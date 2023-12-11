@@ -43,3 +43,22 @@
   position: absolute;
   top: 165px;
 }
+
+.appearance-options-view {
+  display: flex;
+  flex-direction: row;
+}
+
+[type=radio] {
+  position: relative;
+  top: 20px;
+  right: -60px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: gold;
+}
+
+[type=readio]::after {
+  background-color: gold;
+}
