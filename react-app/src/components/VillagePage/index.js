@@ -7,11 +7,11 @@ function VillagePage() {
 
 	if (!sessionUser) return <Redirect to="/" />;
 
-	const currerntCharacter = localStorage.getItem("character_name") || {};
+	const currentCharacter = localStorage.getItem("character_name") || {};
 
 	return (
 		<>
-			{Object.keys(currerntCharacter).length ? (
+			{Object.keys(currentCharacter).length ? (
 				<div className="village-page-container">
 					<h1>Village</h1>
 					<div className="village-options-container">
