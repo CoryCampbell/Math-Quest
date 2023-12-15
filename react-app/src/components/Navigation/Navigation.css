@@ -94,3 +94,7 @@
 a:hover {
     color: rgb(218, 196, 75);
 }
+
+.greetings {
+  font-size: 15px;
+}

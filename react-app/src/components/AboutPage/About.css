@@ -3,7 +3,12 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 95vh;
+  width: 1022px;
+  height: 650px;
+  margin: 50px auto;
+  border: solid goldenrod 15px;
+  box-sizing: border-box;
+  border-style: groove;
 }
 
 .about-page-container > h1 {

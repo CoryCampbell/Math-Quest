@@ -3,6 +3,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 95vh;
+  width: 1022px;
+  height: 650px;
+  margin: 50px auto;
+  border: solid goldenrod 15px;
+  box-sizing: border-box;
+  border-style: groove;
 }

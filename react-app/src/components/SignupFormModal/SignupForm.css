@@ -87,3 +87,8 @@ margin-bottom: 55px;
   align-items: center;
   height: 100%;
 }
+
+button:disabled {
+  background-color: transparent;
+  color: white;
+}

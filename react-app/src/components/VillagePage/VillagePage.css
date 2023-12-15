@@ -1,17 +1,21 @@
 .village-page-container {
   display: flex;
   flex-direction: column;
-  height: 875px;
-  width: 100%;
-  margin: auto;
+  height: 650px;
+  width: 1022px;
+  margin: 50px auto;
+  padding-top: 250px;
   justify-content: center;
   align-items: center;
   background-image: url("../../static/images/Background.png");
-  background-size: cover;
-  background-attachment: fixed;
+  background-size: contain;
+  border: solid goldenrod 15px;
+  box-sizing: border-box;
+  border-style: groove;
 }
 
-.village-page-container > h1 {
+.village-option-closed > p {
+  background-color: black;
 }
 
 .village-options-container {
@@ -28,20 +32,20 @@
   border-style: groove;
   width: 30%;
   height: 50%;
-  background-color: rgba(255, 255, 255, 0.52);
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.village-option-closed {
+button.village-option-closed {
   border: solid gray 5px;
   box-sizing: border-box;
   border-style: groove;
   width: 30%;
   height: 50%;
-  background-color: rgba(128, 128, 128, 0.52);
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,7 +58,7 @@
   border-style: groove;
   width: 30%;
   height: 50%;
-  background-color: rgba(255, 255, 255, 0.52);
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,8 +68,8 @@
 .x {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-items: start;
   font-size: 150px;
   color: rgb(113, 0, 0);
   margin: 0px;
@@ -76,5 +80,5 @@
 }
 
 .village-options-container > button:hover {
-box-shadow: 0px 0px 150px rgba(255, 255, 0, 0.285);
+box-shadow: 0px 0px 100px rgb(0, 17, 255);
 }
