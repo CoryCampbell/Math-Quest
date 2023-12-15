@@ -23,7 +23,7 @@
   margin: 110px;
   margin-bottom: 15px;
   align-self: center;
-  font-family: fantasy;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 25px;
 }
 
@@ -43,12 +43,13 @@
 .delete-button-container > button {
   position: absolute;
   bottom: 130px;
-  width: 300px;
-  height: 50px;
-  border-radius: 20px;
+  width: 160px;
+  height: 40px;
+  border-radius: 5px;
   background-color: rgb(205, 0, 0);
-  font-family: fantasy;
-  font-size: 25px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 
@@ -57,7 +58,7 @@
   width: 300px;
   height: 50px;
   border-radius: 20px;
-  font-family: fantasy;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 25px;
 }
 
@@ -66,4 +67,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.update-char-form > label > p {
+  margin: 0px;
+  font-size: 25px;
+}
+
+.update-char-form > .characterNameError {
+  color: rgb(255, 75, 75);
+  position: absolute;
+  top: 180px;
+  right: 190px;
+  font-size: 20px;
 }

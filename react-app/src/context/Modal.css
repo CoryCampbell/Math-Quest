@@ -24,10 +24,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 600px;
-  width: 600px;
-    font-family: fantasy;
+  height: 800px;
+  width: 1000px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 15px;
+  color: white;
   border: solid goldenrod 10px;
   border-style: groove;
   border-radius: 15px;
