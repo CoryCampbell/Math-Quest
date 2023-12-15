@@ -45,21 +45,17 @@ function LoginFormModal() {
 	return (
 		<div className="login-modal-container">
 			<h1 className="login-title">Log In</h1>
-			<form className="user-input-container" onSubmit={handleSubmit}>
-				<div className="username-input-row">
-					{errors.username && <p className="errors usernameError">{errors.username}</p>}
-					<label>
-						Username
-						<input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-					</label>
-				</div>
-				<div className="password-input-row">
-					{errors.password && <p className="errors passwordError">{errors.password}</p>}
-					<label>
-						Password
-						<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-					</label>
-				</div>
+			<form className="user-login-container" onSubmit={handleSubmit}>
+				{errors.username && <p className="errors usernameError">{errors.username}</p>}
+				<label>
+					<p>Username</p>
+					<input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+				</label>
+				{errors.password && <p className="errors passwordError">{errors.password}</p>}
+				<label>
+					<p>Password</p>
+					<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+				</label>
 				<button className="login-button" type="submit" onClick={validateInfo}>
 					Log In
 				</button>

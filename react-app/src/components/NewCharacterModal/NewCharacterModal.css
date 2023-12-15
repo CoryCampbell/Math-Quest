@@ -24,6 +24,11 @@
   margin: 50px;
 }
 
+.create-char-button:hover {
+    background-color: rgb(0, 192, 0);
+    box-shadow: 0px 0px 10px white;
+}
+
 .name-input-row {
   margin: 55px;
   padding-top: 25px;
@@ -33,6 +38,14 @@
   align-items: center;
 }
 
+.name-input-row > .characterNameError {
+  color: rgb(255, 75, 75);
+  position: absolute;
+  top: 105px;
+  right: 190px;
+  font-size: 20px;
+}
+
 .appearance-select-container {
   display: flex;
   flex-direction: column;
@@ -40,14 +53,32 @@
   align-items: center;
 }
 
-.appearanceError {
+.appearance-select-container > .appearanceError {
+  color: rgb(255, 75, 75);
   position: absolute;
-  top: 175px;
+  top: 215px;
+  font-size: 20px;
 }
 
 .appearance-options-view {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 420px;
+  padding: 0px;
+}
+
+.boys-select-container {
+  display: flex;
   flex-direction: row;
+  margin: 10px;
+}
+
+.girls-select-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
 }
 
 [type=radio] {
@@ -70,4 +101,13 @@
   top: 75px;
   left: 50px;
   font-size: 25px;
+}
+
+.name-input-row > label {
+  font-size: 25px;
+}
+
+.name-input-row > label > p {
+  margin: 0px;
+  align-self: start;
 }
