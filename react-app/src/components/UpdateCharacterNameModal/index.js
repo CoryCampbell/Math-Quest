@@ -53,6 +53,8 @@ function UpdateCharacterModal() {
 		if (!newCharacterName || !newCharacterName.trim().length)
 			errorsObj.characterName = "Please give your character a Name!";
 
+		if (newCharacterName.length > 22) errorsObj.nameLength = "Names are not allowed to be longer than 22 characters!";
+
 		if (forbiddenLoop(newCharacterName))
 			errorsObj.characterName = "Names are not allowed to include any Symbols or Special Characters!";
 
@@ -71,7 +73,8 @@ function UpdateCharacterModal() {
 			<form className="update-char-container" onSubmit={handleSubmit}>
 				<div className="update-char-form">
 					{errors.characterName && <p className="errors characterNameError">{errors.characterName}</p>}
-					<label>
+					{errors.nameLength && <p className="errors nameLengthError">{errors.nameLength}</p>}
+					<label className="update-container">
 						<p>New Name</p>
 						<input type="text" value={newCharacterName} onChange={(e) => setNewCharacterName(e.target.value)} />
 					</label>
