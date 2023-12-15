@@ -136,10 +136,6 @@
   height: 10%;
 }
 
-.spacer-div {
-  height: 10vh;
-}
-
 .visual-game-container {
   display: flex;
   flex-direction: row;
@@ -288,4 +284,22 @@
   align-items: center;
   border: solid goldenrod 15px;
   border-style: groove;
+}
+
+.player-icon {
+display: flex;
+width: 100%;
+overflow: hidden;
+  background-image: linear-gradient(rgb(255, 255, 255) 0%, skyblue 90%, green 10%);
+}
+
+.player-icon-image {
+  overflow: hidden;
+}
+
+.enemy-icon {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+    background-image: linear-gradient(rgb(255, 255, 255) 0%, skyblue 90%, green 10%);
 }

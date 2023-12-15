@@ -46,6 +46,8 @@ function NewCharacterModal() {
 			if (!characterName || !characterName.trim().length)
 				errorsObj.characterName = "Please give your character a Name!";
 
+			if (characterName.length > 22) errorsObj.nameLength = "Names are not allowed to be longer than 22 characters!";
+
 			if (forbiddenLoop(characterName))
 				errorsObj.characterName = "Names are not allowed to include any Symbols or Special Characters!";
 

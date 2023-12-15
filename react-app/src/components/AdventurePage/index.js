@@ -185,6 +185,11 @@ function AdventurePage() {
 
 			setCompleted(true);
 			setRewardsClaimed(false);
+			localStorage.removeItem("currentProgress");
+			const nextStage = currentStage + 1;
+			console.log("Advancing to the next stage: ", nextStage);
+			setCurrentStage(nextStage);
+			localStorage.setItem("currentProgress", JSON.stringify(nextStage));
 			return;
 		} else {
 			localStorage.removeItem("currentQuestion");
@@ -258,7 +263,7 @@ function AdventurePage() {
 						</div>
 					) : (
 						<>
-							{completed === false && rewardsClaimed ? (
+							{completed === false && rewardsClaimed && currentStage <= 10 ? (
 								<div className="current-adventure-container">
 									<div className="adventure-info-container">
 										<div className="adv-top-left">
