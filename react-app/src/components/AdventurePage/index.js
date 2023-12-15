@@ -233,6 +233,7 @@ function AdventurePage() {
 		<>
 			{!selectedCharacter && rewardsClaimed && parseInt(currentProgress) !== 10 ? (
 				<div className="no-character-adv-page">
+					<img src={require("../../static/appearances/unselected.PNG").default} alt="Female1"></img>
 					<div>Please Select A Character To Start A New Adventure!</div>
 					<NavLink to="/characters">Characters</NavLink>
 				</div>
@@ -240,7 +241,6 @@ function AdventurePage() {
 				<>
 					{selectedCharacter && Object.keys(currentAdventure).length === 0 ? (
 						<div className="adventure-page-container">
-							<div className="page-title">Select Your Adventure!</div>
 							<div className="adventure-options-container">
 								<button className="adventure-option add" value="addition" onClick={startAdventure}>
 									Addition Adventure
@@ -352,7 +352,6 @@ function AdventurePage() {
 									</div>
 								</div>
 							)}
-							<div className="spacer-div"></div>
 						</>
 					)}
 				</>

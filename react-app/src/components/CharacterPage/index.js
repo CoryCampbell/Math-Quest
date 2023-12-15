@@ -149,7 +149,7 @@ function CharacterPage() {
 									</div>
 								</div>
 								<div className="selected-character-gear">
-									<img src={imagePreview.default} alt="appearance-preview"></img>
+									<img src={imagePreview.default} alt="appearance-preview" className="image-preview"></img>
 									<div className="gear-preview">gear</div>
 								</div>
 							</div>
@@ -157,7 +157,36 @@ function CharacterPage() {
 						</>
 					) : (
 						<>
-							<div>unselected</div>
+							<div className="character-info-stats-container">
+								<div className="info-stats-top">
+									<div className="character-name-options-container">
+										<div className="info-character-title">{selectedCharacterName}</div>
+										<div className="update-name-modal-container">
+											<OpenModalButton
+												buttonText="Edit"
+												modalComponent={<UpdateCharacterModal className="update-name-modal" />}
+											></OpenModalButton>
+										</div>
+									</div>
+									<div>Coins</div>
+								</div>
+								<div className="info-stats-bottom">
+									Health
+									<div className="xp-info">
+										<div className="char-level-div">Level </div>
+										<div className="char-xp-div"> XP </div>
+									</div>
+								</div>
+								<div className="selected-character-gear">
+									<img src={imagePreview.default} alt="appearance-preview" className="image-preview"></img>
+									<div className="gear-preview"></div>
+								</div>
+							</div>
+							<div className="inventory-container-unselected">
+								Select A Character
+								<p>Or</p>
+								Make A New One
+							</div>
 						</>
 					)}
 				</div>
