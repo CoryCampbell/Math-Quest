@@ -161,12 +161,7 @@ function CharacterPage() {
 								<div className="info-stats-top">
 									<div className="character-name-options-container">
 										<div className="info-character-title">{selectedCharacterName}</div>
-										<div className="update-name-modal-container">
-											<OpenModalButton
-												buttonText="Edit"
-												modalComponent={<UpdateCharacterModal className="update-name-modal" />}
-											></OpenModalButton>
-										</div>
+										<div className="update-name-modal-container"></div>
 									</div>
 									<div>Coins</div>
 								</div>
