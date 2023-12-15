@@ -69,6 +69,7 @@ function NewCharacterModal() {
 			<form className="create-new-character-form" onSubmit={handleSubmit}>
 				<div className="name-input-row">
 					{errors.characterName && <p className="errors characterNameError">{errors.characterName}</p>}
+					{errors.nameLength && <p className="errors nameLengthError">{errors.nameLength}</p>}
 					{errors.adventure && <p className="errors adventureError">{errors.adventure}</p>}
 					<label>
 						<p>Character Name</p>

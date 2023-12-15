@@ -81,3 +81,22 @@
   right: 190px;
   font-size: 20px;
 }
+
+.update-char-form > .nameLengthError {
+  top: 100px;
+}
+
+.update-char-form > .update-button:hover {
+    background-color: rgb(0, 185, 0);
+    box-shadow: 0px 0px 15px white;
+  }
+
+  .update-char-form > .cancel-update-button:hover {
+    background-color: rgb(229, 248, 254);
+    box-shadow: 0px 0px 15px white;
+}
+
+.delete-button-container > button:hover {
+    background-color: rgb(248, 0, 0);
+    box-shadow: 0px 0px 15px white;
+}
