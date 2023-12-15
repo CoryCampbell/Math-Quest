@@ -64,7 +64,7 @@ function Navigation({ isLoaded }) {
 			<ul className="nav-items-container">
 				{isLoaded && sessionUser ? (
 					<div className="logged-in-nav-container">
-						<li>Greetings, {sessionUser.first_name}</li>
+						<li className="greetings">Greetings, {sessionUser.first_name}</li>
 						<li>
 							<button className="log-out-button" onClick={handleLogout}>
 								Log Out
