@@ -60,6 +60,16 @@
   font-size: 20px;
 }
 
+.name-input-row > .adventureError {
+  color: rgb(255, 75, 75);
+  position: absolute;
+  top: 18px;
+  left: 80px;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+
 .appearance-options-view {
   display: flex;
   flex-direction: column;
