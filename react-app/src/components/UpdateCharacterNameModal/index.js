@@ -31,6 +31,10 @@ function UpdateCharacterModal() {
 		} else return;
 	};
 
+	function handleCancel() {
+		closeModal();
+	}
+
 	function validateInput() {
 		const errorsObj = {};
 		const forbiddenSymbols = "/|-!?)(*&^%$#><:~`'@=+";
@@ -68,13 +72,15 @@ function UpdateCharacterModal() {
 				<div className="update-char-form">
 					{errors.characterName && <p className="errors characterNameError">{errors.characterName}</p>}
 					<label>
-						New Name
+						<p>New Name</p>
 						<input type="text" value={newCharacterName} onChange={(e) => setNewCharacterName(e.target.value)} />
 					</label>
 					<button className="update-button" type="submit" onClick={validateInput}>
 						Update
 					</button>
-					<button className="cancel-update-button">Cancel</button>
+					<button className="cancel-update-button" onClick={handleCancel}>
+						Cancel
+					</button>
 				</div>
 				<div className="delete-button-container">
 					<OpenModalButton

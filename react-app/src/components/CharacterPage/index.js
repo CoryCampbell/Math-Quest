@@ -13,10 +13,24 @@ import UpdateCharacterModal from "../UpdateCharacterNameModal";
 //
 
 function CharacterPage() {
-	const appearanceOne = require("../../static/appearances/female-one.png");
-	const appearanceTwo = require("../../static/appearances/FEMALE2.PNG");
-	const appearanceThree = require("../../static/appearances/FEMALE3.PNG");
-	const appearanceFour = require("../../static/appearances/FEMALE4.PNG");
+	const maleAppearance1 = require("../../static/appearances/MALE1.PNG");
+	const maleAppearance2 = require("../../static/appearances/MALE2.PNG");
+	const maleAppearance3 = require("../../static/appearances/MALE3.PNG");
+	const maleAppearance4 = require("../../static/appearances/MALE4.PNG");
+	const maleAppearance5 = require("../../static/appearances/MALE5.PNG");
+	const maleAppearance6 = require("../../static/appearances/MALE6.PNG");
+	const maleAppearance7 = require("../../static/appearances/MALE7.PNG");
+	const maleAppearance8 = require("../../static/appearances/MALE8.PNG");
+
+	const femaleAppearance1 = require("../../static/appearances/FEMALE1.PNG");
+	const femaleAppearance2 = require("../../static/appearances/FEMALE2.PNG");
+	const femaleAppearance3 = require("../../static/appearances/FEMALE3.PNG");
+	const femaleAppearance4 = require("../../static/appearances/FEMALE4.PNG");
+	const femaleAppearance5 = require("../../static/appearances/FEMALE5.PNG");
+	const femaleAppearance6 = require("../../static/appearances/FEMALE6.PNG");
+	const femaleAppearance7 = require("../../static/appearances/FEMALE7.PNG");
+	const femaleAppearance8 = require("../../static/appearances/FEMALE8.PNG");
+
 	const appearanceUnselected = require("../../static/appearances/unselected.PNG");
 
 	const dispatch = useDispatch();
@@ -33,13 +47,37 @@ function CharacterPage() {
 	let imagePreview;
 
 	if (appearance === 1) {
-		imagePreview = appearanceOne;
+		imagePreview = maleAppearance1;
 	} else if (appearance === 2) {
-		imagePreview = appearanceTwo;
+		imagePreview = femaleAppearance1;
 	} else if (appearance === 3) {
-		imagePreview = appearanceThree;
+		imagePreview = maleAppearance2;
 	} else if (appearance === 4) {
-		imagePreview = appearanceFour;
+		imagePreview = femaleAppearance2;
+	} else if (appearance === 5) {
+		imagePreview = maleAppearance3;
+	} else if (appearance === 6) {
+		imagePreview = femaleAppearance3;
+	} else if (appearance === 7) {
+		imagePreview = maleAppearance4;
+	} else if (appearance === 8) {
+		imagePreview = femaleAppearance4;
+	} else if (appearance === 9) {
+		imagePreview = maleAppearance5;
+	} else if (appearance === 10) {
+		imagePreview = femaleAppearance5;
+	} else if (appearance === 11) {
+		imagePreview = maleAppearance6;
+	} else if (appearance === 12) {
+		imagePreview = femaleAppearance6;
+	} else if (appearance === 13) {
+		imagePreview = maleAppearance7;
+	} else if (appearance === 14) {
+		imagePreview = femaleAppearance7;
+	} else if (appearance === 15) {
+		imagePreview = maleAppearance8;
+	} else if (appearance === 16) {
+		imagePreview = femaleAppearance8;
 	} else {
 		imagePreview = appearanceUnselected;
 	}

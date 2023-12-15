@@ -48,13 +48,6 @@
   width: 15%;
 }
 
-
-
-.user-input-container {
-  display: flex;
-  flex-direction: column;
-}
-
 .modal-buttons-container {
   display: flex;
   flex-direction: row;

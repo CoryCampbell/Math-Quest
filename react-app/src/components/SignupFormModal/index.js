@@ -49,33 +49,33 @@ function SignupFormModal() {
 	}
 
 	return (
-		<>
+		<div className="signup-modal-container">
 			<h1 className="signup-title">Sign Up</h1>
 			<form className="sign-up-form-container" onSubmit={handleSubmit}>
 				{errors.firstName && <p className="errors firstNameError">{errors.firstName}</p>}
 				<label>
-					First Name
+					<p>First Name</p>
 					<input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
 				</label>
 				{errors.username && <p className="errors usernameError">{errors.username}</p>}
 				<label>
-					Username
+					<p>Username</p>
 					<input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
 				</label>
 				{errors.password && <p className="errors passwordError">{errors.password}</p>}
 				<label>
-					Password
+					<p>Password</p>
 					<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 				</label>
 				<label className="confirm-password-label">
-					Confirm Password
+					<p>Confirm Password</p>
 					<input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
 				</label>
 				<button className="sign-up-button" type="submit" onClick={validateInfo}>
 					Sign Up
 				</button>
 			</form>
-		</>
+		</div>
 	);
 }
 
