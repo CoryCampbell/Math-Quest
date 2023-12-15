@@ -331,7 +331,7 @@ function AdventurePage() {
 										</div>
 										<div className="help-button-container">
 											<OpenModalButton
-												buttonText="?"
+												buttonText="Help"
 												modalComponent={<AdventureStartModal className="adventure-start-help-button" />}
 											></OpenModalButton>
 										</div>
