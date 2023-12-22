@@ -16,6 +16,19 @@
   top: 50px;
 }
 
+.cancel-char-button {
+  background-color: rgb(224, 224, 224);
+  border-radius: 20px;
+  width: 300px;
+  height: 50px;
+  margin: 50px;
+}
+
+.cancel-char-button:hover {
+  background-color: rgb(224, 224, 224);
+  box-shadow: 0px 0px 10px white;
+}
+
 .create-char-button {
   background-color: rgb(0, 170, 0);
   border-radius: 20px;
@@ -97,7 +110,7 @@
   right: -60px;
   width: 20px;
   height: 20px;
-  cursor: pointer;
+  cursor: url("../../static/images/mouse.png"), auto;
   accent-color: gold;
 }
 

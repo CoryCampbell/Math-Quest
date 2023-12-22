@@ -44,6 +44,9 @@ function AdventurePage() {
 	const femaleAppearance7 = require("../../static/appearances/FEMALE7.PNG");
 	const femaleAppearance8 = require("../../static/appearances/FEMALE8.PNG");
 
+	const addMonster = "../../static/enemies/addMonster.png";
+	const subMonster = "../../static/enemies/subMonster.png";
+
 	let currentAdventure = localStorage.getItem("currentAdventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	let currentProgress = localStorage.getItem("currentProgress") || {};
@@ -155,11 +158,11 @@ function AdventurePage() {
 		currentAdventure = JSON.parse(localStorage.getItem("currentAdventure"));
 		console.log("adventure after grab from local storage start adventure click: ", currentAdventure);
 
-		currentQuestion = loadQuestion(currentStage - 1);
+		currentQuestion = loadQuestion(currentStage - 1, currentAdventure.adventure_type);
 		console.log("currentQuestion ===========> should be first question", currentQuestion);
 	}
 
-	function loadQuestion(nextStage) {
+	function loadQuestion(nextStage, adventure_type) {
 		//get random question from list ---OLD VERSION
 		// Change this to a function that grabs a random question
 		// const randomInt = Math.floor(Math.random() * 4);
@@ -170,7 +173,18 @@ function AdventurePage() {
 		// return question;
 
 		console.log("loading question #", nextStage);
-		let question = easyQuestions.easySet1[nextStage];
+		console.log("adventure type: ", adventure_type);
+		let question;
+		if (adventure_type === "addition") {
+			question = easyQuestions.easyAdditionSet1[nextStage];
+		} else if (adventure_type === "subtraction") {
+			question = easyQuestions.easySubtractionSet1[nextStage];
+		} else if (adventure_type === "multiplication") {
+			question = easyQuestions.easyMultiplicationSet1[nextStage];
+		} else if (adventure_type === "division") {
+			question = easyQuestions.easyDivisionSet1[nextStage];
+		}
+
 		localStorage.setItem("currentQuestion", JSON.stringify(question));
 		return question;
 	}
@@ -252,7 +266,7 @@ function AdventurePage() {
 			const nextStage = currentStage + 1;
 			console.log("Advancing to the next stage: ", nextStage);
 			setCurrentStage(nextStage);
-			question = loadQuestion(nextStage - 1);
+			question = loadQuestion(nextStage - 1, currentAdventure.adventure_type);
 			localStorage.setItem("currentQuestion", JSON.stringify(question));
 			localStorage.setItem("currentProgress", JSON.stringify(nextStage));
 		}
@@ -305,8 +319,8 @@ function AdventurePage() {
 								<button className="adventure-option add" value="addition" onClick={startAdventure}>
 									Addition Adventure
 								</button>
-								<button className="adventure-option sub" disabled>
-									Subtraction Adventure Coming Soon!
+								<button className="adventure-option sub" value="subtraction" onClick={startAdventure}>
+									Subtraction Adventure
 								</button>
 								<button className="adventure-option mult" disabled>
 									Multiplication Adventure Coming Soon!
@@ -331,7 +345,7 @@ function AdventurePage() {
 										</div>
 										<div className="help-button-container">
 											<OpenModalButton
-												buttonText="?"
+												buttonText="Help"
 												modalComponent={<AdventureStartModal className="adventure-start-help-button" />}
 											></OpenModalButton>
 										</div>
@@ -355,10 +369,48 @@ function AdventurePage() {
 										</div>
 										<div className="bottom-game-container">
 											<div className="visual-game-container">
-												<div className="player-icon icon">
-													<img src={imagePreview.default} alt="player-icon" className="player-icon-image"></img>
-												</div>
-												<div className="enemy-icon icon">enemy icon</div>
+												{currentAdventure.adventure_type === "addition" ? (
+													<div className="player-icon icon addback">
+														<img src={imagePreview?.default} alt="player-icon" className="player-icon-image"></img>
+													</div>
+												) : currentAdventure.adventure_type === "subtraction" ? (
+													<div className="player-icon icon subback">
+														<img src={imagePreview?.default} alt="player-icon" className="player-icon-image"></img>
+													</div>
+												) : currentAdventure.adventure_type === "division" ? (
+													<div className="player-icon icon divback">
+														<img src={imagePreview?.default} alt="player-icon" className="player-icon-image"></img>
+													</div>
+												) : (
+													<div className="player-icon icon multback">
+														<img src={imagePreview?.default} alt="player-icon" className="player-icon-image"></img>
+													</div>
+												)}
+												{currentAdventure.adventure_type === "addition" ? (
+													<div className="enemy-icon icon addback">
+														<img
+															src={require("../../static/enemies/addMonster.png").default}
+															alt="enemy-icon"
+															className="enemy-icon-image"
+														></img>
+													</div>
+												) : currentAdventure.adventure_type === "subtraction" ? (
+													<div className="enemy-icon icon subback">
+														<img
+															src={require("../../static/enemies/subMonster.png").default}
+															alt="enemy-icon"
+															className="enemy-icon-image"
+														></img>
+													</div>
+												) : currentAdventure.adventure_type === "division" ? (
+													<div className="enemy-icon icon divback">
+														<img src={imagePreview?.default} alt="enemy-icon" className="enemy-icon-image"></img>
+													</div>
+												) : (
+													<div className="enemy-icon icon multback">
+														<img src={imagePreview?.default} alt="enemy-icon" className="enemy-icon-image"></img>
+													</div>
+												)}
 											</div>
 											<div className="math-game-container">
 												<div className="question-container">{currentQuestion?.question} = ?</div>

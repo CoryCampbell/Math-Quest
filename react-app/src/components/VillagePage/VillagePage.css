@@ -15,64 +15,57 @@
 }
 
 .village-option-closed > p {
-  background-color: black;
+  color: red;
+  margin: 0px;
+  height: 50px;
 }
 
 .village-options-container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: end;
   width: 75%;
   height: 70%;
 }
 
 .village-character-option {
-  border: solid gray 5px;
-  box-sizing: border-box;
-  border-style: groove;
-  width: 30%;
-  height: 50%;
-  background-color: rgb(255, 255, 255);
+  position: relative;
+  top: 0px;
+  right: -380px;
+  font-size: 20px;
+  font-weight: bolder;
+  color: white;
+  width: 60%;
+  height: 200%;
+  background-color: transparent;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
+  border: none !important;
 }
 
 button.village-option-closed {
-  border: solid gray 5px;
-  box-sizing: border-box;
-  border-style: groove;
-  width: 30%;
-  height: 50%;
-  background-color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: bolder;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 
 .village-option {
-  border: solid gray 5px;
-  box-sizing: border-box;
-  border-style: groove;
-  width: 30%;
-  height: 50%;
-  background-color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: bolder;
+  color: white;
+  width: 50%;
+  height: 100%;
+  background-color: transparent;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.x {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  font-size: 150px;
-  color: rgb(113, 0, 0);
-  margin: 0px;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 
 .village-options-container > p {
@@ -80,5 +73,40 @@ button.village-option-closed {
 }
 
 .village-options-container > button:hover {
-box-shadow: 0px 0px 100px rgb(0, 17, 255);
+  background-image: linear-gradient(rgba(255, 255, 255, 0) 10%, rgb(255, 230, 0) 1500px);
+  border-radius: 25%;
+}
+
+.shop {
+  position: relative;
+  top: 0px;
+  left: -124px;
+  height: 200%;
+  width: 40%;
+  border: none;
+  font-size: 25px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  -webkit-clip-path: inset(-100px -100px -100px 0px);
+  clip-path: inset(-100px -100px -100px 0px);
+}
+
+.adventures {
+  position: relative;
+  top: 0px;
+  right: 300px;
+  height: 200%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  border: none;
+}
+
+.unselected-char {
+  position: relative;
+  left: 380px;
+  top: 30px;
 }

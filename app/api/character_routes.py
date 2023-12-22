@@ -95,12 +95,14 @@ def delete_character(character_id):
 def update_experience(character_id, experience_points_gained):
 
     character = Character.query.filter_by(id=character_id).first()
-    print("=======> before change: ", character.to_dict()["character_name"])
+    print("=======> before change: ", character.to_dict())
     if character:
         character.experience_points += int(experience_points_gained)
+        
+
         character.coins += 10
 
-        print("after change ============> ", character.to_dict()["character_name"])
+        print("after change ============> ", character.to_dict())
         db.session.commit()
 
         return {"message": repr("{old_character_name} will now be known as {new_character_name}!")}

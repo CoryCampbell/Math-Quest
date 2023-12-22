@@ -281,9 +281,14 @@ function NewCharacterModal() {
 							</div>
 						</div>
 					</fieldset>
-					<button className="create-char-button" type="submit" onClick={validateInput}>
-						Create
-					</button>
+					<div className="create-char-button-container">
+						<button className="create-char-button" type="submit" onClick={validateInput}>
+							Create
+						</button>
+						<button className="cancel-char-button" type="button" onClick={closeModal}>
+							Cancel
+						</button>
+					</div>
 				</div>
 			</form>
 		</div>

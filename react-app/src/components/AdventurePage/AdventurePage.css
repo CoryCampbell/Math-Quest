@@ -37,8 +37,12 @@
   background-color: rgb(255, 255, 177);
 }
 
-.add:hover {
+.adventure-option:hover {
   background-color: white;
+}
+
+.adventure-option:disabled:hover {
+  background-color: initial;
 }
 
 .no-character-adv-page {
@@ -97,6 +101,10 @@
 .adv-top-right {
   width: 33%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .full-game-container {
@@ -108,7 +116,7 @@
 
 .help-button-container > button {
   background-color: rgb(0, 162, 255);
-  width: 25px;
+  width: 45px;
   height: 25px;
   color: white;
   border-radius: 4px;
@@ -118,7 +126,7 @@
 
 .help-button-container > button:hover {
   background-color: rgb(0, 162, 255);
-  width: 25px;
+  width: 45px;
   height: 25px;
   color: white;
   border-radius: 4px;
@@ -142,7 +150,7 @@
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 50%;
+  height: 168px;
 }
 
 .math-game-container {
@@ -300,6 +308,15 @@ overflow: hidden;
 .enemy-icon {
   display: flex;
   width: 100%;
+  height: 100%;
   overflow: hidden;
     background-image: linear-gradient(rgb(255, 255, 255) 0%, skyblue 90%, green 10%);
+}
+
+.addback {
+  background-image: url('../../static/images/Hero adventure scene.png');
+}
+
+.subback {
+  background-image: url('../../static/images/Cave\ scene.png');
 }
