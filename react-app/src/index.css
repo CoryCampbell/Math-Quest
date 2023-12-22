@@ -32,4 +32,9 @@ html {
 
 a {
   color: goldenrod;
+    cursor: url("../src/static/images/Hovering mouse cursor.png"), auto;
+}
+
+a:active {
+        cursor: url("../src/static/images/Hovering mouse cursor closed.png"), auto;
 }
