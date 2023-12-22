@@ -6,22 +6,29 @@ body {
   height: 100vh;
   font-size: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  cursor: url("../src/static/images/Hovering mouse cursor.png"), auto;
 }
 
 /* Chrome/Safari/Opera */
 html::-webkit-scrollbar {
   display: none;
+  cursor: url("../src/static/images/Hovering mouse cursor.png"), auto;
 }
 
 
 html {
   -ms-overflow-style: none;  /* IE/Edge */
   scrollbar-width: none;  /* Firefox */
+    cursor: url("../src/static/images/Hovering mouse cursor.png"), auto;
+  }
+
+  button {
+  cursor: url("../src/static/images/Hovering mouse cursor.png"), auto;
 }
 
-button {
-  cursor: pointer;
-}
+  button:active {
+      cursor: url("../src/static/images/Hovering mouse cursor closed.png"), auto;
+  }
 
 a {
   color: goldenrod;
