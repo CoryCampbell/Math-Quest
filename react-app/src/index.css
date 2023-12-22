@@ -6,35 +6,47 @@ body {
   height: 100vh;
   font-size: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  cursor: url("../src/static/images/Hovering mouse cursor.png"), auto;
+  cursor: url("../src/static/images/mouse.png"), auto;
 }
 
 /* Chrome/Safari/Opera */
 html::-webkit-scrollbar {
   display: none;
-  cursor: url("../src/static/images/Hovering mouse cursor.png"), auto;
+  cursor: url("../src/static/images/mouse.png"), auto;
 }
 
 
 html {
   -ms-overflow-style: none;  /* IE/Edge */
   scrollbar-width: none;  /* Firefox */
-    cursor: url("../src/static/images/Hovering mouse cursor.png"), auto;
+    cursor: url("../src/static/images/mouse.png"), auto;
   }
 
   button {
-  cursor: url("../src/static/images/Hovering mouse cursor.png"), auto;
+  cursor: url("../src/static/images/mouse.png"), auto;
 }
 
   button:active {
-      cursor: url("../src/static/images/Hovering mouse cursor closed.png"), auto;
+      cursor: url("../src/static/images/mouse-click.png"), auto;
   }
 
 a {
   color: goldenrod;
-    cursor: url("../src/static/images/Hovering mouse cursor.png"), auto;
+    cursor: url("../src/static/images/mouse.png"), auto;
 }
 
 a:active {
-        cursor: url("../src/static/images/Hovering mouse cursor closed.png"), auto;
+        cursor: url("../src/static/images/mouse-click.png"), auto;
+}
+
+img {
+      cursor: url("../src/static/images/mouse.png"), auto;
+}
+
+input {
+      cursor: url("../src/static/images/mouse.png"), auto;
+}
+
+input:active {
+      cursor: url("../src/static/images/mouse-click.png"), auto;
 }
