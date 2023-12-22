@@ -26,14 +26,14 @@ function VillagePage() {
 			{Object.keys(currentCharacter).length ? (
 				<div className="village-page-container">
 					<div className="village-options-container">
-						<button className="village-option" onClick={toShopPage}>
+						<button className="village-option shop" onClick={toShopPage}>
 							<p>Shop</p>
 						</button>
 
 						<button className="village-character-option" onClick={toCharPage}>
 							<p>Characters</p>
 						</button>
-						<button className="village-option" onClick={toAdventuresPage}>
+						<button className="village-option adventures" onClick={toAdventuresPage}>
 							<p>Adventures!</p>
 						</button>
 					</div>
@@ -42,18 +42,16 @@ function VillagePage() {
 				<>
 					<div className="village-page-container">
 						<div className="village-options-container">
-							<button className="village-option-closed" disabled>
-								<p>Shop Is Closed. Please Select A Character And Return Later!</p>
-								<p className="x">X</p>
+							<button className="village-option-closed shop" disabled>
+								<p>Shop Is Closed.</p>
 							</button>
 
-							<button className="village-character-option" onClick={toCharPage}>
+							<button className="village-character-option unselected-char" onClick={toCharPage}>
 								<img src={require("../../static/appearances/unselected.PNG").default} alt="Female1"></img>
 								<p>Choose A Character To Start Your Journey!</p>
 							</button>
-							<button className="village-option-closed" disabled>
-								<p>Adventures need Heroes. Please Select A Character To Start An Adventure!</p>
-								<p className="x">X</p>
+							<button className="village-option-closed adventures" disabled>
+								<p>Adventures unavailable.</p>
 							</button>
 						</div>
 					</div>
