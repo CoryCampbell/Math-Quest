@@ -1,5 +1,18 @@
 # MathQuest
-App Summary
+
+Welcome to Mathquest! 
+
+This is my Capstone Project for graduation from App Academy. It is a Web-based Game, where kids can practice their math skills and have fun while theyre doing it!
+Users can login/signup to save their progress, and continue to level up their characters.
+
+Features coming soon:
+
+-Health system for combat
+-Shop to purchase potions and gear
+-Quests (achievements)
+-Statistics for each character
+-Endless Dungeons Mode and New Gear
+-Global leaderboard
 
 # Live Link
 [MathQuest](https://mathquest.onrender.com)
@@ -7,13 +20,12 @@ App Summary
 # Tech Stack
 
 Frameworks and libraries:
-    'Python, Flask, Javascript, React, Redux, CSS3, HTML5'
+    '![Python](https://a11ybadges.com/badge?logo=python), ![Flask](https://a11ybadges.com/badge?logo=flask), ![JavaScript](https://a11ybadges.com/badge?logo=javascript), ![React](https://a11ybadges.com/badge?logo=react), ![Redux](https://a11ybadges.com/badge?logo=redux), ![CSS3](https://a11ybadges.com/badge?logo=css3), ![HTML5](https://a11ybadges.com/badge?logo=html5)'
 
 Database:
-    'Postgres'
+    '![PostgreSQL](https://a11ybadges.com/badge?logo=postgresql)'
 
-Hosted by:
-    'Render'
+Hosted by: Render
 
 # Index
 
