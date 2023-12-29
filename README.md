@@ -56,4 +56,4 @@ Getting the Character's information to render correctly was my biggest setback f
 # Connect with the creator
 email: corycampbell20@yahoo.com
 github: @CoryCampbell
-discord: monkeydcory
+discord: corythedev
