@@ -19,11 +19,7 @@ Features coming soon:
 
 # Tech Stack
 
-Frameworks and libraries:
-    '![Python](https://a11ybadges.com/badge?logo=python), ![Flask](https://a11ybadges.com/badge?logo=flask), ![JavaScript](https://a11ybadges.com/badge?logo=javascript), ![React](https://a11ybadges.com/badge?logo=react), ![Redux](https://a11ybadges.com/badge?logo=redux), ![CSS3](https://a11ybadges.com/badge?logo=css3), ![HTML5](https://a11ybadges.com/badge?logo=html5)'
-
-Database:
-    '![PostgreSQL](https://a11ybadges.com/badge?logo=postgresql)'
+    ![Python](https://a11ybadges.com/badge?logo=python) ![Flask](https://a11ybadges.com/badge?logo=flask) ![JavaScript](https://a11ybadges.com/badge?logo=javascript) ![React](https://a11ybadges.com/badge?logo=react) ![Redux](https://a11ybadges.com/badge?logo=redux) ![CSS3](https://a11ybadges.com/badge?logo=css3) ![HTML5](https://a11ybadges.com/badge?logo=html5) ![PostgreSQL](https://a11ybadges.com/badge?logo=postgresql)
 
 Hosted by: Render
 
