@@ -1,6 +1,3 @@
-// import { NavLink } from "react-router-dom";
-
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import "../AboutPage/About.css";
 
 function AboutPage() {
@@ -10,14 +7,18 @@ function AboutPage() {
 				<h1>About</h1>
 				<div className="links-container">
 					<div className="links-left">
-						<h3>This Site was created by Cory Campbell</h3>
-						<h3>Artwork done by Katelyn Owens</h3>
+						<div className="clickables">
+							<a href="https://github.com/CoryCampbell" target="_blank" rel="noreferrer">
+								<i class="fa-brands fa-github"></i>
+							</a>
+							<a href="https://linkedin.com/in/cory-campbell-67694b2a5" target="_blank" rel="noreferrer">
+								<i class="fa-brands fa-linkedin"></i>
+							</a>
+							<i class="fa-brands fa-discord"> corythedev</i>
+						</div>
 					</div>
 					<div className="links-right">
-						<a target="_blank" rel="noreferrer" href="https://github.com/CoryCampbell">
-							Cory Campbell's Github
-						</a>
-						<p>Discord: MonkeyDCory</p>
+						<h3>Artwork done by Katelyn Owens</h3>
 					</div>
 				</div>
 			</div>

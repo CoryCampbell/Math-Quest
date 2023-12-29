@@ -24,7 +24,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: end;
+  align-items: flex-end;
   width: 75%;
   height: 70%;
 }
@@ -42,7 +42,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   border: none !important;
 }
 

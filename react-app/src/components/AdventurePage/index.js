@@ -19,6 +19,7 @@ import "./AdventurePage.css";
 function AdventurePage() {
 	const [passed, setPassed] = useState(false);
 	const [started, setStarted] = useState(false);
+	console.log(started);
 	const [completed, setCompleted] = useState(false);
 	const [rewardsClaimed, setRewardsClaimed] = useState(true);
 	const history = useHistory();
@@ -46,7 +47,7 @@ function AdventurePage() {
 
 	const addMonster = "../../static/enemies/addMonster.png";
 	const subMonster = "../../static/enemies/subMonster.png";
-
+	console.log(addMonster, subMonster);
 	let currentAdventure = localStorage.getItem("currentAdventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	let currentProgress = localStorage.getItem("currentProgress") || {};

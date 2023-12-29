@@ -12,6 +12,21 @@ function LandingPage() {
 		<>
 			<div className="landing-page-container">
 				<h1>Welcome to MathQuest</h1>
+				<img
+					src={require("../../static/landing/adventure-preview.png").default}
+					alt="adv-preview"
+					className="adv-prev"
+				></img>
+				<img
+					src={require("../../static/landing/characters-preview.png").default}
+					alt="char-preview"
+					className="char-prev"
+				></img>
+				<img
+					src={require("../../static/landing/village-preview.png").default}
+					alt="village-preview"
+					className="village-prev"
+				></img>
 				<h4>"Mathematics is not a language. It's an adventure." - Paul Lockhart</h4>
 				<div className="landing-page-details">
 					<div className="landing-detail-one-container">
