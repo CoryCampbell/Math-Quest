@@ -5,23 +5,39 @@ Welcome to Mathquest!
 This is my Capstone Project for graduation from App Academy. It is a Web-based Game, where kids can practice their math skills and have fun while theyre doing it!
 Users can login/signup to save their progress, and continue to level up their characters.
 
-Features coming soon:
+
+
+
+# Features coming soon
 
 -Health system for combat
+
 -Shop to purchase potions and gear
+
 -Quests (achievements)
+
 -Statistics for each character
+
 -Endless Dungeons Mode and New Gear
+
 -Global leaderboard
 
+
+
 # Live Link
+
 [MathQuest](https://mathquest.onrender.com)
 
 # Tech Stack
 
-![Python](https://a11ybadges.com/badge?logo=python) ![Flask](https://a11ybadges.com/badge?logo=flask) ![JavaScript](https://a11ybadges.com/badge?logo=javascript) ![React](https://a11ybadges.com/badge?logo=react) ![Redux](https://a11ybadges.com/badge?logo=redux) ![CSS3](https://a11ybadges.com/badge?logo=css3) ![HTML5](https://a11ybadges.com/badge?logo=html5) ![PostgreSQL](https://a11ybadges.com/badge?logo=postgresql)
+![Python](https://a11ybadges.com/badge?logo=python) ![Flask](https://a11ybadges.com/badge?logo=flask) ![JavaScript](https://a11ybadges.com/badge?logo=javascript) ![React](https://a11ybadges.com/badge?logo=react) ![Redux](https://a11ybadges.com/badge?logo=redux) ![CSS3](https://a11ybadges.com/badge?logo=css3) ![HTML5](https://a11ybadges.com/badge?logo=html5) 
+
+# Database
+![PostgreSQL](https://a11ybadges.com/badge?logo=postgresql)
 
 Hosted by: Render
+
+
 
 # Index
 
@@ -32,6 +48,8 @@ Hosted by: Render
 [MathQuest User Stories](https://github.com/CoryCampbell/Math-Quest/wiki/MathQuest-User-Stories)
 
 [MathQuest Wireframes](https://github.com/CoryCampbell/Math-Quest/wiki/MathQuest-Wireframes)
+
+
 
 # Screenshots
 
@@ -47,14 +65,17 @@ Solve Match Problems to Gain Experience:
 
 
 # Endpoints
+
 Frontend Routes:
 
 ![image](https://github.com/CoryCampbell/Math-Quest/assets/110738538/2180017c-97ae-42d3-b40d-b0b74f6a8c39)
 
 
+
 Backend Routes: 
 
 ![image](https://github.com/CoryCampbell/Math-Quest/assets/110738538/fc893d27-4664-4979-92ae-b599a10a5963)
+
 
 
 # Thoughts about the Process
