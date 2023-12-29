@@ -27,12 +27,14 @@ Hosted by:
 
 # Screenshots
 
+![village-preview](https://github.com/CoryCampbell/Math-Quest/assets/110738538/fede2f86-8d76-4665-a2a8-ced07d2eddb2)
+
 Customizable Character Appearances:
 
-![image](https://github.com/CoryCampbell/Math-Quest/assets/110738538/5788f8c3-4747-49c5-aa85-a4892ea27135)
+![characters-preview](https://github.com/CoryCampbell/Math-Quest/assets/110738538/f8cd9bb3-655c-4828-900f-e78dadaf2494)
 
 Solve Match Problems to Gain Experience: 
-![image](https://github.com/CoryCampbell/Math-Quest/assets/110738538/990e9e02-6779-4ed1-b597-601369b3b6ce)
+![adventure-preview](https://github.com/CoryCampbell/Math-Quest/assets/110738538/3e1470d4-ae36-4c54-938d-e1c4635a85ac)
 
 
 
