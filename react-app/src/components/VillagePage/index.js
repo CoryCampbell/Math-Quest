@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { NavLink, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "./VillagePage.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
