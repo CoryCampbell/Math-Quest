@@ -59,9 +59,16 @@ Backend Routes:
 
 # Thoughts about the Process
 
-Getting the Character's information to render correctly was my biggest setback for this project, it definitely helped me get better with using React Hooks.
+Getting the Character's data to render correctly in real time was the biggest issue I have come across so far. It has really pushed me to deepen my understanding of React/Redux.
+
+Right now, I am just using a static list of math problems, I need to create a function that randomly generates problems for me to give the User more questions to solve.
+
+
 
 # Connect with the creator
+
 email: corycampbell20@yahoo.com
+
 github: @CoryCampbell
+
 discord: corythedev
