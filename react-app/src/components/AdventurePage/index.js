@@ -164,25 +164,39 @@ function AdventurePage() {
 	}
 
 	function loadQuestion(nextStage, adventure_type) {
-		//get random question from list ---OLD VERSION
-		// Change this to a function that grabs a random question
-		// const randomInt = Math.floor(Math.random() * 4);
-		// console.log("randomInt ==========> !!!!!!!!!!", randomInt);
-		// let question = easyQuestions[randomInt];
-		// console.log("question", question);
-		// localStorage.setItem("currentQuestion", JSON.stringify(question));
-		// return question;
-
 		console.log("loading question #", nextStage);
 		console.log("adventure type: ", adventure_type);
 		let question;
 		if (adventure_type === "addition") {
+			//question
+			//answer
+			//choices
+			//question_value
 			question = easyQuestions.easyAdditionSet1[nextStage];
+			let num1 = Math.floor(Math.random(0, 10) * 10);
+			let num2 = Math.floor(Math.random(0, 10) * 10);
+			let currentQuestion = `${num1} + ${num2}`;
+			let answer = num1 + num2;
+			let answer2 = Math.floor(Math.random(0, 10) * 10) + Math.floor(Math.random(0, 10) * 10);
+			let answer3 = Math.floor(Math.random(0, 10) * 10) + Math.floor(Math.random(0, 10) * 10);
+			let answer4 = Math.floor(Math.random(0, 10) * 10) + Math.floor(Math.random(0, 10) * 10);
+			let choices = [answer, answer2, answer3, answer4];
+			let question_value = 5;
+			question = { question: currentQuestion, answer, choices, question_value };
 		} else if (adventure_type === "subtraction") {
+			//
+			//
+			//
 			question = easyQuestions.easySubtractionSet1[nextStage];
 		} else if (adventure_type === "multiplication") {
+			//
+			//
+			//
 			question = easyQuestions.easyMultiplicationSet1[nextStage];
 		} else if (adventure_type === "division") {
+			//
+			//
+			//
 			question = easyQuestions.easyDivisionSet1[nextStage];
 		}
 
@@ -201,7 +215,6 @@ function AdventurePage() {
 
 	function runAway(e) {
 		e.preventDefault();
-		// alert("Feature coming soon!");
 
 		//remove adventure from database
 		dispatch(deleteAdventureThunk(adventure.id));
