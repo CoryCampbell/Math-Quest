@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import Character
 from app import db
+import math
 
 character_routes = Blueprint('characters', __name__)
 
@@ -98,16 +99,23 @@ def update_experience(character_id, experience_points_gained):
     print("=======> before change: ", character.to_dict())
     if character:
         character.experience_points += int(experience_points_gained)
-        
+
+        # SIMPLE LEVEL CURVE
+        # character.level = math.floor(character.experience_points / 100)
+
+        #exponential level curve
+        if ((character.level * 100) * (character.level * .5)) < character.experience_points:
+            character.level += 1
+
+
+
 
         character.coins += 10
-
         print("after change ============> ", character.to_dict())
         db.session.commit()
-
-        return {"message": repr("{old_character_name} will now be known as {new_character_name}!")}
+        return {"message": repr("{character_id} experience updated!")}
     else:
-        return {"error": repr("{old_character_name}'s name could not be changed.")}
+        return {"error": repr("{character_id}'s experience could not be updated.")}
 
 
 
