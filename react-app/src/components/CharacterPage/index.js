@@ -120,7 +120,7 @@ function CharacterPage() {
 									<button className="character-select-option" onClick={selectCharacter}>
 										{character.character_name}
 									</button>
-									<div className="level-preview">Level {character.level}</div>
+									<div className="level-preview">Lvl {character.level}</div>
 								</div>
 							))}
 					</div>
