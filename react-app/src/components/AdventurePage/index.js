@@ -184,7 +184,7 @@ function AdventurePage() {
 			choices = randomizeChoices(choices.slice());
 
 			//CHECK FOR DUPLICATE ANSWER CHOICES
-			choices = checkForDuplicateAnswers(choices.slice());
+			choices = checkForDuplicateAnswers(choices.slice(), nextStage);
 
 			let question_value = answer;
 			question = { question: currentQuestion, answer, choices, question_value };
@@ -206,14 +206,14 @@ function AdventurePage() {
 		return question;
 	}
 
-	function checkForDuplicateAnswers(choices) {
+	function checkForDuplicateAnswers(choices, nextStage) {
 		let uniqueSet = new Set();
 
 		for (let i = 0; i < choices.length; i++) {
 			let answer = choices[i];
 
 			while (uniqueSet.has(answer)) {
-				answer += Math.floor(Math.random() * 10) + 1;
+				answer += Math.floor(Math.random() * 10) + nextStage;
 			}
 
 			choices[i] = answer;
