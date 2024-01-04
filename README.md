@@ -7,6 +7,12 @@ Users can login/signup to save their progress, and continue to level up their ch
 
 
 
+# Live Link
+
+[MathQuest](https://mathquest.onrender.com)
+
+
+
 
 # Features coming soon
 
@@ -24,9 +30,6 @@ Users can login/signup to save their progress, and continue to level up their ch
 
 
 
-# Live Link
-
-[MathQuest](https://mathquest.onrender.com)
 
 # Tech Stack
 
