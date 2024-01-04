@@ -85,7 +85,9 @@ Backend Routes:
 
 Getting the Character's data to render correctly in real time was the biggest issue I have come across so far. It has really pushed me to deepen my understanding of React/Redux.
 
-Right now, I am just using a static list of math problems, I need to create a function that randomly generates problems for me to give the User more questions to solve.
+I really felt pleased with myself when I created a function that randomly generates questions for the user based on their current stage. I also increased experience gained to match the values of the answer of the current question, so experience gained values scale with your current stage as well. I need to figure out how implement a health system for the adventures to give more of a risk/reward experience for users who have missed questions and are starting to get low on health. And also I have enemies visually on the screen but there isnt really anything going on with them without a health system. Im thinking about changing some code to where the stage doesnt change until you get a question right, so you must answer 10 questions correctly to end the adventure.
+
+Right now, I am working on implementing those changes to adventures. Afterwards, I will be working on adding a shop feature to add armor and items to the game!
 
 
 
