@@ -32,15 +32,14 @@
 }
 
 .login-button {
-  position: relative;
-  top: 120px;
   background-color: green;
   width: 50%;
   height: 50px;
   align-self: center;
-  border-radius: 15px;
+  border-radius: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 25px;
+  margin: 2%;
 }
 
 .login-button:hover {
@@ -64,4 +63,18 @@
   position: fixed;
   top: 482px;
   right: 380px;
+}
+
+.cancel-button {
+  background-color: lightblue;
+  width: 50%;
+  height: 50px;
+  border-radius: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 25px;
+}
+
+.cancel-button:hover {
+    background-color: rgb(229, 248, 254);
+    box-shadow: 0px 0px 15px white;
 }

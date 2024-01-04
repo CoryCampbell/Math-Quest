@@ -33,6 +33,10 @@ function SignupFormModal() {
 		}
 	};
 
+	function handleCancel() {
+		closeModal();
+	}
+
 	function validateInfo() {
 		let errorsObj = {};
 
@@ -73,6 +77,9 @@ function SignupFormModal() {
 				</label>
 				<button className="sign-up-button" type="submit" onClick={validateInfo}>
 					Sign Up
+				</button>
+				<button className="cancel-button" onClick={handleCancel}>
+					Cancel
 				</button>
 			</form>
 		</div>
