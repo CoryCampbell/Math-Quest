@@ -5,82 +5,31 @@
   align-items: center;
   font-size: 35px;
   height: 75vh;
-  width: 100%;
-  margin: auto;
+  width: 95%;
+  margin: 0px;
 }
 
 .landing-page-details {
   display: flex;
   flex-direction: row;
-  position: relative;
-  top: 50px;
   width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
-.landing-detail-one-container, .landing-detail-two-container, .landing-detail-three-container {
-  background-color: transparent;
-  border-radius: 50px;
-  height: 300px;
-  width: 33%;
-  margin: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-size: 30px;
-  font-weight: bolder;
-  color: black;
-  text-shadow: 0px 0px 10px white;
-}
-
-.landing-detail-one-container {
-  position: relative;
-  bottom: 150px;
-}
-
-.landing-detail-two-container {
-  position: relative;
-  bottom: 0px;
-}
-
-.landing-detail-three-container {
-  position: relative;
-  bottom: -150px;
-}
-
-.detail-one-text, .detail-two-text, .detail-three-text {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
 
 .adv-prev {
-  position: absolute;
-  top: 540px;
-  left: 100px;
-  width: 200px;
+  width: 600px;
   z-index: -5;
 }
 
 .village-prev {
-  position: absolute;
-  top: 295px;
-  left: 415px;
-  width: 300px;
+  width: 600px;
   z-index: -5;
 }
 
 .char-prev {
-  position: absolute;
-  top: 630px;
-  left: 390px;
-  width: 350px;
+  width: 700px;
   z-index: -5;
 }
 
@@ -94,3 +43,28 @@
   color: goldenrod;
   text-shadow: 5px 5px 15px black;
 }
+
+.prev-one, .prev-two, .prev-three {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bolder;
+  color: black;
+  text-shadow: 0px 0px 10px white;
+}
+
+/* 4K RESOLUTION ^^^ */
+
+/* 1440 */
+
+/* 1024 */
+
+/* 768 */
+
+/* 425 */
+
+/* 320 */
