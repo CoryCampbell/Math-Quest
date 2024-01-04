@@ -7,7 +7,6 @@ import { addNewAdventureThunk, deleteAdventureThunk } from "../../store/adventur
 
 import AdventureStartModal from "../AlertModals/AdventureStartModal";
 import OpenModalButton from "../OpenModalButton";
-import easyQuestions from "../../static/math-questions";
 import "./AdventurePage.css";
 
 //
@@ -172,7 +171,6 @@ function AdventurePage() {
 			//answer
 			//choices
 			//question_value
-			question = easyQuestions.easyAdditionSet1[nextStage];
 			let num1 = Math.floor(Math.random() * 10) + nextStage;
 			let num2 = Math.floor(Math.random() * 10) + nextStage;
 			let currentQuestion = `${num1} + ${num2}`;
@@ -194,17 +192,14 @@ function AdventurePage() {
 			//
 			//
 			//
-			question = easyQuestions.easySubtractionSet1[nextStage];
 		} else if (adventure_type === "multiplication") {
 			//
 			//
 			//
-			question = easyQuestions.easyMultiplicationSet1[nextStage];
 		} else if (adventure_type === "division") {
 			//
 			//
 			//
-			question = easyQuestions.easyDivisionSet1[nextStage];
 		}
 
 		localStorage.setItem("currentQuestion", JSON.stringify(question));
