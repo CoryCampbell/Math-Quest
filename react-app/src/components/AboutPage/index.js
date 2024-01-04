@@ -9,12 +9,12 @@ function AboutPage() {
 					<div className="links-left">
 						<div className="clickables">
 							<a href="https://github.com/CoryCampbell" target="_blank" rel="noreferrer">
-								<i class="fa-brands fa-github"></i>
+								<i className="fa-brands fa-github"></i>
 							</a>
 							<a href="https://linkedin.com/in/cory-campbell-67694b2a5" target="_blank" rel="noreferrer">
-								<i class="fa-brands fa-linkedin"></i>
+								<i className="fa-brands fa-linkedin"></i>
 							</a>
-							<i class="fa-brands fa-discord"> corythedev</i>
+							<i className="fa-brands fa-discord"> corythedev</i>
 						</div>
 					</div>
 					<div className="links-right">
