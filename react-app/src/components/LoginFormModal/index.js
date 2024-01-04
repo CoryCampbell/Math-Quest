@@ -31,6 +31,10 @@ function LoginFormModal() {
 		}
 	};
 
+	function handleCancel() {
+		closeModal();
+	}
+
 	function validateInfo() {
 		let errorsObj = {};
 
@@ -58,6 +62,9 @@ function LoginFormModal() {
 				</label>
 				<button className="login-button" type="submit" onClick={validateInfo}>
 					Log In
+				</button>
+				<button className="cancel-button" onClick={handleCancel}>
+					Cancel
 				</button>
 			</form>
 		</div>

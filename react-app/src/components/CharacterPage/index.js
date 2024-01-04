@@ -95,7 +95,7 @@ function CharacterPage() {
 			return alert("Adventure started, please end your adventure before switching Characters!");
 		}
 
-		selectedCharacterName = e.target.innerHTML;
+		selectedCharacterName = e.target.innerText;
 		localStorage.setItem("character_name", selectedCharacterName);
 		dispatch(getSelectedCharacterThunk());
 	}
