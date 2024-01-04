@@ -180,7 +180,10 @@ function AdventurePage() {
 			let answer2 = Math.floor(Math.random(0, 10) * 10) + Math.floor(Math.random(0, 10) * 10);
 			let answer3 = Math.floor(Math.random(0, 10) * 10) + Math.floor(Math.random(0, 10) * 10);
 			let answer4 = Math.floor(Math.random(0, 10) * 10) + Math.floor(Math.random(0, 10) * 10);
+
+			//NEED TO FIGURE OUT HOW TO RANDOMIZE ORDER OF CHOICES
 			let choices = [answer, answer2, answer3, answer4];
+
 			let question_value = 5;
 			question = { question: currentQuestion, answer, choices, question_value };
 		} else if (adventure_type === "subtraction") {
