@@ -173,13 +173,13 @@ function AdventurePage() {
 			//choices
 			//question_value
 			question = easyQuestions.easyAdditionSet1[nextStage];
-			let num1 = Math.floor(Math.random(0, 10) * 10);
-			let num2 = Math.floor(Math.random(0, 10) * 10);
+			let num1 = Math.floor(Math.random() * 10) + nextStage;
+			let num2 = Math.floor(Math.random() * 10) + nextStage;
 			let currentQuestion = `${num1} + ${num2}`;
 			let answer = num1 + num2;
-			let answer2 = Math.floor(Math.random() * 10) + 1;
-			let answer3 = Math.floor(Math.random() * 10) + 2;
-			let answer4 = Math.floor(Math.random() * 10) + 3;
+			let answer2 = Math.floor(Math.random() * 10) + nextStage;
+			let answer3 = Math.floor(Math.random() * 10) + nextStage;
+			let answer4 = Math.floor(Math.random() * 10) + nextStage;
 			let choices = [answer, answer2, answer3, answer4];
 
 			//RANDOMIZE ORDER OF CHOICES
@@ -212,15 +212,12 @@ function AdventurePage() {
 	}
 
 	function checkForDuplicateAnswers(choices) {
-		console.log("testing for duplicate answers", choices);
-
 		let uniqueSet = new Set();
 
 		for (let i = 0; i < choices.length; i++) {
 			let answer = choices[i];
 
 			while (uniqueSet.has(answer)) {
-				console.log("duplicate answer found", answer);
 				answer += Math.floor(Math.random() * 10) + 1;
 			}
 
@@ -228,23 +225,17 @@ function AdventurePage() {
 			uniqueSet.add(answer);
 		}
 
-		console.log(choices);
 		return choices;
 	}
 
 	//FISHER YATES SHUFFLE ALGORITHM
 	function randomizeChoices(choices) {
-		console.log("starting randomization", choices);
-
 		for (let i = choices.length - 1; i > 0; i--) {
-			// Generate a random index between 0 and i (inclusive)
 			const randomIndex = Math.floor(Math.random() * (i + 1));
 
-			// Swap elements at randomIndex and i
 			[choices[i], choices[randomIndex]] = [choices[randomIndex], choices[i]];
 		}
 
-		console.log("result of randomization: ", choices);
 		return choices;
 	}
 
