@@ -1,4 +1,8 @@
 .stats-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 1022px;
   height: 650px;
   margin: 50px auto;

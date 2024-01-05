@@ -25,6 +25,7 @@ function AdventurePage() {
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
+
 	const adventure = useSelector((state) => state.adventure);
 	const maleAppearance1 = require("../../static/appearances/MALE1.PNG");
 	const maleAppearance2 = require("../../static/appearances/MALE2.PNG");
@@ -347,7 +348,8 @@ function AdventurePage() {
 				//deal damage
 				//give score points
 			} else {
-				//take damage
+				//take damage NEEDS TO UPDATE DATABASE
+				selectedCharacter.current_health = selectedCharacter.current_health - 15;
 			}
 		}
 
