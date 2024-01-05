@@ -66,7 +66,7 @@ export const getSelectedCharacterThunk = () => async (dispatch) => {
 	const characterName = localStorage.getItem("character_name");
 
 	//choose the character
-	const selectedCharacter = data.filter((character) => character.character_name === characterName)[0];
+	const selectedCharacter = data?.filter((character) => character?.character_name === characterName)[0];
 
 	dispatch(getSelectedCharacter(selectedCharacter));
 	return selectedCharacter;
