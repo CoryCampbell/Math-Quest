@@ -11,9 +11,13 @@ function LandingPage() {
 	return (
 		<>
 			<div className="landing-page-container">
-				<h1>Welcome to MathQuest</h1>
+				<h1 className="landing-title">MathQuest</h1>
 
 				<h4>"Mathematics is not a language. It's an adventure." - Paul Lockhart</h4>
+				<h5 className="landing-summary">
+					Welcome to MathQuest! An Educational Web-based Game that encourages kids to practice their math skills while
+					having fun doing it!
+				</h5>
 				<div className="landing-page-details">
 					<div className="prev-one">
 						<img

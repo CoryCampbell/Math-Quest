@@ -166,11 +166,8 @@ function AdventurePage() {
 		console.log("loading question #", nextStage);
 		console.log("adventure type: ", adventure_type);
 		let question;
+
 		if (adventure_type === "addition") {
-			//question
-			//answer
-			//choices
-			//question_value
 			let num1 = Math.floor(Math.random() * 10) + nextStage;
 			let num2 = Math.floor(Math.random() * 10) + nextStage;
 			let currentQuestion = `${num1} + ${num2}`;
@@ -189,17 +186,76 @@ function AdventurePage() {
 			let question_value = answer;
 			question = { question: currentQuestion, answer, choices, question_value };
 		} else if (adventure_type === "subtraction") {
-			//
-			//
-			//
+			let num1 = Math.floor(Math.random() * 10) + nextStage;
+			let num2 = Math.floor(Math.random() * 10) + nextStage;
+
+			let currentQuestion;
+			let answer;
+			if (num1 > num2) {
+				currentQuestion = `${num1} - ${num2}`;
+				answer = num1 - num2;
+			} else {
+				currentQuestion = `${num2} - ${num1}`;
+				answer = num2 - num1;
+			}
+			let answer2 = Math.floor(Math.random() * 10) + nextStage;
+			let answer3 = Math.floor(Math.random() * 10) + nextStage;
+			let answer4 = Math.floor(Math.random() * 10) + nextStage;
+			let choices = [answer, answer2, answer3, answer4];
+
+			//RANDOMIZE ORDER OF CHOICES
+			choices = randomizeChoices(choices.slice());
+			//CHECK FOR DUPLICATE ANSWER CHOICES
+			choices = checkForDuplicateAnswers(choices.slice(), nextStage);
+
+			let question_value = answer;
+			question = { question: currentQuestion, answer, choices, question_value };
 		} else if (adventure_type === "multiplication") {
-			//
-			//
-			//
+			let num1 = Math.floor(Math.random() * 3) + nextStage;
+			let num2 = Math.floor(Math.random() * 3) + nextStage;
+			let currentQuestion = `${num1} X ${num2}`;
+			let answer = num1 * num2;
+			let answer2 = Math.floor(Math.random() * 8) * nextStage;
+			let answer3 = Math.floor(Math.random() * 8) * nextStage;
+			let answer4 = Math.floor(Math.random() * 8) * nextStage;
+			let choices = [answer, answer2, answer3, answer4];
+
+			//RANDOMIZE ORDER OF CHOICES
+			choices = randomizeChoices(choices.slice());
+
+			//CHECK FOR DUPLICATE ANSWER CHOICES
+			choices = checkForDuplicateAnswers(choices.slice(), nextStage);
+
+			let question_value = answer;
+			question = { question: currentQuestion, answer, choices, question_value };
 		} else if (adventure_type === "division") {
-			//
-			//
-			//
+			let num1 = Math.floor(Math.random() * 10) + nextStage;
+			let num2 = Math.floor(Math.random() * 10) + nextStage;
+
+			// Ensure num2 is not 0 to avoid division by zero
+			while (num2 === 0) {
+				num2 = Math.floor(Math.random() * 10) + nextStage;
+			}
+
+			// Ensure that the division results in a whole number
+			let result = num1;
+			let currentQuestion = `${num1 * num2} / ${num2}`;
+			let answer = result;
+
+			let answer2 = Math.floor(Math.random() * 10) + nextStage;
+			let answer3 = Math.floor(Math.random() * 10) + nextStage;
+			let answer4 = Math.floor(Math.random() * 10) + nextStage;
+
+			let choices = [answer, answer2, answer3, answer4];
+
+			// RANDOMIZE ORDER OF CHOICES
+			choices = randomizeChoices(choices.slice());
+
+			// CHECK FOR DUPLICATE ANSWER CHOICES
+			choices = checkForDuplicateAnswers(choices.slice(), nextStage);
+
+			let question_value = num1 * num2;
+			question = { question: currentQuestion, answer, choices, question_value };
 		}
 
 		localStorage.setItem("currentQuestion", JSON.stringify(question));
@@ -273,7 +329,9 @@ function AdventurePage() {
 				setPassed(true);
 
 				//update score value
-				adventure.score = adventure.score + question.question_value;
+				if (question.question_value === 0) {
+					adventure.score += 10;
+				} else adventure.score = adventure.score + question.question_value;
 				console.log("new score value: ", adventure);
 				localStorage.setItem("currentAdventure", JSON.stringify(adventure));
 			}
@@ -366,11 +424,11 @@ function AdventurePage() {
 								<button className="adventure-option sub" value="subtraction" onClick={startAdventure}>
 									Subtraction Adventure
 								</button>
-								<button className="adventure-option mult" disabled>
-									Multiplication Adventure Coming Soon!
+								<button className="adventure-option mult" value="multiplication" onClick={startAdventure}>
+									Multiplication Adventure!
 								</button>
-								<button className="adventure-option division" disabled>
-									Division Adventure Coming Soon!
+								<button className="adventure-option division" value="division" onClick={startAdventure}>
+									Division Adventure!
 								</button>
 							</div>
 						</div>

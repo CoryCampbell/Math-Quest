@@ -44,6 +44,11 @@
   text-shadow: 5px 5px 15px black;
 }
 
+.landing-summary {
+  text-align: center;
+  width: 75%;
+}
+
 .prev-one, .prev-two, .prev-three {
   display: flex;
   flex-direction: column;
