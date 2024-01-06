@@ -155,11 +155,12 @@ function AdventurePage() {
 
 		console.log("storing start of adventure in local storage", adventureObject);
 		localStorage.setItem("currentAdventure", JSON.stringify(adventureObject));
+		localStorage.setItem("enemy_health", 100);
 
 		currentAdventure = JSON.parse(localStorage.getItem("currentAdventure"));
 		console.log("adventure after grab from local storage start adventure click: ", currentAdventure);
 
-		currentQuestion = loadQuestion(currentStage - 1, currentAdventure.adventure_type);
+		currentQuestion = loadQuestion(currentStage, currentAdventure.adventure_type);
 		console.log("currentQuestion ===========> should be first question", currentQuestion);
 	}
 
@@ -192,12 +193,15 @@ function AdventurePage() {
 
 			let currentQuestion;
 			let answer;
+			let question_value;
 			if (num1 > num2) {
 				currentQuestion = `${num1} - ${num2}`;
 				answer = num1 - num2;
+				question_value = num1;
 			} else {
 				currentQuestion = `${num2} - ${num1}`;
 				answer = num2 - num1;
+				question_value = num2;
 			}
 			let answer2 = Math.floor(Math.random() * 10) + nextStage;
 			let answer3 = Math.floor(Math.random() * 10) + nextStage;
@@ -209,7 +213,6 @@ function AdventurePage() {
 			//CHECK FOR DUPLICATE ANSWER CHOICES
 			choices = checkForDuplicateAnswers(choices.slice(), nextStage);
 
-			let question_value = answer;
 			question = { question: currentQuestion, answer, choices, question_value };
 		} else if (adventure_type === "multiplication") {
 			let num1 = Math.floor(Math.random() * 3) + nextStage;
@@ -310,6 +313,7 @@ function AdventurePage() {
 		localStorage.removeItem("currentAdventure");
 		localStorage.removeItem("currentQuestion");
 		localStorage.removeItem("currentProgress");
+		localStorage.removeItem("enemy_health");
 
 		//redirect to village page
 		history.push("/characters");
@@ -399,6 +403,7 @@ function AdventurePage() {
 		localStorage.removeItem("currentAdventure");
 		localStorage.removeItem("currentQuestion");
 		localStorage.removeItem("currentProgress");
+		localStorage.removeItem("enemy_health");
 
 		history.push("/village");
 	}
