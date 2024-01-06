@@ -151,8 +151,14 @@ def change_character_health(character_id, change_amount):
     if character:
         character.current_health -= int(change_amount)
 
+        if character.current_health > character.max_health:
+            character.current_health = character.max_health
+
+        if character.current_health < 0:
+            character.current_health = 0
+
         db.session.commit()
 
-        return {"message": repr("{character} has lost {change_amount} health!")}
+        return {"message": repr("{character} recieved/lost {change_amount} health!")}
     else:
         return {"error": repr("ERROR DURING ACTIONS: {character} has lost {change_amount} health")}
