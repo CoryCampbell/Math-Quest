@@ -138,3 +138,21 @@ def update_character(old_character_name, new_character_name):
         return {"message": repr("{old_character_name} will now be known as {new_character_name}!")}
     else:
         return {"error": repr("{old_character_name}'s name could not be changed.")}
+
+
+
+
+
+
+@character_routes.route('/health/<character_id>/<reduction_amount>', methods=['PATCH'])
+@login_required
+def damage_character(character_id, reduction_amount):
+    character = Character.query.filter_by(id=character_id).first()
+    if character:
+        character.current_health -= int(reduction_amount)
+
+        db.session.commit()
+
+        return {"message": repr("{character} has lost {reduction_amount} health!")}
+    else:
+        return {"error": repr("ERROR DURING ACTIONS: {character} has lost {reduction_amount} health")}
