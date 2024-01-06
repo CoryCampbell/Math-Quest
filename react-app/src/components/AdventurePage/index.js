@@ -1,7 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { getSelectedCharacterThunk, getUserCharactersThunk, updateExperienceThunk } from "../../store/characters";
+import {
+	getSelectedCharacterThunk,
+	getUserCharactersThunk,
+	updateExperienceThunk,
+	changeCharacterHealthThunk
+} from "../../store/characters";
 import { useEffect, useState } from "react";
 import { addNewAdventureThunk, deleteAdventureThunk } from "../../store/adventures";
 
@@ -51,6 +56,8 @@ function AdventurePage() {
 	let currentAdventure = localStorage.getItem("currentAdventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	let currentProgress = localStorage.getItem("currentProgress") || {};
+	let currentHealth = localStorage.getItem("current_health") || {};
+	let enemyHealth = localStorage.getItem("enemy_health") || {};
 	const appearance = selectedCharacter?.appearance;
 	console.log("appearance--------> ", appearance);
 
@@ -103,6 +110,9 @@ function AdventurePage() {
 
 	const [currentStage, setCurrentStage] = useState(currentProgress);
 
+	const [playerHealth, setPlayerHealth] = useState(selectedCharacter?.current_health);
+	const [enemyHealthState, setEnemyHealthState] = useState(enemyHealth);
+
 	//Protects page rendering from missing question
 	if (Object.values(currentQuestion) === 0) {
 		currentQuestion = loadQuestion(currentStage);
@@ -145,6 +155,7 @@ function AdventurePage() {
 
 		//create progress tracker for local storage
 		localStorage.setItem("currentProgress", 1);
+		localStorage.setItem("current_health", selectedCharacter.current_health);
 
 		//create adventure object shell that will eventually be added to db
 		let adventureObject = {};
@@ -306,9 +317,13 @@ function AdventurePage() {
 	function runAway(e) {
 		e.preventDefault();
 
+		//changes health in db to correct value from taking damage in adventure
+		const dbCurrentHealth = selectedCharacter.current_health;
+		const currentHealth = localStorage.getItem("current_health");
+		const healthChange = dbCurrentHealth - currentHealth;
 		//remove adventure from database
-		dispatch(deleteAdventureThunk(adventure.id));
-
+		dispatch(changeCharacterHealthThunk(selectedCharacter.id, healthChange));
+		dispatch(getUserCharactersThunk());
 		//remove adventure from local storage
 		localStorage.removeItem("currentAdventure");
 		localStorage.removeItem("currentQuestion");
@@ -332,7 +347,10 @@ function AdventurePage() {
 			if (parseInt(e.target.value) === question.answer) {
 				console.log("CORRECT ANSWER!");
 				setPassed(true);
-
+				let enemyHealth = JSON.parse(localStorage.getItem("enemy_health"));
+				enemyHealth -= 10;
+				localStorage.setItem("enemy_health", JSON.stringify(enemyHealth));
+				setEnemyHealthState(enemyHealth);
 				//update score value
 				if (question.question_value === 0) {
 					adventure.score += 10;
@@ -345,15 +363,10 @@ function AdventurePage() {
 			if (parseInt(e.target.value) !== question.answer) {
 				console.log("INCORRECT ANSWER!");
 				setPassed(false);
-			}
-
-			//deal damage or take damage based off of passed value
-			if (passed) {
-				//deal damage
-				//give score points
-			} else {
-				//take damage NEEDS TO UPDATE DATABASE
-				selectedCharacter.current_health = selectedCharacter.current_health - 15;
+				let currentHealth = JSON.parse(localStorage.getItem("current_health"));
+				currentHealth -= 10;
+				localStorage.setItem("current_health", JSON.stringify(currentHealth));
+				setPlayerHealth(currentHealth);
 			}
 		}
 
@@ -448,7 +461,7 @@ function AdventurePage() {
 											<div>{selectedCharacter?.character_name}</div>
 											<div>
 												<div>
-													❤{selectedCharacter?.current_health} / {selectedCharacter?.max_health}
+													❤{playerHealth} / {selectedCharacter?.max_health}
 												</div>
 											</div>
 										</div>

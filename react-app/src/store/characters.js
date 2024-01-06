@@ -6,6 +6,7 @@ const DELETE_CHARACTER = "characters/deleteCharacter";
 const UPDATE_CHARACTER = "characters/updateCharacter";
 const UPDATE_EXPERIENCE = "characters/updateExperience";
 const CLEAR_CHARACTERS = "characters/clearCharacters";
+const CHANGE_CHARACTER_HEALTH = "characters/changeCharacterHealth";
 
 // Action Creators
 const getUserCharacters = (payload) => ({
@@ -22,14 +23,20 @@ const clearCharacters = () => ({
 	type: CLEAR_CHARACTERS
 });
 
+const changeCharacterHealth = (characterId, changeAmount) => ({
+	type: CHANGE_CHARACTER_HEALTH,
+	characterId,
+	changeAmount
+});
+
 const addNewCharacter = (payload) => ({
 	type: ADD_NEW_CHARACTER,
 	payload
 });
 
-const deleteCharacter = (character_id) => ({
+const deleteCharacter = (characterId) => ({
 	type: DELETE_CHARACTER,
-	character_id
+	characterId
 });
 
 const updateCharacter = (oldCharacterName, newCharacterName) => ({
@@ -160,6 +167,24 @@ export const updateExperienceThunk = (character_id, experience_points_gained) =>
 	}
 };
 
+//
+//CHANGE CHARACTER HEALTH
+//
+export const changeCharacterHealthThunk = (characterId, changeAmount) => async (dispatch) => {
+	const res = await fetch(`/api/characters/health/${characterId}/${changeAmount}`, {
+		method: "PATCH"
+	});
+
+	if (res.ok) {
+		const data = await res.json();
+		dispatch(changeCharacterHealth(characterId, changeAmount));
+		return data;
+	} else {
+		const errors = await res.json();
+		return errors;
+	}
+};
+
 //Initial state
 const initialState = { userCharacters: null, selectedCharacter: null };
 
@@ -177,9 +202,10 @@ export default function charactersReducer(state = initialState, action) {
 		case ADD_NEW_CHARACTER:
 			return { ...state, userCharacters: [userCharactersAfterChange] };
 		case DELETE_CHARACTER:
-			console.log("============> ACTION: ", action);
 			return { ...state, userCharacters: [userCharactersAfterChange] };
 		case UPDATE_CHARACTER:
+			return { ...state, userCharacters: [userCharactersAfterChange] };
+		case CHANGE_CHARACTER_HEALTH:
 			return { ...state, userCharacters: [userCharactersAfterChange] };
 		default:
 			return state;
