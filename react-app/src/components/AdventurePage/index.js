@@ -8,7 +8,7 @@ import {
 	changeCharacterHealthThunk
 } from "../../store/characters";
 import { useEffect, useState } from "react";
-import { addNewAdventureThunk, deleteAdventureThunk } from "../../store/adventures";
+import { addNewAdventureThunk } from "../../store/adventures";
 
 import AdventureStartModal from "../AlertModals/AdventureStartModal";
 import OpenModalButton from "../OpenModalButton";
@@ -58,6 +58,7 @@ function AdventurePage() {
 	let currentProgress = localStorage.getItem("currentProgress") || {};
 	let currentHealth = localStorage.getItem("current_health") || {};
 	let enemyHealth = localStorage.getItem("enemy_health") || {};
+
 	const appearance = selectedCharacter?.appearance;
 	console.log("appearance--------> ", appearance);
 
@@ -111,7 +112,11 @@ function AdventurePage() {
 	const [currentStage, setCurrentStage] = useState(currentProgress);
 
 	const [playerHealth, setPlayerHealth] = useState(selectedCharacter?.current_health);
-	const [enemyHealthState, setEnemyHealthState] = useState(enemyHealth);
+
+	if (!Object.values(enemyHealth)) {
+		enemyHealth = 100;
+	}
+	const [enemyHealthState, setEnemyHealthState] = useState(enemyHealth || 100);
 
 	//Protects page rendering from missing question
 	if (Object.values(currentQuestion) === 0) {
@@ -347,10 +352,10 @@ function AdventurePage() {
 			if (parseInt(e.target.value) === question.answer) {
 				console.log("CORRECT ANSWER!");
 				setPassed(true);
-				let enemyHealth = JSON.parse(localStorage.getItem("enemy_health"));
-				enemyHealth -= 10;
-				localStorage.setItem("enemy_health", JSON.stringify(enemyHealth));
-				setEnemyHealthState(enemyHealth);
+				let currentEnemyHealth = JSON.parse(localStorage.getItem("enemy_health"));
+				currentEnemyHealth -= 10;
+				localStorage.setItem("enemy_health", JSON.stringify(currentEnemyHealth));
+				setEnemyHealthState(currentEnemyHealth);
 				//update score value
 				if (question.question_value === 0) {
 					adventure.score += 10;
@@ -376,6 +381,7 @@ function AdventurePage() {
 			setCompleted(true);
 			setRewardsClaimed(false);
 			localStorage.removeItem("currentProgress");
+			//this is the end of the adventure (after 10 stages), but the end page renders on stage 11.
 			const nextStage = currentStage + 1;
 			console.log("Advancing to the next stage: ", nextStage);
 			setCurrentStage(nextStage);
@@ -387,7 +393,7 @@ function AdventurePage() {
 			const nextStage = currentStage + 1;
 			console.log("Advancing to the next stage: ", nextStage);
 			setCurrentStage(nextStage);
-			question = loadQuestion(nextStage - 1, currentAdventure.adventure_type);
+			question = loadQuestion(nextStage, currentAdventure.adventure_type);
 			localStorage.setItem("currentQuestion", JSON.stringify(question));
 			localStorage.setItem("currentProgress", JSON.stringify(nextStage));
 		}
@@ -396,6 +402,13 @@ function AdventurePage() {
 	function claimRewards(e) {
 		e.preventDefault();
 
+		//changes health in db to correct value from taking damage in adventure
+		const dbCurrentHealth = selectedCharacter.current_health;
+		const currentHealth = localStorage.getItem("current_health");
+		const healthChange = dbCurrentHealth - currentHealth;
+		//remove adventure from database
+		dispatch(changeCharacterHealthThunk(selectedCharacter.id, healthChange));
+		dispatch(getUserCharactersThunk());
 		let adventure = JSON.parse(localStorage.getItem("currentAdventure"));
 		adventure.completed = true;
 		// receive rewards/experience points
@@ -406,6 +419,7 @@ function AdventurePage() {
 			addNewAdventureThunk(selectedCharacter?.id, adventure.adventure_type, adventure.score, adventure.completed)
 		);
 		dispatch(updateExperienceThunk(selectedCharacter?.id, adventure.score));
+		dispatch(changeCharacterHealthThunk(selectedCharacter?.id, healthChange));
 
 		//update setStates to render the home adventure page again
 		setCompleted(false);
@@ -536,8 +550,52 @@ function AdventurePage() {
 											</div>
 											<div className="math-game-container">
 												<div className="health-bar-container">
-													<div className="player-health">player health</div>
-													<div className="enemy-health">enemy health</div>
+													{playerHealth === 100 ? (
+														<div className="player-health">100</div>
+													) : playerHealth === 90 ? (
+														<div className="player-health">90</div>
+													) : playerHealth === 80 ? (
+														<div className="player-health">80</div>
+													) : playerHealth === 70 ? (
+														<div className="player-health">70</div>
+													) : playerHealth === 60 ? (
+														<div className="player-health">60</div>
+													) : playerHealth === 50 ? (
+														<div className="player-health">50</div>
+													) : playerHealth === 40 ? (
+														<div className="player-health">40</div>
+													) : playerHealth === 30 ? (
+														<div className="player-health">30</div>
+													) : playerHealth === 20 ? (
+														<div className="player-health">20</div>
+													) : playerHealth === 10 ? (
+														<div className="player-health">10</div>
+													) : (
+														<div className="player-health">0</div>
+													)}
+													{enemyHealthState === 100 ? (
+														<div className="enemy-health">100</div>
+													) : enemyHealthState === 90 ? (
+														<div className="enemy-health">90</div>
+													) : enemyHealthState === 80 ? (
+														<div className="enemy-health">80</div>
+													) : enemyHealthState === 70 ? (
+														<div className="enemy-health">70</div>
+													) : enemyHealthState === 60 ? (
+														<div className="enemy-health">60</div>
+													) : enemyHealthState === 50 ? (
+														<div className="enemy-health">50</div>
+													) : enemyHealthState === 40 ? (
+														<div className="enemy-health">40</div>
+													) : enemyHealthState === 30 ? (
+														<div className="enemy-health">30</div>
+													) : enemyHealthState === 20 ? (
+														<div className="enemy-health">20</div>
+													) : enemyHealthState === 10 ? (
+														<div className="enemy-health">10</div>
+													) : (
+														<div className="enemy-health">0</div>
+													)}
 												</div>
 												<div className="question-container">{currentQuestion?.question} = ?</div>
 												<div className="answers-container">
