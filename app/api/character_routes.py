@@ -138,3 +138,27 @@ def update_character(old_character_name, new_character_name):
         return {"message": repr("{old_character_name} will now be known as {new_character_name}!")}
     else:
         return {"error": repr("{old_character_name}'s name could not be changed.")}
+
+
+
+
+
+
+@character_routes.route('/health/<character_id>/<change_amount>', methods=['PATCH'])
+@login_required
+def change_character_health(character_id, change_amount):
+    character = Character.query.filter_by(id=character_id).first()
+    if character:
+        character.current_health -= int(change_amount)
+
+        if character.current_health > character.max_health:
+            character.current_health = character.max_health
+
+        if character.current_health < 0:
+            character.current_health = 0
+
+        db.session.commit()
+
+        return {"message": repr("{character} recieved/lost {change_amount} health!")}
+    else:
+        return {"error": repr("ERROR DURING ACTIONS: {character} has lost {change_amount} health")}

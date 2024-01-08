@@ -54,6 +54,7 @@ function Navigation({ isLoaded }) {
 		localStorage.removeItem("currentQuestion");
 		localStorage.removeItem("currentAdventure");
 		localStorage.removeItem("currentProgress");
+		localStorage.removeItem("enemy_health");
 
 		closeMenu();
 		history.push("/");

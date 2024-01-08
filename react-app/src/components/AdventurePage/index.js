@@ -1,9 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { getSelectedCharacterThunk, getUserCharactersThunk, updateExperienceThunk } from "../../store/characters";
+import {
+	getSelectedCharacterThunk,
+	getUserCharactersThunk,
+	updateExperienceThunk,
+	changeCharacterHealthThunk
+} from "../../store/characters";
 import { useEffect, useState } from "react";
-import { addNewAdventureThunk, deleteAdventureThunk } from "../../store/adventures";
+import { addNewAdventureThunk } from "../../store/adventures";
 
 import AdventureStartModal from "../AlertModals/AdventureStartModal";
 import OpenModalButton from "../OpenModalButton";
@@ -51,6 +56,9 @@ function AdventurePage() {
 	let currentAdventure = localStorage.getItem("currentAdventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	let currentProgress = localStorage.getItem("currentProgress") || {};
+	let currentHealth = localStorage.getItem("current_health") || {};
+	let enemyHealth = localStorage.getItem("enemy_health") || {};
+
 	const appearance = selectedCharacter?.appearance;
 	console.log("appearance--------> ", appearance);
 
@@ -103,6 +111,13 @@ function AdventurePage() {
 
 	const [currentStage, setCurrentStage] = useState(currentProgress);
 
+	const [playerHealth, setPlayerHealth] = useState(selectedCharacter?.current_health);
+
+	if (!Object.values(enemyHealth)) {
+		enemyHealth = 100;
+	}
+	const [enemyHealthState, setEnemyHealthState] = useState(enemyHealth || 100);
+
 	//Protects page rendering from missing question
 	if (Object.values(currentQuestion) === 0) {
 		currentQuestion = loadQuestion(currentStage);
@@ -145,6 +160,7 @@ function AdventurePage() {
 
 		//create progress tracker for local storage
 		localStorage.setItem("currentProgress", 1);
+		localStorage.setItem("current_health", selectedCharacter.current_health);
 
 		//create adventure object shell that will eventually be added to db
 		let adventureObject = {};
@@ -155,11 +171,12 @@ function AdventurePage() {
 
 		console.log("storing start of adventure in local storage", adventureObject);
 		localStorage.setItem("currentAdventure", JSON.stringify(adventureObject));
+		localStorage.setItem("enemy_health", 100);
 
 		currentAdventure = JSON.parse(localStorage.getItem("currentAdventure"));
 		console.log("adventure after grab from local storage start adventure click: ", currentAdventure);
 
-		currentQuestion = loadQuestion(currentStage - 1, currentAdventure.adventure_type);
+		currentQuestion = loadQuestion(currentStage, currentAdventure.adventure_type);
 		console.log("currentQuestion ===========> should be first question", currentQuestion);
 	}
 
@@ -192,12 +209,15 @@ function AdventurePage() {
 
 			let currentQuestion;
 			let answer;
+			let question_value;
 			if (num1 > num2) {
 				currentQuestion = `${num1} - ${num2}`;
 				answer = num1 - num2;
+				question_value = num1;
 			} else {
 				currentQuestion = `${num2} - ${num1}`;
 				answer = num2 - num1;
+				question_value = num2;
 			}
 			let answer2 = Math.floor(Math.random() * 10) + nextStage;
 			let answer3 = Math.floor(Math.random() * 10) + nextStage;
@@ -209,7 +229,6 @@ function AdventurePage() {
 			//CHECK FOR DUPLICATE ANSWER CHOICES
 			choices = checkForDuplicateAnswers(choices.slice(), nextStage);
 
-			let question_value = answer;
 			question = { question: currentQuestion, answer, choices, question_value };
 		} else if (adventure_type === "multiplication") {
 			let num1 = Math.floor(Math.random() * 3) + nextStage;
@@ -303,13 +322,18 @@ function AdventurePage() {
 	function runAway(e) {
 		e.preventDefault();
 
+		//changes health in db to correct value from taking damage in adventure
+		const dbCurrentHealth = selectedCharacter.current_health;
+		const currentHealth = localStorage.getItem("current_health");
+		const healthChange = dbCurrentHealth - currentHealth;
 		//remove adventure from database
-		dispatch(deleteAdventureThunk(adventure.id));
-
+		dispatch(changeCharacterHealthThunk(selectedCharacter.id, healthChange));
+		dispatch(getUserCharactersThunk());
 		//remove adventure from local storage
 		localStorage.removeItem("currentAdventure");
 		localStorage.removeItem("currentQuestion");
 		localStorage.removeItem("currentProgress");
+		localStorage.removeItem("enemy_health");
 
 		//redirect to village page
 		history.push("/characters");
@@ -328,7 +352,10 @@ function AdventurePage() {
 			if (parseInt(e.target.value) === question.answer) {
 				console.log("CORRECT ANSWER!");
 				setPassed(true);
-
+				let currentEnemyHealth = JSON.parse(localStorage.getItem("enemy_health"));
+				currentEnemyHealth -= 10;
+				localStorage.setItem("enemy_health", JSON.stringify(currentEnemyHealth));
+				setEnemyHealthState(currentEnemyHealth);
 				//update score value
 				if (question.question_value === 0) {
 					adventure.score += 10;
@@ -341,15 +368,10 @@ function AdventurePage() {
 			if (parseInt(e.target.value) !== question.answer) {
 				console.log("INCORRECT ANSWER!");
 				setPassed(false);
-			}
-
-			//deal damage or take damage based off of passed value
-			if (passed) {
-				//deal damage
-				//give score points
-			} else {
-				//take damage NEEDS TO UPDATE DATABASE
-				selectedCharacter.current_health = selectedCharacter.current_health - 15;
+				let currentHealth = JSON.parse(localStorage.getItem("current_health"));
+				currentHealth -= 10;
+				localStorage.setItem("current_health", JSON.stringify(currentHealth));
+				setPlayerHealth(currentHealth);
 			}
 		}
 
@@ -359,6 +381,7 @@ function AdventurePage() {
 			setCompleted(true);
 			setRewardsClaimed(false);
 			localStorage.removeItem("currentProgress");
+			//this is the end of the adventure (after 10 stages), but the end page renders on stage 11.
 			const nextStage = currentStage + 1;
 			console.log("Advancing to the next stage: ", nextStage);
 			setCurrentStage(nextStage);
@@ -370,7 +393,7 @@ function AdventurePage() {
 			const nextStage = currentStage + 1;
 			console.log("Advancing to the next stage: ", nextStage);
 			setCurrentStage(nextStage);
-			question = loadQuestion(nextStage - 1, currentAdventure.adventure_type);
+			question = loadQuestion(nextStage, currentAdventure.adventure_type);
 			localStorage.setItem("currentQuestion", JSON.stringify(question));
 			localStorage.setItem("currentProgress", JSON.stringify(nextStage));
 		}
@@ -379,6 +402,13 @@ function AdventurePage() {
 	function claimRewards(e) {
 		e.preventDefault();
 
+		//changes health in db to correct value from taking damage in adventure
+		const dbCurrentHealth = selectedCharacter.current_health;
+		const currentHealth = localStorage.getItem("current_health");
+		const healthChange = dbCurrentHealth - currentHealth;
+		//remove adventure from database
+		dispatch(changeCharacterHealthThunk(selectedCharacter.id, healthChange));
+		dispatch(getUserCharactersThunk());
 		let adventure = JSON.parse(localStorage.getItem("currentAdventure"));
 		adventure.completed = true;
 		// receive rewards/experience points
@@ -389,6 +419,7 @@ function AdventurePage() {
 			addNewAdventureThunk(selectedCharacter?.id, adventure.adventure_type, adventure.score, adventure.completed)
 		);
 		dispatch(updateExperienceThunk(selectedCharacter?.id, adventure.score));
+		dispatch(changeCharacterHealthThunk(selectedCharacter?.id, healthChange));
 
 		//update setStates to render the home adventure page again
 		setCompleted(false);
@@ -399,6 +430,7 @@ function AdventurePage() {
 		localStorage.removeItem("currentAdventure");
 		localStorage.removeItem("currentQuestion");
 		localStorage.removeItem("currentProgress");
+		localStorage.removeItem("enemy_health");
 
 		history.push("/village");
 	}
@@ -443,7 +475,7 @@ function AdventurePage() {
 											<div>{selectedCharacter?.character_name}</div>
 											<div>
 												<div>
-													❤{selectedCharacter?.current_health} / {selectedCharacter?.max_health}
+													❤{playerHealth} / {selectedCharacter?.max_health}
 												</div>
 											</div>
 										</div>
@@ -517,6 +549,54 @@ function AdventurePage() {
 												)}
 											</div>
 											<div className="math-game-container">
+												<div className="health-bar-container">
+													{playerHealth === 100 ? (
+														<div className="player-health">100</div>
+													) : playerHealth === 90 ? (
+														<div className="player-health">90</div>
+													) : playerHealth === 80 ? (
+														<div className="player-health">80</div>
+													) : playerHealth === 70 ? (
+														<div className="player-health">70</div>
+													) : playerHealth === 60 ? (
+														<div className="player-health">60</div>
+													) : playerHealth === 50 ? (
+														<div className="player-health">50</div>
+													) : playerHealth === 40 ? (
+														<div className="player-health">40</div>
+													) : playerHealth === 30 ? (
+														<div className="player-health">30</div>
+													) : playerHealth === 20 ? (
+														<div className="player-health">20</div>
+													) : playerHealth === 10 ? (
+														<div className="player-health">10</div>
+													) : (
+														<div className="player-health">0</div>
+													)}
+													{enemyHealthState === 100 ? (
+														<div className="enemy-health">100</div>
+													) : enemyHealthState === 90 ? (
+														<div className="enemy-health">90</div>
+													) : enemyHealthState === 80 ? (
+														<div className="enemy-health">80</div>
+													) : enemyHealthState === 70 ? (
+														<div className="enemy-health">70</div>
+													) : enemyHealthState === 60 ? (
+														<div className="enemy-health">60</div>
+													) : enemyHealthState === 50 ? (
+														<div className="enemy-health">50</div>
+													) : enemyHealthState === 40 ? (
+														<div className="enemy-health">40</div>
+													) : enemyHealthState === 30 ? (
+														<div className="enemy-health">30</div>
+													) : enemyHealthState === 20 ? (
+														<div className="enemy-health">20</div>
+													) : enemyHealthState === 10 ? (
+														<div className="enemy-health">10</div>
+													) : (
+														<div className="enemy-health">0</div>
+													)}
+												</div>
 												<div className="question-container">{currentQuestion?.question} = ?</div>
 												<div className="answers-container">
 													<button
