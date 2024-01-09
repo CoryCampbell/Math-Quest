@@ -58,7 +58,7 @@ function AdventurePage() {
 	let currentAdventure = localStorage.getItem("currentAdventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	let currentProgress = localStorage.getItem("currentProgress") || {};
-	let currentHealth = localStorage.getItem("current_health") || selectedCharacter?.current_health;
+	let currentHealth = selectedCharacter?.current_health;
 	const maxEnemyHealth = selectedCharacter?.max_health;
 	const currentEnemyHealth = localStorage.getItem("enemy_health") || maxEnemyHealth;
 	const appearance = selectedCharacter?.appearance;
@@ -313,16 +313,19 @@ function AdventurePage() {
 		e.preventDefault();
 		console.log("USING POTION");
 		console.log("old health:", currentHealth);
+		console.log(selectedCharacter.max_health);
+
 		//remove potion from inventory
 
 		//update user HP
-		let newHealth = selectedCharacter.current_health + 20;
+		let newHealth = currentHealth + 20;
 
 		if (newHealth > selectedCharacter.max_health) {
 			newHealth = selectedCharacter.max_health;
 		}
 
 		localStorage.setItem("current_health", newHealth);
+		setPlayerHealth(newHealth);
 		dispatch(changeCharacterHealthThunk(selectedCharacter.id, -20));
 		dispatch(getUserCharactersThunk());
 		dispatch(getSelectedCharacterThunk());
@@ -379,10 +382,11 @@ function AdventurePage() {
 				let currentHealth = localStorage.getItem("current_health");
 				currentHealth -= 10;
 				const healthChange = 10;
-				dispatch(changeCharacterHealthThunk(selectedCharacter.id, healthChange));
-				// dispatch(getUserCharactersThunk());
-				localStorage.setItem("current_health", JSON.stringify(currentHealth));
 				setPlayerHealth(currentHealth);
+				localStorage.setItem("current_health", JSON.stringify(currentHealth));
+				dispatch(changeCharacterHealthThunk(selectedCharacter.id, healthChange));
+				dispatch(getUserCharactersThunk());
+				dispatch(getSelectedCharacterThunk());
 			}
 		}
 
