@@ -380,7 +380,7 @@ function AdventurePage() {
 			}
 		}
 
-		if (currentStage + 1 > 10) {
+		if (enemyHealthState - 10 === 0) {
 			console.log("adventure is over!", currentAdventure);
 
 			setCompleted(true);
@@ -395,7 +395,7 @@ function AdventurePage() {
 		} else {
 			localStorage.removeItem("currentQuestion");
 			localStorage.removeItem("currentProgress");
-			const nextStage = currentStage + 1;
+			const nextStage = currentStage;
 			console.log("Advancing to the next stage: ", nextStage);
 			setCurrentStage(nextStage);
 			question = loadQuestion(nextStage, currentAdventure.adventure_type);
@@ -494,7 +494,6 @@ function AdventurePage() {
 												Use Potion
 											</button>
 											<div>Score: {currentAdventure["score"]}</div>
-											<div>Stage: {currentStage} / 10</div>
 											<button className="run-away-button" value={adventure?.id} onClick={runAway}>
 												Run Away!
 											</button>
