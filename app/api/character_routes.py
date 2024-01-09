@@ -100,13 +100,16 @@ def update_experience(character_id, experience_points_gained):
     if character:
         character.experience_points += int(experience_points_gained)
 
-        # SIMPLE LEVEL CURVE
-        # character.level = math.floor(character.experience_points / 100)
+        oldLevel = character.level;
 
         #exponential level curve
         if ((character.level * 100) * (character.level * .5)) < character.experience_points:
             character.level += 1
 
+
+        #update max health on level up
+        if (oldLevel < character.level):
+            character.max_health = math.trunc(character.max_health + character.max_health * .1)
 
 
 
