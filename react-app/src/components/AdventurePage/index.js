@@ -323,6 +323,7 @@ function AdventurePage() {
 
 		localStorage.setItem("current_health", newHealth);
 		dispatch(changeCharacterHealthThunk(selectedCharacter.id, -20));
+		dispatch(getSelectedCharacterThunk());
 	}
 
 	function runAway(e) {
@@ -468,14 +469,14 @@ function AdventurePage() {
 						</div>
 					) : (
 						<>
-							{completed === false && rewardsClaimed && currentStage <= 10 ? (
+							{completed === false && rewardsClaimed && enemyHealthState > 0 ? (
 								<div className="current-adventure-container">
 									<div className="adventure-info-container">
 										<div className="adv-top-left">
 											<div>{selectedCharacter?.character_name}</div>
 											<div>
 												<div>
-													❤{playerHealth} / {selectedCharacter?.max_health}
+													❤{currentHealth} / {selectedCharacter?.max_health}
 												</div>
 											</div>
 										</div>
