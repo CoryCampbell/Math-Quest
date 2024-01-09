@@ -556,8 +556,12 @@ function AdventurePage() {
 											</div>
 											<div className="math-game-container">
 												<div className="health-bar-container">
-													<HealthBar health={currentHealth} />
-													<HealthBar health={enemyHealthState} />
+													<div className="player-healthbar-container">
+														<HealthBar health={currentHealth} />
+													</div>
+													<div className="enemy-healthbar-container">
+														<HealthBar health={enemyHealthState} />
+													</div>
 												</div>
 												<div className="question-container">{currentQuestion?.question} = ?</div>
 												<div className="answers-container">

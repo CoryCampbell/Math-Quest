@@ -1,13 +1,12 @@
 
 /* Container styles */
 .health-bar-container {
-  border: 1px solid #333;
-  border-radius: 5px;
   overflow: hidden;
-    display: flex;
+  display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  height: 30px;
 }
 
 /* Bar styles */
@@ -15,8 +14,8 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: flex-start;
   height: 30px;
+  width: 50%;
   transition: width 0.1s ease-in-out;
 }
 
@@ -31,4 +30,16 @@
 
 .HealthBar.red {
   background-color: red;
+}
+
+.player-healthbar-container {
+  margin: 5px;
+  width: 50%;
+  background-color: white;
+}
+
+.enemy-healthbar-container {
+  width: 50%;
+  margin: 5px;
+  background-color: white;
 }
