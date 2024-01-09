@@ -8,9 +8,8 @@ const HealthBar = ({ health }) => {
 	const barColor = getHealthColor(normalizedHealth);
 
 	return (
-		<div className="HealthBarContainer">
+		<div className="health-bar-container">
 			<div className={`HealthBar ${barColor}`} style={{ width: `${normalizedHealth}%` }}></div>
-			<p>Health: {normalizedHealth}%</p>
 		</div>
 	);
 };

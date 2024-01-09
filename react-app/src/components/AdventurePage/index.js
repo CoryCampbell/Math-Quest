@@ -311,7 +311,8 @@ function AdventurePage() {
 
 	function usePotion(e) {
 		e.preventDefault();
-
+		console.log("USING POTION");
+		console.log("old health:", currentHealth);
 		//remove potion from inventory
 
 		//update user HP
@@ -323,6 +324,7 @@ function AdventurePage() {
 
 		localStorage.setItem("current_health", newHealth);
 		dispatch(changeCharacterHealthThunk(selectedCharacter.id, -20));
+		dispatch(getUserCharactersThunk());
 		dispatch(getSelectedCharacterThunk());
 	}
 

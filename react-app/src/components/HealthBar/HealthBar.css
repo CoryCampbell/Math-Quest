@@ -1,15 +1,23 @@
 
 /* Container styles */
-.HealthBarContainer {
+.health-bar-container {
   border: 1px solid #333;
   border-radius: 5px;
   overflow: hidden;
+    display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 /* Bar styles */
 .HealthBar {
-  height: 20px;
-  transition: width 0.3s ease-in-out;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 30px;
+  transition: width 0.1s ease-in-out;
 }
 
 /* Color variations based on health percentage */
