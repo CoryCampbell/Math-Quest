@@ -60,7 +60,7 @@ function AdventurePage() {
 	let currentProgress = localStorage.getItem("currentProgress") || {};
 	let currentHealth = localStorage.getItem("current_health") || selectedCharacter?.current_health;
 	const maxEnemyHealth = selectedCharacter?.max_health;
-
+	const currentEnemyHealth = localStorage.getItem("enemy_health") || maxEnemyHealth;
 	const appearance = selectedCharacter?.appearance;
 	console.log("appearance--------> ", appearance);
 
@@ -115,7 +115,7 @@ function AdventurePage() {
 
 	const [playerHealth, setPlayerHealth] = useState(currentHealth);
 
-	const [enemyHealthState, setEnemyHealthState] = useState(maxEnemyHealth);
+	const [enemyHealthState, setEnemyHealthState] = useState(currentEnemyHealth);
 
 	//Protects page rendering from missing question
 	if (Object.values(currentQuestion) === 0) {
