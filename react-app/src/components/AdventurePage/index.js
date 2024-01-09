@@ -58,7 +58,7 @@ function AdventurePage() {
 	let currentAdventure = localStorage.getItem("currentAdventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	let currentProgress = localStorage.getItem("currentProgress") || {};
-	let currentHealth = localStorage.getItem("current_health") || selectedCharacter?.current_health;
+	let currentHealth = selectedCharacter?.current_health;
 	const maxEnemyHealth = selectedCharacter?.max_health;
 	const currentEnemyHealth = localStorage.getItem("enemy_health") || maxEnemyHealth;
 	const appearance = selectedCharacter?.appearance;
@@ -170,7 +170,7 @@ function AdventurePage() {
 
 		console.log("storing start of adventure in local storage", adventureObject);
 		localStorage.setItem("currentAdventure", JSON.stringify(adventureObject));
-		localStorage.setItem("enemy_health", 100);
+		localStorage.setItem("enemy_health", maxEnemyHealth);
 
 		currentAdventure = JSON.parse(localStorage.getItem("currentAdventure"));
 		console.log("adventure after grab from local storage start adventure click: ", currentAdventure);
@@ -311,18 +311,24 @@ function AdventurePage() {
 
 	function usePotion(e) {
 		e.preventDefault();
+		console.log("USING POTION");
+		console.log("old health:", currentHealth);
+		console.log(selectedCharacter.max_health);
 
 		//remove potion from inventory
 
 		//update user HP
-		let newHealth = selectedCharacter.current_health + 20;
+		let newHealth = currentHealth + 20;
 
 		if (newHealth > selectedCharacter.max_health) {
 			newHealth = selectedCharacter.max_health;
 		}
 
 		localStorage.setItem("current_health", newHealth);
+		setPlayerHealth(newHealth);
 		dispatch(changeCharacterHealthThunk(selectedCharacter.id, -20));
+		dispatch(getUserCharactersThunk());
+		dispatch(getSelectedCharacterThunk());
 	}
 
 	function runAway(e) {
@@ -354,6 +360,9 @@ function AdventurePage() {
 				setPassed(true);
 				let currentEnemyHealth = JSON.parse(localStorage.getItem("enemy_health"));
 				currentEnemyHealth -= 10;
+
+				if (currentEnemyHealth < 0) currentEnemyHealth = 0;
+
 				localStorage.setItem("enemy_health", JSON.stringify(currentEnemyHealth));
 				setEnemyHealthState(currentEnemyHealth);
 				dispatch(getUserCharactersThunk());
@@ -373,14 +382,15 @@ function AdventurePage() {
 				let currentHealth = localStorage.getItem("current_health");
 				currentHealth -= 10;
 				const healthChange = 10;
-				dispatch(changeCharacterHealthThunk(selectedCharacter.id, healthChange));
-				// dispatch(getUserCharactersThunk());
-				localStorage.setItem("current_health", JSON.stringify(currentHealth));
 				setPlayerHealth(currentHealth);
+				localStorage.setItem("current_health", JSON.stringify(currentHealth));
+				dispatch(changeCharacterHealthThunk(selectedCharacter.id, healthChange));
+				dispatch(getUserCharactersThunk());
+				dispatch(getSelectedCharacterThunk());
 			}
 		}
 
-		if (enemyHealthState - 10 === 0) {
+		if (enemyHealthState - 10 <= 0) {
 			console.log("adventure is over!", currentAdventure);
 
 			setCompleted(true);
@@ -427,6 +437,7 @@ function AdventurePage() {
 		localStorage.removeItem("currentQuestion");
 		localStorage.removeItem("currentProgress");
 		localStorage.removeItem("enemy_health");
+		localStorage.removeItem("current_health");
 
 		history.push("/village");
 	}
@@ -464,14 +475,14 @@ function AdventurePage() {
 						</div>
 					) : (
 						<>
-							{completed === false && rewardsClaimed && currentStage <= 10 ? (
+							{completed === false && rewardsClaimed && enemyHealthState > 0 ? (
 								<div className="current-adventure-container">
 									<div className="adventure-info-container">
 										<div className="adv-top-left">
 											<div>{selectedCharacter?.character_name}</div>
 											<div>
 												<div>
-													❤{playerHealth} / {selectedCharacter?.max_health}
+													❤{currentHealth} / {selectedCharacter?.max_health}
 												</div>
 											</div>
 										</div>
@@ -545,8 +556,12 @@ function AdventurePage() {
 											</div>
 											<div className="math-game-container">
 												<div className="health-bar-container">
-													<HealthBar health={currentHealth} />
-													<HealthBar health={enemyHealthState} />
+													<div className="player-healthbar-container">
+														<HealthBar health={currentHealth} />
+													</div>
+													<div className="enemy-healthbar-container">
+														<HealthBar health={enemyHealthState} />
+													</div>
 												</div>
 												<div className="question-container">{currentQuestion?.question} = ?</div>
 												<div className="answers-container">
