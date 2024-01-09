@@ -1,0 +1,26 @@
+
+/* Container styles */
+.HealthBarContainer {
+  border: 1px solid #333;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Bar styles */
+.HealthBar {
+  height: 20px;
+  transition: width 0.3s ease-in-out;
+}
+
+/* Color variations based on health percentage */
+.HealthBar.green {
+  background-color: green;
+}
+
+.HealthBar.orange {
+  background-color: orange;
+}
+
+.HealthBar.red {
+  background-color: red;
+}
