@@ -56,7 +56,7 @@ function AdventurePage() {
 	let currentAdventure = localStorage.getItem("currentAdventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	let currentProgress = localStorage.getItem("currentProgress") || {};
-	let currentHealth = localStorage.getItem("current_health") || {};
+	let currentHealth = localStorage.getItem("current_health") || selectedCharacter.current_health;
 	let enemyHealth = localStorage.getItem("enemy_health") || {};
 
 	const appearance = selectedCharacter?.appearance;
@@ -111,12 +111,29 @@ function AdventurePage() {
 
 	const [currentStage, setCurrentStage] = useState(currentProgress);
 
-	const [playerHealth, setPlayerHealth] = useState(selectedCharacter?.current_health);
-
-	if (!Object.values(enemyHealth)) {
-		enemyHealth = 100;
+	if (Object.values(currentHealth) === 0) {
+		currentHealth = 100;
+	} else {
+		try {
+			currentHealth = JSON.parse(currentHealth);
+		} catch {
+			currentHealth = 1;
+		}
 	}
-	const [enemyHealthState, setEnemyHealthState] = useState(enemyHealth || 100);
+
+	const [playerHealth, setPlayerHealth] = useState(currentHealth);
+
+	if (Object.values(enemyHealth) === 0) {
+		enemyHealth = 100;
+	} else {
+		try {
+			enemyHealth = JSON.parse(enemyHealth);
+		} catch {
+			enemyHealth = 100;
+		}
+	}
+
+	const [enemyHealthState, setEnemyHealthState] = useState(enemyHealth);
 
 	//Protects page rendering from missing question
 	if (Object.values(currentQuestion) === 0) {
@@ -322,18 +339,12 @@ function AdventurePage() {
 	function runAway(e) {
 		e.preventDefault();
 
-		//changes health in db to correct value from taking damage in adventure
-		const dbCurrentHealth = selectedCharacter.current_health;
-		const currentHealth = localStorage.getItem("current_health");
-		const healthChange = dbCurrentHealth - currentHealth;
-		//remove adventure from database
-		dispatch(changeCharacterHealthThunk(selectedCharacter.id, healthChange));
-		dispatch(getUserCharactersThunk());
 		//remove adventure from local storage
 		localStorage.removeItem("currentAdventure");
 		localStorage.removeItem("currentQuestion");
 		localStorage.removeItem("currentProgress");
 		localStorage.removeItem("enemy_health");
+		localStorage.removeItem("current_health");
 
 		//redirect to village page
 		history.push("/characters");
@@ -356,6 +367,7 @@ function AdventurePage() {
 				currentEnemyHealth -= 10;
 				localStorage.setItem("enemy_health", JSON.stringify(currentEnemyHealth));
 				setEnemyHealthState(currentEnemyHealth);
+				dispatch(getUserCharactersThunk());
 				//update score value
 				if (question.question_value === 0) {
 					adventure.score += 10;
@@ -368,8 +380,12 @@ function AdventurePage() {
 			if (parseInt(e.target.value) !== question.answer) {
 				console.log("INCORRECT ANSWER!");
 				setPassed(false);
-				let currentHealth = JSON.parse(localStorage.getItem("current_health"));
+				//changes health in db to correct value from taking damage in adventure
+				let currentHealth = localStorage.getItem("current_health");
 				currentHealth -= 10;
+				const healthChange = 10;
+				dispatch(changeCharacterHealthThunk(selectedCharacter.id, healthChange));
+				// dispatch(getUserCharactersThunk());
 				localStorage.setItem("current_health", JSON.stringify(currentHealth));
 				setPlayerHealth(currentHealth);
 			}
@@ -401,14 +417,6 @@ function AdventurePage() {
 
 	function claimRewards(e) {
 		e.preventDefault();
-
-		//changes health in db to correct value from taking damage in adventure
-		const dbCurrentHealth = selectedCharacter.current_health;
-		const currentHealth = localStorage.getItem("current_health");
-		const healthChange = dbCurrentHealth - currentHealth;
-		//remove adventure from database
-		dispatch(changeCharacterHealthThunk(selectedCharacter.id, healthChange));
-		dispatch(getUserCharactersThunk());
 		let adventure = JSON.parse(localStorage.getItem("currentAdventure"));
 		adventure.completed = true;
 		// receive rewards/experience points
@@ -419,7 +427,6 @@ function AdventurePage() {
 			addNewAdventureThunk(selectedCharacter?.id, adventure.adventure_type, adventure.score, adventure.completed)
 		);
 		dispatch(updateExperienceThunk(selectedCharacter?.id, adventure.score));
-		dispatch(changeCharacterHealthThunk(selectedCharacter?.id, healthChange));
 
 		//update setStates to render the home adventure page again
 		setCompleted(false);
