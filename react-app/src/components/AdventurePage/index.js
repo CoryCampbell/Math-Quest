@@ -14,6 +14,8 @@ import AdventureStartModal from "../AlertModals/AdventureStartModal";
 import OpenModalButton from "../OpenModalButton";
 import "./AdventurePage.css";
 
+import HealthBar from "../HealthBar";
+
 //
 
 //
@@ -56,9 +58,9 @@ function AdventurePage() {
 	let currentAdventure = localStorage.getItem("currentAdventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	let currentProgress = localStorage.getItem("currentProgress") || {};
-	let currentHealth = localStorage.getItem("current_health") || selectedCharacter.current_health;
-	let enemyHealth = localStorage.getItem("enemy_health") || {};
-
+	let currentHealth = localStorage.getItem("current_health") || selectedCharacter?.current_health;
+	const maxEnemyHealth = selectedCharacter?.max_health;
+	const currentEnemyHealth = localStorage.getItem("enemy_health") || maxEnemyHealth;
 	const appearance = selectedCharacter?.appearance;
 	console.log("appearance--------> ", appearance);
 
@@ -111,29 +113,9 @@ function AdventurePage() {
 
 	const [currentStage, setCurrentStage] = useState(currentProgress);
 
-	if (Object.values(currentHealth) === 0) {
-		currentHealth = 100;
-	} else {
-		try {
-			currentHealth = JSON.parse(currentHealth);
-		} catch {
-			currentHealth = 1;
-		}
-	}
-
 	const [playerHealth, setPlayerHealth] = useState(currentHealth);
 
-	if (Object.values(enemyHealth) === 0) {
-		enemyHealth = 100;
-	} else {
-		try {
-			enemyHealth = JSON.parse(enemyHealth);
-		} catch {
-			enemyHealth = 100;
-		}
-	}
-
-	const [enemyHealthState, setEnemyHealthState] = useState(enemyHealth);
+	const [enemyHealthState, setEnemyHealthState] = useState(currentEnemyHealth);
 
 	//Protects page rendering from missing question
 	if (Object.values(currentQuestion) === 0) {
@@ -329,11 +311,18 @@ function AdventurePage() {
 
 	function usePotion(e) {
 		e.preventDefault();
-		alert("Feature coming soon!");
 
 		//remove potion from inventory
 
 		//update user HP
+		let newHealth = selectedCharacter.current_health + 20;
+
+		if (newHealth > selectedCharacter.max_health) {
+			newHealth = selectedCharacter.max_health;
+		}
+
+		localStorage.setItem("current_health", newHealth);
+		dispatch(changeCharacterHealthThunk(selectedCharacter.id, -20));
 	}
 
 	function runAway(e) {
@@ -391,7 +380,7 @@ function AdventurePage() {
 			}
 		}
 
-		if (currentStage + 1 > 10) {
+		if (enemyHealthState - 10 === 0) {
 			console.log("adventure is over!", currentAdventure);
 
 			setCompleted(true);
@@ -406,7 +395,7 @@ function AdventurePage() {
 		} else {
 			localStorage.removeItem("currentQuestion");
 			localStorage.removeItem("currentProgress");
-			const nextStage = currentStage + 1;
+			const nextStage = currentStage;
 			console.log("Advancing to the next stage: ", nextStage);
 			setCurrentStage(nextStage);
 			question = loadQuestion(nextStage, currentAdventure.adventure_type);
@@ -505,7 +494,6 @@ function AdventurePage() {
 												Use Potion
 											</button>
 											<div>Score: {currentAdventure["score"]}</div>
-											<div>Stage: {currentStage} / 10</div>
 											<button className="run-away-button" value={adventure?.id} onClick={runAway}>
 												Run Away!
 											</button>
@@ -557,52 +545,8 @@ function AdventurePage() {
 											</div>
 											<div className="math-game-container">
 												<div className="health-bar-container">
-													{playerHealth === 100 ? (
-														<div className="player-health">100</div>
-													) : playerHealth === 90 ? (
-														<div className="player-health">90</div>
-													) : playerHealth === 80 ? (
-														<div className="player-health">80</div>
-													) : playerHealth === 70 ? (
-														<div className="player-health">70</div>
-													) : playerHealth === 60 ? (
-														<div className="player-health">60</div>
-													) : playerHealth === 50 ? (
-														<div className="player-health">50</div>
-													) : playerHealth === 40 ? (
-														<div className="player-health">40</div>
-													) : playerHealth === 30 ? (
-														<div className="player-health">30</div>
-													) : playerHealth === 20 ? (
-														<div className="player-health">20</div>
-													) : playerHealth === 10 ? (
-														<div className="player-health">10</div>
-													) : (
-														<div className="player-health">0</div>
-													)}
-													{enemyHealthState === 100 ? (
-														<div className="enemy-health">100</div>
-													) : enemyHealthState === 90 ? (
-														<div className="enemy-health">90</div>
-													) : enemyHealthState === 80 ? (
-														<div className="enemy-health">80</div>
-													) : enemyHealthState === 70 ? (
-														<div className="enemy-health">70</div>
-													) : enemyHealthState === 60 ? (
-														<div className="enemy-health">60</div>
-													) : enemyHealthState === 50 ? (
-														<div className="enemy-health">50</div>
-													) : enemyHealthState === 40 ? (
-														<div className="enemy-health">40</div>
-													) : enemyHealthState === 30 ? (
-														<div className="enemy-health">30</div>
-													) : enemyHealthState === 20 ? (
-														<div className="enemy-health">20</div>
-													) : enemyHealthState === 10 ? (
-														<div className="enemy-health">10</div>
-													) : (
-														<div className="enemy-health">0</div>
-													)}
+													<HealthBar health={currentHealth} />
+													<HealthBar health={enemyHealthState} />
 												</div>
 												<div className="question-container">{currentQuestion?.question} = ?</div>
 												<div className="answers-container">
