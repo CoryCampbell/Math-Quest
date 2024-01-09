@@ -430,6 +430,7 @@ function AdventurePage() {
 		localStorage.removeItem("currentQuestion");
 		localStorage.removeItem("currentProgress");
 		localStorage.removeItem("enemy_health");
+		localStorage.removeItem("current_health");
 
 		history.push("/village");
 	}
