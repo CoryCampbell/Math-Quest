@@ -170,7 +170,7 @@ function AdventurePage() {
 
 		console.log("storing start of adventure in local storage", adventureObject);
 		localStorage.setItem("currentAdventure", JSON.stringify(adventureObject));
-		localStorage.setItem("enemy_health", 100);
+		localStorage.setItem("enemy_health", maxEnemyHealth);
 
 		currentAdventure = JSON.parse(localStorage.getItem("currentAdventure"));
 		console.log("adventure after grab from local storage start adventure click: ", currentAdventure);
@@ -354,6 +354,9 @@ function AdventurePage() {
 				setPassed(true);
 				let currentEnemyHealth = JSON.parse(localStorage.getItem("enemy_health"));
 				currentEnemyHealth -= 10;
+
+				if (currentEnemyHealth < 0) currentEnemyHealth = 0;
+
 				localStorage.setItem("enemy_health", JSON.stringify(currentEnemyHealth));
 				setEnemyHealthState(currentEnemyHealth);
 				dispatch(getUserCharactersThunk());
@@ -380,7 +383,7 @@ function AdventurePage() {
 			}
 		}
 
-		if (enemyHealthState - 10 === 0) {
+		if (enemyHealthState - 10 <= 0) {
 			console.log("adventure is over!", currentAdventure);
 
 			setCompleted(true);

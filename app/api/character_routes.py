@@ -110,6 +110,7 @@ def update_experience(character_id, experience_points_gained):
         #update max health on level up
         if (oldLevel < character.level):
             character.max_health = math.trunc(character.max_health + character.max_health * .1)
+            character.current_health = character.max_health
 
 
 
