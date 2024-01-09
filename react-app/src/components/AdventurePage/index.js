@@ -56,7 +56,7 @@ function AdventurePage() {
 	let currentAdventure = localStorage.getItem("currentAdventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	let currentProgress = localStorage.getItem("currentProgress") || {};
-	let currentHealth = localStorage.getItem("current_health") || {};
+	let currentHealth = localStorage.getItem("current_health") || selectedCharacter.current_health;
 	let enemyHealth = localStorage.getItem("enemy_health") || {};
 
 	const appearance = selectedCharacter?.appearance;
@@ -112,7 +112,7 @@ function AdventurePage() {
 	const [currentStage, setCurrentStage] = useState(currentProgress);
 
 	if (Object.values(currentHealth) === 0) {
-		currentHealth = {};
+		currentHealth = 100;
 	} else {
 		try {
 			currentHealth = JSON.parse(currentHealth);
