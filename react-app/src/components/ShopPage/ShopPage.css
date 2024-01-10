@@ -1,6 +1,6 @@
 .shop-page-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 1022px;
@@ -9,4 +9,31 @@
   border: solid goldenrod 15px;
   box-sizing: border-box;
   border-style: groove;
+  background-color: rgb(189, 107, 49);
+}
+
+.shop-left {
+  border: solid goldenrod 15px;
+  box-sizing: border-box;
+  border-style: groove;
+  background-color: gray;
+  width: 70%;
+  height: 98%;
+  margin: 5px;
+}
+
+.shop-right {
+  border: solid goldenrod 15px;
+  box-sizing: border-box;
+  border-style: groove;
+  background-color: gray;
+  width: 30%;
+  height: 98%;
+  margin: 5px 5px 5px 0px;
+}
+
+.shop-item-preview {
+  width: 100%;
+  background-color: red;
+  height: 200px;
 }
