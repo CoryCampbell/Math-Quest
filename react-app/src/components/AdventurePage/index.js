@@ -230,13 +230,14 @@ function AdventurePage() {
 
 			question = { question: currentQuestion, answer, choices, question_value };
 		} else if (adventure_type === "multiplication") {
-			let num1 = Math.floor(Math.random() * 3) + nextStage;
-			let num2 = Math.floor(Math.random() * 3) + nextStage;
-			let currentQuestion = `${num1} X ${num2}`;
+			let num1 = Math.floor(Math.random() * 10) * nextStage;
+			let num2 = Math.floor(Math.random() * 10) * nextStage;
+			let currentQuestion = `${num1} x ${num2}`;
 			let answer = num1 * num2;
-			let answer2 = Math.floor(Math.random() * 8) * nextStage;
-			let answer3 = Math.floor(Math.random() * 8) * nextStage;
-			let answer4 = Math.floor(Math.random() * 8) * nextStage;
+			let answer2 = answer - 1;
+			if (answer2 <= 0) answer2 += 2;
+			let answer3 = answer + 2;
+			let answer4 = answer + 5;
 			let choices = [answer, answer2, answer3, answer4];
 
 			//RANDOMIZE ORDER OF CHOICES
@@ -501,9 +502,12 @@ function AdventurePage() {
 									</div>
 									<div className="full-game-container">
 										<div className="stage-time-container">
-											<button className="use-potion-button" onClick={usePotion}>
-												Use Potion
-											</button>
+											<div className="potion-container">
+												<button className="use-potion-button" onClick={usePotion}>
+													Use Potion
+												</button>{" "}
+												x5
+											</div>
 											<div>Score: {currentAdventure["score"]}</div>
 											<button className="run-away-button" value={adventure?.id} onClick={runAway}>
 												Run Away!
@@ -546,11 +550,19 @@ function AdventurePage() {
 													</div>
 												) : currentAdventure.adventure_type === "division" ? (
 													<div className="enemy-icon icon divback">
-														<img src={imagePreview?.default} alt="enemy-icon" className="enemy-icon-image"></img>
+														<img
+															src={require("../../static/enemies/DivMonster.png").default}
+															alt="enemy-icon"
+															className="enemy-icon-image"
+														></img>
 													</div>
 												) : (
 													<div className="enemy-icon icon multback">
-														<img src={imagePreview?.default} alt="enemy-icon" className="enemy-icon-image"></img>
+														<img
+															src={require("../../static/enemies/MultiplicationOne.png").default}
+															alt="enemy-icon"
+															className="enemy-icon-image multmonster"
+														></img>
 													</div>
 												)}
 											</div>
