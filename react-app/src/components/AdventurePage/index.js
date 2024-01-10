@@ -501,9 +501,12 @@ function AdventurePage() {
 									</div>
 									<div className="full-game-container">
 										<div className="stage-time-container">
-											<button className="use-potion-button" onClick={usePotion}>
-												Use Potion
-											</button>
+											<div className="potion-container">
+												<button className="use-potion-button" onClick={usePotion}>
+													Use Potion
+												</button>{" "}
+												x5
+											</div>
 											<div>Score: {currentAdventure["score"]}</div>
 											<button className="run-away-button" value={adventure?.id} onClick={runAway}>
 												Run Away!
@@ -546,11 +549,19 @@ function AdventurePage() {
 													</div>
 												) : currentAdventure.adventure_type === "division" ? (
 													<div className="enemy-icon icon divback">
-														<img src={imagePreview?.default} alt="enemy-icon" className="enemy-icon-image"></img>
+														<img
+															src={require("../../static/enemies/DivMonster.png").default}
+															alt="enemy-icon"
+															className="enemy-icon-image"
+														></img>
 													</div>
 												) : (
 													<div className="enemy-icon icon multback">
-														<img src={imagePreview?.default} alt="enemy-icon" className="enemy-icon-image"></img>
+														<img
+															src={require("../../static/enemies/MultiplicationOne.png").default}
+															alt="enemy-icon"
+															className="enemy-icon-image multmonster"
+														></img>
 													</div>
 												)}
 											</div>

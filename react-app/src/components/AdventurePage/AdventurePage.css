@@ -317,8 +317,22 @@ overflow: hidden;
   background-image: url('../../static/images/Hero adventure scene.png');
 }
 
+.multback {
+  background-image: url('../../static/images/Hero adventure scene.png');
+}
+
 .subback {
   background-image: url('../../static/images/Cave\ scene.png');
+}
+
+.divback {
+  background-image: url('../../static/images/Cave\ scene.png');
+}
+
+.multmonster {
+  width: 280px;
+  position: relative;
+  top: -20px;
 }
 
 .health-bar-container {
