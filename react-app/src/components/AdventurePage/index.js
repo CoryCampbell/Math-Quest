@@ -230,13 +230,14 @@ function AdventurePage() {
 
 			question = { question: currentQuestion, answer, choices, question_value };
 		} else if (adventure_type === "multiplication") {
-			let num1 = Math.floor(Math.random() * 3) + nextStage;
-			let num2 = Math.floor(Math.random() * 3) + nextStage;
-			let currentQuestion = `${num1} X ${num2}`;
+			let num1 = Math.floor(Math.random() * 10) * nextStage;
+			let num2 = Math.floor(Math.random() * 10) * nextStage;
+			let currentQuestion = `${num1} x ${num2}`;
 			let answer = num1 * num2;
-			let answer2 = Math.floor(Math.random() * 8) * nextStage;
-			let answer3 = Math.floor(Math.random() * 8) * nextStage;
-			let answer4 = Math.floor(Math.random() * 8) * nextStage;
+			let answer2 = answer - 1;
+			if (answer2 <= 0) answer2 += 2;
+			let answer3 = answer + 2;
+			let answer4 = answer + 5;
 			let choices = [answer, answer2, answer3, answer4];
 
 			//RANDOMIZE ORDER OF CHOICES
