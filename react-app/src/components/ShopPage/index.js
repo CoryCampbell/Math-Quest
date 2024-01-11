@@ -36,11 +36,27 @@ function ShopPage() {
 				</div>
 				<h3>WEAPONS</h3>
 				<div className="weapons-section">
-					<div className="bow-arrows shop-item">Bow & arrows</div>
-					<div className="sword shop-item">Sword</div>
-					<div className="shield shop-item">Shield</div>
-					<div className="glaive shop-item">Glaive</div>
-					<div className="staff shop-item">Staff</div>
+					<img className="bow shop-item" src={require("../../static/shop-images/bow.png").default} alt="bow"></img>
+					<img
+						className="sword shop-item"
+						src={require("../../static/shop-images/sword.png").default}
+						alt="sword"
+					></img>
+					<img
+						className="shield shop-item"
+						src={require("../../static/shop-images/shield.png").default}
+						alt="shield"
+					></img>
+					<img
+						className="glaive shop-item"
+						src={require("../../static/shop-images/glaive.png").default}
+						alt="glaive"
+					></img>
+					<img
+						className="staff shop-item"
+						src={require("../../static/shop-images/staff.png").default}
+						alt="staff"
+					></img>
 				</div>
 				<h3>ARMOR</h3>
 				<div className="armor-section">
