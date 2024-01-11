@@ -60,10 +60,22 @@ function ShopPage() {
 				</div>
 				<h3>ARMOR</h3>
 				<div className="armor-section">
-					<div className="steel-armor shop-item">Steel Armor</div>
-					<div className="golden-armor shop-item">Golden Armor</div>
-					<div className="netherite-armor shop-item">Netherite Armor</div>
-					<div className="obsidian-armor shop-item">Obsidian Armor</div>
+					<img
+						className="steel shop-item"
+						src={require("../../static/shop-images/steel.png").default}
+						alt="steel"
+					></img>
+					<img className="gold shop-item" src={require("../../static/shop-images/gold.png").default} alt="gold"></img>
+					<img
+						className="netherite shop-item"
+						src={require("../../static/shop-images/netherite.png").default}
+						alt="netherite"
+					></img>
+					<img
+						className="obsidian shop-item"
+						src={require("../../static/shop-images/obsidian.png").default}
+						alt="obsidian"
+					></img>
 				</div>
 			</div>
 		</>
