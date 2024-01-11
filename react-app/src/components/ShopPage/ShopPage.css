@@ -21,7 +21,6 @@
   border: solid goldenrod 10px;
   box-sizing: border-box;
   border-style: groove;
-  background-color: rgb(189, 107, 49);
 }
 .weapons-section {
   width: 100%;
@@ -32,7 +31,6 @@
   border: solid goldenrod 10px;
   box-sizing: border-box;
   border-style: groove;
-  background-color: rgb(189, 107, 49);
 }
 .armor-section {
   width: 100%;
@@ -43,13 +41,14 @@
   border: solid goldenrod 10px;
   box-sizing: border-box;
   border-style: groove;
-  background-color: rgb(189, 107, 49);
 }
 
 .shop-item {
   border: solid goldenrod 5px;
   box-sizing: border-box;
   border-style: groove;
-  background-color: rgb(189, 107, 49);
+  background-color: transparent;
   width: 100px;
+  height: 100px;
+  align-self: center;
 }

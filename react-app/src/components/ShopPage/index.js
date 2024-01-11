@@ -18,9 +18,21 @@ function ShopPage() {
 			<div className="shop-page-container">
 				<h3>POTIONS</h3>
 				<div className="potions-section">
-					<div className="small-potion shop-item">Small Potion</div>
-					<div className="medium-potion shop-item">Medium Potion</div>
-					<div className="large-potion shop-item">Large Potion</div>
+					<img
+						className="small-potion shop-item"
+						src={require("../../static/shop-images/small-potion.png").default}
+						alt="small-potion"
+					></img>
+					<img
+						className="medium-potion shop-item"
+						src={require("../../static/shop-images/medium-potion.png").default}
+						alt="medium-potion"
+					></img>
+					<img
+						className="large-potion shop-item"
+						src={require("../../static/shop-images/large-potion.png").default}
+						alt="large-potion"
+					></img>
 				</div>
 				<h3>WEAPONS</h3>
 				<div className="weapons-section">
