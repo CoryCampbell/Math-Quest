@@ -158,10 +158,31 @@ function CharacterPage() {
 								</div>
 								<div className="selected-character-gear">
 									<img src={imagePreview.default} alt="appearance-preview" className="image-preview"></img>
-									<div className="gear-preview">gear</div>
+									<div className="gear-preview">
+										<div className="potion-inventory">potions</div>
+										<div>armor</div>
+										<div>weapon</div>
+										<div>shield</div>
+									</div>
 								</div>
 							</div>
-							<div className="inventory-container">Inventory</div>
+							<div className="inventory-container">
+								<div className="inventory-title">Inventory</div>
+								<div className="all-inventory">
+									<div className="inventory-item">test item</div>
+									<div className="inventory-item">test item</div>
+									<div className="inventory-item">test item</div>
+									<div className="inventory-item">test item</div>
+									<div className="inventory-item">test item</div>
+									<div className="inventory-item">test item</div>
+									<div className="inventory-item">test item</div>
+									<div className="inventory-item">test item</div>
+									<div className="inventory-item">test item</div>
+									<div className="inventory-item">test item</div>
+									<div className="inventory-item">test item</div>
+									<div className="inventory-item">test item</div>
+								</div>
+							</div>
 						</>
 					) : (
 						<>
