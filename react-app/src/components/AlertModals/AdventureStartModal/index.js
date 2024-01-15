@@ -19,7 +19,7 @@ function AdventureStartModal() {
 			</p>
 			<div className="tips-container">
 				<p>Tip: You can run away from a fight if you find yourself low on health.</p>
-				<p>Tip: After 10 stages, you will return to your Village and be rewarded for your progress!</p>
+				<p>Tip: After you defeat the monster, you will return to your Village and be rewarded for your progress!</p>
 			</div>
 			<button type="button" onClick={handleSubmit}>
 				Okay!

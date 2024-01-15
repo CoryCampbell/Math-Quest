@@ -23,7 +23,7 @@
   margin: 110px;
   margin-bottom: 15px;
   align-self: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: immortalFont;
   font-size: 25px;
 }
 
@@ -47,7 +47,7 @@
   height: 40px;
   border-radius: 5px;
   background-color: rgb(205, 0, 0);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: immortalFont;
   font-size: 15px;
   font-weight: bold;
 }
@@ -58,7 +58,7 @@
   width: 300px;
   height: 50px;
   border-radius: 20px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: immortalFont;
   font-size: 25px;
 }
 

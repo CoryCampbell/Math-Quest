@@ -1,11 +1,16 @@
-/* TODO Add site wide styles */
+/* site wide styles */
+
+@font-face {
+  font-family: immortalFont;
+  src: url("./static/Font/IMMORTAL.ttf");
+}
 
 body {
   margin: 0px;
   background-image: linear-gradient(rgb(255, 255, 255) 0%, skyblue 90%, green 10%);
   height: 100vh;
   font-size: 20px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: immortalFont;
   cursor: url("../src/static/images/mouse.png"), auto;
   caret-color: transparent;
 }
@@ -29,6 +34,7 @@ html {
 
   button {
   cursor: url("../src/static/images/mouse.png"), auto;
+  font-family: immortalFont;
 }
 
   button:active {
