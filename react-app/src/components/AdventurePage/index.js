@@ -494,7 +494,15 @@ function AdventurePage() {
 											></OpenModalButton>
 										</div>
 										<div className="adv-top-right">
-											<div>Coins: {selectedCharacter?.coins}</div>
+											<div className="coin-total">
+												{" "}
+												<img
+													className="coin-image"
+													src={require("../../static/images/gold-coin.png").default}
+													alt="coin"
+												></img>{" "}
+												{selectedCharacter?.coins}
+											</div>
 											<div>
 												level {selectedCharacter?.level} XP: {selectedCharacter?.experience_points}
 											</div>

@@ -76,6 +76,8 @@
   height: 30px;
   width: 150px;
   color: gold;
+  font-weight: bold;
+  font-size: 15px;
 }
 
 .characters-title-container > button:hover {
@@ -253,4 +255,35 @@ form.submit-delete-character-container {
   color: white;
   background-color: rgb(154, 0, 0);
   height: 100%;
+}
+
+.coin-total {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+.inventory-item {
+  border: solid 1px black;
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.inventory-title {
+  text-align: center;
+  font-weight: bold;
+}
+
+.all-inventory {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
