@@ -16,6 +16,13 @@
   font-weight: bolder;
 }
 
+.coin-total {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
 .adventure-options-container {
   display: flex;
   flex-direction: column;

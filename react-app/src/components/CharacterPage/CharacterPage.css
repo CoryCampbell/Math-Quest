@@ -256,3 +256,10 @@ form.submit-delete-character-container {
   background-color: rgb(154, 0, 0);
   height: 100%;
 }
+
+.coin-total {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}

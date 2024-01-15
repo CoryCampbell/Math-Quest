@@ -139,7 +139,15 @@ function CharacterPage() {
 											></OpenModalButton>
 										</div>
 									</div>
-									<div>Coins: {selectedCharacter.coins}</div>
+									<div className="coin-total">
+										{" "}
+										<img
+											className="coin-image"
+											src={require("../../static/images/gold-coin.png").default}
+											alt="coin"
+										></img>{" "}
+										{selectedCharacter.coins}
+									</div>
 								</div>
 								<div className="info-stats-bottom">
 									Health: {selectedCharacter.current_health}/{selectedCharacter.max_health}
