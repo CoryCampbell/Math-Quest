@@ -14,155 +14,174 @@ function ShopPage() {
 		return <Redirect to="/adventures" />;
 	}
 	return (
-		<>
-			<div className="shop-page-container">
-				<h3>POTIONS</h3>
-				<div className="potions-section">
-					<div className="option-container">
-						<img
-							className="small-potion shop-item"
-							src={require("../../static/shop-images/small-potion.png").default}
-							alt="small-potion"
-						></img>
-						<div>
-							<div>Lesser Health Potion</div>
-							<div>price</div>
-							<button>BUY</button>
-						</div>
-					</div>
-					<div className="option-container">
-						<img
-							className="medium-potion shop-item"
-							src={require("../../static/shop-images/medium-potion.png").default}
-							alt="medium-potion"
-						></img>
-						<div>
-							<div>Greater Health Potion</div>
-							<div>price</div>
-							<button>BUY</button>
-						</div>
-					</div>
-					<div className="option-container">
-						<img
-							className="large-potion shop-item"
-							src={require("../../static/shop-images/large-potion.png").default}
-							alt="large-potion"
-						></img>
-						<div>
-							<div>Perfected Health Potion</div>
-							<div>price</div>
-							<button>BUY</button>
-						</div>
-					</div>
+		<div className="shop-page-container">
+			<div className="option-container">
+				<div className="item-title">
+					Lesser <br></br>Health Potion
 				</div>
-				<h3>WEAPONS</h3>
-				<div className="weapons-section">
-					<div className="option-container">
-						<img className="bow shop-item" src={require("../../static/shop-images/bow.png").default} alt="bow"></img>
-						<div>
-							<div>Bow and Arrows</div>
-							<div>price</div>
-							<button>BUY</button>
-						</div>
-					</div>
-					<div className="option-container">
-						<img
-							className="sword shop-item"
-							src={require("../../static/shop-images/sword.png").default}
-							alt="sword"
-						></img>
-						<div>
-							<div>Greatsword</div>
-							<div>price</div>
-							<button>BUY</button>
-						</div>
-					</div>
-					<div className="option-container">
-						<img
-							className="shield shop-item"
-							src={require("../../static/shop-images/shield.png").default}
-							alt="shield"
-						></img>
-						<div>
-							<div>Shield</div>
-							<div>price</div>
-							<button>BUY</button>
-						</div>
-					</div>
-					<div className="option-container">
-						<img
-							className="glaive shop-item"
-							src={require("../../static/shop-images/glaive.png").default}
-							alt="glaive"
-						></img>
-						<div>
-							<div>Glaive</div>
-							<div>price</div>
-							<button>BUY</button>
-						</div>
-					</div>
-					<div className="option-container">
-						<img
-							className="staff shop-item"
-							src={require("../../static/shop-images/staff.png").default}
-							alt="staff"
-						></img>
-						<div>
-							<div>Staff</div>
-							<div>price</div>
-							<button>BUY</button>
-						</div>
-					</div>
-				</div>
-				<h3>ARMOR</h3>
-				<div className="armor-section">
-					<div className="option-container">
-						<img
-							className="steel shop-item"
-							src={require("../../static/shop-images/steel.png").default}
-							alt="steel"
-						></img>
-						<div>
-							<div>Steel Armor</div>
-							<div>price</div>
-							<button>BUY</button>
-						</div>
-					</div>
-					<div className="option-container">
-						<img className="gold shop-item" src={require("../../static/shop-images/gold.png").default} alt="gold"></img>
-						<div>
-							<div>Golden Armor</div>
-							<div>price</div>
-							<button>BUY</button>
-						</div>
-					</div>
-					<div className="option-container">
-						<img
-							className="netherite shop-item"
-							src={require("../../static/shop-images/netherite.png").default}
-							alt="netherite"
-						></img>
-						<div>
-							<div>Netherite Armor</div>
-							<div>price</div>
-							<button>BUY</button>
-						</div>
-					</div>
-					<div className="option-container">
-						<img
-							className="obsidian shop-item"
-							src={require("../../static/shop-images/obsidian.png").default}
-							alt="obsidian"
-						></img>
-						<div>
-							<div>Obsidian Armor</div>
-							<div>price</div>
-							<button>BUY</button>
-						</div>
-					</div>
+				<img
+					className="small-potion shop-item"
+					src={require("../../static/shop-images/small-potion.png").default}
+					alt="small-potion"
+				></img>
+				<div className="purchase-container">
+					<button className="purchase-button">
+						<img className="coin-image" src={require("../../static/images/gold-coin.png").default} alt="coin"></img>
+						<div className="imem-price">10</div>
+					</button>
 				</div>
 			</div>
-		</>
+			<div className="option-container">
+				<div className="item-title">
+					Greater <br></br>Health Potion
+				</div>
+				<img
+					className="medium-potion shop-item"
+					src={require("../../static/shop-images/medium-potion.png").default}
+					alt="medium-potion"
+				></img>
+				<div className="purchase-container">
+					<button className="purchase-button">
+						<img className="coin-image" src={require("../../static/images/gold-coin.png").default} alt="coin"></img>
+						50
+					</button>
+				</div>
+			</div>
+			<div className="option-container">
+				<div className="item-title">
+					Perfected <br></br>Health Potion
+				</div>
+				<img
+					className="large-potion shop-item"
+					src={require("../../static/shop-images/large-potion.png").default}
+					alt="large-potion"
+				></img>
+				<div className="purchase-container">
+					<button className="purchase-button">
+						<img className="coin-image" src={require("../../static/images/gold-coin.png").default} alt="coin"></img>
+						100
+					</button>
+				</div>
+			</div>
+			<div className="option-container">
+				<div className="item-title">
+					Bow and <br></br>Arrows
+				</div>
+				<img className="bow shop-item" src={require("../../static/shop-images/bow.png").default} alt="bow"></img>
+				<div className="purchase-container">
+					<button className="purchase-button">
+						<img className="coin-image" src={require("../../static/images/gold-coin.png").default} alt="coin"></img>
+						50
+					</button>
+				</div>
+			</div>
+			<div className="option-container">
+				<div className="item-title">
+					Great <br></br>Sword
+				</div>
+				<img className="sword shop-item" src={require("../../static/shop-images/sword.png").default} alt="sword"></img>
+				<div className="purchase-container">
+					<button className="purchase-button">
+						<img className="coin-image" src={require("../../static/images/gold-coin.png").default} alt="coin"></img>
+						250
+					</button>
+				</div>
+			</div>
+			<div className="option-container">
+				<div className="item-title">Shield</div>
+				<img
+					className="shield shop-item"
+					src={require("../../static/shop-images/shield.png").default}
+					alt="shield"
+				></img>
+				<div className="purchase-container">
+					<button className="purchase-button">
+						<img className="coin-image" src={require("../../static/images/gold-coin.png").default} alt="coin"></img>
+						500
+					</button>
+				</div>
+			</div>
+			<div className="option-container">
+				<div className="item-title">Glaive</div>
+				<img
+					className="glaive shop-item"
+					src={require("../../static/shop-images/glaive.png").default}
+					alt="glaive"
+				></img>
+				<div className="purchase-container">
+					<button className="purchase-button">
+						<img className="coin-image" src={require("../../static/images/gold-coin.png").default} alt="coin"></img>
+						1,000
+					</button>
+				</div>
+			</div>
+			<div className="option-container">
+				<div className="item-title">Staff</div>
+				<img className="staff shop-item" src={require("../../static/shop-images/staff.png").default} alt="staff"></img>
+				<div className="purchase-container">
+					<button className="purchase-button">
+						<img className="coin-image" src={require("../../static/images/gold-coin.png").default} alt="coin"></img>
+						5,000
+					</button>
+				</div>
+			</div>
+			<div className="option-container">
+				<div className="item-title">
+					Steel<br></br>Armor
+				</div>
+				<img className="steel shop-item" src={require("../../static/shop-images/steel.png").default} alt="steel"></img>
+				<div className="purchase-container">
+					<button className="purchase-button">
+						<img className="coin-image" src={require("../../static/images/gold-coin.png").default} alt="coin"></img>
+						250
+					</button>
+				</div>
+			</div>
+			<div className="option-container">
+				<div className="item-title">
+					Golden<br></br>Armor
+				</div>
+				<img className="gold shop-item" src={require("../../static/shop-images/gold.png").default} alt="gold"></img>
+				<div className="purchase-container">
+					<button className="purchase-button">
+						<img className="coin-image" src={require("../../static/images/gold-coin.png").default} alt="coin"></img>
+						1,000
+					</button>
+				</div>
+			</div>
+			<div className="option-container">
+				<div className="item-title">
+					Netherite<br></br>Armor
+				</div>
+				<img
+					className="netherite shop-item"
+					src={require("../../static/shop-images/netherite.png").default}
+					alt="netherite"
+				></img>
+				<div className="purchase-container">
+					<button className="purchase-button">
+						<img className="coin-image" src={require("../../static/images/gold-coin.png").default} alt="coin"></img>
+						5,000
+					</button>
+				</div>
+			</div>
+			<div className="option-container">
+				<div className="item-title">
+					Obsidian<br></br>Armor
+				</div>
+				<img
+					className="obsidian shop-item"
+					src={require("../../static/shop-images/obsidian.png").default}
+					alt="obsidian"
+				></img>
+				<div className="purchase-container">
+					<button className="purchase-button">
+						<img className="coin-image" src={require("../../static/images/gold-coin.png").default} alt="coin"></img>
+						10,000
+					</button>
+				</div>
+			</div>
+		</div>
 	);
 }
 

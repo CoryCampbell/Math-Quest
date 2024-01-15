@@ -76,6 +76,8 @@
   height: 30px;
   width: 150px;
   color: gold;
+  font-weight: bold;
+  font-size: 15px;
 }
 
 .characters-title-container > button:hover {

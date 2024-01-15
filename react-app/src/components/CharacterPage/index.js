@@ -109,7 +109,7 @@ function CharacterPage() {
 					<div className="characters-title-container">
 						<div className="char-title">CHARACTERS</div>
 						<OpenModalButton
-							buttonText="Create New Character"
+							buttonText="New Character"
 							modalComponent={<NewCharacterModal className="new-character-button" disabled />}
 						></OpenModalButton>
 					</div>
@@ -191,6 +191,3 @@ function CharacterPage() {
 }
 
 export default CharacterPage;
-
-/* <button className="character-select-option">Select A Character</button>
-					<button className="character-select-gear">Gear</button> */
