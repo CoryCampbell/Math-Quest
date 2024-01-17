@@ -28,7 +28,7 @@
 .logged-in-nav-container {
   display: flex;
   flex-direction: row;
-  width: 90%;
+  width: 98%;
   margin: auto;
   justify-content: center;
   align-items: center;
@@ -64,7 +64,7 @@
 }
 
 .modal-buttons-container > button:hover {
-    background-color: rgb(171, 171, 171);
+  background-color: rgb(171, 171, 171);
   border-radius: 5px;
   color: rgb(255, 226, 62);
 }
@@ -76,7 +76,7 @@
 }
 
 .demo-user-button:hover {
-    background-color: rgb(191, 2, 2);
+  background-color: rgb(191, 2, 2);
   border-radius: 5px;
   color: rgb(251, 221, 52);
 }
@@ -105,11 +105,10 @@ a:hover {
 }
 
 .selected-character-title {
-  width: 280px;
+  width: 200px;
   display: flex;
+  justify-content: flex-start;
   overflow: hidden;
-}
-
-.info-character-title {
-  overflow: hidden;
+  font-size: 20px;
+  text-align: center;
 }

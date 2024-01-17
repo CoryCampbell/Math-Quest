@@ -178,8 +178,6 @@ function CharacterPage() {
 									<div className="inventory-item">test item</div>
 									<div className="inventory-item">test item</div>
 									<div className="inventory-item">test item</div>
-									<div className="inventory-item">test item</div>
-									<div className="inventory-item">test item</div>
 								</div>
 							</div>
 						</>
