@@ -85,6 +85,7 @@ function Navigation({ isLoaded }) {
 						<NavLink to="/dungeons">Dungeons</NavLink>
 						<NavLink to="/quests">Quests</NavLink>
 						<NavLink to="/statistics">Statistics</NavLink>
+						<NavLink to="/leaderboard">Leaderboard</NavLink>
 						<NavLink to="/about">About</NavLink>
 					</div>
 				) : (

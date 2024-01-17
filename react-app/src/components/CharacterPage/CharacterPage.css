@@ -287,3 +287,35 @@ form.submit-delete-character-container {
   justify-content: center;
   align-items: center;
 }
+
+.equipped {
+  height: 100%;
+}
+
+.equipped-armor {
+    border: solid goldenrod 5px;
+  box-sizing: border-box;
+  border-style: groove;
+}
+
+.equipped-weapon {
+    border: solid goldenrod 5px;
+  box-sizing: border-box;
+  border-style: groove;
+}
+
+.equipped-shield {
+  border: solid goldenrod 5px;
+  box-sizing: border-box;
+  border-style: groove;
+}
+
+.gear-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.buff {
+  color: rgb(0, 255, 0) !important;
+}

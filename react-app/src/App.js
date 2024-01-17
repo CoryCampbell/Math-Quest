@@ -12,6 +12,7 @@ import AdventurePage from "./components/AdventurePage";
 import StatisticsPage from "./components/StatisticsPage";
 import QuestsPage from "./components/QuestsPage";
 import DungeonsPage from "./components/DungeonsPage";
+import LeaderboardPage from "./components/LeaderboardPage";
 import Footer from "./components/Footer";
 
 function App() {
@@ -49,6 +50,9 @@ function App() {
 					</Route>
 					<Route path="/village">
 						<VillagePage />
+					</Route>
+					<Route path="/leaderboard">
+						<LeaderboardPage />
 					</Route>
 					<Route exact path="/">
 						<LandingPage />

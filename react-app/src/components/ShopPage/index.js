@@ -19,6 +19,7 @@ function ShopPage() {
 				<div className="item-title">
 					Lesser <br></br>Health Potion
 				</div>
+				<div className="item-title buff">+20hp</div>
 				<img
 					className="small-potion shop-item"
 					src={require("../../static/shop-images/small-potion.png").default}
@@ -27,11 +28,11 @@ function ShopPage() {
 				<div className="purchase-container">
 					<button className="purchase-button">
 						<img className="coin-image" src={require("../../static/images/gold-coin.png").default} alt="coin"></img>
-						<div className="imem-price">10</div>
+						<div className="item-price">10</div>
 					</button>
 				</div>
 			</div>
-			<div className="option-container">
+			{/* <div className="option-container">
 				<div className="item-title">
 					Greater <br></br>Health Potion
 				</div>
@@ -46,8 +47,8 @@ function ShopPage() {
 						50
 					</button>
 				</div>
-			</div>
-			<div className="option-container">
+			</div> */}
+			{/* <div className="option-container">
 				<div className="item-title">
 					Perfected <br></br>Health Potion
 				</div>
@@ -62,11 +63,12 @@ function ShopPage() {
 						100
 					</button>
 				</div>
-			</div>
+			</div> */}
 			<div className="option-container">
 				<div className="item-title">
 					Bow and <br></br>Arrows
 				</div>
+				<div className="item-title buff">+3 Damage</div>
 				<img className="bow shop-item" src={require("../../static/shop-images/bow.png").default} alt="bow"></img>
 				<div className="purchase-container">
 					<button className="purchase-button">
@@ -79,6 +81,7 @@ function ShopPage() {
 				<div className="item-title">
 					Great <br></br>Sword
 				</div>
+				<div className="item-title buff">+5 Damage</div>
 				<img className="sword shop-item" src={require("../../static/shop-images/sword.png").default} alt="sword"></img>
 				<div className="purchase-container">
 					<button className="purchase-button">
@@ -88,7 +91,10 @@ function ShopPage() {
 				</div>
 			</div>
 			<div className="option-container">
-				<div className="item-title">Shield</div>
+				<div className="item-title">
+					Heater<br></br>Shield
+				</div>
+				<div className="item-title buff">+5 Defense</div>
 				<img
 					className="shield shop-item"
 					src={require("../../static/shop-images/shield.png").default}
@@ -103,6 +109,7 @@ function ShopPage() {
 			</div>
 			<div className="option-container">
 				<div className="item-title">Glaive</div>
+				<div className="item-title buff">+10 Damage</div>
 				<img
 					className="glaive shop-item"
 					src={require("../../static/shop-images/glaive.png").default}
@@ -117,6 +124,7 @@ function ShopPage() {
 			</div>
 			<div className="option-container">
 				<div className="item-title">Staff</div>
+				<div className="item-title buff">+25 Damage</div>
 				<img className="staff shop-item" src={require("../../static/shop-images/staff.png").default} alt="staff"></img>
 				<div className="purchase-container">
 					<button className="purchase-button">
@@ -129,6 +137,7 @@ function ShopPage() {
 				<div className="item-title">
 					Steel<br></br>Armor
 				</div>
+				<div className="item-title buff">+2 Defense</div>
 				<img className="steel shop-item" src={require("../../static/shop-images/steel.png").default} alt="steel"></img>
 				<div className="purchase-container">
 					<button className="purchase-button">
@@ -141,6 +150,7 @@ function ShopPage() {
 				<div className="item-title">
 					Golden<br></br>Armor
 				</div>
+				<div className="item-title buff">+5 Defense</div>
 				<img className="gold shop-item" src={require("../../static/shop-images/gold.png").default} alt="gold"></img>
 				<div className="purchase-container">
 					<button className="purchase-button">
@@ -153,6 +163,7 @@ function ShopPage() {
 				<div className="item-title">
 					Netherite<br></br>Armor
 				</div>
+				<div className="item-title buff">+10 Defense</div>
 				<img
 					className="netherite shop-item"
 					src={require("../../static/shop-images/netherite.png").default}
@@ -169,6 +180,7 @@ function ShopPage() {
 				<div className="item-title">
 					Obsidian<br></br>Armor
 				</div>
+				<div className="item-title buff">+25 Defense</div>
 				<img
 					className="obsidian shop-item"
 					src={require("../../static/shop-images/obsidian.png").default}

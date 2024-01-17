@@ -1,0 +1,53 @@
+.leaderboard-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 1022px;
+  height: 650px;
+  margin: 50px auto;
+  border: solid goldenrod 15px;
+  box-sizing: border-box;
+  border-style: groove;
+  background-color: black !important;
+  color: white;
+}
+
+.leaderboard-title {
+  margin: 20px;
+}
+
+.all-scores-container {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+}
+
+.adventures-leaderboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+
+.dungeons-leaderboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+
+.al-title {
+  font-size: 35px;
+  margin: 15px;
+}
+
+.dl-title {
+  font-size: 35px;
+  margin: 15px;
+}
