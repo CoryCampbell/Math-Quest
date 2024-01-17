@@ -7,7 +7,7 @@
 
 .character-select-container > button {
   border: none;
-    font-size: 15px;
+    font-size: 25px;
     height: 40px;
     background-color: transparent;
     display: flex;
@@ -35,7 +35,7 @@
 }
 
 .character-select-container > button:hover {
-    font-size: 15px;
+    font-size: 25px;
     height: 40px;
     display: flex;
     flex-direction: row;
@@ -117,7 +117,6 @@ form.submit-delete-character-container {
   border: solid black 1px;
   box-sizing: border-box;
   display: flex;
-
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -280,10 +279,46 @@ form.submit-delete-character-container {
   font-weight: bold;
 }
 
+.info-character-title {
+  overflow: hidden;
+}
+
 .all-inventory {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+
+.equipped {
+  height: 100%;
+}
+
+.equipped-armor {
+    border: solid goldenrod 5px;
+  box-sizing: border-box;
+  border-style: groove;
+}
+
+.equipped-weapon {
+    border: solid goldenrod 5px;
+  box-sizing: border-box;
+  border-style: groove;
+}
+
+.equipped-shield {
+  border: solid goldenrod 5px;
+  box-sizing: border-box;
+  border-style: groove;
+}
+
+.gear-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.buff {
+  color: rgb(0, 255, 0) !important;
 }
