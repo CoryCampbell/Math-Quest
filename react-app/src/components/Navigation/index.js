@@ -11,6 +11,7 @@ import { clearAdventureThunk, deleteAdventureThunk } from "../../store/adventure
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
+	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
 	const adventure = useSelector((state) => state.adventure);
 	const history = useHistory();
 	const dispatch = useDispatch();
@@ -66,27 +67,29 @@ function Navigation({ isLoaded }) {
 			<ul className="nav-items-container">
 				{isLoaded && sessionUser ? (
 					<div className="logged-in-nav-container">
-						<li className="greetings">Greetings, {sessionUser.first_name}</li>
-						<li>
+						<div className="selected-character-title">
+							{selectedCharacter ? <p>{selectedCharacter?.character_name}</p> : <p>Select a Character</p>}
+						</div>
+						<div className="static-nav">
 							<button className="log-out-button" onClick={handleLogout}>
 								Log Out
 							</button>
-						</li>
-						<NavLink exact to="/village">
-							Village
-						</NavLink>
-						<NavLink exact to="/characters">
-							Characters
-						</NavLink>
-						<NavLink exact to="/shop">
-							Shop
-						</NavLink>
-						<NavLink to="/adventures">Adventures</NavLink>
-						<NavLink to="/dungeons">Dungeons</NavLink>
-						<NavLink to="/quests">Quests</NavLink>
-						<NavLink to="/statistics">Statistics</NavLink>
-						<NavLink to="/leaderboard">Leaderboard</NavLink>
-						<NavLink to="/about">About</NavLink>
+							<NavLink exact to="/village">
+								Village
+							</NavLink>
+							<NavLink exact to="/characters">
+								Characters
+							</NavLink>
+							<NavLink exact to="/shop">
+								Shop
+							</NavLink>
+							<NavLink to="/adventures">Adventures</NavLink>
+							<NavLink to="/dungeons">Dungeons</NavLink>
+							<NavLink to="/quests">Quests</NavLink>
+							<NavLink to="/statistics">Statistics</NavLink>
+							<NavLink to="/leaderboard">Leaderboard</NavLink>
+							<NavLink to="/about">About</NavLink>
+						</div>
 					</div>
 				) : (
 					<div className="landing-navlinks">

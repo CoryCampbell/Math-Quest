@@ -1,8 +1,10 @@
 .navigation-container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
   height: 5vh;
+  width: 100%;
   background-color: rgb(255, 255, 255);
 }
 
@@ -12,8 +14,8 @@
   width: 100%;
   padding: 0px;
   margin: 0px;
-  justify-content: space-between;
-  list-style-type: none;
+  justify-content: center;
+  align-items: center;
 }
 
 .landing-navlinks {
@@ -28,7 +30,7 @@
   flex-direction: row;
   width: 90%;
   margin: auto;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   list-style-type: none;
 }
@@ -36,14 +38,14 @@
 .user-log-commands-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   width: 25%;
 }
 
 .landing-links-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   width: 15%;
 }
@@ -92,9 +94,22 @@
 }
 
 a:hover {
-    color: rgb(218, 196, 75);
+    color: rgb(54, 47, 6);
 }
 
-.greetings {
-  font-size: 15px;
+
+.static-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.selected-character-title {
+  width: 280px;
+  display: flex;
+  overflow: hidden;
+}
+
+.info-character-title {
+  overflow: hidden;
 }
