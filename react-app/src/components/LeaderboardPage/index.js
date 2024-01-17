@@ -9,7 +9,7 @@ function LeaderboardPage() {
 	return (
 		<>
 			<div className="leaderboard-page-container">
-				<h1 className="leaderboard-title">Leaderboard</h1>
+				<h1 className="leaderboard-title">Leaderboard (Coming Soon!)</h1>
 				<div className="all-scores-container">
 					<div className="adventures-leaderboard">
 						<h2 className="al-title">Adventures</h2>
