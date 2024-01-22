@@ -133,6 +133,20 @@ form.submit-delete-character-container {
   padding-right: 15px;
 }
 
+
+.equipped-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+.equipped-title {
+  text-align: center;
+  margin: 5px;
+}
+
 .info-stats-top {
   display: flex;
   flex-direction: row;
@@ -293,6 +307,10 @@ form.submit-delete-character-container {
 
 .equipped {
   height: 100%;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .equipped-armor {
