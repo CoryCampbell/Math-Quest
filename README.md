@@ -16,8 +16,6 @@ Users can login/signup to save their progress, and continue to level up their ch
 
 # Features coming soon
 
--Health system for combat
-
 -Shop to purchase potions and gear
 
 -Quests (achievements)
@@ -63,7 +61,8 @@ Customizable Character Appearances:
 ![characters-preview](https://github.com/CoryCampbell/Math-Quest/assets/110738538/f8cd9bb3-655c-4828-900f-e78dadaf2494)
 
 Solve Match Problems to Gain Experience: 
-![adventure-preview](https://github.com/CoryCampbell/Math-Quest/assets/110738538/3e1470d4-ae36-4c54-938d-e1c4635a85ac)
+
+![adventure-preview](https://github.com/CoryCampbell/Math-Quest/assets/110738538/d3d0f46e-e155-4dd5-80ee-5715d427614d)
 
 
 
