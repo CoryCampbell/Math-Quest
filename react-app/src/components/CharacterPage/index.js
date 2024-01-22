@@ -159,14 +159,13 @@ function CharacterPage() {
 								<div className="selected-character-gear">
 									<img src={imagePreview.default} alt="appearance-preview" className="image-preview"></img>
 									<div className="gear-preview">
+										<h5 className="equipped-armor-title equipped-title">Equipped Items</h5>
 										<div className="equipped-armor equipped">
-											<h5 className="equipped-armor-title equipped-title">Equipped Armor</h5>
 											<div className="equipped-items">
 												<div className="inventory-item">armor</div>
 											</div>
 										</div>
 										<div className="equipped-weapon equipped">
-											<h5 className="equipped-items-title equipped-title">Equipped Weapon</h5>
 											<div className="equipped-items">
 												<div className="inventory-item">weapon</div>
 												<div className="inventory-item">shield</div>

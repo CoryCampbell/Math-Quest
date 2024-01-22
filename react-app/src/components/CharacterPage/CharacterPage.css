@@ -144,7 +144,7 @@ form.submit-delete-character-container {
 
 .equipped-title {
   text-align: center;
-  margin: 15px;
+  margin: 5px;
 }
 
 .info-stats-top {
@@ -307,6 +307,10 @@ form.submit-delete-character-container {
 
 .equipped {
   height: 100%;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .equipped-armor {
