@@ -228,7 +228,18 @@ function NewCharacterModal() {
 									<img src={require("../../static/appearances/FEMALE4.PNG").default} alt="Female4"></img>
 								</label>
 							</div>
-
+							<div>
+								<input
+									type="radio"
+									id={16}
+									name="drone"
+									value={appearance}
+									onChange={(e) => setAppearance(e.target.id)}
+								/>
+								<label htmlFor="appearance-f8">
+									<img src={require("../../static/appearances/FEMALE8.PNG").default} alt="Female8"></img>
+								</label>
+							</div>
 							<div>
 								<input
 									type="radio"
@@ -241,20 +252,6 @@ function NewCharacterModal() {
 									<img src={require("../../static/appearances/FEMALE5.PNG").default} alt="Female5"></img>
 								</label>
 							</div>
-
-							<div>
-								<input
-									type="radio"
-									id={12}
-									name="drone"
-									value={appearance}
-									onChange={(e) => setAppearance(e.target.id)}
-								/>
-								<label htmlFor="appearance-f6">
-									<img src={require("../../static/appearances/FEMALE6.PNG").default} alt="Female6"></img>
-								</label>
-							</div>
-
 							<div>
 								<input
 									type="radio"
@@ -270,13 +267,13 @@ function NewCharacterModal() {
 							<div>
 								<input
 									type="radio"
-									id={16}
+									id={12}
 									name="drone"
 									value={appearance}
 									onChange={(e) => setAppearance(e.target.id)}
 								/>
-								<label htmlFor="appearance-f8">
-									<img src={require("../../static/appearances/FEMALE8.PNG").default} alt="Female8"></img>
+								<label htmlFor="appearance-f6">
+									<img src={require("../../static/appearances/FEMALE6.PNG").default} alt="Female6"></img>
 								</label>
 							</div>
 						</div>
