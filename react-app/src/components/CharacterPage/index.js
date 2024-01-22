@@ -159,25 +159,35 @@ function CharacterPage() {
 								<div className="selected-character-gear">
 									<img src={imagePreview.default} alt="appearance-preview" className="image-preview"></img>
 									<div className="gear-preview">
-										<div className="equipped-armor equipped">armor</div>
-										<div className="equipped-weapon equipped">weapon</div>
-										<div className="equipped-shield equipped">shield</div>
+										<div className="equipped-armor equipped">
+											<h5 className="equipped-armor-title equipped-title">Equipped Armor</h5>
+											<div className="equipped-items">
+												<div className="inventory-item">armor</div>
+											</div>
+										</div>
+										<div className="equipped-weapon equipped">
+											<h5 className="equipped-items-title equipped-title">Equipped Weapon</h5>
+											<div className="equipped-items">
+												<div className="inventory-item">weapon</div>
+												<div className="inventory-item">shield</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 							<div className="inventory-container">
 								<div className="inventory-title">Inventory</div>
 								<div className="all-inventory">
-									<div className="inventory-item">test item</div>
-									<div className="inventory-item">test item</div>
-									<div className="inventory-item">test item</div>
-									<div className="inventory-item">test item</div>
-									<div className="inventory-item">test item</div>
-									<div className="inventory-item">test item</div>
-									<div className="inventory-item">test item</div>
-									<div className="inventory-item">test item</div>
-									<div className="inventory-item">test item</div>
-									<div className="inventory-item">test item</div>
+									<div className="inventory-item item-slot-one">{"1"}</div>
+									<div className="inventory-item item-slot-two">{"2"}</div>
+									<div className="inventory-item item-slot-three">{"3"}</div>
+									<div className="inventory-item item-slot-four">{"4"}</div>
+									<div className="inventory-item item-slot-five">{"5"}</div>
+									<div className="inventory-item item-slot-six">{"6"}</div>
+									<div className="inventory-item item-slot-seven">{"7"}</div>
+									<div className="inventory-item item-slot-eight">{"8"}</div>
+									<div className="inventory-item item-slot-nine">{"9"}</div>
+									<div className="inventory-item item-slot-ten">{"10"}</div>
 								</div>
 							</div>
 						</>
