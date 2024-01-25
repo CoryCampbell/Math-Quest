@@ -42,7 +42,6 @@ function CharacterPage() {
 	let selectedCharacterName = localStorage.getItem("character_name");
 
 	const appearance = selectedCharacter?.appearance;
-	console.log("appearance--------> ", appearance);
 
 	let imagePreview;
 
@@ -82,7 +81,6 @@ function CharacterPage() {
 		imagePreview = appearanceUnselected;
 	}
 
-	console.log("imagePreview", imagePreview);
 
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());

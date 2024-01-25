@@ -19,12 +19,10 @@ function LoginFormModal() {
 		const data = await dispatch(login(username, password));
 
 		if (Object.values(errors).length) {
-			console.log("errors", errors);
 			return;
 		} else if (data) {
 			errorsObj.username = data[0];
 			errorsObj.password = data[1];
-			console.log("==============> errorsObj", errorsObj);
 			setErrors(errorsObj);
 		} else {
 			closeModal();
