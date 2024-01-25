@@ -86,7 +86,6 @@ export const clearAdventureThunk = () => async (dispatch) => {
 //
 export const getCurrentAdventureThunk = () => async (dispatch) => {
 	const currentAdventure = JSON.parse(localStorage.getItem("currentAdventure"));
-	console.log("currentAdventure", currentAdventure.character_id);
 	const character_id = currentAdventure.character_id;
 
 	const res = await fetch(`/api/adventures/${character_id}`, {

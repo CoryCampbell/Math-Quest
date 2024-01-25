@@ -21,7 +21,6 @@ function SignupFormModal() {
 		const data = await dispatch(signUp(username, firstName, password));
 
 		if (Object.values(errors).length !== 0) {
-			console.log("errors", errors);
 			return;
 		} else if (data) {
 			errorsObj.firstName = data[0];

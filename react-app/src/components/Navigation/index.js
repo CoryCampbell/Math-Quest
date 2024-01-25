@@ -45,7 +45,6 @@ function Navigation({ isLoaded }) {
 		dispatch(clearCharactersThunk());
 		dispatch(clearAdventureThunk());
 
-		console.log("adventure state on logout: ", adventure);
 		if (Object.keys(adventure).length) {
 			dispatch(deleteAdventureThunk(adventure.id));
 		}

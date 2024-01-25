@@ -25,7 +25,6 @@ import HealthBar from "../HealthBar";
 function AdventurePage() {
 	const [passed, setPassed] = useState(false);
 	const [started, setStarted] = useState(false);
-	console.log(started);
 	const [completed, setCompleted] = useState(false);
 	const [rewardsClaimed, setRewardsClaimed] = useState(true);
 	const history = useHistory();
@@ -54,7 +53,6 @@ function AdventurePage() {
 
 	const addMonster = "../../static/enemies/addMonster.png";
 	const subMonster = "../../static/enemies/subMonster.png";
-	console.log(addMonster, subMonster);
 	let currentAdventure = localStorage.getItem("currentAdventure") || {};
 	let currentQuestion = localStorage.getItem("currentQuestion") || {};
 	let currentProgress = localStorage.getItem("currentProgress") || {};
@@ -62,7 +60,6 @@ function AdventurePage() {
 	const maxEnemyHealth = selectedCharacter?.max_health;
 	const currentEnemyHealth = localStorage.getItem("enemy_health") || maxEnemyHealth;
 	const appearance = selectedCharacter?.appearance;
-	console.log("appearance--------> ", appearance);
 
 	let imagePreview;
 
@@ -150,12 +147,10 @@ function AdventurePage() {
 		e.preventDefault();
 		setStarted(true);
 		const adventure_type = e.target.value;
-		console.log("--------------STARTING ADVENTURE--------------");
-		console.log("--------------STARTING ADVENTURE--------------");
-		console.log("--------------STARTING ADVENTURE--------------");
+
 		//clear any residual data from previous adventures
 		e.preventDefault();
-		console.log("currentStage should be 1", currentStage);
+
 
 		//create progress tracker for local storage
 		localStorage.setItem("currentProgress", 1);
@@ -168,20 +163,15 @@ function AdventurePage() {
 		adventureObject.score = 0;
 		adventureObject.completed = false;
 
-		console.log("storing start of adventure in local storage", adventureObject);
 		localStorage.setItem("currentAdventure", JSON.stringify(adventureObject));
 		localStorage.setItem("enemy_health", maxEnemyHealth);
 
 		currentAdventure = JSON.parse(localStorage.getItem("currentAdventure"));
-		console.log("adventure after grab from local storage start adventure click: ", currentAdventure);
 
 		currentQuestion = loadQuestion(currentStage, currentAdventure.adventure_type);
-		console.log("currentQuestion ===========> should be first question", currentQuestion);
 	}
 
 	function loadQuestion(nextStage, adventure_type) {
-		console.log("loading question #", nextStage);
-		console.log("adventure type: ", adventure_type);
 		let question;
 
 		if (adventure_type === "addition") {
@@ -312,9 +302,6 @@ function AdventurePage() {
 
 	function usePotion(e) {
 		e.preventDefault();
-		console.log("USING POTION");
-		console.log("old health:", currentHealth);
-		console.log(selectedCharacter.max_health);
 
 		//remove potion from inventory
 
@@ -350,14 +337,10 @@ function AdventurePage() {
 		e.preventDefault();
 		let question = JSON.parse(localStorage.getItem("currentQuestion"));
 		let adventure = JSON.parse(localStorage.getItem("currentAdventure"));
-		console.log(" current question: ", question);
-		console.log("submitted answer: ", e.target.value);
-		console.log("correct answer: ", question.answer);
 
 		if (!adventure.completed) {
 			//handle correct answer updates
 			if (parseInt(e.target.value) === question.answer) {
-				console.log("CORRECT ANSWER!");
 				setPassed(true);
 				let currentEnemyHealth = JSON.parse(localStorage.getItem("enemy_health"));
 				currentEnemyHealth -= 10;
@@ -371,13 +354,11 @@ function AdventurePage() {
 				if (question.question_value === 0) {
 					adventure.score += 10;
 				} else adventure.score = adventure.score + question.question_value;
-				console.log("new score value: ", adventure);
 				localStorage.setItem("currentAdventure", JSON.stringify(adventure));
 			}
 
 			//handle incorrect answer updates
 			if (parseInt(e.target.value) !== question.answer) {
-				console.log("INCORRECT ANSWER!");
 				setPassed(false);
 				//changes health in db to correct value from taking damage in adventure
 				let currentHealth = localStorage.getItem("current_health");
@@ -392,14 +373,12 @@ function AdventurePage() {
 		}
 
 		if (enemyHealthState - 10 <= 0) {
-			console.log("adventure is over!", currentAdventure);
 
 			setCompleted(true);
 			setRewardsClaimed(false);
 			localStorage.removeItem("currentProgress");
 			//this is the end of the adventure (after 10 stages), but the end page renders on stage 11.
 			const nextStage = currentStage + 1;
-			console.log("Advancing to the next stage: ", nextStage);
 			setCurrentStage(nextStage);
 			localStorage.setItem("currentProgress", JSON.stringify(nextStage));
 			return;
@@ -407,7 +386,6 @@ function AdventurePage() {
 			localStorage.removeItem("currentQuestion");
 			localStorage.removeItem("currentProgress");
 			const nextStage = currentStage;
-			console.log("Advancing to the next stage: ", nextStage);
 			setCurrentStage(nextStage);
 			question = loadQuestion(nextStage, currentAdventure.adventure_type);
 			localStorage.setItem("currentQuestion", JSON.stringify(question));
