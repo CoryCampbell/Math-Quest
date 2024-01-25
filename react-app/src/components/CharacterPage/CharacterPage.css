@@ -303,6 +303,8 @@ form.submit-delete-character-container {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  width: 90%;
+  margin: auto;
 }
 
 .equipped {

@@ -7,6 +7,7 @@ const UPDATE_CHARACTER = "characters/updateCharacter";
 const UPDATE_EXPERIENCE = "characters/updateExperience";
 const CLEAR_CHARACTERS = "characters/clearCharacters";
 const CHANGE_CHARACTER_HEALTH = "characters/changeCharacterHealth";
+const GET_INVENTORY = "characters/getInventory";
 
 // Action Creators
 const getUserCharacters = (payload) => ({
@@ -49,6 +50,11 @@ const updateExperience = (character_id, experience_points_gained) => ({
 	type: UPDATE_EXPERIENCE,
 	character_id,
 	experience_points_gained
+});
+
+const getInventory = (character_id) => ({
+	type: GET_INVENTORY,
+	character_id
 });
 
 //Thunks
@@ -182,6 +188,18 @@ export const changeCharacterHealthThunk = (characterId, changeAmount) => async (
 	} else {
 		const errors = await res.json();
 		return errors;
+	}
+};
+
+//
+//GET INVENTORY
+//
+export const getInventoryThunk = (character_id) => async (dispatch) => {
+	const res = await fetch(`/api/characters/inventory/${character_id}`, {
+		method: "GET"
+	});
+
+	if (res.ok) {
 	}
 };
 
