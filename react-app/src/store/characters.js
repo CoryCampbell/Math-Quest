@@ -194,17 +194,23 @@ export const changeCharacterHealthThunk = (characterId, changeAmount) => async (
 //
 //GET INVENTORY
 //
-export const getInventoryThunk = (character_id) => async (dispatch) => {
-	const res = await fetch(`/api/characters/inventory/${character_id}`, {
+export const getInventoryThunk = (characterId) => async (dispatch) => {
+	const res = await fetch(`/api/characters/inventory/${characterId}`, {
 		method: "GET"
 	});
 
 	if (res.ok) {
+		const data = await res.json();
+		dispatch(getInventory(characterId));
+		return data;
+	} else {
+		const errors = await res.json();
+		return errors;
 	}
 };
 
 //Initial state
-const initialState = { userCharacters: null, selectedCharacter: null };
+const initialState = { userCharacters: null, selectedCharacter: null, inventoryItems: null };
 
 //Reducer
 export default function charactersReducer(state = initialState, action) {
@@ -225,6 +231,8 @@ export default function charactersReducer(state = initialState, action) {
 			return { ...state, userCharacters: [userCharactersAfterChange] };
 		case CHANGE_CHARACTER_HEALTH:
 			return { ...state, userCharacters: [userCharactersAfterChange] };
+		case GET_INVENTORY:
+			return { ...state, inventoryItems: action.payload };
 		default:
 			return state;
 	}

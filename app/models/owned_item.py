@@ -19,7 +19,7 @@ class OwnedItem(db.Model, UserMixin):
         return {
             'id': self.id,
             'character_id': self.character_id,
-            'quest_id': self.quest_id,
+            'item_id': self.item_id,
             'item_type': self.item_type,
             'quantity': self.quantity
         }

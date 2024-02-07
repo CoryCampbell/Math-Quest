@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Character
+from app.models import Character, OwnedItem
 from app import db
 import math
 
@@ -166,3 +166,16 @@ def change_character_health(character_id, change_amount):
         return {"message": repr("{character} recieved/lost {change_amount} health!")}
     else:
         return {"error": repr("ERROR DURING ACTIONS: {character} has lost {change_amount} health")}
+
+
+
+@character_routes.route('/characters/inventory/<character_id>')
+@login_required
+def get_inventory(character_id):
+    """
+    Query for current character inventory
+    """
+
+    ownedItems = OwnedItem.query.filter_by(id=character_id).all()
+
+    return [item.to_dict() for item in ownedItems];
