@@ -215,6 +215,7 @@ const initialState = { userCharacters: null, selectedCharacter: null, inventoryI
 //Reducer
 export default function charactersReducer(state = initialState, action) {
 	const userCharactersAfterChange = { ...state.userCharacters };
+	const inventoryItemsAfterChange = { ...state.inventoryItems };
 
 	switch (action.type) {
 		case GET_USER_CHARACTERS:
@@ -232,7 +233,7 @@ export default function charactersReducer(state = initialState, action) {
 		case CHANGE_CHARACTER_HEALTH:
 			return { ...state, userCharacters: [userCharactersAfterChange] };
 		case GET_INVENTORY:
-			return { ...state, inventoryItems: [...state.inventoryItems, action.payload] };
+			return { ...state, inventoryItems: [inventoryItemsAfterChange] };
 		default:
 			return state;
 	}

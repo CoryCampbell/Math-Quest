@@ -14,7 +14,6 @@ def get_user_characters():
     """
 
     allCharacters = Character.query.filter_by(user_id=current_user.id).all()
-    print("============> all user characters", allCharacters)
 
     return [character.to_dict() for character in allCharacters]
 
@@ -96,7 +95,7 @@ def delete_character(character_id):
 def update_experience(character_id, experience_points_gained):
 
     character = Character.query.filter_by(id=character_id).first()
-    print("=======> before change: ", character.to_dict())
+
     if character:
         character.experience_points += int(experience_points_gained)
 
@@ -115,7 +114,6 @@ def update_experience(character_id, experience_points_gained):
 
 
         character.coins += 10
-        print("after change ============> ", character.to_dict())
         db.session.commit()
         return {"message": repr("{character_id} experience updated!")}
     else:
@@ -136,7 +134,6 @@ def update_character(old_character_name, new_character_name):
     if character:
         character.character_name = new_character_name
 
-        print("after change ============> ", character.to_dict()["character_name"])
         db.session.commit()
 
         return {"message": repr("{old_character_name} will now be known as {new_character_name}!")}
@@ -177,5 +174,5 @@ def get_inventory(character_id):
     """
 
     ownedItems = OwnedItem.query.filter_by(id=character_id).all()
-
+    print("===========> inventory", [item.to_dict() for item in ownedItems])
     return [item.to_dict() for item in ownedItems];

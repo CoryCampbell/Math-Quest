@@ -13,10 +13,8 @@ def get_current_adventure(character_id):
     Query for current unfinished adventure of a user
     """
     character_id = request.json.get("character_id")
-    print("++++++++!+!+!+!+! character id : ", character_id)
 
     current_adventure = Adventure.query.filter_by(character_id=character_id, completed=False).first()
-    print("============> current Adventure: ", current_adventure)
 
     if current_adventure:
         return current_adventure.to_dict()
