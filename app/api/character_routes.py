@@ -169,7 +169,7 @@ def change_character_health(character_id, change_amount):
 
 
 
-@character_routes.route('/characters/inventory/<character_id>')
+@character_routes.route('/inventory/<character_id>')
 @login_required
 def get_inventory(character_id):
     """

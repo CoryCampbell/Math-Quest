@@ -232,7 +232,7 @@ export default function charactersReducer(state = initialState, action) {
 		case CHANGE_CHARACTER_HEALTH:
 			return { ...state, userCharacters: [userCharactersAfterChange] };
 		case GET_INVENTORY:
-			return { ...state, inventoryItems: action.payload };
+			return { ...state, inventoryItems: [...state.inventoryItems, action.payload] };
 		default:
 			return state;
 	}

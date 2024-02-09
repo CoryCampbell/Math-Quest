@@ -40,8 +40,6 @@ function CharacterPage() {
 	const currentInventory = useSelector((state) => state.characters.inventoryItems);
 	const currentAdventure = localStorage.getItem("currentAdventure") || {};
 
-	console.log(currentInventory, "<<<=====");
-
 	let selectedCharacterName = localStorage.getItem("character_name");
 	let characterId = selectCharacter.id;
 
