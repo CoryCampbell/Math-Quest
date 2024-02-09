@@ -302,7 +302,6 @@ function AdventurePage() {
 
 	function usePotion(e) {
 		e.preventDefault();
-
 		//remove potion from inventory
 
 		//update user HP

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
+import { getInventoryThunk, getSelectedCharacterThunk, getUserCharactersThunk } from "../../store/characters";
 import OpenModalButton from "../OpenModalButton";
 import NewCharacterModal from "../NewCharacterModal";
 import "./CharacterPage.css";
@@ -37,9 +37,11 @@ function CharacterPage() {
 	const sessionUser = useSelector((state) => state.session.user);
 	const userCharacters = useSelector((state) => state.characters.userCharacters);
 	const selectedCharacter = useSelector((state) => state.characters.selectedCharacter);
+	const currentInventory = useSelector((state) => state.characters.inventoryItems);
 	const currentAdventure = localStorage.getItem("currentAdventure") || {};
 
 	let selectedCharacterName = localStorage.getItem("character_name");
+	let characterId = selectCharacter.id;
 
 	const appearance = selectedCharacter?.appearance;
 
@@ -81,7 +83,6 @@ function CharacterPage() {
 		imagePreview = appearanceUnselected;
 	}
 
-
 	useEffect(() => {
 		dispatch(getUserCharactersThunk());
 		dispatch(getSelectedCharacterThunk());
@@ -96,6 +97,9 @@ function CharacterPage() {
 		selectedCharacterName = e.target.innerText;
 		localStorage.setItem("character_name", selectedCharacterName);
 		dispatch(getSelectedCharacterThunk());
+
+		characterId = selectedCharacter?.id;
+		dispatch(getInventoryThunk(characterId));
 	}
 
 	if (!sessionUser) return <Redirect to="/" />;
